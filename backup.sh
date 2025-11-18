@@ -54,6 +54,15 @@ fi
 if [ -f "frontend/js/views/logs.js" ]; then
     cp "frontend/js/views/logs.js" "$CURRENT_BACKUP/frontend/js/views/logs.js"
 fi
+if [ -f "frontend/js/electricity.js" ]; then
+    cp "frontend/js/electricity.js" "$CURRENT_BACKUP/frontend/js/electricity.js"
+fi
+if [ -f "frontend/js/views/electricity.js" ]; then
+    cp "frontend/js/views/electricity.js" "$CURRENT_BACKUP/frontend/js/views/electricity.js"
+fi
+if [ -f "frontend/js/views/electricity-sections.js" ]; then
+    cp "frontend/js/views/electricity-sections.js" "$CURRENT_BACKUP/frontend/js/views/electricity-sections.js"
+fi
 
 # HTML
 if [ -f "frontend/index.html" ]; then

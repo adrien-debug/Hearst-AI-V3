@@ -10,6 +10,8 @@ import { initCockpit } from './cockpit.js';
 import { renderSettingsView, settingsStyles } from './views/settings.js';
 import { initSettings } from './settings.js';
 import { initProjections } from './projections.js';
+import { renderElectricityView, electricityStyles } from './views/electricity.js';
+import { initElectricity } from './electricity.js';
 import API from './api.js';
 import Modal from './components/modal.js';
 import notify from './components/notification.js';
@@ -319,6 +321,7 @@ node server.js</pre>
             logs: 'Activity Logs',
             cockpit: 'Cockpit',
             settings: 'Settings',
+            electricity: 'Électricité',
         };
         
         this.pageTitle.textContent = titles[view] || view;
@@ -395,9 +398,11 @@ node server.js</pre>
             if (cockpitHeaderInfo) cockpitHeaderInfo.remove();
             const settingsNav = document.getElementById('settings-header-nav');
             if (settingsNav) settingsNav.remove();
+            const electricityNav = document.getElementById('electricity-header-nav');
+            if (electricityNav) electricityNav.remove();
             const header = document.querySelector('.header');
             if (header) {
-                header.classList.remove('has-cockpit-nav', 'has-settings-nav');
+                header.classList.remove('has-cockpit-nav', 'has-settings-nav', 'has-electricity-nav');
                 header.classList.add('has-projections-nav');
             }
             this.setupProjectionsHeaderNav();
@@ -421,12 +426,42 @@ node server.js</pre>
             if (cockpitHeaderInfo) cockpitHeaderInfo.remove();
             const projectionsNav = document.getElementById('projections-header-nav');
             if (projectionsNav) projectionsNav.remove();
+            const electricityNav = document.getElementById('electricity-header-nav');
+            if (electricityNav) electricityNav.remove();
             const header = document.querySelector('.header');
             if (header) {
-                header.classList.remove('has-cockpit-nav', 'has-projections-nav');
+                header.classList.remove('has-cockpit-nav', 'has-projections-nav', 'has-electricity-nav');
                 header.classList.add('has-settings-nav');
             }
             this.setupSettingsHeaderNav();
+        } else if (view === 'electricity') {
+            // Pour electricity, on cache le bouton et on affiche la navigation
+            if (this.btnNewAction) this.btnNewAction.style.display = 'none';
+            // Cacher le header-right (Admin)
+            const headerRight = document.querySelector('.header-right');
+            if (headerRight) {
+                headerRight.style.display = 'none';
+            }
+            // Afficher le header-left pour le titre "Électricité"
+            const headerLeft = document.querySelector('.header-left');
+            if (headerLeft) {
+                headerLeft.style.display = 'flex';
+            }
+            // Supprimer les autres navigations
+            const cockpitNav = document.getElementById('cockpit-header-nav');
+            if (cockpitNav) cockpitNav.remove();
+            const cockpitHeaderInfo = document.getElementById('cockpit-header-info');
+            if (cockpitHeaderInfo) cockpitHeaderInfo.remove();
+            const projectionsNav = document.getElementById('projections-header-nav');
+            if (projectionsNav) projectionsNav.remove();
+            const settingsNav = document.getElementById('settings-header-nav');
+            if (settingsNav) settingsNav.remove();
+            const header = document.querySelector('.header');
+            if (header) {
+                header.classList.remove('has-cockpit-nav', 'has-projections-nav', 'has-settings-nav');
+                header.classList.add('has-electricity-nav');
+            }
+            this.setupElectricityHeaderNav();
         } else {
             const buttonText = buttons[view] || '+ New';
             if (buttonText) {
@@ -484,6 +519,11 @@ node server.js</pre>
             if (settingsNav) {
                 settingsNav.remove();
             }
+            // Supprimer la navigation electricity si elle existe
+            const electricityNav = document.getElementById('electricity-header-nav');
+            if (electricityNav) {
+                electricityNav.remove();
+            }
             // Supprimer la navigation projections si elle existe
             const projectionsNav = document.getElementById('projections-header-nav');
             if (projectionsNav) {
@@ -495,6 +535,7 @@ node server.js</pre>
                 header.classList.remove('has-cockpit-nav');
                 header.classList.remove('has-settings-nav');
                 header.classList.remove('has-projections-nav');
+                header.classList.remove('has-electricity-nav');
             }
         }
     }
@@ -753,6 +794,73 @@ node server.js</pre>
         }
     }
     
+    setupElectricityHeaderNav() {
+        // Supprimer l'ancienne navigation si elle existe
+        const existingNav = document.getElementById('electricity-header-nav');
+        if (existingNav) {
+            existingNav.remove();
+        }
+        
+        // Créer la navigation electricity dans le header (centrée)
+        const header = document.querySelector('.header');
+        if (!header) return;
+        
+        // Ajouter une classe au header pour le positionnement
+        header.classList.add('has-electricity-nav');
+        
+        // Créer un conteneur centré pour les onglets
+        const electricityNav = document.createElement('div');
+        electricityNav.id = 'electricity-header-nav';
+        electricityNav.className = 'cockpit-header-nav'; // Réutiliser les styles cockpit
+        electricityNav.innerHTML = `
+            <div class="cockpit-nav-tabs">
+                <button class="cockpit-nav-tab electricity-nav-tab" data-electricity-section="home">
+                    <span class="cockpit-nav-icon">${Icons.home}</span>
+                    <span class="cockpit-nav-label">Home</span>
+                </button>
+                <button class="cockpit-nav-tab electricity-nav-tab" data-electricity-section="mining">
+                    <span class="cockpit-nav-icon">${Icons.miners}</span>
+                    <span class="cockpit-nav-label">Mining</span>
+                </button>
+                <button class="cockpit-nav-tab electricity-nav-tab active" data-electricity-section="electricity">
+                    <span class="cockpit-nav-icon">${Icons.energy}</span>
+                    <span class="cockpit-nav-label">Electricity</span>
+                </button>
+                <button class="cockpit-nav-tab electricity-nav-tab" data-electricity-section="contracts">
+                    <span class="cockpit-nav-icon">${Icons.document}</span>
+                    <span class="cockpit-nav-label">Contracts</span>
+                </button>
+                <button class="cockpit-nav-tab electricity-nav-tab" data-electricity-section="analytics">
+                    <span class="cockpit-nav-icon">${Icons.charts}</span>
+                    <span class="cockpit-nav-label">Analytics</span>
+                </button>
+            </div>
+        `;
+        
+        // Insérer dans le header (centré)
+        header.appendChild(electricityNav);
+        
+        // Attacher les event listeners
+        const navTabs = electricityNav.querySelectorAll('.electricity-nav-tab');
+        navTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const sectionId = tab.getAttribute('data-electricity-section');
+                if (sectionId && window.showElectricitySection) {
+                    window.showElectricitySection(sectionId);
+                    
+                    // Update active state
+                    navTabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                }
+            });
+        });
+        
+        // Recharger les icônes après insertion
+        if (this.reloadIcons) {
+            this.reloadIcons();
+        }
+    }
+    
     handleNewAction() {
         const actions = {
             dashboard: () => window.showCreateProjectModal(),
@@ -802,7 +910,8 @@ node server.js</pre>
             prompts: async () => ({ prompts: [] }),
             logs: async () => ({ logs: [] }),
             cockpit: async () => ({}),
-            settings: async () => ({})
+            settings: async () => ({}),
+            electricity: async () => ({})
         };
         
         const fetcher = dataFetchers[view];
@@ -827,6 +936,7 @@ node server.js</pre>
             logs: async () => this.renderLogs(data),
             cockpit: async () => this.renderCockpit(data),
             settings: async () => this.renderSettings(data),
+            electricity: async () => this.renderElectricity(data),
         };
         
         const renderer = renderers[view];
@@ -961,6 +1071,14 @@ node server.js</pre>
         
         // Initialize settings functionality
         initSettings();
+    }
+    
+    async renderElectricity(data) {
+        const template = await renderElectricityView();
+        this.contentArea.innerHTML = electricityStyles + template;
+        
+        // Initialize electricity functionality
+        initElectricity();
     }
     
     async reloadCurrentView() {
