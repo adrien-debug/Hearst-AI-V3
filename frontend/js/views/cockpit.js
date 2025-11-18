@@ -32,14 +32,20 @@ export const cockpitStyles = `
     <style>
         /* Cockpit View Styles - HEARST Design System */
         /* Note: Les styles de navigation sont dans cockpit.css */
+        /* Harmonisé avec Dashboard - DASHBOARD REFERENCE */
 
         .cockpit-view {
-            padding: 0;
+            padding: var(--space-6);  /* ✅ Match Dashboard (24px) */
             width: 100%;
+            max-width: 100%;
+            margin: 0;
         }
 
         .cockpit-content {
             width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-8);  /* ✅ Match Dashboard (32px) */
         }
     </style>
 `;

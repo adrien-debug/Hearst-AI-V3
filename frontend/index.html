@@ -11,6 +11,297 @@
     <link rel="stylesheet" href="css/projections.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        /* ═══════════════════════════════════════════════════════════════
+           STYLE PREMIUM - EFFETS VISUELS SEULEMENT
+           Ne casse pas la structure existante, ajoute seulement les effets premium
+           ═══════════════════════════════════════════════════════════════ */
+        
+        /* Glassmorphism pour la sidebar existante */
+        .sidebar {
+            backdrop-filter: blur(20px) !important;
+            background: rgba(0, 0, 0, 0.95) !important;
+        }
+
+        /* Amélioration des cards avec glassmorphism */
+        .card {
+            backdrop-filter: blur(12px) !important;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8) !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .card:hover {
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9), 0 0 20px rgba(138, 253, 129, 0.1) !important;
+            border-color: rgba(138, 253, 129, 0.2) !important;
+            transform: translateY(-2px) !important;
+        }
+
+        /* Amélioration des boutons */
+        .btn-primary,
+        .action-btn.primary,
+        button.btn-primary {
+            background: rgba(138, 253, 129, 0.15) !important;
+            border: 1px solid rgba(138, 253, 129, 0.3) !important;
+            color: #8afd81 !important;
+            transition: all 0.2s ease !important;
+            box-shadow: 0 4px 16px rgba(138, 253, 129, 0.2) !important;
+        }
+
+        .btn-primary:hover,
+        .action-btn.primary:hover,
+        button.btn-primary:hover {
+            background: rgba(138, 253, 129, 0.25) !important;
+            border-color: rgba(138, 253, 129, 0.5) !important;
+            box-shadow: 0 6px 24px rgba(138, 253, 129, 0.4) !important;
+            transform: translateY(-1px) !important;
+        }
+
+        /* Glow effect sur les éléments actifs */
+        .nav-item.active {
+            box-shadow: 0 0 20px rgba(138, 253, 129, 0.3) !important;
+        }
+
+        /* Animations premium */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse-live-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.2); }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { 
+                box-shadow: 0 0 8px rgba(138, 253, 129, 0.3), 0 0 12px rgba(138, 253, 129, 0.2);
+            }
+            50% { 
+                box-shadow: 0 0 12px rgba(138, 253, 129, 0.5), 0 0 20px rgba(138, 253, 129, 0.3);
+            }
+        }
+
+        /* KPI Cards avec effets premium */
+        .kpi-card,
+        .stat-card {
+            backdrop-filter: blur(12px) !important;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6) !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .kpi-card:hover,
+        .stat-card:hover {
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), 0 0 30px rgba(138, 253, 129, 0.15) !important;
+            transform: translateY(-4px) !important;
+        }
+
+        .kpi-card.neon-accent {
+            border-left: 4px solid #8afd81 !important;
+            box-shadow: inset -2px 0 8px rgba(138, 253, 129, 0.15), 0 20px 60px rgba(0, 0, 0, 0.6) !important;
+        }
+
+        /* Tables avec effets premium */
+        .data-table tbody tr {
+            transition: all 0.2s ease !important;
+        }
+
+        .data-table tbody tr:hover {
+            background: rgba(40, 40, 40, 0.6) !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        /* Status badges avec glow */
+        .status-badge.green,
+        .badge-success {
+            background: rgba(138, 253, 129, 0.12) !important;
+            color: #8afd81 !important;
+            box-shadow: 0 0 10px rgba(138, 253, 129, 0.2) !important;
+        }
+
+        /* Header avec glassmorphism */
+        .header {
+            backdrop-filter: blur(12px) !important;
+            background: rgba(0, 0, 0, 0.8) !important;
+        }
+
+        /* Content area avec animation */
+        .content-area {
+            animation: fadeIn 0.3s ease !important;
+        }
+
+        /* Live badge avec animation */
+        .live-badge {
+            background: rgba(138, 253, 129, 0.15) !important;
+            border: 1px solid rgba(138, 253, 129, 0.4) !important;
+            color: #8afd81 !important;
+            box-shadow: 0 0 15px rgba(138, 253, 129, 0.3) !important;
+        }
+
+        .live-dot {
+            background: #8afd81 !important;
+            animation: pulse-live-dot 1.5s ease-in-out infinite !important;
+            box-shadow: 0 0 10px rgba(138, 253, 129, 0.8) !important;
+        }
+
+        /* User badge avec gradient */
+        .user-avatar-circle {
+            background: linear-gradient(135deg, #8afd81 0%, #5fb85f 100%) !important;
+            box-shadow: 0 4px 12px rgba(138, 253, 129, 0.3) !important;
+        }
+
+        /* Notification badge avec pulse */
+        .notification-badge {
+            animation: pulse-glow 2s ease-in-out infinite !important;
+        }
+
+        /* Amélioration des inputs */
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        select,
+        textarea {
+            backdrop-filter: blur(8px) !important;
+            background: rgba(255, 255, 255, 0.05) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            transition: all 0.2s ease !important;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        select:focus,
+        textarea:focus {
+            border-color: rgba(138, 253, 129, 0.5) !important;
+            box-shadow: 0 0 15px rgba(138, 253, 129, 0.2) !important;
+            background: rgba(255, 255, 255, 0.08) !important;
+        }
+
+        /* Loading spinner avec glow */
+        .spinner {
+            border-color: rgba(138, 253, 129, 0.2) !important;
+            border-top-color: #8afd81 !important;
+            box-shadow: 0 0 20px rgba(138, 253, 129, 0.3) !important;
+        }
+
+        /* Scrollbar premium */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(138, 253, 129, 0.3);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(138, 253, 129, 0.5);
+        }
+
+        /* Text utilities avec couleur premium */
+        .text-success {
+            color: #8afd81 !important;
+        }
+
+        /* LED Pulse Animations */
+        @keyframes pulse-green {
+            0%, 100% {
+                opacity: 1;
+                box-shadow: 0 0 8px #8afd81, 0 0 12px rgba(138, 253, 129, 0.5);
+            }
+            50% {
+                opacity: 0.6;
+                box-shadow: 0 0 4px #8afd81, 0 0 6px rgba(138, 253, 129, 0.3);
+            }
+        }
+
+        @keyframes pulse-blue {
+            0%, 100% {
+                opacity: 1;
+                box-shadow: 0 0 8px #00bfff, 0 0 12px rgba(0, 191, 255, 0.5);
+            }
+            50% {
+                opacity: 0.6;
+                box-shadow: 0 0 4px #00bfff, 0 0 6px rgba(0, 191, 255, 0.3);
+            }
+        }
+
+        @keyframes pulse-orange {
+            0%, 100% {
+                opacity: 1;
+                box-shadow: 0 0 8px #ffa500, 0 0 12px rgba(255, 165, 0, 0.5);
+            }
+            50% {
+                opacity: 0.6;
+                box-shadow: 0 0 4px #ffa500, 0 0 6px rgba(255, 165, 0, 0.3);
+            }
+        }
+
+        @keyframes pulse-red {
+            0%, 100% {
+                opacity: 1;
+                box-shadow: 0 0 8px #ff4d4d, 0 0 12px rgba(255, 77, 77, 0.5);
+            }
+            50% {
+                opacity: 0.6;
+                box-shadow: 0 0 4px #ff4d4d, 0 0 6px rgba(255, 77, 77, 0.3);
+            }
+        }
+
+        /* Cross-Reference Table styles */
+        .cross-ref-table {
+            border-collapse: collapse;
+        }
+
+        .cross-ref-table th {
+            background: rgba(255, 255, 255, 0.05) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        }
+
+        .cross-ref-table .cell-data {
+            background: rgba(138, 253, 129, 0.1) !important;
+            transition: all 0.2s ease !important;
+        }
+
+        .cross-ref-table .cell-data:hover {
+            background: rgba(138, 253, 129, 0.2) !important;
+            transform: scale(1.05) !important;
+        }
+
+        .cross-ref-table .total-cell {
+            background: rgba(138, 253, 129, 0.15) !important;
+            color: #8afd81 !important;
+        }
+
+        /* Badge active */
+        .badge-active {
+            background: rgba(138, 253, 129, 0.2) !important;
+            color: #8afd81 !important;
+            box-shadow: 0 0 10px rgba(138, 253, 129, 0.3) !important;
+        }
+
+        /* Flow diagram styles */
+        .flow-box {
+            backdrop-filter: blur(8px) !important;
+            border: 2px solid rgba(255,255,255,0.1) !important;
+        }
+
+        .flow-box.center {
+            background: linear-gradient(135deg, rgba(138, 253, 129, 0.15) 0%, rgba(74, 158, 255, 0.15) 100%) !important;
+            border: 2px solid rgba(138, 253, 129, 0.4) !important;
+            box-shadow: 0 0 30px rgba(138, 253, 129, 0.2) !important;
+        }
+
+        .flow-box.center .flow-box-title {
+            color: #8afd81 !important;
+        }
+    </style>
 </head>
 <body>
     <!-- Layout principal -->
