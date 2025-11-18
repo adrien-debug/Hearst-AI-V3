@@ -1,25 +1,24 @@
 // ===================================
 // THEME.JS - Dark/Light mode system
 // ===================================
+import { Icons } from './icons.js';
 
 class ThemeManager {
     constructor() {
-        this.currentTheme = 'dark'; // Default NEARST theme
+        this.currentTheme = 'dark'; // Default HEARST theme
         this.init();
     }
 
     init() {
-        // Load saved theme from localStorage
-        const savedTheme = localStorage.getItem('hearstai-theme');
-        if (savedTheme) {
-            this.currentTheme = savedTheme;
-        }
+        // HEARST design is always dark - force dark theme
+        this.currentTheme = 'dark';
+        localStorage.setItem('hearstai-theme', 'dark');
         
         // Apply theme
         this.applyTheme(this.currentTheme);
         
-        // Create theme toggle button
-        this.createToggleButton();
+        // Create theme toggle button (disabled for HEARST - always dark)
+        // this.createToggleButton();
     }
 
     createToggleButton() {
@@ -89,8 +88,8 @@ class ThemeManager {
 
     getThemeIcon() {
         return this.currentTheme === 'dark' 
-            ? '☀️' // Sun for switching to light
-            : '🌙'; // Moon for switching to dark
+            ? Icons.sun // Sun for switching to light
+            : Icons.moon; // Moon for switching to dark
     }
 
     saveTheme() {
@@ -111,8 +110,8 @@ const themeToggleStyles = `
     font-size: 20px;
     cursor: pointer;
     padding: 8px;
-    border-radius: 6px;
-    transition: all var(--transition-fast);
+    border-radius: 12px;
+    transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -140,22 +139,23 @@ const themeToggleStyles = `
     100% { transform: rotate(180deg); }
 }
 
-/* Ajustements pour le light mode */
+/* HEARST design is always dark - no light mode */
 [data-theme="light"] .sidebar {
-    background: #ffffff;
-    border-right: 1px solid var(--border-color);
+    background: var(--primary-grey) !important;
+    border-right: var(--border-thin) solid var(--grey-100) !important;
 }
 
 [data-theme="light"] .nav-item.active {
-    background: rgba(123, 237, 159, 0.1);
+    background: rgba(138, 253, 129, 0.1) !important;
 }
 
 [data-theme="light"] .logo-text {
-    color: var(--text-primary);
+    color: var(--primary-green) !important;
 }
 
 [data-theme="light"] .card {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    background: var(--primary-grey) !important;
+    box-shadow: var(--shadow-md) !important;
 }
 </style>
 `;

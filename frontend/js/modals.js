@@ -34,11 +34,32 @@ export function showCreateProjectModal() {
                 </div>
                 
                 <div class="form-group">
+                    <label for="project-type">Project Type *</label>
+                    <select id="project-type" name="type" class="form-input" required>
+                        <option value="">Select type...</option>
+                        <option value="html_static">HTML Static</option>
+                        <option value="spa">SPA (Single Page App)</option>
+                        <option value="dashboard">Dashboard</option>
+                        <option value="nodejs_app">Node.js App</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="project-repo-type">Repository Type *</label>
+                    <select id="project-repo-type" name="repo_type" class="form-input" required>
+                        <option value="">Select repository type...</option>
+                        <option value="local">Local</option>
+                        <option value="github">GitHub</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
                     <label for="project-repo">Repository URL</label>
                     <input 
                         type="url" 
                         id="project-repo" 
-                        name="repository_url" 
+                        name="repo_url" 
                         class="form-input" 
                         placeholder="https://github.com/user/repo"
                     >
@@ -48,20 +69,57 @@ export function showCreateProjectModal() {
         confirmText: 'Create Project',
         onConfirm: async () => {
             const form = document.getElementById('create-project-form');
+            if (!form) {
+                notify.error('Form not found');
+                return false;
+            }
+            
             const formData = new FormData(form);
             const data = Object.fromEntries(formData);
             
-            if (!data.name || data.name.trim() === '') {
+            // Validation avec trim pour éviter les espaces
+            const name = (data.name || '').trim();
+            const type = (data.type || '').trim();
+            const repo_type = (data.repo_type || '').trim();
+            
+            if (!name) {
                 notify.error('Project name is required');
                 return false;
             }
             
+            if (!type) {
+                notify.error('Project type is required');
+                return false;
+            }
+            
+            if (!repo_type) {
+                notify.error('Repository type is required');
+                return false;
+            }
+            
+            // Utiliser les valeurs nettoyées
+            data.name = name;
+            data.type = type;
+            data.repo_type = repo_type;
+            
             try {
-                await API.createProject(data);
+                const response = await API.createProject(data);
+                console.log('Project created:', response);
                 notify.success('Project created successfully!');
-                setTimeout(() => window.location.reload(), 1000);
+                
+                // Fermer le modal (sera fait automatiquement par le modal si onConfirm retourne true)
+                // Recharger la vue actuelle après un court délai
+                if (window.app && typeof window.app.reloadCurrentView === 'function') {
+                    setTimeout(() => {
+                        window.app.reloadCurrentView();
+                    }, 300);
+                } else {
+                    // Fallback si app n'est pas disponible
+                    setTimeout(() => window.location.reload(), 1000);
+                }
                 return true;
             } catch (error) {
+                console.error('Error creating project:', error);
                 notify.error('Failed to create project: ' + error.message);
                 return false;
             }
@@ -135,7 +193,15 @@ export function showCreateJobModal(projectId = null) {
             try {
                 await API.createJob(data);
                 notify.success('Job created successfully!');
-                setTimeout(() => window.location.reload(), 1000);
+                // Recharger la vue actuelle au lieu de recharger toute la page
+                if (window.app && typeof window.app.reloadCurrentView === 'function') {
+                    setTimeout(() => {
+                        window.app.reloadCurrentView();
+                    }, 500);
+                } else {
+                    // Fallback si app n'est pas disponible
+                    setTimeout(() => window.location.reload(), 1000);
+                }
                 return true;
             } catch (error) {
                 notify.error('Failed to create job: ' + error.message);

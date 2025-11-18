@@ -1,5 +1,6 @@
 // Modal Component - Reusable modal system
-// NEARST styled modals
+// HEARST styled modals
+import { Icons } from '../icons.js';
 
 class Modal {
     constructor(options = {}) {
@@ -71,8 +72,27 @@ class Modal {
         // Confirm button
         const confirmBtn = this.element.querySelector('[data-modal-confirm]');
         if (confirmBtn) {
-            confirmBtn.addEventListener('click', () => {
-                if (this.onConfirm) this.onConfirm();
+            confirmBtn.addEventListener('click', async () => {
+                if (this.onConfirm) {
+                    // Désactiver le bouton pour éviter les clics multiples
+                    confirmBtn.disabled = true;
+                    try {
+                        const result = await this.onConfirm();
+                        // Si onConfirm retourne true ou undefined, fermer le modal
+                        if (result !== false) {
+                            this.close();
+                        } else {
+                            // Réactiver le bouton si la validation échoue
+                            confirmBtn.disabled = false;
+                        }
+                    } catch (error) {
+                        console.error('Error in onConfirm:', error);
+                        // Réactiver le bouton en cas d'erreur
+                        confirmBtn.disabled = false;
+                    }
+                } else {
+                    this.close();
+                }
             });
         }
 
@@ -111,6 +131,17 @@ class Modal {
             this.element.style.display = 'none';
             this.isOpen = false;
             document.body.style.overflow = '';
+            // Réactiver le bouton confirm au cas où
+            const confirmBtn = this.element.querySelector('[data-modal-confirm]');
+            if (confirmBtn) {
+                confirmBtn.disabled = false;
+            }
+            // Détruire le modal après un court délai pour permettre les animations
+            setTimeout(() => {
+                if (this.element && !this.isOpen) {
+                    this.destroy();
+                }
+            }, 300);
         }
     }
 
@@ -177,7 +208,7 @@ class Modal {
             
             body.insertAdjacentHTML('afterbegin', `
                 <div class="alert alert-danger">
-                    ❌ ${message}
+                    <span class="icon-inline">${Icons.error}</span> ${message}
                 </div>
             `);
         }

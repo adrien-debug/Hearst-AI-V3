@@ -1,6 +1,7 @@
 // ===================================
 // NOTIFICATION.JS - Système de toast
 // ===================================
+import { Icons } from '../icons.js';
 
 class Notification {
     constructor() {
@@ -72,10 +73,10 @@ class Notification {
      */
     getIcon(type) {
         const icons = {
-            success: '✓',
-            error: '✕',
-            warning: '⚠',
-            info: 'ℹ'
+            success: Icons.check,
+            error: Icons.error,
+            warning: Icons.warning,
+            info: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 16V12M12 8H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`
         };
         return icons[type] || icons.info;
     }
@@ -151,9 +152,9 @@ const notificationStyles = `
 }
 
 .notification {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
+    background: #1A1A1A;
+    border: 1px solid rgba(138, 253, 129, 0.08);
+    border-radius: 16px;
     padding: 16px;
     display: flex;
     align-items: center;

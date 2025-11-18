@@ -1,0 +1,229 @@
+/* Cockpit Mining Operations - HEARST Design System */
+/* Utilise les tokens de design HEARST définis dans main.css */
+
+/* Styles supplémentaires pour le cockpit (complémentaires à main.css et components.css) */
+.cockpit-view {
+    padding: 0;
+}
+
+.cockpit-content {
+    width: 100%;
+}
+
+/* Navigation cockpit dans le header */
+.cockpit-header-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.cockpit-header-nav > * {
+    pointer-events: auto;
+}
+
+/* Horloge et badge LIVE à droite */
+.cockpit-header-info {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-left: auto;
+    position: relative;
+    z-index: 10;
+}
+
+.cockpit-nav-tabs {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    background: var(--primary-grey);
+    border: var(--border-thin) solid var(--grey-100);
+    border-radius: var(--radius-lg);
+    padding: var(--space-1);
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.cockpit-nav-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.cockpit-nav-tab {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    height: 40px;
+    border: none;
+    background: transparent;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-in-out);
+    color: var(--text-secondary);
+    padding: 0 var(--space-3);
+    position: relative;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.cockpit-nav-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.cockpit-nav-icon svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+}
+
+.cockpit-nav-label {
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    line-height: 1;
+}
+
+.cockpit-nav-tab:hover {
+    background: var(--grey-200);
+    color: var(--text-primary);
+}
+
+.cockpit-nav-tab.active {
+    background: var(--primary-green);
+    color: var(--primary-dark);
+}
+
+.cockpit-nav-tab.active .cockpit-nav-icon svg {
+    stroke: var(--primary-dark);
+}
+
+.cockpit-nav-tab.active .cockpit-nav-label {
+    color: var(--primary-dark);
+    font-weight: var(--font-semibold);
+}
+
+.header-clock {
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    color: var(--primary-green);
+    font-family: var(--font-mono);
+    letter-spacing: 0.5px;
+}
+
+.live-badge {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    background: rgba(138, 253, 129, 0.15);
+    border: var(--border-thin) solid rgba(138, 253, 129, 0.4);
+    border-radius: var(--radius-full);
+    font-size: var(--text-xs);
+    font-weight: var(--font-bold);
+    color: var(--primary-green);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.live-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--primary-green);
+    border-radius: var(--radius-full);
+    animation: pulse-live-dot 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-live-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.2); }
+}
+
+/* Section header */
+.cockpit-section-header {
+    margin-bottom: var(--space-6);
+}
+
+.cockpit-section-header .view-title {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-1);
+}
+
+.cockpit-section-header .view-subtitle {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+}
+
+/* Status badges */
+.status-badge {
+    display: inline-block;
+    font-size: var(--text-xs);
+    font-weight: var(--font-semibold);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-md);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-badge.green {
+    background: rgba(138, 253, 129, 0.15);
+    color: var(--primary-green);
+    border: var(--border-thin) solid var(--primary-green);
+}
+
+.status-badge.orange {
+    background: rgba(243, 156, 18, 0.15);
+    color: var(--warning);
+    border: var(--border-thin) solid var(--warning);
+}
+
+.status-badge.red {
+    background: rgba(231, 76, 60, 0.15);
+    color: var(--error);
+    border: var(--border-thin) solid var(--error);
+}
+
+/* PATCH RESPONSIVE FULL-SCREEN – 18 Nov 2025 */
+/* Assure que les sections cockpit prennent toute la largeur disponible */
+
+.cockpit-view {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+}
+
+.cockpit-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+}
+
+.section-premium {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* Assure que les conteneurs de sections ne dépassent pas */
+.cockpit-section {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+}
+
