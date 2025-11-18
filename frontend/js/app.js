@@ -12,6 +12,8 @@ import { initSettings } from './settings.js';
 import { initProjections } from './projections.js';
 import { renderElectricityView, electricityStyles } from './views/electricity.js';
 import { initElectricity } from './electricity.js';
+import { renderAdminPanelView, adminPanelStyles } from './views/admin-panel.js';
+import { initAdminPanel } from './admin-panel.js';
 import API from './api.js';
 import Modal from './components/modal.js';
 import notify from './components/notification.js';
@@ -322,6 +324,7 @@ node server.js</pre>
             cockpit: 'Cockpit',
             settings: 'Settings',
             electricity: 'Électricité',
+            'admin-panel': 'Admin Panel',
         };
         
         this.pageTitle.textContent = titles[view] || view;
@@ -456,12 +459,44 @@ node server.js</pre>
             if (projectionsNav) projectionsNav.remove();
             const settingsNav = document.getElementById('settings-header-nav');
             if (settingsNav) settingsNav.remove();
+            const adminPanelNav = document.getElementById('admin-panel-header-nav');
+            if (adminPanelNav) adminPanelNav.remove();
             const header = document.querySelector('.header');
             if (header) {
-                header.classList.remove('has-cockpit-nav', 'has-projections-nav', 'has-settings-nav');
+                header.classList.remove('has-cockpit-nav', 'has-projections-nav', 'has-settings-nav', 'has-admin-panel-nav');
                 header.classList.add('has-electricity-nav');
             }
             this.setupElectricityHeaderNav();
+        } else if (view === 'admin-panel') {
+            // Pour admin-panel, on cache le bouton et on affiche la navigation
+            if (this.btnNewAction) this.btnNewAction.style.display = 'none';
+            // Cacher le header-right (Admin)
+            const headerRight = document.querySelector('.header-right');
+            if (headerRight) {
+                headerRight.style.display = 'none';
+            }
+            // Afficher le header-left pour le titre "Admin Panel"
+            const headerLeft = document.querySelector('.header-left');
+            if (headerLeft) {
+                headerLeft.style.display = 'flex';
+            }
+            // Supprimer les autres navigations
+            const cockpitNav = document.getElementById('cockpit-header-nav');
+            if (cockpitNav) cockpitNav.remove();
+            const cockpitHeaderInfo = document.getElementById('cockpit-header-info');
+            if (cockpitHeaderInfo) cockpitHeaderInfo.remove();
+            const projectionsNav = document.getElementById('projections-header-nav');
+            if (projectionsNav) projectionsNav.remove();
+            const settingsNav = document.getElementById('settings-header-nav');
+            if (settingsNav) settingsNav.remove();
+            const electricityNav = document.getElementById('electricity-header-nav');
+            if (electricityNav) electricityNav.remove();
+            const header = document.querySelector('.header');
+            if (header) {
+                header.classList.remove('has-cockpit-nav', 'has-projections-nav', 'has-settings-nav', 'has-electricity-nav');
+                header.classList.add('has-admin-panel-nav');
+            }
+            this.setupAdminPanelHeaderNav();
         } else {
             const buttonText = buttons[view] || '+ New';
             if (buttonText) {
@@ -524,6 +559,11 @@ node server.js</pre>
             if (electricityNav) {
                 electricityNav.remove();
             }
+            // Supprimer la navigation admin-panel si elle existe
+            const adminPanelNav = document.getElementById('admin-panel-header-nav');
+            if (adminPanelNav) {
+                adminPanelNav.remove();
+            }
             // Supprimer la navigation projections si elle existe
             const projectionsNav = document.getElementById('projections-header-nav');
             if (projectionsNav) {
@@ -536,6 +576,7 @@ node server.js</pre>
                 header.classList.remove('has-settings-nav');
                 header.classList.remove('has-projections-nav');
                 header.classList.remove('has-electricity-nav');
+                header.classList.remove('has-admin-panel-nav');
             }
         }
     }
@@ -861,6 +902,89 @@ node server.js</pre>
         }
     }
     
+    setupAdminPanelHeaderNav() {
+        // Supprimer l'ancienne navigation si elle existe
+        const existingNav = document.getElementById('admin-panel-header-nav');
+        if (existingNav) {
+            existingNav.remove();
+        }
+        
+        // Créer la navigation admin-panel dans le header (centrée)
+        const header = document.querySelector('.header');
+        if (!header) return;
+        
+        // Ajouter une classe au header pour le positionnement
+        header.classList.add('has-admin-panel-nav');
+        
+        // Créer un conteneur centré pour les onglets
+        const adminPanelNav = document.createElement('div');
+        adminPanelNav.id = 'admin-panel-header-nav';
+        adminPanelNav.className = 'cockpit-header-nav'; // Réutiliser les styles cockpit
+        adminPanelNav.innerHTML = `
+            <div class="cockpit-nav-tabs">
+                <button class="cockpit-nav-tab admin-panel-nav-tab active" data-admin-section="dashboard">
+                    <span class="cockpit-nav-icon">${Icons.dashboard}</span>
+                    <span class="cockpit-nav-label">Dashboard</span>
+                </button>
+                <button class="cockpit-nav-tab admin-panel-nav-tab" data-admin-section="structure">
+                    <span class="cockpit-nav-icon">${Icons.projects}</span>
+                    <span class="cockpit-nav-label">Structure</span>
+                </button>
+                <button class="cockpit-nav-tab admin-panel-nav-tab" data-admin-section="health">
+                    <span class="cockpit-nav-icon">${Icons.incidents}</span>
+                    <span class="cockpit-nav-label">Health</span>
+                </button>
+                <button class="cockpit-nav-tab admin-panel-nav-tab" data-admin-section="teams">
+                    <span class="cockpit-nav-icon">${Icons.workers}</span>
+                    <span class="cockpit-nav-label">Teams</span>
+                </button>
+                <button class="cockpit-nav-tab admin-panel-nav-tab" data-admin-section="actions">
+                    <span class="cockpit-nav-icon">${Icons.document}</span>
+                    <span class="cockpit-nav-label">Actions</span>
+                </button>
+                <button class="cockpit-nav-tab admin-panel-nav-tab" data-admin-section="finances">
+                    <span class="cockpit-nav-icon">${Icons.charts}</span>
+                    <span class="cockpit-nav-label">Finances</span>
+                </button>
+                <button class="cockpit-nav-tab admin-panel-nav-tab" data-admin-section="documents">
+                    <span class="cockpit-nav-icon">${Icons.document}</span>
+                    <span class="cockpit-nav-label">Documents</span>
+                </button>
+                <button class="cockpit-nav-tab admin-panel-nav-tab" data-admin-section="reports">
+                    <span class="cockpit-nav-icon">${Icons.document}</span>
+                    <span class="cockpit-nav-label">Reports</span>
+                </button>
+                <button class="cockpit-nav-tab admin-panel-nav-tab" data-admin-section="compliance">
+                    <span class="cockpit-nav-icon">${Icons.incidents}</span>
+                    <span class="cockpit-nav-label">Compliance</span>
+                </button>
+            </div>
+        `;
+        
+        // Insérer dans le header (centré)
+        header.appendChild(adminPanelNav);
+        
+        // Attacher les event listeners
+        const navTabs = adminPanelNav.querySelectorAll('.admin-panel-nav-tab');
+        navTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const sectionId = tab.getAttribute('data-admin-section');
+                if (sectionId && window.showAdminPanelSection) {
+                    window.showAdminPanelSection(sectionId);
+                    
+                    // Update active state
+                    navTabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                }
+            });
+        });
+        
+        // Recharger les icônes après insertion
+        if (this.reloadIcons) {
+            this.reloadIcons();
+        }
+    }
+    
     handleNewAction() {
         const actions = {
             dashboard: () => window.showCreateProjectModal(),
@@ -911,7 +1035,8 @@ node server.js</pre>
             logs: async () => ({ logs: [] }),
             cockpit: async () => ({}),
             settings: async () => ({}),
-            electricity: async () => ({})
+            electricity: async () => ({}),
+            'admin-panel': async () => ({})
         };
         
         const fetcher = dataFetchers[view];
@@ -937,6 +1062,7 @@ node server.js</pre>
             cockpit: async () => this.renderCockpit(data),
             settings: async () => this.renderSettings(data),
             electricity: async () => this.renderElectricity(data),
+            'admin-panel': async () => this.renderAdminPanel(data),
         };
         
         const renderer = renderers[view];
@@ -1079,6 +1205,14 @@ node server.js</pre>
         
         // Initialize electricity functionality
         initElectricity();
+    }
+    
+    async renderAdminPanel(data) {
+        const template = await renderAdminPanelView();
+        this.contentArea.innerHTML = adminPanelStyles + template;
+        
+        // Initialize admin panel functionality
+        initAdminPanel();
     }
     
     async reloadCurrentView() {
