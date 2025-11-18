@@ -816,3 +816,291 @@
     max-width: 1600px !important; /* OK - multiple de 8px */
 }
 
+/* ====================================
+   🎨 DESIGN PREMIUM - PATCH COCKPIT
+   Date: 18 Nov 2025
+   ==================================== */
+
+/* ====================================
+   AMÉLIORATION COCKPIT NAV - PREMIUM
+   ==================================== */
+
+.cockpit-nav-tabs {
+    background: rgba(26, 26, 26, 0.8) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: var(--radius-lg) !important;
+    padding: var(--space-1) !important;
+    backdrop-filter: blur(12px) !important;
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+}
+
+.cockpit-nav-tab {
+    height: 38px !important;
+    padding: 0 var(--space-4) !important;
+    border-radius: var(--radius-md) !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    letter-spacing: -0.01em !important;
+    transition: all var(--duration-fast) var(--ease-in-out) !important;
+}
+
+.cockpit-nav-tab:hover {
+    background: rgba(138, 253, 129, 0.1) !important;
+    color: var(--primary-green) !important;
+}
+
+.cockpit-nav-tab.active {
+    background: var(--primary-green) !important;
+    color: var(--primary-dark) !important;
+    box-shadow: 
+        0 2px 8px rgba(138, 253, 129, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+}
+
+.header-clock {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.3px !important;
+}
+
+.live-badge {
+    padding: var(--space-2) var(--space-4) !important;
+    background: rgba(138, 253, 129, 0.18) !important;
+    border: 1.5px solid rgba(138, 253, 129, 0.5) !important;
+    border-radius: var(--radius-full) !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.8px !important;
+    box-shadow: 0 0 12px rgba(138, 253, 129, 0.2) !important;
+}
+
+.live-dot {
+    width: 6px !important;
+    height: 6px !important;
+    box-shadow: 0 0 8px rgba(138, 253, 129, 0.6) !important;
+}
+
+/* ====================================
+   AMÉLIORATION SECTION PREMIUM - PREMIUM
+   ==================================== */
+
+.section-premium {
+    padding: var(--space-8) !important;
+    gap: var(--space-6) !important;
+}
+
+.section-premium > div:first-child {
+    margin-bottom: var(--space-6) !important;
+    gap: var(--space-4) !important;
+}
+
+.section-premium > div:first-child > div:first-child h2 {
+    font-size: 22px !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.02em !important;
+    padding-left: var(--space-4) !important;
+}
+
+.section-premium > div:first-child > div:first-child p {
+    font-size: 15px !important;
+    letter-spacing: -0.01em !important;
+}
+
+/* ====================================
+   AMÉLIORATION KPI BOXES - PREMIUM
+   ==================================== */
+
+.kpi-box-premium {
+    background: rgba(26, 26, 26, 0.75) !important;
+    backdrop-filter: blur(24px) saturate(200%) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(200%) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: var(--radius-lg) !important;
+    padding: var(--space-6) !important;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.45),
+        0 2px 8px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+    transition: all var(--duration-normal) var(--ease-in-out) !important;
+}
+
+.kpi-box-premium.kpi-box-green {
+    border: 1.5px solid rgba(138, 253, 129, 0.4) !important;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.45),
+        0 2px 8px rgba(0, 0, 0, 0.35),
+        0 0 0 1px rgba(138, 253, 129, 0.15),
+        0 0 24px rgba(138, 253, 129, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+.kpi-box-premium.kpi-box-orange {
+    border: 1.5px solid rgba(255, 165, 0, 0.4) !important;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.45),
+        0 2px 8px rgba(0, 0, 0, 0.35),
+        0 0 0 1px rgba(255, 165, 0, 0.15),
+        0 0 24px rgba(255, 165, 0, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+.kpi-box-premium.kpi-box-red {
+    border: 1.5px solid rgba(255, 68, 68, 0.4) !important;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.45),
+        0 2px 8px rgba(0, 0, 0, 0.35),
+        0 0 0 1px rgba(255, 68, 68, 0.15),
+        0 0 24px rgba(255, 68, 68, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+.kpi-box-premium:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 
+        0 12px 48px rgba(0, 0, 0, 0.55),
+        0 4px 16px rgba(0, 0, 0, 0.45),
+        0 0 0 1px rgba(138, 253, 129, 0.3),
+        0 0 32px rgba(138, 253, 129, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+.kpi-box-premium.kpi-box-green:hover {
+    border-color: rgba(138, 253, 129, 0.5) !important;
+    box-shadow: 
+        0 12px 48px rgba(0, 0, 0, 0.55),
+        0 4px 16px rgba(0, 0, 0, 0.45),
+        0 0 0 1px rgba(138, 253, 129, 0.4),
+        0 0 40px rgba(138, 253, 129, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+}
+
+.kpi-box-premium.kpi-box-orange:hover {
+    border-color: rgba(255, 165, 0, 0.5) !important;
+    box-shadow: 
+        0 12px 48px rgba(0, 0, 0, 0.55),
+        0 4px 16px rgba(0, 0, 0, 0.45),
+        0 0 0 1px rgba(255, 165, 0, 0.4),
+        0 0 40px rgba(255, 165, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+}
+
+.kpi-box-premium.kpi-box-red:hover {
+    border-color: rgba(255, 68, 68, 0.5) !important;
+    box-shadow: 
+        0 12px 48px rgba(0, 0, 0, 0.55),
+        0 4px 16px rgba(0, 0, 0, 0.45),
+        0 0 0 1px rgba(255, 68, 68, 0.4),
+        0 0 40px rgba(255, 68, 68, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+}
+
+.kpi-box-label {
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.4px !important;
+    margin-bottom: var(--space-2) !important;
+}
+
+.kpi-box-value {
+    font-size: 26px !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.04em !important;
+    line-height: 1.2 !important;
+    margin-bottom: var(--space-1) !important;
+}
+
+.kpi-box-detail {
+    font-size: 12px !important;
+    letter-spacing: -0.01em !important;
+    line-height: 1.5 !important;
+    margin-bottom: var(--space-1) !important;
+}
+
+/* ====================================
+   AMÉLIORATION STATUS BADGES - PREMIUM
+   ==================================== */
+
+.status-badge {
+    padding: var(--space-2) var(--space-4) !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px !important;
+    border-width: 1.5px !important;
+    border-radius: var(--radius-md) !important;
+}
+
+.status-badge.green {
+    background: rgba(138, 253, 129, 0.18) !important;
+    border-color: rgba(138, 253, 129, 0.5) !important;
+    box-shadow: 0 0 12px rgba(138, 253, 129, 0.15) !important;
+}
+
+.status-badge.orange {
+    background: rgba(243, 156, 18, 0.18) !important;
+    border-color: rgba(243, 156, 18, 0.5) !important;
+}
+
+.status-badge.red {
+    background: rgba(231, 76, 60, 0.18) !important;
+    border-color: rgba(231, 76, 60, 0.5) !important;
+}
+
+/* ====================================
+   AMÉLIORATION COCKPIT SECTION HEADER - PREMIUM
+   ==================================== */
+
+.cockpit-section-header {
+    margin-bottom: var(--space-6) !important;
+}
+
+.cockpit-section-header .view-title {
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.03em !important;
+    margin-bottom: var(--space-2) !important;
+}
+
+.cockpit-section-header .view-subtitle {
+    font-size: 14px !important;
+    letter-spacing: -0.01em !important;
+}
+
+/* ====================================
+   AMÉLIORATION RESPONSIVE COCKPIT - PREMIUM
+   ==================================== */
+
+@media (max-width: 1440px) {
+    .section-premium {
+        padding: var(--space-6) !important;
+    }
+}
+
+@media (max-width: 1024px) {
+    .section-premium {
+        padding: var(--space-5) !important;
+        gap: var(--space-5) !important;
+    }
+    
+    .cockpit-nav-tabs {
+        overflow-x: auto !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .section-premium {
+        padding: var(--space-4) !important;
+        gap: var(--space-4) !important;
+    }
+    
+    .kpi-box-premium {
+        padding: var(--space-5) !important;
+    }
+    
+    .kpi-box-value {
+        font-size: 22px !important;
+    }
+}
+

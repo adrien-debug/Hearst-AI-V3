@@ -153,9 +153,8 @@ export function renderDashboard(data) {
 const dashboardStyles = `
 <style>
 .dashboard-view {
-    padding: var(--space-8);
+    padding: 0;
     width: 100%;
-    max-width: 100%;
     margin: 0;
 }
 
@@ -453,7 +452,6 @@ const dashboardStyles = `
     font-weight: var(--font-semibold) !important;
     color: var(--text-primary) !important;
     margin: 0 !important;
-    margin-left: 20px !important;
     white-space: nowrap !important;
     flex: 0 0 auto !important;
     padding: 0 !important;
@@ -729,7 +727,7 @@ button.btn-transaction-history:active {
 /* Responsive */
 @media (max-width: 1024px) {
     .dashboard-view {
-        padding: var(--space-6);
+        padding: 0;
     }
     
     .section-header-home {
