@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design System Demo - Hearst AI</title>
+    <link rel="stylesheet" href="css/design-tokens.css">
+    <link rel="stylesheet" href="css/design-system-examples.css">
+    <link rel="stylesheet" href="css/icons-guide.css">
+    <style>
+        /* Demo page styles */
+        body {
+            font-family: var(--font-family-primary);
+            background: var(--color-surface-default);
+            color: var(--color-text-default);
+            padding: var(--spacing-6);
+            margin: 0;
+        }
+        
+        .demo-container {
+            max-width: var(--grid-container-max-width);
+            margin: 0 auto;
+        }
+        
+        .demo-section {
+            margin-bottom: var(--spacing-10);
+            padding: var(--spacing-6);
+            background: var(--color-surface-subtle-green);
+            border-radius: var(--radius-sections);
+        }
+        
+        .demo-title {
+            font-size: var(--typography-page-title-size);
+            font-weight: var(--typography-page-title-weight);
+            line-height: var(--typography-page-title-line-height);
+            letter-spacing: var(--typography-page-title-letter-spacing);
+            color: var(--color-text-default);
+            margin-bottom: var(--spacing-6);
+        }
+        
+        .demo-subtitle {
+            font-size: var(--typography-section-title-size);
+            font-weight: var(--typography-section-title-weight);
+            line-height: var(--typography-section-title-line-height);
+            color: var(--color-text-default);
+            margin-bottom: var(--spacing-5);
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <h1 class="demo-title">Design System - Hearst AI</h1>
+        
+        <!-- Typography Section -->
+        <section class="demo-section">
+            <h2 class="demo-subtitle">Typography</h2>
+            
+            <div class="card-example">
+                <p style="font-size: var(--typography-display-size); font-weight: var(--typography-display-weight); line-height: var(--typography-display-line-height); letter-spacing: var(--typography-display-letter-spacing);">
+                    Display Text
+                </p>
+                <p style="font-size: var(--typography-page-title-size); font-weight: var(--typography-page-title-weight); line-height: var(--typography-page-title-line-height); letter-spacing: var(--typography-page-title-letter-spacing);">
+                    Page Title
+                </p>
+                <p style="font-size: var(--typography-section-title-size); font-weight: var(--typography-section-title-weight); line-height: var(--typography-section-title-line-height);">
+                    Section Title
+                </p>
+                <p style="font-size: var(--typography-subsection-title-size); font-weight: var(--typography-subsection-title-weight); line-height: var(--typography-subsection-title-line-height);">
+                    Sub Section Title
+                </p>
+                <p style="font-size: var(--typography-body-bold-size); font-weight: var(--typography-body-bold-weight); line-height: var(--typography-body-bold-line-height);">
+                    Body Bold
+                </p>
+                <p style="font-size: var(--typography-body-size); font-weight: var(--typography-body-weight); line-height: var(--typography-body-line-height);">
+                    Body Regular
+                </p>
+                <p style="font-size: var(--typography-body-minor-size); font-weight: var(--typography-body-minor-weight); line-height: var(--typography-body-minor-line-height);">
+                    Body Minor
+                </p>
+                <p style="font-size: var(--typography-caption-size); font-weight: var(--typography-caption-weight); line-height: var(--typography-caption-line-height);">
+                    Caption
+                </p>
+            </div>
+        </section>
+        
+        <!-- Colors Section -->
+        <section class="demo-section">
+            <h2 class="demo-subtitle">Colors</h2>
+            
+            <div class="grid-example">
+                <div class="grid-example-item-3">
+                    <div style="background: var(--color-primary-light-green); padding: var(--spacing-5); border-radius: var(--radius-cards);">
+                        <p class="text-default">Primary Light Green</p>
+                    </div>
+                </div>
+                <div class="grid-example-item-3">
+                    <div style="background: var(--color-accent-ash-grey); padding: var(--spacing-5); border-radius: var(--radius-cards);">
+                        <p class="text-negative">Accent Ash Grey</p>
+                    </div>
+                </div>
+                <div class="grid-example-item-3">
+                    <div style="background: var(--color-surface-subtle-green); padding: var(--spacing-5); border-radius: var(--radius-cards);">
+                        <p class="text-default">Subtle Green</p>
+                    </div>
+                </div>
+                <div class="grid-example-item-3">
+                    <div style="background: var(--color-surface-green-light); padding: var(--spacing-5); border-radius: var(--radius-cards);">
+                        <p class="text-default">Green Light</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Components Section -->
+        <section class="demo-section">
+            <h2 class="demo-subtitle">Components</h2>
+            
+            <div class="card-example">
+                <div class="card-example-header">
+                    <h3 class="card-example-title">Card Example</h3>
+                </div>
+                <div class="card-example-body">
+                    This is a card component example using the design system tokens.
+                </div>
+                <div class="card-example-footer">
+                    <button class="btn-example">Primary Button</button>
+                    <button class="btn-example btn-example-secondary">Secondary Button</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Buttons Section -->
+        <section class="demo-section">
+            <h2 class="demo-subtitle">Buttons</h2>
+            
+            <div style="display: flex; gap: var(--spacing-3); flex-wrap: wrap;">
+                <button class="btn-example">Primary</button>
+                <button class="btn-example btn-example-secondary">Secondary</button>
+            </div>
+        </section>
+        
+        <!-- Badges Section -->
+        <section class="demo-section">
+            <h2 class="demo-subtitle">Badges</h2>
+            
+            <div style="display: flex; gap: var(--spacing-3); flex-wrap: wrap;">
+                <span class="badge-example">Default Badge</span>
+                <span class="badge-example badge-example-accent">Accent Badge</span>
+                <span class="badge-example badge-example-secondary">Secondary Badge</span>
+            </div>
+        </section>
+        
+        <!-- Spacing Section -->
+        <section class="demo-section">
+            <h2 class="demo-subtitle">Spacing System</h2>
+            
+            <div>
+                <div style="background: var(--color-primary-light-green); height: var(--spacing-3); margin-bottom: var(--spacing-3); border-radius: var(--radius-small-cards);">8px</div>
+                <div style="background: var(--color-primary-light-green); height: var(--spacing-5); margin-bottom: var(--spacing-3); border-radius: var(--radius-small-cards);">16px</div>
+                <div style="background: var(--color-primary-light-green); height: var(--spacing-6); margin-bottom: var(--spacing-3); border-radius: var(--radius-small-cards);">24px</div>
+                <div style="background: var(--color-primary-light-green); height: var(--spacing-7); margin-bottom: var(--spacing-3); border-radius: var(--radius-small-cards);">32px</div>
+            </div>
+        </section>
+        
+        <!-- Radius Section -->
+        <section class="demo-section">
+            <h2 class="demo-subtitle">Border Radius</h2>
+            
+            <div style="display: flex; gap: var(--spacing-5); flex-wrap: wrap;">
+                <div style="width: 100px; height: 100px; background: var(--color-primary-light-green); border-radius: var(--radius-flat);"></div>
+                <div style="width: 100px; height: 100px; background: var(--color-primary-light-green); border-radius: var(--radius-small-cards);"></div>
+                <div style="width: 100px; height: 100px; background: var(--color-primary-light-green); border-radius: var(--radius-cards);"></div>
+                <div style="width: 100px; height: 100px; background: var(--color-primary-light-green); border-radius: var(--radius-sections);"></div>
+                <div style="width: 100px; height: 100px; background: var(--color-primary-light-green); border-radius: var(--radius-rounded);"></div>
+            </div>
+        </section>
+        
+        <!-- Patterns Section -->
+        <section class="demo-section">
+            <h2 class="demo-subtitle">Decorative Patterns</h2>
+            
+            <div style="display: flex; gap: var(--spacing-5); flex-wrap: wrap;">
+                <div class="pattern-spherical" style="width: 200px; height: 100px; border-radius: var(--radius-cards); border: var(--border-width-thin) solid var(--border-color-default);"></div>
+                <div class="pattern-stacked-squares" style="width: 200px; height: 100px; border-radius: var(--radius-cards); border: var(--border-width-thin) solid var(--border-color-default);"></div>
+                <div class="pattern-cube-mesh" style="width: 200px; height: 100px; border-radius: var(--radius-cards); border: var(--border-width-thin) solid var(--border-color-default);"></div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
+

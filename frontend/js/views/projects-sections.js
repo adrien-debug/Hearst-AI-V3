@@ -27,126 +27,143 @@ export function renderProjectionSection(sectionId) {
     </div>`;
 }
 
-// Overview Section
-function renderOverviewSection() {
+// Helper function pour les cartes de projection (définie AVANT renderOverviewSection)
+function renderProjectionCard(name, date, number, hashrate, btc) {
     return `
-        <div id="overview">
-            <h2 style="font-size: 24px; font-weight: 700; color: #ffffff; margin-bottom: 32px;">Lasts Projections</h2>
-            <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; margin-bottom: 48px;">
-                <div style="background: rgba(26, 26, 26, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 24px; cursor: pointer;">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
-                        <div>
-                            <div style="font-size: 11px; color: #888; text-transform: uppercase; margin-bottom: 4px;">Projection Alpha</div>
-                            <div style="font-size: 11px; color: #aaa;">2024-01-15</div>
-                        </div>
-                        <div style="width: 32px; height: 32px; background: rgba(138, 253, 129, 0.2); border: 1px solid #8afd81; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #8afd81; font-weight: 600;">1</div>
-                    </div>
-                    <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 16px;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                            <span style="font-size: 11px; color: #aaa;">Hashrate</span>
-                            <span style="font-size: 14px; font-weight: 600; color: #8afd81;">2.5 PH/s</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span style="font-size: 11px; color: #aaa;">BTC</span>
-                            <span style="font-size: 14px; font-weight: 600; color: #fff;">125 BTC</span>
-                        </div>
-                    </div>
-                </div>
-                <div style="background: rgba(26, 26, 26, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 24px; cursor: pointer;">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
-                        <div>
-                            <div style="font-size: 11px; color: #888; text-transform: uppercase; margin-bottom: 4px;">Projection Beta</div>
-                            <div style="font-size: 11px; color: #aaa;">2024-01-20</div>
-                        </div>
-                        <div style="width: 32px; height: 32px; background: rgba(138, 253, 129, 0.2); border: 1px solid #8afd81; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #8afd81; font-weight: 600;">2</div>
-                    </div>
-                    <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 16px;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                            <span style="font-size: 11px; color: #aaa;">Hashrate</span>
-                            <span style="font-size: 14px; font-weight: 600; color: #8afd81;">3.2 PH/s</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span style="font-size: 11px; color: #aaa;">BTC</span>
-                            <span style="font-size: 14px; font-weight: 600; color: #fff;">158 BTC</span>
-                        </div>
-                    </div>
-                </div>
-                <div style="background: rgba(26, 26, 26, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 24px; cursor: pointer;">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
-                        <div>
-                            <div style="font-size: 11px; color: #888; text-transform: uppercase; margin-bottom: 4px;">Projection Gamma</div>
-                            <div style="font-size: 11px; color: #aaa;">2024-01-25</div>
-                        </div>
-                        <div style="width: 32px; height: 32px; background: rgba(138, 253, 129, 0.2); border: 1px solid #8afd81; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #8afd81; font-weight: 600;">3</div>
-                    </div>
-                    <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 16px;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                            <span style="font-size: 11px; color: #aaa;">Hashrate</span>
-                            <span style="font-size: 14px; font-weight: 600; color: #8afd81;">1.8 PH/s</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span style="font-size: 11px; color: #aaa;">BTC</span>
-                            <span style="font-size: 14px; font-weight: 600; color: #fff;">92 BTC</span>
-                        </div>
-                    </div>
-                </div>
-                <div style="background: rgba(26, 26, 26, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 24px; cursor: pointer;">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
-                        <div>
-                            <div style="font-size: 11px; color: #888; text-transform: uppercase; margin-bottom: 4px;">Projection Delta</div>
-                            <div style="font-size: 11px; color: #aaa;">2024-02-01</div>
-                        </div>
-                        <div style="width: 32px; height: 32px; background: rgba(138, 253, 129, 0.2); border: 1px solid #8afd81; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #8afd81; font-weight: 600;">4</div>
-                    </div>
-                    <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 16px;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                            <span style="font-size: 11px; color: #aaa;">Hashrate</span>
-                            <span style="font-size: 14px; font-weight: 600; color: #8afd81;">4.1 PH/s</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span style="font-size: 11px; color: #aaa;">BTC</span>
-                            <span style="font-size: 14px; font-weight: 600; color: #fff;">203 BTC</span>
-                        </div>
-                    </div>
-                </div>
-                <div style="background: rgba(26, 26, 26, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 24px; cursor: pointer;">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
-                        <div>
-                            <div style="font-size: 11px; color: #888; text-transform: uppercase; margin-bottom: 4px;">Projection Epsilon</div>
-                            <div style="font-size: 11px; color: #aaa;">2024-02-10</div>
-                        </div>
-                        <div style="width: 32px; height: 32px; background: rgba(138, 253, 129, 0.2); border: 1px solid #8afd81; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #8afd81; font-weight: 600;">5</div>
-                    </div>
-                    <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 16px;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                            <span style="font-size: 11px; color: #aaa;">Hashrate</span>
-                            <span style="font-size: 14px; font-weight: 600; color: #8afd81;">2.9 PH/s</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span style="font-size: 11px; color: #aaa;">BTC</span>
-                            <span style="font-size: 14px; font-weight: 600; color: #fff;">145 BTC</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div>
-                <label style="display: block; font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 12px;">Projection History</label>
-                <select id="projection-history-select" style="width: 100%; padding: 12px 16px; background: rgba(26, 26, 26, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; color: #fff; font-size: 14px; cursor: pointer;">
-                    <option value="">Select a projection from history...</option>
-                    <option value="proj-2024-01-15">Projection Alpha - 2024-01-15 (2.5 PH/s, 125 BTC)</option>
-                    <option value="proj-2024-01-20">Projection Beta - 2024-01-20 (3.2 PH/s, 158 BTC)</option>
-                    <option value="proj-2024-01-25">Projection Gamma - 2024-01-25 (1.8 PH/s, 92 BTC)</option>
-                    <option value="proj-2024-02-01">Projection Delta - 2024-02-01 (4.1 PH/s, 203 BTC)</option>
-                    <option value="proj-2024-02-10">Projection Epsilon - 2024-02-10 (2.9 PH/s, 145 BTC)</option>
-                    <option value="proj-2024-02-15">Projection Zeta - 2024-02-15 (3.5 PH/s, 172 BTC)</option>
-                    <option value="proj-2024-02-20">Projection Eta - 2024-02-20 (2.1 PH/s, 105 BTC)</option>
-                    <option value="proj-2024-03-01">Projection Theta - 2024-03-01 (4.8 PH/s, 238 BTC)</option>
-                </select>
-            </div>
+<div style="background: rgba(26, 26, 26, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 24px; cursor: pointer; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3); transition: all 0.3s ease;" 
+     onmouseover="this.style.borderColor='#8afd81'; this.style.transform='translateY(-2px)'" 
+     onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.1)'; this.style.transform='translateY(0)'">
+    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+        <div>
+            <div style="font-size: 11px; color: #888; text-transform: uppercase; margin-bottom: 4px;">Projection ${name}</div>
+            <div style="font-size: 11px; color: #aaa;">${date}</div>
         </div>
+        <div style="width: 32px; height: 32px; background: rgba(138, 253, 129, 0.2); border: 1px solid #8afd81; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #8afd81; font-weight: 600;">${number}</div>
+    </div>
+    <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 16px;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+            <span style="font-size: 11px; color: #aaa;">Hashrate</span>
+            <span style="font-size: 14px; font-weight: 600; color: #8afd81;">${hashrate}</span>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+            <span style="font-size: 11px; color: #aaa;">BTC</span>
+            <span style="font-size: 14px; font-weight: 600; color: #fff;">${btc}</span>
+        </div>
+    </div>
+</div>
     `;
 }
+
+// Helper function pour les lignes du tableau (définie AVANT renderOverviewSection)
+function renderProjectionTableRow(name, date, hashrate, btc, status) {
+    const statusColors = {
+        'active': { bg: 'rgba(138, 253, 129, 0.15)', color: '#8afd81', text: 'Active' },
+        'completed': { bg: 'rgba(138, 253, 129, 0.1)', color: '#8afd81', text: 'Completed' },
+        'pending': { bg: 'rgba(255, 255, 255, 0.1)', color: '#aaa', text: 'Pending' }
+    };
+    const statusStyle = statusColors[status] || statusColors.pending;
+    
+    return `
+<tr style="cursor: pointer;" onmouseover="this.style.background='rgba(138, 253, 129, 0.03)'" onmouseout="this.style.background='transparent'">
+    <td style="font-weight: 600; color: var(--text-primary);">Projection ${name}</td>
+    <td style="color: var(--text-secondary);">${date}</td>
+    <td style="color: #8afd81; font-weight: 600;">${hashrate}</td>
+    <td style="color: var(--text-primary); font-weight: 600;">${btc}</td>
+    <td>
+        <span style="padding: 4px 10px; background: ${statusStyle.bg}; border: 1px solid ${statusStyle.color}; border-radius: 4px; font-size: 10px; font-weight: 700; color: ${statusStyle.color}; text-transform: uppercase;">
+            ${statusStyle.text}
+        </span>
+    </td>
+    <td>
+        <div style="display: flex; gap: 8px;">
+            <button style="padding: 6px 12px; background: rgba(138, 253, 129, 0.1); border: 1px solid #8afd81; border-radius: 6px; color: #8afd81; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.2s;" 
+                    onmouseover="this.style.background='rgba(138, 253, 129, 0.2)'" 
+                    onmouseout="this.style.background='rgba(138, 253, 129, 0.1)'">
+                View
+            </button>
+            <button style="padding: 6px 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 6px; color: var(--text-secondary); font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.2s;" 
+                    onmouseover="this.style.borderColor='#8afd81'; this.style.color='#8afd81'" 
+                    onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.1)'; this.style.color='var(--text-secondary)'">
+                Edit
+            </button>
+        </div>
+    </td>
+</tr>
+    `;
+}
+
+// Overview Section - 5 dernières projections + liste complète
+function renderOverviewSection() {
+    try {
+        return `
+<div id="overview-section" style="padding: 20px; width: 100%;">
+    <h2 style="font-size: 24px; font-weight: 700; color: #ffffff; margin-bottom: 32px;">Lasts Projections</h2>
+    
+    <!-- 5 Boxes des dernières projections -->
+    <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; margin-bottom: 48px;">
+        ${renderProjectionCard('Alpha', '2024-01-15', 1, '2.5 PH/s', '125 BTC')}
+        ${renderProjectionCard('Beta', '2024-01-20', 2, '3.2 PH/s', '158 BTC')}
+        ${renderProjectionCard('Gamma', '2024-01-25', 3, '1.8 PH/s', '92 BTC')}
+        ${renderProjectionCard('Delta', '2024-02-01', 4, '4.1 PH/s', '203 BTC')}
+        ${renderProjectionCard('Epsilon', '2024-02-10', 5, '2.9 PH/s', '145 BTC')}
+    </div>
+    
+    <!-- Liste complète des projections -->
+    <div style="margin-top: 48px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+            <h3 style="font-size: 18px; font-weight: 700; color: #ffffff;">All Projections</h3>
+            <select id="projection-history-select" style="padding: 12px 16px; background: rgba(26, 26, 26, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; color: #fff; font-size: 14px; cursor: pointer;">
+                <option value="">Select a projection from history...</option>
+                <option value="proj-2024-01-15">Projection Alpha - 2024-01-15 (2.5 PH/s, 125 BTC)</option>
+                <option value="proj-2024-01-20">Projection Beta - 2024-01-20 (3.2 PH/s, 158 BTC)</option>
+                <option value="proj-2024-01-25">Projection Gamma - 2024-01-25 (1.8 PH/s, 92 BTC)</option>
+                <option value="proj-2024-02-01">Projection Delta - 2024-02-01 (4.1 PH/s, 203 BTC)</option>
+                <option value="proj-2024-02-10">Projection Epsilon - 2024-02-10 (2.9 PH/s, 145 BTC)</option>
+                <option value="proj-2024-02-15">Projection Zeta - 2024-02-15 (3.5 PH/s, 172 BTC)</option>
+                <option value="proj-2024-02-20">Projection Eta - 2024-02-20 (2.1 PH/s, 105 BTC)</option>
+                <option value="proj-2024-03-01">Projection Theta - 2024-03-01 (4.8 PH/s, 238 BTC)</option>
+                <option value="proj-2024-03-10">Projection Iota - 2024-03-10 (3.8 PH/s, 189 BTC)</option>
+                <option value="proj-2024-03-20">Projection Kappa - 2024-03-20 (2.7 PH/s, 134 BTC)</option>
+            </select>
+        </div>
+        
+        <div class="table-container">
+            <table class="table-premium">
+                <thead>
+                    <tr>
+                        <th>Projection</th>
+                        <th>Date</th>
+                        <th>Hashrate</th>
+                        <th>BTC</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${renderProjectionTableRow('Alpha', '2024-01-15', '2.5 PH/s', '125 BTC', 'active')}
+                    ${renderProjectionTableRow('Beta', '2024-01-20', '3.2 PH/s', '158 BTC', 'active')}
+                    ${renderProjectionTableRow('Gamma', '2024-01-25', '1.8 PH/s', '92 BTC', 'completed')}
+                    ${renderProjectionTableRow('Delta', '2024-02-01', '4.1 PH/s', '203 BTC', 'active')}
+                    ${renderProjectionTableRow('Epsilon', '2024-02-10', '2.9 PH/s', '145 BTC', 'active')}
+                    ${renderProjectionTableRow('Zeta', '2024-02-15', '3.5 PH/s', '172 BTC', 'pending')}
+                    ${renderProjectionTableRow('Eta', '2024-02-20', '2.1 PH/s', '105 BTC', 'completed')}
+                    ${renderProjectionTableRow('Theta', '2024-03-01', '4.8 PH/s', '238 BTC', 'active')}
+                    ${renderProjectionTableRow('Iota', '2024-03-10', '3.8 PH/s', '189 BTC', 'active')}
+                    ${renderProjectionTableRow('Kappa', '2024-03-20', '2.7 PH/s', '134 BTC', 'pending')}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+    `;
+    } catch (error) {
+        console.error('Error in renderOverviewSection:', error);
+        return `<div id="overview-section" style="padding: 40px; text-align: center; color: #fff;">
+            <p>Error rendering overview: ${error.message}</p>
+        </div>`;
+    }
+}
+
 
 // Market Metrics
 function renderMarketMetrics() {
@@ -160,9 +177,9 @@ function renderMarketMetrics() {
             </div>
             <div class="metrics-grid">
                 ${renderMetricCard('green', 'Bitcoin Price', '$95,000', 'Live market data via CoinGecko API', 'btc')}
-                ${renderMetricCard('blue', 'Network Hashrate', '742 EH/s', 'Total Bitcoin network computing power', 'hashrate')}
-                ${renderMetricCard('yellow', 'Block Reward', '3.125 BTC', 'Current mining reward (post-halving 2024)', 'reward')}
-                ${renderMetricCard('purple', 'Average Block Time', '10 min', 'Target block confirmation interval', 'time')}
+                ${renderMetricCard('green', 'Network Hashrate', '742 EH/s', 'Total Bitcoin network computing power', 'hashrate')}
+                ${renderMetricCard('green', 'Block Reward', '3.125 BTC', 'Current mining reward (post-halving 2024)', 'reward')}
+                ${renderMetricCard('green', 'Average Block Time', '10 min', 'Target block confirmation interval', 'time')}
             </div>
         </div>
     `;
@@ -432,7 +449,7 @@ function renderEnergyCosts() {
                                 <td style="font-weight: 600; color: var(--text-primary);">Europe</td>
                                 <td>$0.085/kWh</td>
                                 <td>$0.06 - $0.12</td>
-                                <td><span style="color: var(--accent-yellow);">High</span></td>
+                                <td><span style="color: #8afd81;">High</span></td>
                             </tr>
                             <tr>
                                 <td style="font-weight: 600; color: var(--text-primary);">South America</td>
@@ -988,7 +1005,7 @@ function renderCalculatorStep3() {
                 
                 <table style="width: 100%; border-collapse: collapse;">
                     <thead>
-                        <tr style="border-bottom: 1px solid var(--gray-700);">
+                        <tr style="border-bottom: 1px solid rgba(138, 253, 129, 0.15);">
                             <th style="text-align: left; padding: 10px; font-size: 12px; color: var(--text-muted); text-transform: uppercase;">Phase</th>
                             <th style="text-align: right; padding: 10px; font-size: 12px; color: var(--text-muted); text-transform: uppercase;">Units</th>
                             <th style="text-align: right; padding: 10px; font-size: 12px; color: var(--text-muted); text-transform: uppercase;">Start Month</th>
@@ -996,17 +1013,17 @@ function renderCalculatorStep3() {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr style="border-bottom: 1px solid var(--gray-700);">
+                        <tr style="border-bottom: 1px solid rgba(138, 253, 129, 0.15);">
                             <td style="padding: 10px; color: var(--text-primary);">Phase 1</td>
-                            <td style="padding: 10px; text-align: right;"><input type="number" style="width: 80px; background: var(--gray-800); border: 1px solid var(--gray-700); border-radius: 6px; padding: 6px; color: var(--text-primary); text-align: right;" value="100"></td>
-                            <td style="padding: 10px; text-align: right;"><input type="number" style="width: 80px; background: var(--gray-800); border: 1px solid var(--gray-700); border-radius: 6px; padding: 6px; color: var(--text-primary); text-align: right;" value="0"></td>
-                            <td style="padding: 10px; text-align: right;"><input type="number" style="width: 80px; background: var(--gray-800); border: 1px solid var(--gray-700); border-radius: 6px; padding: 6px; color: var(--text-primary); text-align: right;" value="1"></td>
+                            <td style="padding: 10px; text-align: right;"><input type="number" style="width: 80px; background: rgba(26, 26, 26, 0.9); border: 1px solid rgba(138, 253, 129, 0.15); border-radius: 6px; padding: 6px; color: var(--text-primary); text-align: right;" value="100"></td>
+                            <td style="padding: 10px; text-align: right;"><input type="number" style="width: 80px; background: rgba(26, 26, 26, 0.9); border: 1px solid rgba(138, 253, 129, 0.15); border-radius: 6px; padding: 6px; color: var(--text-primary); text-align: right;" value="0"></td>
+                            <td style="padding: 10px; text-align: right;"><input type="number" style="width: 80px; background: rgba(26, 26, 26, 0.9); border: 1px solid rgba(138, 253, 129, 0.15); border-radius: 6px; padding: 6px; color: var(--text-primary); text-align: right;" value="1"></td>
                         </tr>
                         <tr>
                             <td style="padding: 10px; color: var(--text-primary);">Phase 2</td>
-                            <td style="padding: 10px; text-align: right;"><input type="number" style="width: 80px; background: var(--gray-800); border: 1px solid var(--gray-700); border-radius: 6px; padding: 6px; color: var(--text-primary); text-align: right;" value="106"></td>
-                            <td style="padding: 10px; text-align: right;"><input type="number" style="width: 80px; background: var(--gray-800); border: 1px solid var(--gray-700); border-radius: 6px; padding: 6px; color: var(--text-primary); text-align: right;" value="3"></td>
-                            <td style="padding: 10px; text-align: right;"><input type="number" style="width: 80px; background: var(--gray-800); border: 1px solid var(--gray-700); border-radius: 6px; padding: 6px; color: var(--text-primary); text-align: right;" value="2"></td>
+                            <td style="padding: 10px; text-align: right;"><input type="number" style="width: 80px; background: rgba(26, 26, 26, 0.9); border: 1px solid rgba(138, 253, 129, 0.15); border-radius: 6px; padding: 6px; color: var(--text-primary); text-align: right;" value="106"></td>
+                            <td style="padding: 10px; text-align: right;"><input type="number" style="width: 80px; background: rgba(26, 26, 26, 0.9); border: 1px solid rgba(138, 253, 129, 0.15); border-radius: 6px; padding: 6px; color: var(--text-primary); text-align: right;" value="3"></td>
+                            <td style="padding: 10px; text-align: right;"><input type="number" style="width: 80px; background: rgba(26, 26, 26, 0.9); border: 1px solid rgba(138, 253, 129, 0.15); border-radius: 6px; padding: 6px; color: var(--text-primary); text-align: right;" value="2"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -1352,32 +1369,32 @@ function renderResultsSection() {
                     </div>
 
                     <!-- TOTAL HASHRATE -->
-                    <div class="metric-card blue">
-                        <div class="metric-icon-wrapper blue">
+                    <div class="metric-card green">
+                        <div class="metric-icon-wrapper green">
                             ${Icons.hashrate}
                         </div>
                         <span class="metric-label">Total Hashrate</span>
-                        <span class="metric-value blue">124.6 PH/s</span>
+                        <span class="metric-value green">124.6 PH/s</span>
                         <span class="metric-description">206 units deployed</span>
                     </div>
 
                     <!-- PAYBACK PERIOD -->
-                    <div class="metric-card yellow">
-                        <div class="metric-icon-wrapper yellow">
+                    <div class="metric-card green">
+                        <div class="metric-icon-wrapper green">
                             ${Icons.clock}
                         </div>
                         <span class="metric-label">Payback Period</span>
-                        <span class="metric-value yellow">18 mo</span>
+                        <span class="metric-value green">18 mo</span>
                         <span class="metric-description">6 mo faster than baseline</span>
                     </div>
 
                     <!-- BREAK-EVEN -->
-                    <div class="metric-card purple">
-                        <div class="metric-icon-wrapper purple">
+                    <div class="metric-card green">
+                        <div class="metric-icon-wrapper green">
                             ${Icons.check}
                         </div>
                         <span class="metric-label">Break-even</span>
-                        <span class="metric-value purple">12 mo</span>
+                        <span class="metric-value green">12 mo</span>
                         <span class="metric-description">Excellent performance</span>
                     </div>
                 </div>
@@ -1391,7 +1408,7 @@ function renderResultsSection() {
                         <p style="font-size: 12px; color: var(--text-muted); font-weight: 500;">12-month forecast</p>
                     </div>
                 </div>
-                <div style="background: var(--gray-900); border: 1px solid var(--gray-700); border-radius: 12px; padding: 24px;">
+                <div style="background: #1A1A1A; border: 1px solid rgba(138, 253, 129, 0.15); border-radius: 12px; padding: 24px;">
                     <div style="position: relative; height: 400px;">
                         <canvas id="revenueChartAnalysis"></canvas>
                     </div>
@@ -1402,7 +1419,7 @@ function renderResultsSection() {
             <div class="section-premium" style="margin-top: 32px;">
                 <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
                     <!-- CUMULATIVE CASH FLOW -->
-                    <div style="background: var(--gray-900); border: 1px solid var(--gray-700); border-radius: 12px; padding: 24px;">
+                    <div style="background: #1A1A1A; border: 1px solid rgba(138, 253, 129, 0.15); border-radius: 12px; padding: 24px;">
                         <div style="margin-bottom: 20px;">
                             <h3 style="font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px;">Cumulative Cash Flow</h3>
                             <p style="font-size: 12px; color: var(--text-muted);">Break-even analysis</p>
@@ -1413,7 +1430,7 @@ function renderResultsSection() {
                     </div>
 
                     <!-- COST BREAKDOWN -->
-                    <div style="background: var(--gray-900); border: 1px solid var(--gray-700); border-radius: 12px; padding: 24px;">
+                    <div style="background: #1A1A1A; border: 1px solid rgba(138, 253, 129, 0.15); border-radius: 12px; padding: 24px;">
                         <div style="margin-bottom: 20px;">
                             <h3 style="font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px;">Cost Breakdown</h3>
                             <p style="font-size: 12px; color: var(--text-muted);">CAPEX vs OPEX distribution</p>
@@ -1490,32 +1507,32 @@ function renderChartsSection() {
                     </div>
                 </div>
                 <div id="chartsContent">
-                    <div class="chart-container" style="background: var(--gray-900); border: 1px solid var(--gray-700); border-radius: 12px; padding: 24px; margin-bottom: 24px;">
+                    <div class="chart-container" style="background: #1A1A1A; border: 1px solid rgba(138, 253, 129, 0.15); border-radius: 12px; padding: 24px; margin-bottom: 24px;">
                         <h3 style="font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px;">Cumulative Cash Flow (12 Months)</h3>
                         <div style="position: relative; height: 400px;">
                             <canvas id="cashflowChart"></canvas>
                         </div>
                     </div>
-                    <div class="chart-container" style="background: var(--gray-900); border: 1px solid var(--gray-700); border-radius: 12px; padding: 24px; margin-bottom: 24px;">
+                    <div class="chart-container" style="background: #1A1A1A; border: 1px solid rgba(138, 253, 129, 0.15); border-radius: 12px; padding: 24px; margin-bottom: 24px;">
                         <h3 style="font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px;">Monthly Revenue vs Costs</h3>
                         <div style="position: relative; height: 400px;">
                             <canvas id="revenueChart"></canvas>
                         </div>
                     </div>
-                    <div class="chart-container" style="background: var(--gray-900); border: 1px solid var(--gray-700); border-radius: 12px; padding: 24px; margin-bottom: 24px;">
+                    <div class="chart-container" style="background: #1A1A1A; border: 1px solid rgba(138, 253, 129, 0.15); border-radius: 12px; padding: 24px; margin-bottom: 24px;">
                         <h3 style="font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px;">ROI Sensitivity Analysis (BTC Price Impact)</h3>
                         <div style="position: relative; height: 400px;">
                             <canvas id="sensitivityChart"></canvas>
                         </div>
                     </div>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 24px; margin-top: 32px;">
-                        <div class="chart-container" style="background: var(--gray-900); border: 1px solid var(--gray-700); border-radius: 12px; padding: 24px;">
+                        <div class="chart-container" style="background: #1A1A1A; border: 1px solid rgba(138, 253, 129, 0.15); border-radius: 12px; padding: 24px;">
                             <h3 style="font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px;">Monthly Cost Breakdown</h3>
                             <div style="position: relative; height: 300px;">
                                 <canvas id="costBreakdownChart"></canvas>
                             </div>
                         </div>
-                        <div class="chart-container" style="background: var(--gray-900); border: 1px solid var(--gray-700); border-radius: 12px; padding: 24px;">
+                        <div class="chart-container" style="background: #1A1A1A; border: 1px solid rgba(138, 253, 129, 0.15); border-radius: 12px; padding: 24px;">
                             <h3 style="font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px;">Network Hashrate Impact on Profitability</h3>
                             <div style="position: relative; height: 300px;">
                                 <canvas id="hashrateImpactChart"></canvas>
@@ -1580,11 +1597,11 @@ function renderMonteCarloSection() {
                         <div class="param-card-title">Simulation Results</div>
                         <p style="color: var(--text-secondary); margin-bottom: 24px;">Break-even time distribution across all scenarios</p>
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 32px;">
-                            <div style="padding: 16px; background: var(--gray-800); border-radius: 12px; text-align: center;">
+                            <div style="padding: 16px; background: rgba(26, 26, 26, 0.9); border: 1px solid rgba(138, 253, 129, 0.1); border-radius: 12px; text-align: center;">
                                 <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase;">10th Percentile</div>
                                 <div style="font-size: 24px; font-weight: 700; color: var(--text-primary);" id="p10">-- months</div>
                             </div>
-                            <div style="padding: 16px; background: var(--gray-800); border-radius: 12px; text-align: center;">
+                            <div style="padding: 16px; background: rgba(26, 26, 26, 0.9); border: 1px solid rgba(138, 253, 129, 0.1); border-radius: 12px; text-align: center;">
                                 <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase;">25th Percentile</div>
                                 <div style="font-size: 24px; font-weight: 700; color: var(--text-primary);" id="p25">-- months</div>
                             </div>
@@ -1592,17 +1609,17 @@ function renderMonteCarloSection() {
                                 <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase;">Median (50th)</div>
                                 <div style="font-size: 24px; font-weight: 700; color: #8afd81;" id="p50">-- months</div>
                             </div>
-                            <div style="padding: 16px; background: var(--gray-800); border-radius: 12px; text-align: center;">
+                            <div style="padding: 16px; background: rgba(26, 26, 26, 0.9); border: 1px solid rgba(138, 253, 129, 0.1); border-radius: 12px; text-align: center;">
                                 <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase;">75th Percentile</div>
                                 <div style="font-size: 24px; font-weight: 700; color: var(--text-primary);" id="p75">-- months</div>
                             </div>
-                            <div style="padding: 16px; background: var(--gray-800); border-radius: 12px; text-align: center;">
+                            <div style="padding: 16px; background: rgba(26, 26, 26, 0.9); border: 1px solid rgba(138, 253, 129, 0.1); border-radius: 12px; text-align: center;">
                                 <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase;">90th Percentile</div>
                                 <div style="font-size: 24px; font-weight: 700; color: var(--text-primary);" id="p90">-- months</div>
                             </div>
                         </div>
                     </div>
-                    <div class="chart-container" style="background: var(--gray-900); border: 1px solid var(--gray-700); border-radius: 12px; padding: 24px; margin-top: 24px;">
+                    <div class="chart-container" style="background: #1A1A1A; border: 1px solid rgba(138, 253, 129, 0.15); border-radius: 12px; padding: 24px; margin-top: 24px;">
                         <h3 style="font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px;">ROI Distribution Histogram</h3>
                         <div style="position: relative; height: 400px;">
                             <canvas id="monteCarloChart"></canvas>
@@ -1645,7 +1662,7 @@ function renderProjectsListSection() {
                     <!-- Projects will be loaded here -->
                 </div>
                 <div id="noProjects" style="text-align: center; padding: 60px 20px;">
-                    <div style="width: 80px; height: 80px; margin: 0 auto 24px; background: var(--gray-800); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    <div style="width: 80px; height: 80px; margin: 0 auto 24px; background: rgba(26, 26, 26, 0.9); border: 1px solid rgba(138, 253, 129, 0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
                         ${Icons.projects}
                     </div>
                     <p style="color: var(--text-muted); font-size: 16px; margin-bottom: 8px;">No saved projects yet</p>
@@ -1768,7 +1785,7 @@ function renderHardwareSection() {
                                 <input type="number" class="form-input" id="hw_hours" value="24" min="1" max="24" onchange="updateHardwareCalc()">
                             </div>
                         </div>
-                        <div style="background: var(--gray-800); padding: 20px; border-radius: 12px; border: 1px solid rgba(138, 253, 129, 0.2);">
+                        <div style="background: rgba(26, 26, 26, 0.9); padding: 20px; border-radius: 12px; border: 1px solid rgba(138, 253, 129, 0.2);">
                             <h3 style="font-size: 14px; margin-bottom: 16px; color: #8afd81; font-weight: 700;">Calculation Results</h3>
                             <div class="grid-2">
                                 <div>
@@ -1925,6 +1942,7 @@ function renderInfrastructureSection() {
     `;
 }
 
+
 // Initialize Overview
 export function initOverview() {
     console.log('Initializing Overview Section');
@@ -1937,37 +1955,9 @@ export function initOverview() {
             if (selectedValue) {
                 console.log('Selected projection:', selectedValue);
                 // TODO: Load projection details based on selected value
-                // You can implement the logic to load and display the selected projection
             }
         });
     }
-    
-    // Fetch BTC price
-    async function fetchBTC() {
-        try {
-            const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
-            const data = await res.json();
-            const price = data.bitcoin.usd;
-            const priceEl = document.getElementById('overviewbtc');
-            if (priceEl) {
-                priceEl.textContent = '$' + price.toLocaleString();
-            }
-        } catch (e) {
-            console.error('Error fetching BTC price:', e);
-        }
-    }
-    
-    fetchBTC();
-    setInterval(fetchBTC, 60000); // Update every minute
-    
-    // Update last update time
-    const updateTime = () => {
-        const lastUpdateEl = document.getElementById('lastUpdate');
-        if (lastUpdateEl) {
-            lastUpdateEl.textContent = 'Just now';
-        }
-    };
-    updateTime();
 }
 
 // Initialize Calculator
@@ -2127,9 +2117,9 @@ function initRevenueChartAnalysis() {
     revenueGradient.addColorStop(1, 'rgba(138, 253, 129, 0)');
 
     const profitGradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 400);
-    profitGradient.addColorStop(0, 'rgba(255, 149, 0, 0.3)');
-    profitGradient.addColorStop(0.5, 'rgba(255, 149, 0, 0.1)');
-    profitGradient.addColorStop(1, 'rgba(255, 149, 0, 0)');
+    profitGradient.addColorStop(0, 'rgba(138, 253, 129, 0.25)');
+    profitGradient.addColorStop(0.5, 'rgba(138, 253, 129, 0.08)');
+    profitGradient.addColorStop(1, 'rgba(138, 253, 129, 0)');
 
     new Chart(ctx, {
         type: 'line',
@@ -2150,7 +2140,7 @@ function initRevenueChartAnalysis() {
                 {
                     label: 'Profit',
                     data: [468000, 475200, 482400, 489600, 496800, 504000, 511200, 518400, 525600, 532800, 540000, 547200],
-                    borderColor: '#FF9500',
+                    borderColor: '#8afd81',
                     backgroundColor: profitGradient,
                     borderWidth: 3,
                     fill: true,
@@ -2279,8 +2269,8 @@ function initCostChartAnalysis() {
             labels: ['CAPEX', 'OPEX'],
             datasets: [{
                 data: [2500000, 4644000],
-                backgroundColor: ['#8afd81', '#FF9500'],
-                borderColor: ['#8afd81', '#FF9500'],
+                backgroundColor: ['#8afd81', 'rgba(138, 253, 129, 0.6)'],
+                borderColor: ['#8afd81', '#8afd81'],
                 borderWidth: 2
             }]
         },
@@ -2319,8 +2309,221 @@ function initCostChartAnalysis() {
 // Initialize Charts
 export function initCharts() {
     console.log('Initializing Charts Section');
-    // Placeholder for chart initialization
-    // Charts would be initialized here using Chart.js or similar library
+    
+    setTimeout(() => {
+        if (typeof Chart !== 'undefined') {
+            initCashflowChart();
+            initRevenueChart();
+            initSensitivityChart();
+            initCostBreakdownChart();
+            initHashrateImpactChart();
+        } else {
+            console.warn('Chart.js not loaded yet');
+            setTimeout(() => {
+                initCharts();
+            }, 500);
+        }
+    }, 200);
+}
+
+// Initialize Cash Flow Chart
+function initCashflowChart() {
+    const ctx = document.getElementById('cashflowChart');
+    if (!ctx) return;
+
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const cashflowGradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 400);
+    cashflowGradient.addColorStop(0, 'rgba(138, 253, 129, 0.3)');
+    cashflowGradient.addColorStop(1, 'rgba(138, 253, 129, 0)');
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: months,
+            datasets: [{
+                label: 'Cumulative Cash Flow',
+                data: [-2500000, -2031400, -1562800, -1094200, -625600, -157000, 311600, 780200, 1248800, 1717400, 2186000, 2654600],
+                borderColor: '#8afd81',
+                backgroundColor: cashflowGradient,
+                borderWidth: 3,
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: 'rgba(0, 0, 0, 0.95)',
+                    titleColor: '#8afd81',
+                    bodyColor: '#E8E8E8',
+                    borderColor: 'rgba(138, 253, 129, 0.3)'
+                }
+            },
+            scales: {
+                x: { grid: { color: 'rgba(255, 255, 255, 0.02)' }, ticks: { color: '#A3A3A3' } },
+                y: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#CCCCCC' } }
+            }
+        }
+    });
+}
+
+// Initialize Revenue Chart
+function initRevenueChart() {
+    const ctx = document.getElementById('revenueChart');
+    if (!ctx) return;
+
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const revenueGradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 400);
+    revenueGradient.addColorStop(0, 'rgba(138, 253, 129, 0.3)');
+    revenueGradient.addColorStop(1, 'rgba(138, 253, 129, 0)');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: months,
+            datasets: [
+                {
+                    label: 'Revenue',
+                    data: [842600, 856200, 869800, 883400, 897000, 910600, 924200, 937800, 951400, 965000, 978600, 992200],
+                    backgroundColor: '#8afd81',
+                    borderColor: '#8afd81'
+                },
+                {
+                    label: 'Costs',
+                    data: [374600, 381000, 387400, 393800, 400200, 406600, 413000, 419400, 425800, 432200, 438600, 445000],
+                    backgroundColor: 'rgba(138, 253, 129, 0.4)',
+                    borderColor: 'rgba(138, 253, 129, 0.6)'
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { labels: { color: '#E8E8E8' } },
+                tooltip: {
+                    backgroundColor: 'rgba(0, 0, 0, 0.95)',
+                    titleColor: '#8afd81',
+                    bodyColor: '#E8E8E8',
+                    borderColor: 'rgba(138, 253, 129, 0.3)'
+                }
+            },
+            scales: {
+                x: { grid: { color: 'rgba(255, 255, 255, 0.02)' }, ticks: { color: '#A3A3A3' } },
+                y: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#CCCCCC' } }
+            }
+        }
+    });
+}
+
+// Initialize Sensitivity Chart
+function initSensitivityChart() {
+    const ctx = document.getElementById('sensitivityChart');
+    if (!ctx) return;
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['$70k', '$80k', '$90k', '$100k', '$110k', '$120k'],
+            datasets: [{
+                label: 'ROI %',
+                data: [12.5, 28.3, 44.1, 57.8, 71.5, 85.2],
+                borderColor: '#8afd81',
+                backgroundColor: 'rgba(138, 253, 129, 0.1)',
+                borderWidth: 3,
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { labels: { color: '#E8E8E8' } },
+                tooltip: {
+                    backgroundColor: 'rgba(0, 0, 0, 0.95)',
+                    titleColor: '#8afd81',
+                    bodyColor: '#E8E8E8',
+                    borderColor: 'rgba(138, 253, 129, 0.3)'
+                }
+            },
+            scales: {
+                x: { grid: { color: 'rgba(255, 255, 255, 0.02)' }, ticks: { color: '#A3A3A3' } },
+                y: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#CCCCCC' } }
+            }
+        }
+    });
+}
+
+// Initialize Cost Breakdown Chart
+function initCostBreakdownChart() {
+    const ctx = document.getElementById('costBreakdownChart');
+    if (!ctx) return;
+
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Energy', 'Hardware', 'Infrastructure', 'Other'],
+            datasets: [{
+                data: [387000, 250000, 150000, 50000],
+                backgroundColor: ['#8afd81', 'rgba(138, 253, 129, 0.7)', 'rgba(138, 253, 129, 0.5)', 'rgba(138, 253, 129, 0.3)'],
+                borderColor: '#8afd81',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { labels: { color: '#E8E8E8' } },
+                tooltip: {
+                    backgroundColor: 'rgba(0, 0, 0, 0.95)',
+                    titleColor: '#8afd81',
+                    bodyColor: '#E8E8E8',
+                    borderColor: 'rgba(138, 253, 129, 0.3)'
+                }
+            }
+        }
+    });
+}
+
+// Initialize Hashrate Impact Chart
+function initHashrateImpactChart() {
+    const ctx = document.getElementById('hashrateImpactChart');
+    if (!ctx) return;
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['600 EH/s', '650 EH/s', '700 EH/s', '750 EH/s', '800 EH/s'],
+            datasets: [{
+                label: 'Monthly Profit',
+                data: [420000, 380000, 340000, 300000, 260000],
+                backgroundColor: '#8afd81',
+                borderColor: '#8afd81'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: 'rgba(0, 0, 0, 0.95)',
+                    titleColor: '#8afd81',
+                    bodyColor: '#E8E8E8',
+                    borderColor: 'rgba(138, 253, 129, 0.3)'
+                }
+            },
+            scales: {
+                x: { grid: { color: 'rgba(255, 255, 255, 0.02)' }, ticks: { color: '#A3A3A3' } },
+                y: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#CCCCCC' } }
+            }
+        }
+    });
 }
 
 // Initialize Monte Carlo

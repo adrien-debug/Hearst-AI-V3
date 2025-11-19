@@ -441,6 +441,22 @@ node server.js</pre>
             }
             // Créer la navigation projections (une seule fois)
             this.setupProjectionsHeaderNav();
+            
+            // Mettre à jour l'onglet actif et le titre directement (overview est déjà chargé dans le template)
+            setTimeout(() => {
+                const overviewTab = document.querySelector('[data-projection-section="overview"]');
+                if (overviewTab) {
+                    // Mettre à jour l'état actif sans déclencher le clic (pour éviter le rechargement)
+                    const navTabs = document.querySelectorAll('.cockpit-nav-tab[data-projection-section]');
+                    navTabs.forEach(tab => tab.classList.remove('active'));
+                    overviewTab.classList.add('active');
+                    
+                    const pageTitle = document.getElementById('page-title');
+                    if (pageTitle) {
+                        pageTitle.innerText = 'Overview';
+                    }
+                }
+            }, 100);
         } else if (view === 'settings') {
             // Pour settings, on cache le bouton et on affiche la navigation
             if (this.btnNewAction) this.btnNewAction.style.display = 'none';
@@ -824,13 +840,29 @@ node server.js</pre>
         projectionsNav.className = 'cockpit-header-nav'; // Réutiliser les styles cockpit
         projectionsNav.innerHTML = `
             <div class="cockpit-nav-tabs">
-                <button class="cockpit-nav-tab active" data-projection-section="calculator">
+                <button class="cockpit-nav-tab active" data-projection-section="overview">
+                    <span class="cockpit-nav-icon">${Icons.overview}</span>
+                    <span class="cockpit-nav-label">Overview</span>
+                </button>
+                <button class="cockpit-nav-tab" data-projection-section="calculator">
                     <span class="cockpit-nav-icon">${Icons.calculator}</span>
-                    <span class="cockpit-nav-label">Projections</span>
+                    <span class="cockpit-nav-label">Calculator</span>
                 </button>
                 <button class="cockpit-nav-tab" data-projection-section="results">
                     <span class="cockpit-nav-icon">${Icons.results}</span>
                     <span class="cockpit-nav-label">Results</span>
+                </button>
+                <button class="cockpit-nav-tab" data-projection-section="charts">
+                    <span class="cockpit-nav-icon">${Icons.charts}</span>
+                    <span class="cockpit-nav-label">Charts</span>
+                </button>
+                <button class="cockpit-nav-tab" data-projection-section="monte-carlo">
+                    <span class="cockpit-nav-icon">${Icons.monteCarlo}</span>
+                    <span class="cockpit-nav-label">Monte Carlo</span>
+                </button>
+                <button class="cockpit-nav-tab" data-projection-section="projects">
+                    <span class="cockpit-nav-icon">${Icons.projects}</span>
+                    <span class="cockpit-nav-label">Projects</span>
                 </button>
                 <button class="cockpit-nav-tab" data-projection-section="hardware">
                     <span class="cockpit-nav-icon">${Icons.hardware}</span>
@@ -1353,12 +1385,17 @@ node server.js</pre>
         this.contentArea.innerHTML = projectsStyles + template;
         
         // Initialiser les projections après le rendu
+        // Attendre que le DOM soit complètement rendu avant d'initialiser
         setTimeout(async () => {
-            const { initProjections } = await import('./projections.js');
-            if (initProjections) {
-                initProjections();
+            try {
+                const { initProjections } = await import('./projections.js');
+                if (initProjections) {
+                    initProjections();
+                }
+            } catch (error) {
+                console.error('❌ Error initializing projections:', error);
             }
-        }, 100);
+        }, 200);
     }
     
     async renderJobs() {

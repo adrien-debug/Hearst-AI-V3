@@ -3,21 +3,55 @@
 import { Icons } from '../icons.js';
 
 export async function renderProjectsView(data = null) {
-    return `
-        <div class="projects-view">
-            <div class="projects-content">
-                <!-- Zone de contenu dynamique pour chaque section -->
-                <div id="projections-sections-container">
-                    <!-- Le contenu sera injecté dynamiquement -->
+    // Charger directement la section overview
+    try {
+        const { renderProjectionSection } = await import('./projects-sections.js');
+        const overviewContent = renderProjectionSection('overview');
+        
+        if (!overviewContent || overviewContent.trim() === '') {
+            console.error('Overview content is empty');
+            return `
+                <div class="projects-view">
+                    <div class="projects-content">
+                        <div id="projections-sections-container">
+                            <div style="padding: 40px; text-align: center; color: #fff;">
+                                <p>Error: Overview content could not be loaded</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        return `
+            <div class="projects-view">
+                <div class="projects-content">
+                    <!-- Zone de contenu dynamique pour chaque section -->
+                    <div id="projections-sections-container">
+                        ${overviewContent}
+                    </div>
                 </div>
             </div>
-        </div>
-    `;
+        `;
+    } catch (error) {
+        console.error('Error loading overview section:', error);
+        return `
+            <div class="projects-view">
+                <div class="projects-content">
+                    <div id="projections-sections-container">
+                        <div style="padding: 40px; text-align: center; color: #fff;">
+                            <p>Error loading overview: ${error.message}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
 }
 
 // Section titles mapping
 export const projectionsSectionTitles = {
-    overview: { title: 'Overview', subtitle: 'Real-time market metrics and mining news' },
+    overview: { title: 'Overview', subtitle: 'Latest projections and history' },
     calculator: { title: 'Projections', subtitle: 'Mining profitability calculator' },
     results: { title: 'Results', subtitle: 'Analysis results and financial metrics' },
     charts: { title: 'Charts', subtitle: 'Financial visualizations and projections' },

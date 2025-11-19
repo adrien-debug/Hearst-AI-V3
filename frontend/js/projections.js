@@ -48,14 +48,22 @@ export function showProjectionSection(sectionId) {
         </div>`;
     });
     
-    // Update navigation tabs in header
-    const navTabs = document.querySelectorAll('.cockpit-nav-tab[data-projection-section]');
-    navTabs.forEach(tab => {
-        tab.classList.remove('active');
-        if (tab.getAttribute('data-projection-section') === sectionId) {
-            tab.classList.add('active');
+    // Update navigation tabs in header (avec retry si pas encore prêt)
+    const updateNavTabs = () => {
+        const navTabs = document.querySelectorAll('.cockpit-nav-tab[data-projection-section]');
+        if (navTabs.length > 0) {
+            navTabs.forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.getAttribute('data-projection-section') === sectionId) {
+                    tab.classList.add('active');
+                }
+            });
+        } else {
+            // Retry après un court délai si la navigation n'est pas encore prête
+            setTimeout(updateNavTabs, 50);
         }
-    });
+    };
+    updateNavTabs();
 }
 
 // Fix responsive mobile - Force override des styles inline
@@ -116,23 +124,43 @@ export function initProjections() {
     // Exposer la fonction globalement
     window.showProjectionSection = showProjectionSection;
     
-    // Set default section
-    const defaultSection = 'calculator';
-    showProjectionSection(defaultSection);
+    // Overview est déjà chargé dans le template, juste initialiser la fonctionnalité
+    const initOverviewFunctionality = () => {
+        const container = document.getElementById('projections-sections-container');
+        if (container) {
+            // Importer et initialiser overview directement
+            import('./views/projects-sections.js').then(module => {
+                if (module.initOverview) {
+                    setTimeout(() => {
+                        module.initOverview();
+                    }, 100);
+                }
+            });
+        } else {
+            // Retry si le container n'est pas encore prêt
+            setTimeout(initOverviewFunctionality, 50);
+        }
+    };
+    
+    // Démarrer l'initialisation après un court délai
+    setTimeout(initOverviewFunctionality, 100);
     
     // Fix responsive au chargement
     setTimeout(() => {
         fixMobileResponsive();
     }, 300);
     
-    // Fix responsive au resize
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-            fixMobileResponsive();
-        }, 250);
-    });
+    // Fix responsive au resize (éviter les doublons)
+    if (!window.projectionsResizeHandler) {
+        let resizeTimeout;
+        window.projectionsResizeHandler = () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                fixMobileResponsive();
+            }, 250);
+        };
+        window.addEventListener('resize', window.projectionsResizeHandler);
+    }
     
     // Setup event listeners for navigation tabs (déjà fait dans setupProjectionsHeaderNav)
     // Les event listeners sont déjà attachés dans app.js

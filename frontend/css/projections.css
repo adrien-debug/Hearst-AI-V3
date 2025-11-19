@@ -266,6 +266,61 @@
     animation: fadeIn 0.4s ease;
 }
 
+/* Conteneur principal des sections */
+#projections-sections-container {
+    width: 100% !important;
+    min-height: 400px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+}
+
+/* Overview Section - Styles isolés pour éviter conflits */
+#overview-section {
+    padding: 20px !important;
+    margin: 0 !important;
+    width: 100% !important;
+    background: transparent !important;
+    display: block !important;
+    min-height: 400px !important;
+}
+
+#overview-section * {
+    box-sizing: border-box !important;
+}
+
+#overview-section h2 {
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    margin: 0 0 32px 0 !important;
+    padding: 0 !important;
+}
+
+#overview-section > div:first-of-type {
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr) !important;
+    gap: 20px !important;
+    margin: 0 0 48px 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+}
+
+#projection-history-select {
+    width: 100% !important;
+    max-width: 500px !important;
+    padding: 12px 16px !important;
+    background: rgba(26, 26, 26, 0.9) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 8px !important;
+    color: #fff !important;
+    font-size: 14px !important;
+    cursor: pointer !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+}
+
+
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
@@ -717,7 +772,7 @@
 .badge.badge-green {
     background: #8afd81;
     border: 1px solid #8afd81;
-    color: #FFFFFF;
+    color: #000000;
     font-weight: 700;
 }
 
@@ -765,11 +820,12 @@
 
 /* Chart Container */
 .chart-container {
-    background: var(--gray-900);
-    border: 1px solid var(--gray-700);
+    background: #1A1A1A;
+    border: 1px solid rgba(138, 253, 129, 0.15);
     border-radius: var(--radius-xl);
     padding: 24px;
     margin-bottom: 24px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
 }
 
 .chart-title {
@@ -812,14 +868,63 @@
     }
 }
 
+/* Responsive Mobile - Force 1 colonne pour toutes les grilles */
+@media (max-width: 768px) {
+    /* Overview Section - Grille 5 colonnes → 1 colonne */
+    #overview-section > div:first-of-type {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* Toutes les grilles */
+    .metrics-grid,
+    .grid-2,
+    .grid-3,
+    .grid-4,
+    .radio-cards,
+    .machine-grid,
+    .results-charts-grid,
+    .percentile-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* Flex containers en colonne */
+    .section-header-premium,
+    .projects-toolbar {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+    }
+    
+    /* Padding adapté */
+    #overview-section {
+        padding: 16px !important;
+    }
+    
+    .stepper-container {
+        padding: 24px 16px !important;
+    }
+    
+    /* Pas de scroll horizontal */
+    #projections-sections-container {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Calculator steps en colonne */
+    .calculator-content {
+        grid-template-columns: 1fr !important;
+    }
+}
+
 .summary-panel {
-    background: var(--gray-900);
-    border: 1px solid var(--gray-700);
+    background: #1A1A1A;
+    border: 1px solid rgba(138, 253, 129, 0.15);
     border-radius: var(--radius-xl);
     padding: 24px;
     height: fit-content;
     position: sticky;
     top: 24px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
 }
 
 .summary-title {
@@ -828,7 +933,7 @@
     color: var(--text-primary);
     margin-bottom: 20px;
     padding-bottom: 16px;
-    border-bottom: 1px solid var(--gray-700);
+    border-bottom: 1px solid rgba(138, 253, 129, 0.15);
 }
 
 .summary-item {
@@ -886,8 +991,8 @@
 
 /* News Item */
 .news-item {
-    background: var(--gray-900);
-    border: 1px solid var(--gray-700);
+    background: #1A1A1A;
+    border: 1px solid rgba(138, 253, 129, 0.15);
     border-radius: var(--radius-lg);
     padding: 16px;
     transition: all 0.2s ease;
@@ -998,10 +1103,10 @@
 
 .percentile-item {
     padding: 16px;
-    background: var(--gray-800);
+    background: rgba(26, 26, 26, 0.9);
     border-radius: var(--radius-lg);
     text-align: center;
-    border: 1px solid var(--border-color);
+    border: 1px solid rgba(138, 253, 129, 0.15);
     transition: all 0.2s ease;
 }
 
@@ -1028,12 +1133,13 @@
 
 /* Project Card (Projects List) */
 .project-card {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
+    background: #1A1A1A;
+    border: 1px solid rgba(138, 253, 129, 0.15);
     border-radius: var(--radius-xl);
     padding: 20px;
     transition: all 0.2s ease;
     cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
 }
 
 .project-card:hover {
@@ -1072,8 +1178,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--gray-800);
-    border: 1px solid var(--border-color);
+    background: rgba(26, 26, 26, 0.9);
+    border: 1px solid rgba(138, 253, 129, 0.15);
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -1081,7 +1187,7 @@
 }
 
 .btn-icon:hover {
-    background: var(--gray-700);
+    background: rgba(138, 253, 129, 0.1);
     border-color: #8afd81;
     color: #8afd81;
 }
