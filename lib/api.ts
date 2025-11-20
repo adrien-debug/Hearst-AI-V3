@@ -1,7 +1,8 @@
 // API Client for Next.js API Routes
 // Replaces the old frontend/js/api.js
 
-// Use Railway backend if available, otherwise fallback to local Next.js API routes
+// Use Railway backend in production, fallback to local Next.js API routes in development
+// In production on Vercel, NEXT_PUBLIC_API_URL should be set to Railway backend URL
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || '/api'
 
 export async function fetchAPI<T>(

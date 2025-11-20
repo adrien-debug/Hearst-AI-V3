@@ -1,15 +1,32 @@
 {
   "version": 2,
-  "buildCommand": "echo 'No build required'",
-  "outputDirectory": "frontend",
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": "nextjs",
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "/backend/server.js"
-    },
+      "destination": "/api/:path*"
+    }
+  ],
+  "headers": [
     {
       "source": "/(.*)",
-      "destination": "/frontend/$1"
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        }
+      ]
     }
   ]
 }
