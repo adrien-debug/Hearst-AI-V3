@@ -170,7 +170,9 @@ export default function Dashboard({ data }: DashboardProps) {
   const chartOptions = {
     responsive: true,
     maintainAspectRatio: false,
-    animation: false,
+    animation: {
+      duration: 0,
+    },
     plugins: {
       legend: {
         display: false,
