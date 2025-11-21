@@ -50,7 +50,7 @@ export async function GET(request: NextRequest) {
 
     // Construire les clients avec les vraies données DeBank EN PARALLÈLE
     // ✅ OPTIMISATION : Utiliser Promise.all() pour charger tous les clients en parallèle
-    const clientPromises = customers.map(async (customer) => {
+    const clientPromises = customers.map(async (customer: any) => {
       try {
         const chains = JSON.parse(customer.chains || '["eth"]')
         const protocols = JSON.parse(customer.protocols || '[]')
