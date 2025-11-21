@@ -1,0 +1,374 @@
+/* Calculator Page - HEARST Design System */
+/* Charte HEARST : #8afd81 sur fond noir */
+
+:root {
+    --primary-green: #8afd81;
+    --primary-dark: #000000;
+    --primary-grey: #1a1a1a;
+    --bg-secondary: #1a1a1a;
+    --bg-tertiary: #242424;
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --text-muted: #999999;
+    --border-color: #2a2a2a;
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-full: 9999px;
+    --font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    --font-mono: 'Fira Code', 'Consolas', 'Monaco', monospace;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+    --text-2xl: 1.5rem;
+    --font-semibold: 600;
+    --font-bold: 700;
+    --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.5);
+    --glow-green: 0 0 20px rgba(138, 253, 129, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-primary);
+    background: var(--primary-dark);
+    color: var(--text-primary);
+    line-height: 1.5;
+    min-height: 100vh;
+}
+
+.calculator-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: var(--space-6);
+}
+
+/* Header */
+.calculator-header {
+    margin-bottom: var(--space-8);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+}
+
+.calculator-title {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+}
+
+.live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    background: rgba(138, 253, 129, 0.1);
+    border: 1px solid rgba(138, 253, 129, 0.3);
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: var(--font-semibold);
+    color: var(--primary-green);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.live-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--primary-green);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Métriques temps réel */
+.metrics-section {
+    margin-bottom: var(--space-8);
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-4);
+}
+
+.metric-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    transition: var(--transition-normal);
+}
+
+.metric-card:hover {
+    border-color: rgba(138, 253, 129, 0.15);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.metric-label {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: var(--space-2);
+}
+
+.metric-value {
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+    color: var(--primary-green);
+    font-family: var(--font-mono);
+    margin-bottom: var(--space-1);
+}
+
+.metric-change {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+}
+
+.metric-subtitle {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+}
+
+/* Section Calculator */
+.calculator-section {
+    margin-bottom: var(--space-8);
+}
+
+.calculator-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+}
+
+@media (max-width: 968px) {
+    .calculator-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.section-title {
+    font-size: var(--text-lg);
+    font-weight: var(--font-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-6);
+    letter-spacing: -0.01em;
+}
+
+/* Formulaire */
+.calculator-form {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+}
+
+.form-group {
+    margin-bottom: var(--space-6);
+}
+
+.form-group label {
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-2);
+}
+
+.form-group input {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    background: var(--primary-dark);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: var(--text-base);
+    font-family: var(--font-mono);
+    transition: var(--transition-normal);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary-green);
+    box-shadow: 0 0 0 3px rgba(138, 253, 129, 0.1);
+}
+
+.input-hint {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: var(--space-1);
+}
+
+.btn-calculate {
+    width: 100%;
+    padding: var(--space-4) var(--space-6);
+    background: var(--primary-green);
+    color: #000000;
+    border: none;
+    border-radius: var(--radius-full);
+    font-size: var(--text-base);
+    font-weight: var(--font-semibold);
+    font-family: var(--font-primary);
+    cursor: pointer;
+    transition: var(--transition-normal);
+    box-shadow: var(--shadow-md);
+    letter-spacing: -0.01em;
+}
+
+.btn-calculate:hover:not(:disabled) {
+    background: #6fdc66;
+    transform: scale(1.02);
+    box-shadow: var(--glow-green);
+}
+
+.btn-calculate:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Résultats */
+.calculator-results {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.results-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+}
+
+.results-title {
+    font-size: var(--text-base);
+    font-weight: var(--font-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-4);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+}
+
+.result-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.result-item.highlight {
+    grid-column: 1 / -1;
+    padding: var(--space-4);
+    background: rgba(138, 253, 129, 0.05);
+    border: 1px solid rgba(138, 253, 129, 0.2);
+    border-radius: var(--radius-md);
+}
+
+.result-label {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+}
+
+.result-value {
+    font-size: var(--text-lg);
+    font-weight: var(--font-bold);
+    color: var(--primary-green);
+    font-family: var(--font-mono);
+}
+
+.result-item.highlight .result-value {
+    font-size: var(--text-xl);
+}
+
+/* Chart Section */
+.chart-section {
+    margin-bottom: var(--space-8);
+}
+
+.chart-container {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+}
+
+.chart-container canvas {
+    max-height: 400px;
+}
+
+/* Responsive Mobile-First */
+@media (max-width: 768px) {
+    .calculator-container {
+        padding: var(--space-4);
+    }
+
+    .metrics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .results-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .result-item.highlight {
+        grid-column: 1;
+    }
+
+    .calculator-title {
+        font-size: var(--text-xl);
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.metric-card,
+.results-card,
+.calculator-form {
+    animation: fadeIn 0.3s ease-out;
+}
+
