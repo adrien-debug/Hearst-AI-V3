@@ -39,7 +39,9 @@ app.get('/api', (req, res) => {
             versions: '/api/versions',
             prompts: '/api/prompts',
             logs: '/api/logs',
-            stats: '/api/stats'
+            stats: '/api/stats',
+            hashpriceLite: '/api/hashprice-lite',
+            calculator: '/api/calculator'
         },
         timestamp: new Date().toISOString()
     });
@@ -95,6 +97,22 @@ app.get('/api/cockpit', (req, res) => {
         data: {}
     });
 });
+
+// Hashprice Lite endpoint
+const hashpriceLite = require('./services/hashpriceLite');
+app.get('/api/hashprice-lite', async (req, res) => {
+    try {
+        const metrics = await hashpriceLite.fetchBitcoinMetrics();
+        res.json(metrics);
+    } catch (error) {
+        console.error('Error fetching hashprice:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Calculator routes
+const calculatorRouter = require('./routes/calculator');
+app.use('/api/calculator', calculatorRouter);
 
 // 404 handler for API routes
 app.use('/api/*', (req, res) => {

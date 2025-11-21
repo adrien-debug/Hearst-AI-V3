@@ -1,11 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { useState } from 'react'
 import CockpitDashboard from '@/components/cockpit/CockpitDashboard'
-import CockpitStructure from '@/components/cockpit/CockpitStructure'
-import CockpitHealth from '@/components/cockpit/CockpitHealth'
-import CockpitTeams from '@/components/cockpit/CockpitTeams'
 import CockpitProduction from '@/components/cockpit/CockpitProduction'
 import CockpitIncidents from '@/components/cockpit/CockpitIncidents'
 import CockpitClients from '@/components/cockpit/CockpitClients'
@@ -20,9 +16,6 @@ export default function CockpitPage() {
 
   const sections = [
     { id: 'dashboard', label: 'Dashboard' },
-    { id: 'structure', label: 'Structure' },
-    { id: 'health', label: 'Health Control' },
-    { id: 'teams', label: 'Teams' },
     { id: 'production', label: 'Production' },
     { id: 'incidents', label: 'Incidents' },
     { id: 'clients', label: 'Clients' },
@@ -74,9 +67,6 @@ export default function CockpitPage() {
 
         {/* Section Content */}
         {activeSection === 'dashboard' && <CockpitDashboard />}
-        {activeSection === 'structure' && <CockpitStructure />}
-        {activeSection === 'health' && <CockpitHealth />}
-        {activeSection === 'teams' && <CockpitTeams />}
         {activeSection === 'production' && <CockpitProduction />}
         {activeSection === 'incidents' && <CockpitIncidents />}
         {activeSection === 'clients' && <CockpitClients />}

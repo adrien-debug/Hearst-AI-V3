@@ -1257,7 +1257,8 @@ node server.js</pre>
             settings: async () => ({}),
             electricity: async () => ({}),
             'admin-panel': async () => ({}),
-            collateral: async () => ({})
+            collateral: async () => ({}),
+            calculator: async () => ({})
         };
         
         const fetcher = dataFetchers[view];
@@ -1285,6 +1286,7 @@ node server.js</pre>
             electricity: async () => this.renderElectricity(data),
             'admin-panel': async () => this.renderAdminPanel(data),
             collateral: async () => this.renderCollateral(data),
+            calculator: async () => this.renderCalculator(data),
         };
         
         const renderer = renderers[view];
@@ -1462,6 +1464,10 @@ node server.js</pre>
         
         // Initialize collateral functionality
         initCollateral();
+    }
+    
+    async renderCalculator(data) {
+        window.location.href = '/calculator';
     }
     
     async reloadCurrentView() {

@@ -37,7 +37,7 @@ export default function Home() {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        minHeight: '400px',
+        minHeight: '250px',
         gap: 'var(--space-4)',
       }}>
         <div className="spinner" style={{
