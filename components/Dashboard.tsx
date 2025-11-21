@@ -20,7 +20,7 @@ const LineChart = dynamic(
   () => import('react-chartjs-2').then((mod) => ({ default: mod.Line })),
   { 
     ssr: false,
-    loading: () => <div style={{ height: '240px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-secondary)' }}>Loading chart...</div>
+    loading: () => <div style={{ height: '180px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-secondary)' }}>Loading chart...</div>
   }
 )
 
@@ -28,7 +28,7 @@ const BarChart = dynamic(
   () => import('react-chartjs-2').then((mod) => ({ default: mod.Bar })),
   { 
     ssr: false,
-    loading: () => <div style={{ height: '240px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-secondary)' }}>Loading chart...</div>
+    loading: () => <div style={{ height: '180px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-secondary)' }}>Loading chart...</div>
   }
 )
 
@@ -58,45 +58,22 @@ interface DashboardProps {
 }
 
 export default function Dashboard({ data }: DashboardProps) {
-  const [searchQuery, setSearchQuery] = useState('')
-  const [searchResults, setSearchResults] = useState<any[]>([])
-  const [isSearching, setIsSearching] = useState(false)
-  const [lastSearchQuery, setLastSearchQuery] = useState<string>('')
-  const [lastSearchResults, setLastSearchResults] = useState<any[]>([
-    {
-      type: 'project',
-      title: 'Project Alpha',
-      description: 'Projet de mining principal avec configuration optimisée',
-      url: '/projects/alpha',
-    },
-    {
-      type: 'job',
-      title: 'Job #1234',
-      description: 'Job de mining en cours avec hash rate élevé',
-      url: '/jobs/1234',
-    },
-    {
-      type: 'customer',
-      title: 'Customer Beta',
-      description: 'Customer avec portefeuille actif sur plusieurs chaînes',
-      url: '/collateral',
-    },
-  ])
+  const [selectedPeriod, setSelectedPeriod] = useState<'daily' | 'monthly' | 'yearly'>('daily')
 
   useEffect(() => {
     // Load icons
     const loadIcons = () => {
-    if (typeof window !== 'undefined' && (window as any).Icons) {
-      document.querySelectorAll('[data-icon]').forEach(el => {
-        const iconName = el.getAttribute('data-icon')
-        if (iconName) {
-          const iconSvg = (window as any).Icons[iconName]
-          if (iconSvg) {
-            el.innerHTML = iconSvg
+      if (typeof window !== 'undefined' && (window as any).Icons) {
+        document.querySelectorAll('[data-icon]').forEach(el => {
+          const iconName = el.getAttribute('data-icon')
+          if (iconName) {
+            const iconSvg = (window as any).Icons[iconName]
+            if (iconSvg) {
+              el.innerHTML = iconSvg
+            }
           }
-        }
-      })
-    }
+        })
+      }
     }
     
     loadIcons()
@@ -105,120 +82,95 @@ export default function Dashboard({ data }: DashboardProps) {
     return () => clearTimeout(timeout)
   }, [])
 
-  const handleSearch = async (query: string) => {
-    setSearchQuery(query)
-    if (!query.trim()) {
-      setSearchResults([])
-      return
-    }
-
-    setIsSearching(true)
-    try {
-      // Simuler une recherche dans les données de la plateforme
-      // Dans un vrai cas, vous feriez un appel API ici
-      const results = await performAISearch(query)
-      setSearchResults(results)
-      
-      // Sauvegarder la dernière recherche si elle a des résultats
-      if (results.length > 0) {
-        setLastSearchQuery(query)
-        setLastSearchResults(results)
-      }
-    } catch (error) {
-      console.error('Search error:', error)
-      setSearchResults([])
-    } finally {
-      setIsSearching(false)
-    }
-  }
-
-  const performAISearch = async (query: string): Promise<any[]> => {
-    // Simulation d'une recherche AI
-    // Dans un vrai cas, cela appellerait une API AI
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const mockResults = [
-          {
-            type: 'project',
-            title: 'Project Alpha',
-            description: `Found project matching "${query}"`,
-            url: '/projects/alpha',
-          },
-          {
-            type: 'job',
-            title: 'Job #1234',
-            description: `Found job matching "${query}"`,
-            url: '/jobs/1234',
-          },
-          {
-            type: 'customer',
-            title: 'Customer Beta',
-            description: `Found customer matching "${query}"`,
-            url: '/collateral',
-          },
-        ].filter(item => 
-          item.title.toLowerCase().includes(query.toLowerCase()) ||
-          item.description.toLowerCase().includes(query.toLowerCase())
-        )
-        resolve(mockResults)
-      }, 300)
-    })
-  }
-
-  const chartData1 = {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  // Daily data (last 7 days)
+  const dailyData = {
+    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
     datasets: [
       {
-        label: 'Projects',
-        data: [2, 4, 6, 8, 9, 10, 11, 11, 12, 12, 12, data?.total_projects || 12],
+        label: 'BTC Mined',
+        data: [0.082156, 0.081234, 0.080521, 0.081892, 0.082156, 0.083247, 0.084521],
         borderColor: '#a5ff9c',
         backgroundColor: 'rgba(165, 255, 156, 0.1)',
         fill: true,
         tension: 0.4,
       },
+    ],
+  }
+
+  // Monthly data (last 12 months)
+  const monthlyData = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    datasets: [
       {
-        label: 'Jobs',
-        data: [15, 32, 48, 67, 89, 112, 145, 178, 201, 215, 228, data?.total_jobs || 234],
-        borderColor: 'rgba(255, 255, 255, 0.4)',
-        backgroundColor: 'rgba(255, 255, 255, 0.05)',
+        label: 'BTC Mined',
+        data: [2.1, 2.3, 2.2, 2.4, 2.5, 2.3, 2.6, 2.4, 2.5, 2.6, 2.5, 2.536588],
+        borderColor: '#a5ff9c',
+        backgroundColor: 'rgba(165, 255, 156, 0.1)',
         fill: true,
         tension: 0.4,
       },
     ],
   }
 
-  const chartData2 = {
-    labels: ['Projects', 'Versions', 'Jobs', 'Running'],
+  // Yearly data (last 5 years)
+  const yearlyData = {
+    labels: ['2020', '2021', '2022', '2023', '2024'],
     datasets: [
       {
-        label: 'Statistics',
-        data: [
-          data?.total_projects || 12,
-          data?.total_versions || 45,
-          data?.total_jobs || 234,
-          data?.jobs_running || 8,
-        ],
-        backgroundColor: [
-          'rgba(165, 255, 156, 0.8)',
-          'rgba(138, 253, 129, 0.8)',
-          'rgba(165, 255, 156, 0.8)',
-          'rgba(138, 253, 129, 0.8)',
-        ],
-        borderColor: [
-          '#a5ff9c',
-          '#8afd81',
-          '#a5ff9c',
-          '#8afd81',
-        ],
-        borderWidth: 2,
-        borderRadius: 4,
+        label: 'BTC Mined',
+        data: [25.2, 27.8, 28.5, 29.1, 30.439056],
+        borderColor: '#a5ff9c',
+        backgroundColor: 'rgba(165, 255, 156, 0.1)',
+        fill: true,
+        tension: 0.4,
       },
     ],
   }
 
+  const chartData1 = selectedPeriod === 'daily' ? dailyData : selectedPeriod === 'monthly' ? monthlyData : yearlyData
+
+  const getBarChartData = () => {
+    const labels = selectedPeriod === 'daily' 
+      ? ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      : selectedPeriod === 'monthly'
+      ? ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+      : ['2020', '2021', '2022', '2023', '2024']
+    
+    const data = selectedPeriod === 'daily'
+      ? [0.082156, 0.081234, 0.080521, 0.081892, 0.082156, 0.083247, 0.084521]
+      : selectedPeriod === 'monthly'
+      ? [2.1, 2.3, 2.2, 2.4, 2.5, 2.3, 2.6, 2.4, 2.5, 2.6, 2.5, 2.536588]
+      : [25.2, 27.8, 28.5, 29.1, 30.439056]
+    
+    const backgroundColor = data.map((_, index) => 
+      index % 2 === 0 ? 'rgba(165, 255, 156, 0.8)' : 'rgba(138, 253, 129, 0.8)'
+    )
+    
+    const borderColor = data.map((_, index) => 
+      index % 2 === 0 ? '#a5ff9c' : '#8afd81'
+    )
+    
+    return {
+      labels,
+      datasets: [
+        {
+          label: 'BTC Mined',
+          data,
+          backgroundColor,
+          borderColor,
+          borderWidth: 2,
+          borderRadius: 4,
+        },
+      ],
+    }
+  }
+
+  const chartData2 = getBarChartData()
+
   const chartOptions = {
     responsive: true,
     maintainAspectRatio: false,
+    animation: false,
     plugins: {
       legend: {
         display: false,
@@ -256,275 +208,120 @@ export default function Dashboard({ data }: DashboardProps) {
   return (
     <div className="dashboard-view">
       <div className="dashboard-content">
-        {/* AI Search Bar Section */}
-        <div className="ai-search-section">
-          <div className="ai-search-container">
-            <div className="ai-search-header">
-              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
-                <div style={{
-                  width: '40px',
-                  height: '40px',
-                  borderRadius: 'var(--radius-md)',
-                  background: 'linear-gradient(135deg, rgba(165, 255, 156, 0.2) 0%, rgba(138, 253, 129, 0.2) 100%)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  border: '1px solid rgba(165, 255, 156, 0.3)',
-                }}>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="#a5ff9c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </div>
-                <div>
-                  <h2 style={{ 
-                    fontSize: 'var(--text-xl)', 
-                    fontWeight: 600, 
-                    color: 'var(--text-primary)',
-                    margin: 0,
-                    marginBottom: '4px',
-                  }}>
-                    My Hearst AI
-                  </h2>
-                  <p style={{ 
-                    fontSize: 'var(--text-sm)', 
-                    color: 'var(--text-secondary)',
-                    margin: 0,
-                  }}>
-                    Recherchez dans toutes les données de la plateforme
-                  </p>
-                </div>
-              </div>
+        {/* Hearst Corporation Section */}
+        <div className="premium-wallet-section">
+          <div className="premium-wallet-box" style={{ width: '100%' }}>
+            <div className="premium-wallet-header">
+              <h3 className="premium-wallet-title">Hearst Corporation</h3>
             </div>
-            <div className="ai-search-input-wrapper" style={{ position: 'relative' }}>
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => handleSearch(e.target.value)}
-                placeholder="Rechercher des projets, jobs, customers, transactions..."
-                className="ai-search-input"
-                style={{
-                  width: '100%',
-                  padding: 'var(--space-4) var(--space-5)',
-                  paddingLeft: '48px',
-                  fontSize: 'var(--text-base)',
-                  backgroundColor: 'rgba(14, 14, 14, 0.75)',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
-                  borderRadius: 'var(--radius-lg)',
-                  color: 'var(--text-primary)',
-                  transition: 'all 0.3s ease',
-                  outline: 'none',
-                }}
-                onFocus={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--hearst-green)'
-                  e.currentTarget.style.boxShadow = '0 0 0 3px rgba(165, 255, 156, 0.1)'
-                }}
-                onBlur={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)'
-                  e.currentTarget.style.boxShadow = 'none'
-                }}
-              />
-              <div style={{
-                position: 'absolute',
-                left: 'var(--space-4)',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                pointerEvents: 'none',
-              }}>
-                {isSearching ? (
-                  <div style={{
-                    width: '20px',
-                    height: '20px',
-                    border: '2px solid rgba(165, 255, 156, 0.3)',
-                    borderTopColor: '#a5ff9c',
-                    borderRadius: '50%',
-                    animation: 'spin 0.8s linear infinite',
-                  }}></div>
-                ) : (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="var(--text-secondary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                )}
-              </div>
-            </div>
-            {searchResults.length > 0 && (
-              <div className="ai-search-results" style={{
-                marginTop: 'var(--space-4)',
-                padding: 'var(--space-3)',
-                backgroundColor: 'rgba(14, 14, 14, 0.75)',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-                borderRadius: 'var(--radius-lg)',
-                maxHeight: '400px',
-                overflowY: 'auto',
-              }}>
-                {searchResults.map((result, index) => (
-                  <a
-                    key={index}
-                    href={result.url}
-                    style={{
-                      display: 'block',
-                      padding: 'var(--space-3)',
-                      borderRadius: 'var(--radius-md)',
-                      textDecoration: 'none',
-                      color: 'var(--text-primary)',
-                      transition: 'background-color 0.2s',
-                      marginBottom: index < searchResults.length - 1 ? 'var(--space-2)' : 0,
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = 'rgba(165, 255, 156, 0.1)'
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = 'transparent'
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
-                      <div style={{
-                        width: '32px',
-                        height: '32px',
-                        borderRadius: 'var(--radius-sm)',
-                        backgroundColor: result.type === 'project' ? 'rgba(165, 255, 156, 0.2)' :
-                                        result.type === 'job' ? 'rgba(255, 165, 0, 0.2)' :
-                                        'rgba(138, 253, 129, 0.2)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        fontSize: 'var(--text-xs)',
-                        fontWeight: 600,
-                        color: result.type === 'project' ? '#a5ff9c' :
-                               result.type === 'job' ? '#FFA500' :
-                               '#8afd81',
-                      }}>
-                        {result.type === 'project' ? 'P' : result.type === 'job' ? 'J' : 'C'}
-                      </div>
-                      <div style={{ flex: 1 }}>
-                        <div style={{ 
-                          fontSize: 'var(--text-base)', 
-                          fontWeight: 600,
-                          marginBottom: '4px',
-                        }}>
-                          {result.title}
-                        </div>
-                        <div style={{ 
-                          fontSize: 'var(--text-sm)', 
-                          color: 'var(--text-secondary)',
-                        }}>
-                          {result.description}
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                ))}
-              </div>
-            )}
             
-            {/* Last Search Results Boxes - Inside the same container */}
-            {lastSearchResults.length > 0 && (
-              <div style={{ marginTop: 'var(--space-6)', paddingTop: 'var(--space-6)', borderTop: '1px solid rgba(255, 255, 255, 0.1)' }}>
+            {/* Hearst Corporation Stats - 4 boxes */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(4, 1fr)',
+              gap: 'var(--space-4)',
+              marginTop: 'var(--space-4)',
+            }}>
+              {/* Active Customers */}
+              <div style={{
+                padding: 'var(--space-4)',
+                backgroundColor: 'rgba(165, 255, 156, 0.05)',
+                borderRadius: 'var(--radius-md)',
+                border: '1px solid rgba(165, 255, 156, 0.1)',
+              }}>
                 <div style={{
-                  marginBottom: 'var(--space-4)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 'var(--space-2)',
+                  fontSize: 'var(--text-sm)',
+                  color: 'var(--text-secondary)',
+                  marginBottom: 'var(--space-2)',
+                  fontWeight: 500,
                 }}>
-                  <h3 style={{
-                    fontSize: 'var(--text-lg)',
-                    fontWeight: 600,
-                    color: 'var(--text-primary)',
-                    margin: 0,
-                  }}>
-                    {lastSearchQuery ? `Résultats de la recherche: "${lastSearchQuery}"` : 'Résultats récents'}
-                  </h3>
+                  Active Customers
                 </div>
                 <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-                  gap: 'var(--space-4)',
+                  fontSize: 'var(--text-xl)',
+                  fontWeight: 700,
+                  color: 'var(--hearst-green)',
                 }}>
-                  {lastSearchResults.map((result, index) => (
-                    <a
-                      key={index}
-                      href={result.url}
-                      style={{
-                        display: 'block',
-                        padding: 'var(--space-5)',
-                        backgroundColor: 'rgba(14, 14, 14, 0.75)',
-                        border: '0.5px solid rgba(255, 255, 255, 0.04)',
-                        borderLeft: '3px solid var(--hearst-green)',
-                        borderRadius: 'var(--radius-lg)',
-                        textDecoration: 'none',
-                        color: 'var(--text-primary)',
-                        transition: 'all 0.3s ease',
-                        boxShadow: '0 4px 24px rgba(0, 0, 0, 0.4), 0 1px 4px rgba(0, 0, 0, 0.2)',
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.transform = 'translateY(-4px)'
-                        e.currentTarget.style.borderColor = 'rgba(165, 255, 156, 0.3)'
-                        e.currentTarget.style.boxShadow = '0 12px 48px rgba(0, 0, 0, 0.5), 0 4px 16px rgba(0, 0, 0, 0.4)'
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.transform = 'translateY(0)'
-                        e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.04)'
-                        e.currentTarget.style.boxShadow = '0 4px 24px rgba(0, 0, 0, 0.4), 0 1px 4px rgba(0, 0, 0, 0.2)'
-                      }}
-                    >
-                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 'var(--space-3)' }}>
-                        <div style={{
-                          width: '48px',
-                          height: '48px',
-                          borderRadius: 'var(--radius-md)',
-                          backgroundColor: result.type === 'project' ? 'rgba(165, 255, 156, 0.2)' :
-                                          result.type === 'job' ? 'rgba(255, 165, 0, 0.2)' :
-                                          'rgba(138, 253, 129, 0.2)',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          fontSize: 'var(--text-lg)',
-                          fontWeight: 700,
-                          color: result.type === 'project' ? '#a5ff9c' :
-                                 result.type === 'job' ? '#FFA500' :
-                                 '#8afd81',
-                          flexShrink: 0,
-                          border: `1px solid ${result.type === 'project' ? 'rgba(165, 255, 156, 0.3)' :
-                                                 result.type === 'job' ? 'rgba(255, 165, 0, 0.3)' :
-                                                 'rgba(138, 253, 129, 0.3)'}`,
-                        }}>
-                          {result.type === 'project' ? 'P' : result.type === 'job' ? 'J' : 'C'}
-                        </div>
-                        <div style={{ flex: 1, minWidth: 0 }}>
-                          <div style={{
-                            fontSize: 'var(--text-base)',
-                            fontWeight: 600,
-                            marginBottom: 'var(--space-1)',
-                            color: 'var(--text-primary)',
-                          }}>
-                            {result.title}
-                          </div>
-                          <div style={{
-                            fontSize: 'var(--text-sm)',
-                            color: 'var(--text-secondary)',
-                            lineHeight: 1.5,
-                          }}>
-                            {result.description}
-                          </div>
-                          <div style={{
-                            marginTop: 'var(--space-2)',
-                            fontSize: 'var(--text-xs)',
-                            color: 'var(--hearst-green)',
-                            fontWeight: 500,
-                            textTransform: 'uppercase',
-                          }}>
-                            {result.type === 'project' ? 'Projet' : result.type === 'job' ? 'Job' : 'Customer'}
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                  ))}
+                  1,247
                 </div>
               </div>
-            )}
+
+              {/* Number of batches */}
+              <div style={{
+                padding: 'var(--space-4)',
+                backgroundColor: 'rgba(165, 255, 156, 0.05)',
+                borderRadius: 'var(--radius-md)',
+                border: '1px solid rgba(165, 255, 156, 0.1)',
+              }}>
+                <div style={{
+                  fontSize: 'var(--text-sm)',
+                  color: 'var(--text-secondary)',
+                  marginBottom: 'var(--space-2)',
+                  fontWeight: 500,
+                }}>
+                  Number of batches
+                </div>
+                <div style={{
+                  fontSize: 'var(--text-xl)',
+                  fontWeight: 700,
+                  color: 'var(--hearst-green)',
+                }}>
+                  3,892
+                </div>
+              </div>
+
+              {/* Number of miners */}
+              <div style={{
+                padding: 'var(--space-4)',
+                backgroundColor: 'rgba(165, 255, 156, 0.05)',
+                borderRadius: 'var(--radius-md)',
+                border: '1px solid rgba(165, 255, 156, 0.1)',
+              }}>
+                <div style={{
+                  fontSize: 'var(--text-sm)',
+                  color: 'var(--text-secondary)',
+                  marginBottom: 'var(--space-2)',
+                  fontWeight: 500,
+                }}>
+                  Number of miners
+                </div>
+                <div style={{
+                  fontSize: 'var(--text-xl)',
+                  fontWeight: 700,
+                  color: 'var(--hearst-green)',
+                }}>
+                  15,648
+                </div>
+              </div>
+
+              {/* Hearst Total Hashrate */}
+              <div style={{
+                padding: 'var(--space-4)',
+                backgroundColor: 'rgba(165, 255, 156, 0.05)',
+                borderRadius: 'var(--radius-md)',
+                border: '1px solid rgba(165, 255, 156, 0.1)',
+              }}>
+                <div style={{
+                  fontSize: 'var(--text-sm)',
+                  color: 'var(--text-secondary)',
+                  marginBottom: 'var(--space-2)',
+                  fontWeight: 500,
+                }}>
+                  Hearst Total Hashrate
+                </div>
+                <div style={{
+                  fontSize: 'var(--text-xl)',
+                  fontWeight: 700,
+                  color: 'var(--hearst-green)',
+                }}>
+                  2,847.5 PH/s
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* BTC Mined Section */}
+        {/* BTC Mined Section with Charts */}
         <div className="premium-wallet-section">
           <div className="premium-wallet-box" style={{ width: '100%' }}>
             <div className="premium-wallet-header">
@@ -553,7 +350,8 @@ export default function Dashboard({ data }: DashboardProps) {
               display: 'grid',
               gridTemplateColumns: 'repeat(4, 1fr)',
               gap: 'var(--space-4)',
-              marginTop: 'var(--space-6)',
+              marginTop: 'var(--space-3)',
+              marginBottom: 'var(--space-8)',
             }}>
               {/* Daily */}
               <div style={{
@@ -661,7 +459,7 @@ export default function Dashboard({ data }: DashboardProps) {
                   marginBottom: 'var(--space-2)',
                   fontWeight: 500,
                 }}>
-                  Yearly
+                  Since beginning
                 </div>
                 <div style={{
                   fontSize: 'var(--text-xl)',
@@ -679,11 +477,144 @@ export default function Dashboard({ data }: DashboardProps) {
                 </div>
               </div>
             </div>
+
+            {/* Charts Container */}
+            <div className="wallet-charts-container">
+              <div className="wallet-chart-section">
+                <div className="chart-header">
+              <h2 className="chart-title">BTC Mined Performance</h2>
+              <div style={{ display: 'flex', gap: 'var(--space-2)', marginTop: 'var(--space-3)' }}>
+                <button
+                  onClick={() => setSelectedPeriod('daily')}
+                  style={{
+                    padding: 'var(--space-2) var(--space-4)',
+                    borderRadius: 'var(--radius-sm)',
+                    border: '1px solid',
+                    borderColor: selectedPeriod === 'daily' ? 'var(--hearst-green)' : 'rgba(255, 255, 255, 0.2)',
+                    backgroundColor: selectedPeriod === 'daily' ? 'rgba(165, 255, 156, 0.1)' : 'transparent',
+                    color: selectedPeriod === 'daily' ? 'var(--hearst-green)' : 'var(--text-secondary)',
+                    fontSize: 'var(--text-sm)',
+                    fontWeight: selectedPeriod === 'daily' ? 600 : 400,
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease',
+                  }}
+                >
+                  Daily
+                </button>
+                <button
+                  onClick={() => setSelectedPeriod('monthly')}
+                  style={{
+                    padding: 'var(--space-2) var(--space-4)',
+                    borderRadius: 'var(--radius-sm)',
+                    border: '1px solid',
+                    borderColor: selectedPeriod === 'monthly' ? 'var(--hearst-green)' : 'rgba(255, 255, 255, 0.2)',
+                    backgroundColor: selectedPeriod === 'monthly' ? 'rgba(165, 255, 156, 0.1)' : 'transparent',
+                    color: selectedPeriod === 'monthly' ? 'var(--hearst-green)' : 'var(--text-secondary)',
+                    fontSize: 'var(--text-sm)',
+                    fontWeight: selectedPeriod === 'monthly' ? 600 : 400,
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease',
+                  }}
+                >
+                  Monthly
+                </button>
+                <button
+                  onClick={() => setSelectedPeriod('yearly')}
+                  style={{
+                    padding: 'var(--space-2) var(--space-4)',
+                    borderRadius: 'var(--radius-sm)',
+                    border: '1px solid',
+                    borderColor: selectedPeriod === 'yearly' ? 'var(--hearst-green)' : 'rgba(255, 255, 255, 0.2)',
+                    backgroundColor: selectedPeriod === 'yearly' ? 'rgba(165, 255, 156, 0.1)' : 'transparent',
+                    color: selectedPeriod === 'yearly' ? 'var(--hearst-green)' : 'var(--text-secondary)',
+                    fontSize: 'var(--text-sm)',
+                    fontWeight: selectedPeriod === 'yearly' ? 600 : 400,
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease',
+                  }}
+                >
+                  Yearly
+                </button>
+              </div>
+              <div className="chart-legend" style={{ marginTop: 'var(--space-3)' }}>
+                <div className="legend-item">
+                  <span className="legend-dot green"></span>
+                  <span>BTC Mined</span>
+                </div>
+              </div>
+            </div>
+            <div className="chart-container" style={{ position: 'relative', width: '100%', height: '180px' }}>
+              <LineChart data={chartData1} options={chartOptions} />
+              </div>
+              </div>
+
+              <div className="wallet-chart-section">
+            <div className="chart-header">
+              <h2 className="chart-title">BTC Mined Statistics</h2>
+              <div style={{ display: 'flex', gap: 'var(--space-2)', marginTop: 'var(--space-3)' }}>
+                <button
+                  onClick={() => setSelectedPeriod('daily')}
+                  style={{
+                    padding: 'var(--space-2) var(--space-4)',
+                    borderRadius: 'var(--radius-sm)',
+                    border: '1px solid',
+                    borderColor: selectedPeriod === 'daily' ? 'var(--hearst-green)' : 'rgba(255, 255, 255, 0.2)',
+                    backgroundColor: selectedPeriod === 'daily' ? 'rgba(165, 255, 156, 0.1)' : 'transparent',
+                    color: selectedPeriod === 'daily' ? 'var(--hearst-green)' : 'var(--text-secondary)',
+                    fontSize: 'var(--text-sm)',
+                    fontWeight: selectedPeriod === 'daily' ? 600 : 400,
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease',
+                  }}
+                >
+                  Daily
+                </button>
+                <button
+                  onClick={() => setSelectedPeriod('monthly')}
+                  style={{
+                    padding: 'var(--space-2) var(--space-4)',
+                    borderRadius: 'var(--radius-sm)',
+                    border: '1px solid',
+                    borderColor: selectedPeriod === 'monthly' ? 'var(--hearst-green)' : 'rgba(255, 255, 255, 0.2)',
+                    backgroundColor: selectedPeriod === 'monthly' ? 'rgba(165, 255, 156, 0.1)' : 'transparent',
+                    color: selectedPeriod === 'monthly' ? 'var(--hearst-green)' : 'var(--text-secondary)',
+                    fontSize: 'var(--text-sm)',
+                    fontWeight: selectedPeriod === 'monthly' ? 600 : 400,
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease',
+                  }}
+                >
+                  Monthly
+                </button>
+                <button
+                  onClick={() => setSelectedPeriod('yearly')}
+                  style={{
+                    padding: 'var(--space-2) var(--space-4)',
+                    borderRadius: 'var(--radius-sm)',
+                    border: '1px solid',
+                    borderColor: selectedPeriod === 'yearly' ? 'var(--hearst-green)' : 'rgba(255, 255, 255, 0.2)',
+                    backgroundColor: selectedPeriod === 'yearly' ? 'rgba(165, 255, 156, 0.1)' : 'transparent',
+                    color: selectedPeriod === 'yearly' ? 'var(--hearst-green)' : 'var(--text-secondary)',
+                    fontSize: 'var(--text-sm)',
+                    fontWeight: selectedPeriod === 'yearly' ? 600 : 400,
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease',
+                  }}
+                >
+                  Yearly
+                </button>
+              </div>
+            </div>
+              <div className="chart-container" style={{ position: 'relative', width: '100%', height: '180px' }}>
+                <BarChart data={chartData2} options={chartOptions} />
+              </div>
+              </div>
+            </div>
           </div>
         </div>
 
         {/* Transaction History Section */}
-        <div className="premium-transaction-section">
+        <div className="premium-transaction-section" style={{ marginTop: 'var(--space-4)' }}>
           <div className="premium-section-header">
             <h3 className="premium-section-title">Transaction history</h3>
           </div>
@@ -734,37 +665,6 @@ export default function Dashboard({ data }: DashboardProps) {
               <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 'var(--space-6)', padding: 'var(--space-4) var(--space-6)', borderTop: '1px solid rgba(255, 255, 255, 0.1)', fontSize: '16px', fontWeight: 600 }}>
                 <strong>Total: <span style={{ color: 'var(--hearst-green)', marginLeft: 'var(--space-2)' }}>0.491902 BTC</span></strong>
               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Charts Container */}
-        <div className="wallet-charts-container">
-          <div className="wallet-chart-section">
-            <div className="chart-header">
-              <h2 className="chart-title">Performance Overview</h2>
-              <div className="chart-legend">
-                <div className="legend-item">
-                  <span className="legend-dot green"></span>
-                  <span>Projects</span>
-                </div>
-                <div className="legend-item">
-                  <span className="legend-dot gray"></span>
-                  <span>Jobs</span>
-                </div>
-              </div>
-            </div>
-            <div className="chart-container" style={{ position: 'relative', width: '100%', height: '240px' }}>
-              <LineChart data={chartData1} options={chartOptions} />
-            </div>
-          </div>
-
-          <div className="wallet-chart-section">
-            <div className="chart-header">
-              <h2 className="chart-title">Statistics Bar Chart</h2>
-            </div>
-            <div className="chart-container" style={{ position: 'relative', width: '100%', height: '240px' }}>
-              <BarChart data={chartData2} options={chartOptions} />
             </div>
           </div>
         </div>

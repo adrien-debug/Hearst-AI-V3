@@ -42,8 +42,60 @@ export default function JobDetailPage() {
       try {
         setLoading(true)
         setError(null)
-        const response = await jobsAPI.getById(jobId)
-        setJob(response.job || response)
+        
+        // Mock data for text-based IDs from MyHearstAI
+        const mockJobs: Record<string, Job> = {
+          '1234': {
+            id: '1234',
+            type: 'Mining',
+            status: 'SUCCESS',
+            inputPrompt: 'Job de mining en cours avec hash rate élevé',
+            createdAt: new Date(Date.now() - 7200000).toISOString(),
+            updatedAt: new Date().toISOString(),
+            startedAt: new Date(Date.now() - 7000000).toISOString(),
+            completedAt: new Date(Date.now() - 1000000).toISOString(),
+            project: {
+              id: 'alpha',
+              name: 'Project Alpha',
+            },
+            logs: [
+              {
+                id: 'log1',
+                level: 'INFO',
+                message: 'Job started successfully',
+                createdAt: new Date(Date.now() - 7000000).toISOString(),
+              },
+              {
+                id: 'log2',
+                level: 'INFO',
+                message: 'Hash rate: 2041.42 TH/s',
+                createdAt: new Date(Date.now() - 6000000).toISOString(),
+              },
+              {
+                id: 'log3',
+                level: 'SUCCESS',
+                message: 'Job completed successfully',
+                createdAt: new Date(Date.now() - 1000000).toISOString(),
+              },
+            ],
+          },
+        }
+
+        // Check if it's a mock job first
+        if (mockJobs[jobId]) {
+          setJob(mockJobs[jobId])
+          setLoading(false)
+          return
+        }
+
+        // Try to load from API
+        try {
+          const response = await jobsAPI.getById(jobId)
+          setJob(response.job || response)
+        } catch (apiErr) {
+          // If API fails and it's not a mock, show error
+          throw apiErr
+        }
       } catch (err) {
         console.error('Error loading job:', err)
         setError(err instanceof Error ? err.message : 'Failed to load job')

@@ -20,7 +20,7 @@ export default function ProjectsMonteCarlo() {
               <Button variant="outline">Configure Parameters</Button>
             </div>
           </div>
-          <div style={{ padding: 'var(--space-4)', background: 'var(--bg-tertiary)', borderRadius: 'var(--radius-md)', minHeight: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ padding: 'var(--space-4)', background: 'var(--bg-tertiary)', borderRadius: 'var(--radius-md)', minHeight: '250px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <p style={{ color: 'var(--text-secondary)' }}>Monte Carlo simulation results will be displayed here</p>
           </div>
         </CardContent>

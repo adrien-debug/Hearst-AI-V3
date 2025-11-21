@@ -1409,7 +1409,7 @@ function renderResultsSection() {
                     </div>
                 </div>
                 <div style="background: #1A1A1A; border: 1px solid rgba(138, 253, 129, 0.15); border-radius: 12px; padding: 24px;">
-                    <div style="position: relative; height: 400px;">
+                    <div style="position: relative; height: 250px;">
                         <canvas id="revenueChartAnalysis"></canvas>
                     </div>
                 </div>
@@ -1424,7 +1424,7 @@ function renderResultsSection() {
                             <h3 style="font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px;">Cumulative Cash Flow</h3>
                             <p style="font-size: 12px; color: var(--text-muted);">Break-even analysis</p>
                         </div>
-                        <div style="position: relative; height: 300px;">
+                        <div style="position: relative; height: 200px;">
                             <canvas id="cashflowChartAnalysis"></canvas>
                         </div>
                     </div>
@@ -1435,7 +1435,7 @@ function renderResultsSection() {
                             <h3 style="font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px;">Cost Breakdown</h3>
                             <p style="font-size: 12px; color: var(--text-muted);">CAPEX vs OPEX distribution</p>
                         </div>
-                        <div style="position: relative; height: 300px;">
+                        <div style="position: relative; height: 200px;">
                             <canvas id="costChartAnalysis"></canvas>
                         </div>
                     </div>
@@ -1509,32 +1509,32 @@ function renderChartsSection() {
                 <div id="chartsContent">
                     <div class="chart-container" style="background: #1A1A1A; border: 1px solid rgba(138, 253, 129, 0.15); border-radius: 12px; padding: 24px; margin-bottom: 24px;">
                         <h3 style="font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px;">Cumulative Cash Flow (12 Months)</h3>
-                        <div style="position: relative; height: 400px;">
+                        <div style="position: relative; height: 250px;">
                             <canvas id="cashflowChart"></canvas>
                         </div>
                     </div>
                     <div class="chart-container" style="background: #1A1A1A; border: 1px solid rgba(138, 253, 129, 0.15); border-radius: 12px; padding: 24px; margin-bottom: 24px;">
                         <h3 style="font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px;">Monthly Revenue vs Costs</h3>
-                        <div style="position: relative; height: 400px;">
+                        <div style="position: relative; height: 250px;">
                             <canvas id="revenueChart"></canvas>
                         </div>
                     </div>
                     <div class="chart-container" style="background: #1A1A1A; border: 1px solid rgba(138, 253, 129, 0.15); border-radius: 12px; padding: 24px; margin-bottom: 24px;">
                         <h3 style="font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px;">ROI Sensitivity Analysis (BTC Price Impact)</h3>
-                        <div style="position: relative; height: 400px;">
+                        <div style="position: relative; height: 250px;">
                             <canvas id="sensitivityChart"></canvas>
                         </div>
                     </div>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 24px; margin-top: 32px;">
                         <div class="chart-container" style="background: #1A1A1A; border: 1px solid rgba(138, 253, 129, 0.15); border-radius: 12px; padding: 24px;">
                             <h3 style="font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px;">Monthly Cost Breakdown</h3>
-                            <div style="position: relative; height: 300px;">
+                            <div style="position: relative; height: 200px;">
                                 <canvas id="costBreakdownChart"></canvas>
                             </div>
                         </div>
                         <div class="chart-container" style="background: #1A1A1A; border: 1px solid rgba(138, 253, 129, 0.15); border-radius: 12px; padding: 24px;">
                             <h3 style="font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px;">Network Hashrate Impact on Profitability</h3>
-                            <div style="position: relative; height: 300px;">
+                            <div style="position: relative; height: 200px;">
                                 <canvas id="hashrateImpactChart"></canvas>
                             </div>
                         </div>
@@ -1621,7 +1621,7 @@ function renderMonteCarloSection() {
                     </div>
                     <div class="chart-container" style="background: #1A1A1A; border: 1px solid rgba(138, 253, 129, 0.15); border-radius: 12px; padding: 24px; margin-top: 24px;">
                         <h3 style="font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px;">ROI Distribution Histogram</h3>
-                        <div style="position: relative; height: 400px;">
+                        <div style="position: relative; height: 250px;">
                             <canvas id="monteCarloChart"></canvas>
                         </div>
                     </div>
@@ -2111,12 +2111,12 @@ function initRevenueChartAnalysis() {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     
     // Create gradients
-    const revenueGradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 400);
+    const revenueGradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 250);
     revenueGradient.addColorStop(0, 'rgba(138, 253, 129, 0.3)');
     revenueGradient.addColorStop(0.5, 'rgba(138, 253, 129, 0.1)');
     revenueGradient.addColorStop(1, 'rgba(138, 253, 129, 0)');
 
-    const profitGradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 400);
+    const profitGradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 250);
     profitGradient.addColorStop(0, 'rgba(138, 253, 129, 0.25)');
     profitGradient.addColorStop(0.5, 'rgba(138, 253, 129, 0.08)');
     profitGradient.addColorStop(1, 'rgba(138, 253, 129, 0)');
@@ -2202,7 +2202,7 @@ function initCashflowChartAnalysis() {
 
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     
-    const cashflowGradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 300);
+    const cashflowGradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 200);
     cashflowGradient.addColorStop(0, 'rgba(138, 253, 129, 0.3)');
     cashflowGradient.addColorStop(1, 'rgba(138, 253, 129, 0)');
 
@@ -2332,7 +2332,7 @@ function initCashflowChart() {
     if (!ctx) return;
 
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    const cashflowGradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 400);
+    const cashflowGradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 250);
     cashflowGradient.addColorStop(0, 'rgba(138, 253, 129, 0.3)');
     cashflowGradient.addColorStop(1, 'rgba(138, 253, 129, 0)');
 
@@ -2376,7 +2376,7 @@ function initRevenueChart() {
     if (!ctx) return;
 
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    const revenueGradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 400);
+    const revenueGradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 250);
     revenueGradient.addColorStop(0, 'rgba(138, 253, 129, 0.3)');
     revenueGradient.addColorStop(1, 'rgba(138, 253, 129, 0)');
 

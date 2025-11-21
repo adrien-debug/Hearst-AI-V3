@@ -278,9 +278,9 @@ export default function ElectricitySection() {
           ref={chartContainerRef}
           style={{ 
             position: 'relative', 
-            height: '400px', 
+            height: '250px', 
             width: '100%',
-            minHeight: '400px',
+            minHeight: '250px',
             minWidth: '100%'
           }}
         >

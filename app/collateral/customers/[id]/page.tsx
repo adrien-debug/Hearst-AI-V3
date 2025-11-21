@@ -24,6 +24,61 @@ export default function CustomerDetailPage() {
         setLoading(true)
         setError(null)
         
+        // Mock data for text-based IDs from MyHearstAI
+        const mockCustomers: Record<string, any> = {
+          'beta': {
+            id: 'beta',
+            name: 'Customer Beta',
+            tag: 'Customer',
+            erc20Address: '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb',
+            chains: JSON.stringify(['eth', 'bsc']),
+            protocols: JSON.stringify(['Aave', 'Compound']),
+            createdAt: new Date().toISOString(),
+          },
+        }
+
+        const mockCollateralData: Record<string, any> = {
+          'beta': {
+            id: 'beta',
+            totalValue: 1250000,
+            totalDebt: 450000,
+            healthFactor: 2.78,
+            availableCredit: 800000,
+            positions: [
+              {
+                asset: 'ETH',
+                protocol: 'Aave',
+                chain: 'eth',
+                collateralAmount: 500,
+                collateralValueUsd: 750000,
+                debtToken: 'USDC',
+                debtAmount: 300000,
+                debtValueUsd: 300000,
+                collateralPriceUsd: 1500,
+              },
+              {
+                asset: 'BTC',
+                protocol: 'Compound',
+                chain: 'eth',
+                collateralAmount: 10,
+                collateralValueUsd: 500000,
+                debtToken: 'DAI',
+                debtAmount: 150000,
+                debtValueUsd: 150000,
+                collateralPriceUsd: 50000,
+              },
+            ],
+          },
+        }
+
+        // Check if it's a mock customer first
+        if (mockCustomers[customerId]) {
+          setCustomer(mockCustomers[customerId])
+          setCollateralData(mockCollateralData[customerId])
+          setLoading(false)
+          return
+        }
+        
         // Charger les données du client
         const customerResponse = await customersAPI.getById(customerId)
         setCustomer(customerResponse.customer || customerResponse)

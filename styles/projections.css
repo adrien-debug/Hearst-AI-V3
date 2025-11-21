@@ -269,7 +269,7 @@
 /* Conteneur principal des sections */
 #projections-sections-container {
     width: 100% !important;
-    min-height: 400px !important;
+    min-height: 250px !important;
     padding: 0 !important;
     margin: 0 !important;
     display: block !important;
@@ -282,7 +282,7 @@
     width: 100% !important;
     background: transparent !important;
     display: block !important;
-    min-height: 400px !important;
+    min-height: 250px !important;
 }
 
 #overview-section * {

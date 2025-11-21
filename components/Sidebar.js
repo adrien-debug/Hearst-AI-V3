@@ -9,10 +9,12 @@ export default function Sidebar() {
 
   const navItems = [
     { href: '/', label: 'Home', icon: 'home', view: 'dashboard' },
+    { href: '/hearst-ai', label: 'My Hearst AI', icon: 'search', view: 'hearst-ai' },
     { href: '/cockpit', label: 'Cockpit', icon: 'dashboard', view: 'cockpit' },
-    { href: '/projects', label: 'Projects', icon: 'document', view: 'projects' },
+    { href: '/projects', label: 'Projections', icon: 'document', view: 'projects' },
     { href: '/electricity', label: 'Électricité', icon: 'energy', view: 'electricity' },
     { href: '/collateral', label: 'Collateral', icon: 'document', view: 'collateral' },
+    { href: '/calculator', label: 'Calculator', icon: 'calculator', view: 'calculator' },
   ]
 
   const isActive = (href) => {

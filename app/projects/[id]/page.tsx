@@ -44,8 +44,52 @@ export default function ProjectDetailPage() {
       try {
         setLoading(true)
         setError(null)
-        const response = await projectsAPI.getById(projectId)
-        setProject(response.project || response)
+        
+        // Mock data for text-based IDs from MyHearstAI
+        const mockProjects: Record<string, Project> = {
+          'alpha': {
+            id: 'alpha',
+            name: 'Project Alpha',
+            description: 'Projet de mining principal avec configuration optimisée',
+            type: 'Mining',
+            repoType: 'Git',
+            status: 'ACTIVE',
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+            versions: [
+              {
+                id: 'v1',
+                version: '1.0.0',
+                status: 'stable',
+                createdAt: new Date().toISOString(),
+              },
+            ],
+            jobs: [
+              {
+                id: '1234',
+                type: 'Mining',
+                status: 'SUCCESS',
+                createdAt: new Date().toISOString(),
+              },
+            ],
+          },
+        }
+
+        // Check if it's a mock project first
+        if (mockProjects[projectId]) {
+          setProject(mockProjects[projectId])
+          setLoading(false)
+          return
+        }
+
+        // Try to load from API
+        try {
+          const response = await projectsAPI.getById(projectId)
+          setProject(response.project || response)
+        } catch (apiErr) {
+          // If API fails and it's not a mock, show error
+          throw apiErr
+        }
       } catch (err) {
         console.error('Error loading project:', err)
         setError(err instanceof Error ? err.message : 'Failed to load project')
