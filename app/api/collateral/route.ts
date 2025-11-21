@@ -48,9 +48,9 @@ export async function GET(request: NextRequest) {
       })
     }
 
-    // Construire les clients avec les vraies données DeBank
-    let clients = []
-    for (const customer of customers) {
+    // Construire les clients avec les vraies données DeBank EN PARALLÈLE
+    // ✅ OPTIMISATION : Utiliser Promise.all() pour charger tous les clients en parallèle
+    const clientPromises = customers.map(async (customer) => {
       try {
         const chains = JSON.parse(customer.chains || '["eth"]')
         const protocols = JSON.parse(customer.protocols || '[]')
@@ -150,15 +150,14 @@ export async function GET(request: NextRequest) {
           positionsCount: clientData.positions?.length || 0
         })
         
-        clients.push(clientData)
+        return clientData
       } catch (error: any) {
         console.warn(`[API Collateral] Erreur pour customer ${customer.name} (${customer.erc20Address}):`, error.message)
-        // En cas d'erreur pour un customer, continuer avec les autres
-        // Optionnel: ajouter le customer avec des données vides
+        // En cas d'erreur pour un customer, retourner le customer avec des données vides
         const chains = JSON.parse(customer.chains || '["eth"]')
         const protocols = JSON.parse(customer.protocols || '[]')
         
-        clients.push({
+        return {
           id: customer.id,
           name: customer.name,
           tag: customer.tag,
@@ -172,9 +171,12 @@ export async function GET(request: NextRequest) {
           healthFactor: 0,
           availableCredit: 0,
           error: error.message,
-        })
+        }
       }
-    }
+    })
+    
+    // ✅ Charger tous les clients EN PARALLÈLE au lieu de séquentiellement
+    const clients = await Promise.all(clientPromises)
 
     return NextResponse.json({ clients })
   } catch (error: any) {

@@ -70,8 +70,13 @@ export interface CollateralClient {
   lastUpdate: string;
 }
 
+// Cache simple en mémoire pour éviter les appels répétés
+// ⚠️ En production, utilisez Redis ou un cache distribué pour plusieurs instances
+const debankCache = new Map<string, { data: any; timestamp: number }>();
+const CACHE_TTL = 60 * 1000; // 60 secondes
+
 /**
- * Appel générique DeBank Pro OpenAPI
+ * Appel générique DeBank Pro OpenAPI avec cache
  * @param path - ex: "/user/all_complex_protocol_list"
  * @param params - query params
  */
@@ -87,11 +92,24 @@ async function debankFetch(
     }
   });
 
+  // Vérifier le cache
+  const cacheKey = url.toString();
+  const cached = debankCache.get(cacheKey);
+  const now = Date.now();
+  
+  if (cached && (now - cached.timestamp) < CACHE_TTL) {
+    console.log(`[DeBank] Cache hit pour ${path}`);
+    return cached.data;
+  }
+
+  console.log(`[DeBank] Appel API pour ${path}`);
   const res = await fetch(url.toString(), {
     headers: {
       Accept: "application/json",
       AccessKey: DEBANK_ACCESS_KEY || "",
     },
+    // Timeout de 30 secondes pour éviter les attentes infinies
+    signal: AbortSignal.timeout(30000),
   });
 
   if (!res.ok) {
@@ -101,7 +119,22 @@ async function debankFetch(
     );
   }
 
-  return res.json();
+  const data = await res.json();
+  
+  // Mettre en cache
+  debankCache.set(cacheKey, { data, timestamp: now });
+  
+  // Nettoyer le cache toutes les 5 minutes (garder seulement les entrées récentes)
+  if (debankCache.size > 100) {
+    const entries = Array.from(debankCache.entries());
+    entries.forEach(([key, value]) => {
+      if (now - value.timestamp > CACHE_TTL * 5) {
+        debankCache.delete(key);
+      }
+    });
+  }
+
+  return data;
 }
 
 /**
