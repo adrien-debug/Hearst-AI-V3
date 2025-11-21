@@ -11,9 +11,6 @@ export async function middleware(request: NextRequest) {
       pathname.startsWith('/auth') ||
       pathname.startsWith('/_next') ||
       pathname.startsWith('/api/auth') ||
-      pathname.startsWith('/api/hashprice-lite') ||
-      pathname.startsWith('/api/calculator') ||
-      pathname.startsWith('/api/calculator/') ||
       pathname === '/favicon.ico' ||
       pathname.startsWith('/js/') ||
       pathname.startsWith('/css/') ||
@@ -29,7 +26,7 @@ export async function middleware(request: NextRequest) {
 
     // En développement, permettre l'accès aux routes API customers et collateral sans authentification
     const isDevelopment = process.env.NODE_ENV === 'development'
-    if (isDevelopment && (pathname.startsWith('/api/customers') || pathname.startsWith('/api/collateral') || pathname.startsWith('/api/hashprice-lite') || pathname.startsWith('/api/calculator'))) {
+    if (isDevelopment && (pathname.startsWith('/api/customers') || pathname.startsWith('/api/collateral'))) {
       return NextResponse.next()
     }
 
