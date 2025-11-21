@@ -1,0 +1,439 @@
+/* ====================================
+   ELECTRICITY VIEW - HEARST SIMPLE
+   Vert fluo sur fond sombre avec coins arrondis
+   ==================================== */
+
+/* Couleurs HEARST */
+:root {
+    --hearst-green: #a5ff9c;
+    --hearst-green-alt: #a5ff9c;
+    --hearst-black: #000000;
+    --hearst-dark: #0a0a0a;
+    --hearst-white: #ffffff;
+    --hearst-grey: #1a1a1a;
+}
+
+/* Container principal */
+.electricity-view {
+    padding: 32px;
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.electricity-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.stat-card {
+    background: rgba(26, 26, 26, 0.8);
+    backdrop-filter: blur(8px);
+    border: 2px solid var(--hearst-green);
+    border-radius: 16px;
+    padding: 24px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--hearst-green);
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--hearst-green-alt);
+    box-shadow: 0 0 20px rgba(165, 255, 156, 0.3);
+}
+
+.stat-label {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.stat-value {
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--hearst-green);
+    margin-bottom: 8px;
+    line-height: 1.2;
+}
+
+.stat-change {
+    font-size: 12px;
+    color: var(--hearst-green);
+    font-weight: 600;
+}
+
+/* Sections */
+.electricity-view .section {
+    margin-bottom: 32px;
+}
+
+.electricity-view .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.electricity-view .section-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--hearst-white);
+}
+
+.electricity-view .section-subtitle {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 8px;
+}
+
+/* Cards */
+.electricity-view .card {
+    background: rgba(26, 26, 26, 0.8);
+    backdrop-filter: blur(8px);
+    border: 2px solid var(--hearst-green);
+    border-radius: 16px;
+    padding: 24px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.electricity-view .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--hearst-green);
+}
+
+.electricity-view .card:hover {
+    transform: translateY(-4px);
+    border-color: var(--hearst-green-alt);
+    box-shadow: 0 0 20px rgba(165, 255, 156, 0.3);
+}
+
+.electricity-view .card-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--hearst-white);
+    margin: 0 0 24px 0;
+}
+
+/* Tables */
+.electricity-view .table-container {
+    background: rgba(26, 26, 26, 0.8);
+    backdrop-filter: blur(8px);
+    border: 2px solid var(--hearst-green);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.electricity-view .table-container:hover {
+    box-shadow: 0 0 20px rgba(165, 255, 156, 0.3);
+    transform: translateY(-2px);
+}
+
+.electricity-view .table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    background: transparent;
+}
+
+.electricity-view .table-container table thead {
+    background: var(--hearst-grey);
+    border-bottom: 2px solid var(--hearst-green);
+}
+
+.electricity-view .table-container table thead th {
+    padding: 16px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--hearst-white);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.electricity-view .table-container table td {
+    padding: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--hearst-white);
+    font-size: 16px;
+}
+
+.electricity-view .table-container table tbody tr:nth-child(even) {
+    background: rgba(165, 255, 156, 0.03);
+}
+
+.electricity-view .table-container table tbody tr:hover {
+    background: rgba(165, 255, 156, 0.1);
+}
+
+.electricity-view .table-container table tbody tr.total-row {
+    background: rgba(26, 26, 26, 0.8);
+    font-weight: 600;
+    border-top: 2px solid var(--hearst-green);
+}
+
+.electricity-view .table-container table tbody tr.total-row td {
+    color: var(--hearst-white);
+    font-size: 18px;
+    padding: 20px 16px;
+}
+
+.electricity-view .table-container table tbody tr.total-row td:last-child {
+    color: var(--hearst-green);
+    font-weight: 700;
+}
+
+/* Filters */
+.electricity-view .filters {
+    display: flex;
+    gap: 16px;
+    align-items: flex-end;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.electricity-view .filter-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+.electricity-view .filter-group label {
+    display: block;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.electricity-view .filter-group input,
+.electricity-view .filter-group select {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(26, 26, 26, 0.8);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--hearst-white);
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.electricity-view .filter-group input:focus,
+.electricity-view .filter-group select:focus {
+    outline: none;
+    border-color: var(--hearst-green);
+    box-shadow: 0 0 0 3px rgba(165, 255, 156, 0.2);
+}
+
+.electricity-view .filter-group input:hover,
+.electricity-view .filter-group select:hover {
+    border-color: var(--hearst-green);
+}
+
+/* Buttons */
+.electricity-view .filters .btn {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+}
+
+.electricity-view .filters .btn-primary {
+    background: var(--hearst-green);
+    color: var(--hearst-black);
+    box-shadow: 0 4px 16px rgba(165, 255, 156, 0.3);
+}
+
+.electricity-view .filters .btn-primary:hover {
+    background: var(--hearst-green-alt);
+    box-shadow: 0 6px 24px rgba(165, 255, 156, 0.4);
+    transform: translateY(-2px);
+}
+
+.electricity-view .filters .btn-secondary {
+    background: rgba(26, 26, 26, 0.8);
+    color: var(--hearst-white);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.electricity-view .filters .btn-secondary:hover {
+    border-color: var(--hearst-green);
+    background: rgba(165, 255, 156, 0.1);
+}
+
+/* Tabs */
+.electricity-view .tabs {
+    display: flex;
+    gap: 8px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 24px;
+}
+
+.electricity-view .tab {
+    padding: 12px 24px;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.6);
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent;
+}
+
+.electricity-view .tab:hover {
+    color: var(--hearst-green);
+}
+
+.electricity-view .tab.active {
+    color: var(--hearst-green);
+    border-bottom-color: var(--hearst-green);
+}
+
+/* Provider Buttons */
+.electricity-view .provider-buttons {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.electricity-view .provider-btn {
+    padding: 12px 24px;
+    border-radius: 8px;
+    background: rgba(26, 26, 26, 0.8);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    color: var(--hearst-white);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.electricity-view .provider-btn:hover {
+    border-color: var(--hearst-green);
+    background: rgba(165, 255, 156, 0.1);
+}
+
+.electricity-view .provider-btn.active {
+    background: var(--hearst-green);
+    border-color: var(--hearst-green);
+    color: var(--hearst-black);
+}
+
+.electricity-view .provider-btn.active:hover {
+    background: var(--hearst-green-alt);
+}
+
+/* Chart Container */
+.electricity-view .chart-container {
+    background: rgba(26, 26, 26, 0.8);
+    backdrop-filter: blur(8px);
+    border: 2px solid var(--hearst-green);
+    border-radius: 16px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.electricity-view .chart-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--hearst-green);
+}
+
+.electricity-view .chart-container:hover {
+    box-shadow: 0 0 20px rgba(165, 255, 156, 0.3);
+    transform: translateY(-2px);
+    border-color: var(--hearst-green-alt);
+}
+
+.electricity-view .chart-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--hearst-white);
+    margin-bottom: 24px;
+}
+
+/* Responsive simple */
+@media (max-width: 1024px) {
+    .electricity-view {
+        padding: 24px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 16px;
+    }
+
+    .electricity-view .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .electricity-view .filters {
+        flex-direction: column;
+    }
+
+    .electricity-view .filter-group {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .electricity-view {
+        padding: 16px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .stat-value {
+        font-size: 32px;
+    }
+
+    .electricity-view .table-container {
+        overflow-x: auto;
+    }
+}

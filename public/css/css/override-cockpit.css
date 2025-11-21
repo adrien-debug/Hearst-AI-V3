@@ -1,0 +1,1819 @@
+/* ====================================
+   OVERRIDE COCKPIT - Styles spécifiques
+   Chargé en dernier pour garantir la priorité
+   ==================================== */
+
+/* Overrides spécifiques au cockpit si nécessaire */
+/* Les styles principaux sont dans cockpit.css et components.css */
+
+/* Variables de couleur spécifiques au cockpit si non définies globalement */
+:root {
+    --cockpit-blue: #4a9eff;
+    --cockpit-orange: #ffa500;
+    --cockpit-orange-dark: #cc8400;
+    --cockpit-pink: #ff6b9d;
+    --cockpit-purple: #9b59b6;
+    --cockpit-red: #e74c3c;
+}
+
+/* Assurer la cohérence des tableaux avec la Home */
+.cockpit-view .table-unified-grid {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+/* Assurer la cohérence des sections avec la Home */
+.cockpit-view .transactions-section {
+    margin-bottom: var(--space-8);
+}
+
+/* ====================================
+   SOUS-MENUS COCKPIT - CENTRÉS & VERTS
+   ==================================== */
+
+/* Navigation cockpit dans le header - Centrée */
+.cockpit-header-nav {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 1 !important;
+    margin: 0 auto !important;
+    padding: 0 var(--space-4) !important;
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    z-index: 10 !important;
+    width: auto !important;
+    max-width: calc(100% - 400px) !important;
+    pointer-events: auto !important;
+}
+
+/* S'assurer qu'une seule navigation est visible - mais toujours afficher la dernière */
+.header > .cockpit-header-nav {
+    display: flex !important;
+}
+
+.header.has-cockpit-nav,
+.header.has-projections-nav,
+.header.has-settings-nav,
+.header.has-electricity-nav,
+.header.has-admin-panel-nav,
+.header.has-collateral-nav {
+    position: relative !important;
+}
+
+
+/* Tabs container */
+.cockpit-nav-tabs {
+    display: flex !important;
+    align-items: center !important;
+    gap: var(--space-1) !important;
+    background: rgba(26, 26, 26, 0.6) !important;
+    border: 1px solid rgba(197, 255, 167, 0.1) !important;
+    border-radius: var(--radius-md) !important;
+    padding: var(--space-1) !important;
+    box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(197, 255, 167, 0.05) !important;
+}
+
+/* Tab button - Style vert HEARST */
+.cockpit-nav-tab {
+    display: flex !important;
+    align-items: center !important;
+    gap: var(--space-2) !important;
+    padding: var(--space-2) var(--space-4) !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: var(--radius-sm) !important;
+    color: var(--text-secondary) !important;
+    font-size: var(--text-sm) !important;
+    font-weight: var(--font-medium) !important;
+    cursor: pointer !important;
+    transition: all var(--duration-fast) var(--ease-in-out) !important;
+    white-space: nowrap !important;
+    font-family: var(--font-primary) !important;
+    letter-spacing: -0.01em !important;
+}
+
+.cockpit-nav-tab:hover {
+    background: rgba(197, 255, 167, 0.1) !important;
+    color: var(--primary-green) !important;
+}
+
+.cockpit-nav-tab.active {
+    background: var(--primary-green) !important;
+    color: var(--primary-dark) !important;
+    font-weight: var(--font-semibold) !important;
+    box-shadow: 
+        0 2px 8px rgba(197, 255, 167, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+}
+
+.cockpit-nav-tab.active:hover {
+    background: rgba(197, 255, 167, 0.9) !important;
+    box-shadow: 
+        0 4px 12px rgba(197, 255, 167, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+}
+
+/* Icon dans les tabs */
+.cockpit-nav-icon {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 18px !important;
+    height: 18px !important;
+    flex-shrink: 0 !important;
+}
+
+.cockpit-nav-icon svg {
+    width: 18px !important;
+    height: 18px !important;
+    stroke: currentColor !important;
+    fill: none !important;
+}
+
+.cockpit-nav-tab.active .cockpit-nav-icon svg {
+    stroke: var(--primary-dark) !important;
+}
+
+/* Label dans les tabs */
+.cockpit-nav-label {
+    font-size: var(--text-sm) !important;
+    letter-spacing: -0.01em !important;
+    line-height: 1.2 !important;
+}
+
+/* ====================================
+   COCKPIT NAVIGATION - EN HAUT
+   ==================================== */
+
+/* Container de navigation - Positionné en haut */
+.cockpit-nav-container {
+    display: flex !important;
+    align-items: center !important;
+    width: 100% !important;
+    margin-bottom: var(--space-6) !important;
+}
+
+/* Tabs container premium - Style ultra premium - Horizontal */
+.cockpit-nav-tabs-premium {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: var(--space-2) !important;
+    background: rgba(14, 14, 14, 0.75) !important;
+    border: 0.5px solid rgba(255, 255, 255, 0.04) !important;
+    border-left: 3px solid var(--primary-green) !important;
+    border-radius: var(--radius-lg) !important;
+    padding: var(--space-3) !important;
+    box-shadow: 
+        0 4px 24px rgba(0, 0, 0, 0.4),
+        0 1px 4px rgba(0, 0, 0, 0.2),
+        inset 0 0.5px 0 rgba(255, 255, 255, 0.06) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.cockpit-nav-tabs-premium::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent 0%,
+        var(--primary-green) 40%,
+        var(--primary-green) 60%,
+        transparent 100%);
+    opacity: 0.6;
+}
+
+/* Tab button premium - Style ultra premium */
+.cockpit-nav-tab-premium {
+    display: flex !important;
+    align-items: center !important;
+    gap: var(--space-3) !important;
+    padding: var(--space-3) var(--space-5) !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: var(--radius-md) !important;
+    color: var(--text-secondary) !important;
+    font-size: var(--text-sm) !important;
+    font-weight: var(--font-medium) !important;
+    cursor: pointer !important;
+    transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+    white-space: nowrap !important;
+    font-family: var(--font-primary) !important;
+    letter-spacing: -0.01em !important;
+    position: relative !important;
+    width: auto !important;
+    min-width: auto !important;
+    overflow: hidden !important;
+}
+
+.cockpit-nav-tab-premium::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--primary-green);
+    opacity: 0;
+    transition: opacity 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.cockpit-nav-tab-premium:hover {
+    background: rgba(197, 255, 167, 0.08) !important;
+    color: var(--primary-green) !important;
+    transform: translateX(4px) !important;
+}
+
+.cockpit-nav-tab-premium:hover::before {
+    opacity: 1;
+}
+
+.cockpit-nav-tab-premium.active {
+    background: linear-gradient(135deg, 
+        rgba(197, 255, 167, 0.15) 0%,
+        rgba(197, 255, 167, 0.08) 100%) !important;
+    color: var(--primary-green) !important;
+    font-weight: var(--font-semibold) !important;
+    box-shadow: 
+        0 2px 12px rgba(197, 255, 167, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 -1px 0 rgba(197, 255, 167, 0.1) !important;
+    border-left: 2px solid var(--primary-green) !important;
+    padding-left: calc(var(--space-5) - 2px) !important;
+}
+
+.cockpit-nav-tab-premium.active::before {
+    opacity: 1;
+    width: 3px;
+    box-shadow: 0 0 12px rgba(197, 255, 167, 0.6);
+}
+
+.cockpit-nav-tab-premium.active:hover {
+    background: linear-gradient(135deg, 
+        rgba(197, 255, 167, 0.2) 0%,
+        rgba(197, 255, 167, 0.12) 100%) !important;
+    box-shadow: 
+        0 4px 16px rgba(197, 255, 167, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        inset 0 -1px 0 rgba(197, 255, 167, 0.15) !important;
+}
+
+/* Icon dans les tabs premium */
+.cockpit-nav-tab-premium .cockpit-nav-icon {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 20px !important;
+    height: 20px !important;
+    flex-shrink: 0 !important;
+    transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+.cockpit-nav-tab-premium .cockpit-nav-icon svg {
+    width: 20px !important;
+    height: 20px !important;
+    stroke: currentColor !important;
+    fill: none !important;
+    transition: stroke 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+.cockpit-nav-tab-premium:hover .cockpit-nav-icon {
+    transform: scale(1.1) !important;
+}
+
+.cockpit-nav-tab-premium.active .cockpit-nav-icon svg {
+    stroke: var(--primary-green) !important;
+    filter: drop-shadow(0 0 4px rgba(197, 255, 167, 0.4)) !important;
+}
+
+/* Label dans les tabs premium */
+.cockpit-nav-tab-premium .cockpit-nav-label {
+    font-size: var(--text-sm) !important;
+    letter-spacing: -0.01em !important;
+    line-height: 1.4 !important;
+    transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+/* Ajuster le KPI grid pour qu'il soit à côté de la nav */
+.cockpit-view .cockpit-kpi-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--space-4);
+    margin-bottom: var(--space-8);
+    margin-top: 0;
+}
+
+/* ====================================
+   PAGE PROJECTIONS - CHARTE GRAPHIQUE PREMIUM
+   ==================================== */
+
+/* Accordion Section - Aligné avec style premium */
+.accordion-section {
+    background: rgba(26, 26, 26, 0.7) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: var(--radius-lg) !important;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+    transition: all var(--duration-normal) var(--ease-in-out) !important;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: var(--space-5) !important;
+}
+
+.accordion-section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at top right,
+        rgba(197, 255, 167, 0.05) 0%,
+        transparent 50%
+    );
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.accordion-section > * {
+    position: relative;
+    z-index: 1;
+}
+
+.accordion-section:hover {
+    box-shadow: 
+        0 12px 48px rgba(0, 0, 0, 0.5),
+        0 4px 16px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(197, 255, 167, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+    transform: translateY(-2px) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.accordion-header {
+    padding: var(--space-5) var(--space-6) !important;
+    background: transparent !important;
+}
+
+.accordion-title {
+    font-size: var(--text-lg) !important;
+    font-weight: var(--font-semibold) !important;
+    color: var(--text-primary) !important;
+    letter-spacing: -0.01em !important;
+}
+
+.accordion-icon {
+    color: var(--primary-green) !important;
+    filter: drop-shadow(0 0 8px rgba(197, 255, 167, 0.3)) !important;
+}
+
+.accordion-content {
+    padding: 0 var(--space-6) var(--space-6) var(--space-6) !important;
+}
+
+.accordion-badge {
+    background: rgba(197, 255, 167, 0.15) !important;
+    border: 1px solid rgba(197, 255, 167, 0.3) !important;
+    color: var(--primary-green) !important;
+    border-radius: var(--radius-md) !important;
+    padding: var(--space-1) var(--space-3) !important;
+    font-size: var(--text-xs) !important;
+    font-weight: var(--font-semibold) !important;
+    letter-spacing: 0.3px !important;
+    box-shadow: 0 2px 8px rgba(197, 255, 167, 0.15) !important;
+}
+
+/* Metric Cards - Aligné avec stat-card premium */
+.metric-card {
+    background: rgba(26, 26, 26, 0.7) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: var(--radius-lg) !important;
+    padding: var(--space-6) !important;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+    transition: all var(--duration-normal) var(--ease-in-out) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.metric-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at top right,
+        rgba(197, 255, 167, 0.05) 0%,
+        transparent 50%
+    );
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.metric-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.metric-card:hover {
+    transform: translateY(-4px) scale(1.02) !important;
+    box-shadow: 
+        0 12px 48px rgba(0, 0, 0, 0.5),
+        0 4px 16px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(197, 255, 167, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.metric-icon-wrapper {
+    border-radius: var(--radius-md) !important;
+    background: rgba(197, 255, 167, 0.1) !important;
+    margin-bottom: var(--space-4) !important;
+}
+
+.metric-label {
+    font-size: var(--text-xs) !important;
+    font-weight: var(--font-medium) !important;
+    color: var(--text-muted) !important;
+    letter-spacing: 0.3px !important;
+    text-transform: uppercase !important;
+    margin-bottom: var(--space-2) !important;
+}
+
+.metric-value {
+    font-size: var(--text-2xl) !important;
+    font-weight: var(--font-bold) !important;
+    color: var(--text-primary) !important;
+    letter-spacing: -0.02em !important;
+    line-height: 1.2 !important;
+    margin-bottom: var(--space-2) !important;
+}
+
+.metric-value.green,
+.metric-value.blue,
+.metric-value.yellow,
+.metric-value.purple {
+    color: var(--primary-green) !important;
+}
+
+.metric-description {
+    font-size: var(--text-sm) !important;
+    color: var(--text-secondary) !important;
+    letter-spacing: -0.01em !important;
+    line-height: var(--leading-normal) !important;
+}
+
+/* Radio Cards - Aligné avec style premium */
+.radio-card {
+    background: rgba(26, 26, 26, 0.7) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: var(--radius-md) !important;
+    padding: var(--space-4) !important;
+    transition: all var(--duration-fast) var(--ease-in-out) !important;
+    box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+}
+
+.radio-card:hover {
+    border-color: rgba(197, 255, 167, 0.3) !important;
+    background: rgba(197, 255, 167, 0.05) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 
+        0 8px 24px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(197, 255, 167, 0.2) !important;
+}
+
+.radio-card:has(input[type="radio"]:checked) {
+    border-color: var(--primary-green) !important;
+    background: rgba(197, 255, 167, 0.1) !important;
+    box-shadow: 
+        0 8px 24px rgba(0, 0, 0, 0.4),
+        0 0 0 2px rgba(197, 255, 167, 0.3) !important;
+}
+
+.radio-card-label {
+    font-size: var(--text-sm) !important;
+    font-weight: var(--font-semibold) !important;
+    color: var(--text-primary) !important;
+    letter-spacing: -0.01em !important;
+}
+
+.radio-card-desc {
+    font-size: var(--text-xs) !important;
+    color: var(--text-secondary) !important;
+    letter-spacing: -0.01em !important;
+}
+
+/* Machine Cards - Aligné avec style premium */
+.machine-card {
+    background: rgba(26, 26, 26, 0.7) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: var(--radius-lg) !important;
+    padding: var(--space-5) !important;
+    transition: all var(--duration-normal) var(--ease-in-out) !important;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+}
+
+.machine-card:hover {
+    transform: translateY(-4px) !important;
+    border-color: rgba(197, 255, 167, 0.3) !important;
+    box-shadow: 
+        0 12px 48px rgba(0, 0, 0, 0.5),
+        0 4px 16px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(197, 255, 167, 0.2) !important;
+}
+
+.machine-card.selected {
+    border-color: var(--primary-green) !important;
+    background: rgba(197, 255, 167, 0.1) !important;
+    box-shadow: 
+        0 12px 48px rgba(0, 0, 0, 0.5),
+        0 0 0 2px rgba(197, 255, 167, 0.3) !important;
+}
+
+.machine-name {
+    font-size: var(--text-base) !important;
+    font-weight: var(--font-semibold) !important;
+    color: var(--text-primary) !important;
+    letter-spacing: -0.01em !important;
+}
+
+/* Project Cards - Aligné avec style premium */
+.project-card {
+    background: rgba(26, 26, 26, 0.7) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: var(--radius-lg) !important;
+    padding: var(--space-6) !important;
+    transition: all var(--duration-normal) var(--ease-in-out) !important;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at top right,
+        rgba(197, 255, 167, 0.05) 0%,
+        transparent 50%
+    );
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.project-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.project-card:hover {
+    transform: translateY(-4px) !important;
+    border-color: rgba(197, 255, 167, 0.3) !important;
+    box-shadow: 
+        0 12px 48px rgba(0, 0, 0, 0.5),
+        0 4px 16px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(197, 255, 167, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+.project-name {
+    font-size: var(--text-lg) !important;
+    font-weight: var(--font-semibold) !important;
+    color: var(--text-primary) !important;
+    letter-spacing: -0.01em !important;
+}
+
+.project-date {
+    font-size: var(--text-xs) !important;
+    color: var(--text-secondary) !important;
+    letter-spacing: -0.01em !important;
+}
+
+.project-stat-value {
+    font-size: var(--text-xl) !important;
+    font-weight: var(--font-bold) !important;
+    color: var(--primary-green) !important;
+    letter-spacing: -0.02em !important;
+}
+
+.project-stat-label {
+    font-size: var(--text-xs) !important;
+    color: var(--text-muted) !important;
+    letter-spacing: 0.3px !important;
+    text-transform: uppercase !important;
+}
+
+/* Section Title Premium - Aligné avec Home */
+.section-title-premium {
+    font-size: var(--text-lg) !important;
+    font-weight: var(--font-semibold) !important;
+    color: var(--text-primary) !important;
+    letter-spacing: -0.01em !important;
+    margin-bottom: var(--space-1) !important;
+}
+
+.section-desc-premium {
+    font-size: var(--text-sm) !important;
+    color: var(--text-secondary) !important;
+    letter-spacing: -0.01em !important;
+}
+
+/* Badge - Aligné avec style premium */
+.badge {
+    background: rgba(197, 255, 167, 0.15) !important;
+    border: 1px solid rgba(197, 255, 167, 0.3) !important;
+    color: var(--primary-green) !important;
+    border-radius: var(--radius-md) !important;
+    padding: var(--space-1) var(--space-3) !important;
+    font-size: var(--text-xs) !important;
+    font-weight: var(--font-semibold) !important;
+    letter-spacing: 0.3px !important;
+    text-transform: uppercase !important;
+    box-shadow: 0 2px 8px rgba(197, 255, 167, 0.15) !important;
+}
+
+/* Summary Card - Aligné avec style premium */
+.summary-card {
+    background: rgba(26, 26, 26, 0.7) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: var(--radius-lg) !important;
+    padding: var(--space-6) !important;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+}
+
+.summary-title {
+    font-size: var(--text-base) !important;
+    font-weight: var(--font-semibold) !important;
+    color: var(--primary-green) !important;
+    letter-spacing: 0.3px !important;
+    text-transform: uppercase !important;
+    border-bottom: 1px solid rgba(197, 255, 167, 0.2) !important;
+    padding-bottom: var(--space-4) !important;
+    margin-bottom: var(--space-4) !important;
+}
+
+.summary-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    padding: var(--space-3) 0 !important;
+}
+
+.summary-label {
+    font-size: var(--text-sm) !important;
+    color: var(--text-secondary) !important;
+    letter-spacing: -0.01em !important;
+}
+
+.summary-value {
+    font-size: var(--text-base) !important;
+    font-weight: var(--font-semibold) !important;
+    color: var(--text-primary) !important;
+    letter-spacing: -0.01em !important;
+}
+
+.summary-value.highlight {
+    color: var(--primary-green) !important;
+    font-size: var(--text-lg) !important;
+    font-weight: var(--font-bold) !important;
+}
+
+/* Metrics Grid - Espacement aligné */
+.metrics-grid {
+    gap: var(--space-5) !important;
+    margin-bottom: var(--space-8) !important;
+}
+
+/* Machine Grid - Espacement aligné */
+.machine-grid {
+    gap: var(--space-5) !important;
+    margin-bottom: var(--space-5) !important;
+}
+
+/* Radio Cards Grid - Espacement aligné */
+.radio-cards {
+    gap: var(--space-4) !important;
+    margin-bottom: var(--space-5) !important;
+}
+
+/* Stepper Container - Aligné avec style premium */
+.stepper-container {
+    background: rgba(26, 26, 26, 0.7) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: var(--radius-xl) !important;
+    padding: var(--space-8) var(--space-10) !important;
+    margin-bottom: var(--space-8) !important;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.stepper-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at top right,
+        rgba(197, 255, 167, 0.05) 0%,
+        transparent 50%
+    );
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.stepper-container > * {
+    position: relative;
+    z-index: 1;
+}
+
+.progress-line-bg {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 2px !important;
+}
+
+.stepper-progress {
+    background: var(--primary-green) !important;
+    box-shadow: 0 0 12px rgba(197, 255, 167, 0.4) !important;
+}
+
+.step-circle {
+    background: rgba(26, 26, 26, 0.8) !important;
+    border: 3px solid rgba(255, 255, 255, 0.1) !important;
+    color: var(--text-muted) !important;
+    box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+    transition: all var(--duration-normal) var(--ease-in-out) !important;
+}
+
+.step.completed .step-circle {
+    background: rgba(26, 26, 26, 0.8) !important;
+    border-color: var(--primary-green) !important;
+    color: var(--primary-green) !important;
+    box-shadow: 
+        0 4px 16px rgba(197, 255, 167, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+}
+
+.step.active .step-circle {
+    background: var(--primary-green) !important;
+    border-color: var(--primary-green) !important;
+    color: var(--primary-dark) !important;
+    box-shadow: 
+        0 4px 20px rgba(197, 255, 167, 0.5),
+        0 0 0 4px rgba(197, 255, 167, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+    transform: scale(1.1) !important;
+}
+
+.step-label {
+    font-size: var(--text-xs) !important;
+    font-weight: var(--font-semibold) !important;
+    color: var(--text-muted) !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    transition: all var(--duration-fast) var(--ease-in-out) !important;
+}
+
+.step.active .step-label {
+    color: var(--primary-green) !important;
+    font-weight: var(--font-bold) !important;
+}
+
+.step.completed .step-label {
+    color: var(--text-secondary) !important;
+}
+
+.step:hover .step-circle {
+    transform: scale(1.05) !important;
+    border-color: rgba(197, 255, 167, 0.5) !important;
+}
+
+.step.active:hover .step-circle {
+    transform: scale(1.15) !important;
+}
+
+/* Param Card - Aligné avec style premium */
+.param-card {
+    background: rgba(26, 26, 26, 0.7) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: var(--radius-lg) !important;
+    padding: var(--space-6) !important;
+    margin-bottom: var(--space-5) !important;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+    transition: all var(--duration-normal) var(--ease-in-out) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.param-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at top right,
+        rgba(197, 255, 167, 0.05) 0%,
+        transparent 50%
+    );
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.param-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.param-card:hover {
+    box-shadow: 
+        0 12px 48px rgba(0, 0, 0, 0.5),
+        0 4px 16px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(197, 255, 167, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+    transform: translateY(-2px) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.param-card-title {
+    font-size: var(--text-base) !important;
+    font-weight: var(--font-semibold) !important;
+    color: var(--text-primary) !important;
+    letter-spacing: 0.3px !important;
+    text-transform: uppercase !important;
+    margin-bottom: var(--space-4) !important;
+}
+
+.param-card-subtitle {
+    font-size: var(--text-sm) !important;
+    color: var(--text-secondary) !important;
+    letter-spacing: -0.01em !important;
+    margin-bottom: var(--space-5) !important;
+}
+
+/* Form Inputs - Aligné avec style premium */
+.form-label {
+    font-size: var(--text-sm) !important;
+    font-weight: var(--font-medium) !important;
+    color: var(--text-secondary) !important;
+    margin-bottom: var(--space-2) !important;
+    letter-spacing: -0.01em !important;
+}
+
+.form-input,
+.form-select,
+input[type="text"],
+input[type="number"],
+input[type="email"],
+select {
+    background: rgba(10, 10, 10, 0.7) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: var(--radius-md) !important;
+    padding: var(--space-3) var(--space-4) !important;
+    color: var(--text-primary) !important;
+    font-size: var(--text-base) !important;
+    font-family: var(--font-primary) !important;
+    letter-spacing: -0.01em !important;
+    transition: all var(--duration-fast) var(--ease-in-out) !important;
+    width: 100% !important;
+}
+
+.form-input:hover,
+.form-select:hover,
+input[type="text"]:hover,
+input[type="number"]:hover,
+select:hover {
+    border-color: rgba(197, 255, 167, 0.4) !important;
+    background: rgba(10, 10, 10, 0.85) !important;
+}
+
+.form-input:focus,
+.form-select:focus,
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+    outline: none !important;
+    border-color: var(--primary-green) !important;
+    box-shadow: 
+        0 0 0 3px rgba(197, 255, 167, 0.15),
+        0 2px 8px rgba(197, 255, 167, 0.1) !important;
+    background: rgba(10, 10, 10, 0.9) !important;
+}
+
+.form-input::placeholder,
+input::placeholder {
+    color: rgba(153, 153, 153, 0.8) !important;
+}
+
+/* Boutons de sélection rapide (2 Years, 3 Years, etc.) */
+button[class*="btn"],
+button[class*="button"],
+.btn,
+.button {
+    background: rgba(26, 26, 26, 0.7) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: var(--radius-md) !important;
+    padding: var(--space-2) var(--space-4) !important;
+    color: var(--text-primary) !important;
+    font-size: var(--text-sm) !important;
+    font-weight: var(--font-medium) !important;
+    letter-spacing: -0.01em !important;
+    cursor: pointer !important;
+    transition: all var(--duration-fast) var(--ease-in-out) !important;
+}
+
+button[class*="btn"]:hover,
+button[class*="button"]:hover,
+.btn:hover,
+.button:hover {
+    background: rgba(197, 255, 167, 0.1) !important;
+    border-color: rgba(197, 255, 167, 0.3) !important;
+    color: var(--primary-green) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(197, 255, 167, 0.15) !important;
+}
+
+button[class*="btn"].active,
+button[class*="button"].active,
+.btn.active,
+.button.active,
+button[class*="btn"]:active,
+button[class*="button"]:active {
+    background: var(--primary-green) !important;
+    border-color: var(--primary-green) !important;
+    color: var(--primary-dark) !important;
+    font-weight: var(--font-semibold) !important;
+    box-shadow: 
+        0 4px 16px rgba(197, 255, 167, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Grid Layouts - Espacement aligné */
+.grid-2,
+.grid-3,
+.grid-4 {
+    gap: var(--space-5) !important;
+}
+
+
+
+/* ====================================
+   PAGE COLLATERAL - CHARTE GRAPHIQUE PREMIUM
+   ==================================== */
+
+/* Collateral View - Aligné avec style premium */
+.collateral-view {
+    padding: var(--space-6) var(--space-8) !important;
+}
+
+.collateral-content {
+    gap: var(--space-8) !important;
+}
+
+/* Stats Grid - Aligné avec style premium */
+.stats-grid {
+    gap: var(--space-5) !important;
+    margin-bottom: var(--space-8) !important;
+}
+
+/* Stat Cards & KPI Cards - Aligné avec stat-card premium */
+.collateral-view .stat-card,
+.collateral-view .kpi-card {
+    background: rgba(26, 26, 26, 0.7) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: var(--radius-lg) !important;
+    padding: var(--space-6) !important;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+    transition: all var(--duration-normal) var(--ease-in-out) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.collateral-view .stat-card::after,
+.collateral-view .kpi-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at top right,
+        rgba(197, 255, 167, 0.05) 0%,
+        transparent 50%
+    );
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.collateral-view .stat-card > *,
+.collateral-view .kpi-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.collateral-view .stat-card:hover,
+.collateral-view .kpi-card:hover {
+    transform: translateY(-4px) scale(1.02) !important;
+    box-shadow: 
+        0 12px 48px rgba(0, 0, 0, 0.5),
+        0 4px 16px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(197, 255, 167, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.collateral-view .stat-card::before,
+.collateral-view .kpi-card::before {
+    display: none !important;
+}
+
+.collateral-view .stat-label,
+.collateral-view .kpi-label {
+    font-size: var(--text-xs) !important;
+    font-weight: var(--font-medium) !important;
+    color: var(--text-muted) !important;
+    letter-spacing: 0.3px !important;
+    text-transform: uppercase !important;
+    margin-bottom: var(--space-2) !important;
+}
+
+.collateral-view .stat-value {
+    font-size: var(--text-2xl) !important;
+    font-weight: var(--font-bold) !important;
+    color: var(--text-primary) !important;
+    letter-spacing: -0.02em !important;
+    line-height: 1.2 !important;
+    margin-bottom: var(--space-2) !important;
+}
+
+.collateral-view .kpi-value {
+    font-size: var(--text-2xl) !important;
+    font-weight: var(--font-bold) !important;
+    color: var(--primary-green) !important;
+    letter-spacing: -0.02em !important;
+    line-height: 1.2 !important;
+    margin-bottom: var(--space-2) !important;
+}
+
+.collateral-view .stat-change,
+.collateral-view .kpi-subtitle {
+    font-size: var(--text-xs) !important;
+    color: var(--text-secondary) !important;
+    letter-spacing: -0.01em !important;
+}
+
+.collateral-view .stat-change {
+    color: var(--primary-green) !important;
+}
+
+/* Chart Section - Aligné avec style premium */
+.collateral-view .chart-section {
+    background: rgba(26, 26, 26, 0.7) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: var(--radius-lg) !important;
+    padding: var(--space-6) !important;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+    margin-bottom: var(--space-6) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.collateral-view .chart-section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at top right,
+        rgba(197, 255, 167, 0.05) 0%,
+        transparent 50%
+    );
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.collateral-view .chart-section > * {
+    position: relative;
+    z-index: 1;
+}
+
+.collateral-view .chart-title {
+    font-size: var(--text-lg) !important;
+    font-weight: var(--font-semibold) !important;
+    color: var(--text-primary) !important;
+    letter-spacing: -0.01em !important;
+}
+
+.collateral-view .chart-container {
+    background: rgba(10, 10, 10, 0.5) !important;
+    border-radius: var(--radius-md) !important;
+    padding: var(--space-4) !important;
+}
+
+/* Table Section - Aligné avec style premium */
+.collateral-view .table-section {
+    background: rgba(26, 26, 26, 0.7) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: var(--radius-lg) !important;
+    padding: var(--space-6) !important;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.collateral-view .table-section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at top right,
+        rgba(197, 255, 167, 0.05) 0%,
+        transparent 50%
+    );
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.collateral-view .table-section > * {
+    position: relative;
+    z-index: 1;
+}
+
+.collateral-view .table-title {
+    font-size: var(--text-lg) !important;
+    font-weight: var(--font-semibold) !important;
+    color: var(--text-primary) !important;
+    letter-spacing: -0.01em !important;
+    margin-bottom: var(--space-6) !important;
+}
+
+/* Data Table - Aligné avec style premium */
+.collateral-view .data-table {
+    background: transparent !important;
+    border-radius: 0 !important;
+    overflow: hidden;
+}
+
+.collateral-view .data-table thead {
+    background: linear-gradient(180deg, rgba(69, 70, 70, 0.95) 0%, rgba(58, 58, 58, 0.95) 100%) !important;
+    border-bottom: 2px solid rgba(197, 255, 167, 0.25) !important;
+}
+
+.collateral-view .data-table th {
+    padding: var(--space-4) var(--space-5) !important;
+    text-align: left !important;
+    font-size: var(--text-xs) !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    color: var(--text-primary) !important;
+}
+
+.collateral-view .data-table tbody tr {
+    transition: all var(--duration-fast) var(--ease-in-out) !important;
+    border-bottom: none !important;
+}
+
+.collateral-view .data-table tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.02) !important;
+}
+
+.collateral-view .data-table tbody tr:hover {
+    background: linear-gradient(
+        90deg,
+        rgba(197, 255, 167, 0.08) 0%,
+        rgba(197, 255, 167, 0.12) 50%,
+        rgba(197, 255, 167, 0.08) 100%
+    ) !important;
+    box-shadow: inset 3px 0 0 var(--primary-green) !important;
+    transform: translateX(3px) !important;
+}
+
+.collateral-view .data-table td {
+    padding: var(--space-4) var(--space-5) !important;
+    font-size: var(--text-sm) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+    color: var(--text-secondary) !important;
+    letter-spacing: -0.01em !important;
+    font-weight: var(--font-normal) !important;
+}
+
+.collateral-view .table-value-positive {
+    color: var(--primary-green) !important;
+    font-weight: var(--font-semibold) !important;
+}
+
+/* Filter Buttons - Aligné avec style premium */
+.collateral-view .filter-btn {
+    background: rgba(26, 26, 26, 0.7) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: var(--radius-md) !important;
+    padding: var(--space-2) var(--space-4) !important;
+    font-size: var(--text-xs) !important;
+    font-weight: var(--font-medium) !important;
+    color: var(--text-secondary) !important;
+    letter-spacing: -0.01em !important;
+    transition: all var(--duration-fast) var(--ease-in-out) !important;
+}
+
+.collateral-view .filter-btn:hover:not(.active) {
+    background: rgba(197, 255, 167, 0.1) !important;
+    border-color: rgba(197, 255, 167, 0.3) !important;
+    color: var(--primary-green) !important;
+    transform: translateY(-1px) !important;
+}
+
+.collateral-view .filter-btn.active {
+    background: var(--primary-green) !important;
+    border-color: var(--primary-green) !important;
+    color: var(--primary-dark) !important;
+    font-weight: var(--font-semibold) !important;
+    box-shadow: 
+        0 4px 16px rgba(197, 255, 167, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Toggle Switch - Aligné avec style premium */
+.collateral-view .toggle-slider {
+    background-color: rgba(26, 26, 26, 0.8) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 19px !important;
+    transition: all var(--duration-fast) var(--ease-in-out) !important;
+}
+
+.collateral-view .toggle-slider:before {
+    background-color: var(--text-muted) !important;
+    transition: all var(--duration-fast) var(--ease-in-out) !important;
+}
+
+.collateral-view input:checked + .toggle-slider {
+    background-color: var(--primary-green) !important;
+    border-color: var(--primary-green) !important;
+    box-shadow: 0 0 12px rgba(197, 255, 167, 0.3) !important;
+}
+
+.collateral-view input:checked + .toggle-slider:before {
+    background-color: var(--primary-dark) !important;
+}
+
+/* Page Header - Aligné avec style premium */
+.collateral-view .page-header {
+    margin-bottom: var(--space-8) !important;
+}
+
+.collateral-view .page-title {
+    font-size: var(--text-2xl) !important;
+    font-weight: var(--font-bold) !important;
+    color: var(--text-primary) !important;
+    letter-spacing: -0.02em !important;
+    margin-bottom: var(--space-2) !important;
+}
+
+/* Cards Grid - Espacement aligné */
+.collateral-view .cards-grid {
+    gap: var(--space-5) !important;
+    margin-bottom: var(--space-6) !important;
+}
+
+/* Legend Items - Aligné avec style premium */
+.collateral-view .legend-item {
+    font-size: var(--text-sm) !important;
+    color: var(--text-secondary) !important;
+    letter-spacing: -0.01em !important;
+}
+
+.collateral-view .legend-dot.green {
+    background: var(--primary-green) !important;
+    box-shadow: 0 0 8px rgba(197, 255, 167, 0.3) !important;
+}
+
+/* Badges Collateral - Aligné avec style premium */
+.collateral-view .badge.super,
+.collateral-view .badge.healthy {
+    background: rgba(197, 255, 167, 0.15) !important;
+    border: 1px solid rgba(197, 255, 167, 0.3) !important;
+    color: var(--primary-green) !important;
+    border-radius: var(--radius-md) !important;
+    padding: var(--space-1) var(--space-3) !important;
+    font-size: var(--text-xs) !important;
+    font-weight: var(--font-semibold) !important;
+    letter-spacing: 0.3px !important;
+    box-shadow: 0 2px 8px rgba(197, 255, 167, 0.15) !important;
+}
+
+.collateral-view .badge.unhealthy {
+    background: rgba(255, 165, 0, 0.15) !important;
+    border: 1px solid rgba(255, 165, 0, 0.3) !important;
+    color: var(--cockpit-orange) !important;
+    border-radius: var(--radius-md) !important;
+    padding: var(--space-1) var(--space-3) !important;
+    font-size: var(--text-xs) !important;
+    font-weight: var(--font-semibold) !important;
+    letter-spacing: 0.3px !important;
+    box-shadow: 0 2px 8px rgba(255, 165, 0, 0.15) !important;
+}
+
+.collateral-view .badge.at-risk {
+    background: rgba(231, 76, 60, 0.15) !important;
+    border: 1px solid rgba(231, 76, 60, 0.3) !important;
+    color: var(--cockpit-red) !important;
+    border-radius: var(--radius-md) !important;
+    padding: var(--space-1) var(--space-3) !important;
+    font-size: var(--text-xs) !important;
+    font-weight: var(--font-semibold) !important;
+    letter-spacing: 0.3px !important;
+    box-shadow: 0 2px 8px rgba(231, 76, 60, 0.15) !important;
+}
+
+/* Override des styles inline pour harmoniser avec la charte */
+.collateral-view [style*="background: linear-gradient(135deg, #121212"],
+.collateral-view [style*="background: var(--bg-secondary)"] {
+    background: rgba(26, 26, 26, 0.7) !important;
+}
+
+.collateral-view [style*="border: 1px solid rgba(255,255,255,0.05)"] {
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+.collateral-view [style*="background: var(--bg-hover)"] {
+    background: rgba(42, 42, 42, 0.5) !important;
+}
+
+/* Harmonisation des couleurs vertes avec --primary-green */
+.collateral-view [style*="#7bed9f"],
+.collateral-view [style*="#45D483"],
+.collateral-view [style*="#6fdc66"] {
+    color: var(--primary-green) !important;
+}
+
+.collateral-view [style*="background: rgba(123, 237, 159"] {
+    background: rgba(197, 255, 167, 0.15) !important;
+}
+
+.collateral-view [style*="background: linear-gradient(135deg, rgba(123, 237, 159"] {
+    background: linear-gradient(135deg, rgba(197, 255, 167, 0.2) 0%, rgba(197, 255, 167, 0.1) 100%) !important;
+}
+
+/* Harmonisation des bordures vertes */
+.collateral-view [style*="border-left: 3px solid #7bed9f"],
+.collateral-view [style*="border-left: 3px solid #45D483"] {
+    border-left: 3px solid var(--primary-green) !important;
+}
+
+/* Conteneurs avec styles inline - Harmonisation premium */
+.collateral-view [style*="background: linear-gradient(135deg, var(--bg-panel)"],
+.collateral-view [style*="background: linear-gradient(135deg, #121212"] {
+    background: rgba(26, 26, 26, 0.7) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: var(--radius-lg) !important;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.collateral-view [style*="background: linear-gradient(135deg, var(--bg-panel)"]::after,
+.collateral-view [style*="background: linear-gradient(135deg, #121212"]::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at top right,
+        rgba(197, 255, 167, 0.05) 0%,
+        transparent 50%
+    );
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* API Blocks - Harmonisation premium */
+.collateral-view .api-block {
+    background: rgba(26, 26, 26, 0.7) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: var(--radius-lg) !important;
+    padding: var(--space-6) !important;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+    transition: all var(--duration-normal) var(--ease-in-out) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.collateral-view .api-block::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at top right,
+        rgba(197, 255, 167, 0.05) 0%,
+        transparent 50%
+    );
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.collateral-view .api-block > * {
+    position: relative;
+    z-index: 1;
+}
+
+.collateral-view .api-block:hover {
+    box-shadow: 
+        0 12px 48px rgba(0, 0, 0, 0.5),
+        0 4px 16px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(197, 255, 167, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+    transform: translateY(-2px) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Inputs de recherche - Harmonisation premium */
+.collateral-view input[type="text"][id*="search"],
+.collateral-view input[type="text"][placeholder*="Search"] {
+    background: rgba(10, 10, 10, 0.7) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: var(--radius-md) !important;
+    padding: var(--space-3) var(--space-4) !important;
+    color: var(--text-primary) !important;
+    font-size: var(--text-sm) !important;
+    font-family: var(--font-primary) !important;
+    letter-spacing: -0.01em !important;
+    transition: all var(--duration-fast) var(--ease-in-out) !important;
+}
+
+.collateral-view input[type="text"][id*="search"]:hover,
+.collateral-view input[type="text"][placeholder*="Search"]:hover {
+    border-color: rgba(197, 255, 167, 0.4) !important;
+    background: rgba(10, 10, 10, 0.85) !important;
+}
+
+.collateral-view input[type="text"][id*="search"]:focus,
+.collateral-view input[type="text"][placeholder*="Search"]:focus {
+    outline: none !important;
+    border-color: var(--primary-green) !important;
+    box-shadow: 
+        0 0 0 3px rgba(197, 255, 167, 0.15),
+        0 2px 8px rgba(197, 255, 167, 0.1) !important;
+    background: rgba(10, 10, 10, 0.9) !important;
+}
+
+.collateral-view input[type="text"][id*="search"]::placeholder,
+.collateral-view input[type="text"][placeholder*="Search"]::placeholder {
+    color: rgba(153, 153, 153, 0.8) !important;
+}
+
+/* Boutons avec styles inline - Harmonisation premium */
+.collateral-view .btn.btn-primary[style*="background: linear-gradient"],
+.collateral-view .btn.btn-primary[style*="background:linear-gradient"] {
+    background: var(--primary-green) !important;
+    border: none !important;
+    color: var(--primary-dark) !important;
+    box-shadow: 
+        0 4px 16px rgba(197, 255, 167, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+    transition: all var(--duration-normal) var(--ease-in-out) !important;
+}
+
+.collateral-view .btn.btn-primary[style*="background: linear-gradient"]:hover,
+.collateral-view .btn.btn-primary[style*="background:linear-gradient"]:hover {
+    background: rgba(197, 255, 167, 0.9) !important;
+    box-shadow: 
+        0 6px 24px rgba(197, 255, 167, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+    transform: translateY(-2px) !important;
+}
+
+.collateral-view .btn.btn-secondary {
+    background: rgba(26, 26, 26, 0.7) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: var(--text-primary) !important;
+    transition: all var(--duration-fast) var(--ease-in-out) !important;
+}
+
+.collateral-view .btn.btn-secondary:hover {
+    background: rgba(197, 255, 167, 0.1) !important;
+    border-color: rgba(197, 255, 167, 0.3) !important;
+    color: var(--primary-green) !important;
+    transform: translateY(-1px) !important;
+}
+
+/* Modal - Harmonisation premium */
+.collateral-view #customerModal {
+    background: rgba(0, 0, 0, 0.85) !important;
+}
+
+.collateral-view #customerModal > div {
+    background: rgba(26, 26, 26, 0.95) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: var(--radius-xl) !important;
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.6),
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Conteneur de positions collateral - Harmonisation premium */
+.collateral-view #collateralPositions {
+    gap: var(--space-4) !important;
+}
+
+/* Titres et sous-titres dans les sections - Harmonisation */
+.collateral-view h2[style*="font-size: 16px"],
+.collateral-view h3[style*="font-size: 14px"] {
+    font-size: var(--text-lg) !important;
+    font-weight: var(--font-semibold) !important;
+    color: var(--text-primary) !important;
+    letter-spacing: -0.01em !important;
+}
+
+.collateral-view p[style*="color: var(--text-muted)"] {
+    font-size: var(--text-sm) !important;
+    color: var(--text-secondary) !important;
+    letter-spacing: -0.01em !important;
+}
+
+/* Harmonisation des valeurs avec gradient text */
+.collateral-view [style*="-webkit-background-clip: text"],
+.collateral-view [style*="background-clip: text"] {
+    color: var(--primary-green) !important;
+    -webkit-text-fill-color: var(--primary-green) !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+}
+
+/* Harmonisation des radial gradients dans les cards */
+.collateral-view [style*="background: radial-gradient(circle at center, rgba(123, 237, 159"] {
+    background: radial-gradient(
+        circle at center,
+        rgba(197, 255, 167, 0.05) 0%,
+        transparent 70%
+    ) !important;
+}
+
+/* Logs containers dans les API blocks - Harmonisation premium */
+.collateral-view [style*="background: var(--bg-secondary)"][style*="border-radius: 6px"] {
+    background: rgba(10, 10, 10, 0.5) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: var(--radius-md) !important;
+    padding: var(--space-4) !important;
+}
+
+/* Logs text - Harmonisation */
+.collateral-view [id*="Logs"][style*="font-family: Monaco"] {
+    font-family: var(--font-mono, monospace) !important;
+    font-size: var(--text-xs) !important;
+    color: var(--text-secondary) !important;
+    line-height: var(--leading-relaxed) !important;
+}
+
+.collateral-view [id*="Logs"] [style*="color: #7bed9f"] {
+    color: var(--primary-green) !important;
+}
+
+/* Harmonisation des valeurs dans les API blocks */
+.collateral-view [style*="font-size: 10px"][style*="font-weight: 600"][style*="color: #7bed9f"] {
+    color: var(--primary-green) !important;
+    font-size: var(--text-sm) !important;
+    font-weight: var(--font-semibold) !important;
+}
+
+.collateral-view [style*="font-size: 10px"][style*="font-weight: 600"][style*="color: var(--text-secondary)"] {
+    color: var(--text-secondary) !important;
+    font-size: var(--text-sm) !important;
+    font-weight: var(--font-semibold) !important;
+}
+
+.collateral-view [style*="font-size: 8px"][style*="color: var(--text-muted)"] {
+    font-size: var(--text-xs) !important;
+    color: var(--text-muted) !important;
+    letter-spacing: 0.3px !important;
+    text-transform: uppercase !important;
+}
+
+/* Harmonisation des badges dans les API blocks */
+.collateral-view .badge[style*="font-size: 8px"] {
+    font-size: var(--text-xs) !important;
+    padding: var(--space-1) var(--space-3) !important;
+}
+
+/* Harmonisation des titres de logs */
+.collateral-view [style*="font-size: 9px"][style*="font-weight: 600"][style*="color: var(--text-primary)"] {
+    font-size: var(--text-xs) !important;
+    font-weight: var(--font-semibold) !important;
+    color: var(--text-primary) !important;
+    letter-spacing: -0.01em !important;
+}
+
+/* ====================================
+   OVERRIDE FORCE - STYLES INLINE COLLATERAL
+   ==================================== */
+/* Force override de tous les styles inline avec des sélecteurs très spécifiques */
+
+/* Stat cards avec styles inline - Force override */
+.collateral-view .stat-card[style*="background: linear-gradient(135deg, #121212"],
+.collateral-view .stat-card[style*="background:linear-gradient(135deg, #121212"] {
+    background: rgba(26, 26, 26, 0.7) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: var(--radius-lg) !important;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+/* Stat values avec gradient text - Force override */
+.collateral-view .stat-value[style*="-webkit-background-clip: text"],
+.collateral-view .stat-value[style*="background-clip: text"] {
+    color: var(--primary-green) !important;
+    -webkit-text-fill-color: var(--primary-green) !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+}
+
+/* Stat labels avec styles inline - Force override */
+.collateral-view .stat-label[style*="font-size: 11px"],
+.collateral-view .stat-label[style*="color: #A3A3A3"] {
+    font-size: var(--text-xs) !important;
+    font-weight: var(--font-medium) !important;
+    color: var(--text-muted) !important;
+    letter-spacing: 0.3px !important;
+    text-transform: uppercase !important;
+    margin-bottom: var(--space-2) !important;
+}
+
+/* Stat values avec styles inline - Force override */
+.collateral-view .stat-value[style*="font-size: 32px"],
+.collateral-view .stat-value[style*="font-weight: 700"] {
+    font-size: var(--text-2xl) !important;
+    font-weight: var(--font-bold) !important;
+    color: var(--text-primary) !important;
+    letter-spacing: -0.02em !important;
+    line-height: 1.2 !important;
+    margin-bottom: var(--space-2) !important;
+}
+
+/* Stat change avec styles inline - Force override */
+.collateral-view .stat-change[style*="color: #CCCCCC"],
+.collateral-view .stat-change[style*="color: #7bed9f"] {
+    font-size: var(--text-xs) !important;
+    color: var(--text-secondary) !important;
+    letter-spacing: -0.01em !important;
+}
+
+.collateral-view .stat-change[style*="color: #7bed9f"] {
+    color: var(--primary-green) !important;
+}
+
+/* Conteneur Collateral Positions avec styles inline - Force override */
+.collateral-view [style*="background: linear-gradient(135deg, var(--bg-panel) 0%, var(--bg-panel-hover) 100%)"] {
+    background: rgba(26, 26, 26, 0.7) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: var(--radius-lg) !important;
+    padding: var(--space-6) !important;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+/* Titres avec styles inline - Force override */
+.collateral-view h2[style*="font-size: 16px"],
+.collateral-view h2[style*="font-weight: 600"] {
+    font-size: var(--text-lg) !important;
+    font-weight: var(--font-semibold) !important;
+    color: var(--text-primary) !important;
+    letter-spacing: -0.01em !important;
+    margin: 0 !important;
+}
+
+/* Page header avec styles inline - Force override */
+.collateral-view .page-header[style*="margin-bottom: 36px"] {
+    margin-bottom: var(--space-8) !important;
+}
+
+/* Stats grid avec styles inline - Force override */
+.collateral-view .stats-grid[style*="margin-bottom: 36px"],
+.collateral-view .stats-grid[style*="gap: 19px"] {
+    gap: var(--space-5) !important;
+    margin-bottom: var(--space-8) !important;
+}
+
+/* Boutons avec styles inline - Force override */
+.collateral-view .btn[style*="display: flex"],
+.collateral-view .btn[style*="padding: 10px 20px"] {
+    display: flex !important;
+    align-items: center !important;
+    gap: var(--space-2) !important;
+    padding: var(--space-3) var(--space-6) !important;
+}
+
+/* Filter buttons avec styles inline - Force override */
+.collateral-view .filter-btn[style*="padding: 8px 16px"],
+.collateral-view .filter-btn[style*="font-size: 11px"] {
+    padding: var(--space-2) var(--space-4) !important;
+    font-size: var(--text-xs) !important;
+}
+
+/* Conteneur positions avec styles inline - Force override */
+.collateral-view #collateralPositions[style*="display: flex"],
+.collateral-view #collateralPositions[style*="gap: 12px"] {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: var(--space-4) !important;
+}
+
+/* ====================================
+   HEADER COCKPIT - HORLOGE ET BADGE LIVE
+   ==================================== */
+.header-cockpit-clock-container {
+    display: flex !important;
+    align-items: center !important;
+    gap: var(--space-3) !important;
+}
+
+.header-cockpit-clock {
+    font-size: var(--text-base) !important;
+    font-weight: var(--font-semibold) !important;
+    color: var(--primary-green) !important;
+    font-variant-numeric: tabular-nums !important;
+    font-family: var(--font-mono, monospace) !important;
+    letter-spacing: 0.02em !important;
+}
+
+.header-cockpit-live-badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: var(--space-2) !important;
+    padding: var(--space-2) var(--space-4) !important;
+    background: rgba(197, 255, 167, 0.1) !important;
+    border: 1px solid rgba(197, 255, 167, 0.3) !important;
+    border-radius: var(--radius-full) !important;
+    font-size: var(--text-xs) !important;
+    font-weight: var(--font-semibold) !important;
+    color: var(--primary-green) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    box-shadow: 0 2px 8px rgba(197, 255, 167, 0.15) !important;
+}
+
+.header-cockpit-live-dot {
+    width: 8px !important;
+    height: 8px !important;
+    background: var(--primary-green) !important;
+    border-radius: 50% !important;
+    animation: pulse 2s infinite !important;
+    box-shadow: 0 0 8px rgba(197, 255, 167, 0.5) !important;
+}

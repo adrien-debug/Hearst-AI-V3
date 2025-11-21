@@ -1,0 +1,40 @@
+/* ====================================
+   HEARST AI - COULEURS UNIQUEMENT
+   Codes couleur de la charte graphique
+   ==================================== */
+
+:root {
+    /* Couleurs HEARST - Essentielles */
+    --hearst-green: #a5ff9c;
+    --hearst-green-alt: #a5ff9c;
+    --hearst-black: #000000;
+    --hearst-dark: #0a0a0a;
+    --hearst-white: #ffffff;
+    --hearst-grey: #1a1a1a;
+    
+    /* Compatibilité - Alias couleurs */
+    --color-primary-light-green: var(--hearst-green-alt);
+    --primary-green: var(--hearst-green-alt);
+    --primary-dark: var(--hearst-black);
+    --text-primary: var(--hearst-white);
+    --text-secondary: rgba(255, 255, 255, 0.6);
+    --color-text-default: var(--hearst-black);
+    --color-text-negative: var(--hearst-white);
+    
+    /* Couleurs système */
+    --success: #27AE60;
+    --warning: #FFB800;
+    --error: #E74C3C;
+    --info: #3498DB;
+    
+    /* Couleurs Cockpit (compatibilité) */
+    --cockpit-blue: #4a9eff;
+    --cockpit-orange: #ffa500;
+    --cockpit-red: var(--error);
+}
+
+/* Dark theme - même couleurs */
+[data-theme="dark"] {
+    --text-primary: var(--hearst-white);
+    --text-secondary: rgba(255, 255, 255, 0.6);
+}
