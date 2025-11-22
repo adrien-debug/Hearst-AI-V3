@@ -568,9 +568,8 @@ export default function MyHearstAI() {
                   gap: 'var(--space-4)',
                 }}>
                   {searchHistory.slice(0, 5).map((historyItem) => (
-                    <a
+                    <div
                       key={historyItem.id}
-                      href={`/hearst-ai/search/${historyItem.id}`}
                       style={{
                         display: 'block',
                         padding: 'var(--space-5)',
@@ -578,10 +577,10 @@ export default function MyHearstAI() {
                         border: '0.5px solid rgba(255, 255, 255, 0.04)',
                         borderLeft: '3px solid var(--hearst-green)',
                         borderRadius: 'var(--radius-lg)',
-                        textDecoration: 'none',
                         color: 'var(--text-primary)',
                         transition: 'all 0.3s ease',
                         boxShadow: '0 4px 24px rgba(0, 0, 0, 0.4), 0 1px 4px rgba(0, 0, 0, 0.2)',
+                        cursor: 'pointer',
                       }}
                       onMouseEnter={(e) => {
                         e.currentTarget.style.transform = 'translateY(-4px)'
@@ -592,6 +591,9 @@ export default function MyHearstAI() {
                         e.currentTarget.style.transform = 'translateY(0)'
                         e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.04)'
                         e.currentTarget.style.boxShadow = '0 4px 24px rgba(0, 0, 0, 0.4), 0 1px 4px rgba(0, 0, 0, 0.2)'
+                      }}
+                      onClick={() => {
+                        window.location.href = `/hearst-ai/search/${historyItem.id}`
                       }}
                     >
                       <div style={{ marginBottom: 'var(--space-3)' }}>
@@ -701,7 +703,7 @@ export default function MyHearstAI() {
                           </div>
                         )}
                       </div>
-                    </a>
+                    </div>
                   ))}
                 </div>
               </div>
