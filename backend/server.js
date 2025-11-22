@@ -4,7 +4,7 @@ const path = require('path');
 const dbManager = require('./database/db');
 
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.BACKEND_PORT || 5001;
 
 // Initialize database
 try {

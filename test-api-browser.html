@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test APIs Calculator</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #000;
+            color: #8afd81;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 { color: #8afd81; }
+        .test-section {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        button {
+            background: #8afd81;
+            color: #000;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        button:hover {
+            background: #6fdc66;
+        }
+        .result {
+            background: #0a0a0a;
+            border: 1px solid #2a2a2a;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.875rem;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        .success { color: #8afd81; }
+        .error { color: #ff6b6b; }
+        .loading { color: #f6c344; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Test des APIs Calculator</h1>
+    
+    <div class="test-section">
+        <h2>1. Test API hashprice-lite (Next.js)</h2>
+        <button onclick="testHashpriceLite()">Tester /api/hashprice-lite</button>
+        <div id="result-hashprice" class="result" style="display:none;"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>2. Test Backend Express Direct</h2>
+        <button onclick="testBackendDirect()">Tester localhost:4000</button>
+        <div id="result-backend" class="result" style="display:none;"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>3. Test Page Calculator</h2>
+        <button onclick="testCalculatorPage()">Tester /api/calculator</button>
+        <div id="result-calculator" class="result" style="display:none;"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>4. Test Complet</h2>
+        <button onclick="testAll()">Tester Tout</button>
+    </div>
+
+    <script>
+        async function testHashpriceLite() {
+            const resultEl = document.getElementById('result-hashprice');
+            resultEl.style.display = 'block';
+            resultEl.textContent = '⏳ Chargement...';
+            resultEl.className = 'result loading';
+            
+            try {
+                const start = Date.now();
+                const response = await fetch('/api/hashprice-lite');
+                const time = Date.now() - start;
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                resultEl.className = 'result success';
+                resultEl.textContent = `✅ Succès (${time}ms)\n\n${JSON.stringify(data, null, 2)}`;
+            } catch (error) {
+                resultEl.className = 'result error';
+                resultEl.textContent = `❌ Erreur: ${error.message}`;
+            }
+        }
+        
+        async function testBackendDirect() {
+            const resultEl = document.getElementById('result-backend');
+            resultEl.style.display = 'block';
+            resultEl.textContent = '⏳ Chargement...';
+            resultEl.className = 'result loading';
+            
+            try {
+                const start = Date.now();
+                const response = await fetch('http://localhost:4000/api/hashprice-lite');
+                const time = Date.now() - start;
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                resultEl.className = 'result success';
+                resultEl.textContent = `✅ Succès (${time}ms)\n\n${JSON.stringify(data, null, 2)}`;
+            } catch (error) {
+                resultEl.className = 'result error';
+                resultEl.textContent = `❌ Erreur: ${error.message}\n\nVérifiez que le backend Express est démarré sur le port 4000`;
+            }
+        }
+        
+        async function testCalculatorPage() {
+            const resultEl = document.getElementById('result-calculator');
+            resultEl.style.display = 'block';
+            resultEl.textContent = '⏳ Chargement...';
+            resultEl.className = 'result loading';
+            
+            try {
+                const start = Date.now();
+                const response = await fetch('/api/calculator');
+                const time = Date.now() - start;
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const html = await response.text();
+                resultEl.className = 'result success';
+                resultEl.textContent = `✅ Succès (${time}ms)\n\nTaille HTML: ${html.length} caractères\n\nAperçu:\n${html.substring(0, 500)}...`;
+            } catch (error) {
+                resultEl.className = 'result error';
+                resultEl.textContent = `❌ Erreur: ${error.message}`;
+            }
+        }
+        
+        async function testAll() {
+            await testHashpriceLite();
+            await new Promise(resolve => setTimeout(resolve, 500));
+            await testBackendDirect();
+            await new Promise(resolve => setTimeout(resolve, 500));
+            await testCalculatorPage();
+        }
+        
+        // Test automatique au chargement
+        window.addEventListener('load', () => {
+            console.log('🧪 Page de test chargée. Cliquez sur les boutons pour tester les APIs.');
+        });
+    </script>
+</body>
+</html>

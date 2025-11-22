@@ -1,138 +1,72 @@
 #!/bin/bash
 
-# Script de démarrage complet en local
-# Démarre le backend Express et le frontend (Next.js ou classique)
+# Script pour démarrer la plateforme en local
+# Backend Express sur le port 5001
+# Frontend Next.js sur le port 5000
 
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "  🚀 Démarrage de HearstAI en local"
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+cd "$(dirname "$0")"
+
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "🚀 Démarrage Hearst AI - Local"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 
-# Fonction pour nettoyer les processus à l'arrêt
+# Couleurs
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+RED='\033[0;31m'
+NC='\033[0m'
+
+# Fonction pour nettoyer les processus au exit
 cleanup() {
     echo ""
-    echo "🛑 Arrêt des serveurs..."
-    kill $BACKEND_PID 2>/dev/null
-    kill $FRONTEND_PID 2>/dev/null
-    exit 0
+    echo -e "${YELLOW}🛑 Arrêt des serveurs...${NC}"
+    kill $BACKEND_PID $FRONTEND_PID 2>/dev/null
+    exit
 }
-
 trap cleanup SIGINT SIGTERM
 
-# Vérifier que Node.js est installé
-if ! command -v node &> /dev/null; then
-    echo "❌ Node.js n'est pas installé"
-    echo "   Installez Node.js: https://nodejs.org/"
-    exit 1
-fi
-
-echo "✅ Node.js détecté: $(node --version)"
-echo ""
-
-# 1. Installer les dépendances backend si nécessaire
-if [ ! -d "backend/node_modules" ]; then
-    echo "📦 Installation des dépendances backend..."
-    cd backend
+# Vérifier que les dépendances sont installées
+if [ ! -d "node_modules" ]; then
+    echo -e "${YELLOW}📦 Installation des dépendances...${NC}"
     npm install
-    cd ..
-    echo "✅ Dépendances backend installées"
-    echo ""
 fi
 
-# 2. Démarrer le backend
-echo "🔌 Démarrage du backend..."
+# Générer Prisma Client
+echo -e "${BLUE}🔧 Génération Prisma Client...${NC}"
+npx prisma generate
+
+# Définir les ports et environnement
+export NODE_ENV=development
+export BACKEND_PORT=5001
+export PORT=3000
+export BACKEND_URL=http://localhost:5001
+
+echo ""
+echo -e "${GREEN}✅ Démarrage du backend Express sur le port 5001...${NC}"
 cd backend
-PORT=5556 node server.js > /tmp/hearst-backend.log 2>&1 &
+node server.js &
 BACKEND_PID=$!
 cd ..
+
+# Attendre que le backend démarre
 sleep 2
 
-# Vérifier que le backend est démarré
-if ps -p $BACKEND_PID > /dev/null; then
-    echo "✅ Backend démarré (PID: $BACKEND_PID) sur http://localhost:5556"
-else
-    echo "❌ Erreur au démarrage du backend"
-    cat /tmp/hearst-backend.log
-    exit 1
-fi
+echo ""
+echo -e "${GREEN}✅ Démarrage du frontend Next.js sur le port 3000...${NC}"
+echo ""
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "🌐 Frontend: http://localhost:3000"
+echo "🔌 Backend API: http://localhost:5001/api"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+echo -e "${BLUE}💡 Appuyez sur Ctrl+C pour arrêter les serveurs${NC}"
 echo ""
 
-# 3. Vérifier si Next.js est configuré
-if [ -f "package.json" ] && [ -d "node_modules/next" ]; then
-    # Vérifier que les dépendances Next.js sont installées
-    if [ ! -d "node_modules" ]; then
-        echo "📦 Installation des dépendances Next.js..."
-        npm install
-        echo "✅ Dépendances installées"
-        echo ""
-    fi
-    
-    echo "⚡ Démarrage du frontend Next.js..."
-    PORT=3000 npm run dev > /tmp/hearst-frontend.log 2>&1 &
-    FRONTEND_PID=$!
-    sleep 3
-    
-    if ps -p $FRONTEND_PID > /dev/null; then
-        echo "✅ Frontend Next.js démarré (PID: $FRONTEND_PID) sur http://localhost:3000"
-        FRONTEND_URL="http://localhost:3000"
-    else
-        echo "❌ Erreur au démarrage de Next.js, passage au frontend classique..."
-        cat /tmp/hearst-frontend.log
-        FRONTEND_PID=""
-    fi
-else
-    # Frontend classique
-    echo "🌐 Démarrage du frontend classique..."
-    
-    # Option 1: Node.js dev-server
-    if [ -f "dev-server.js" ]; then
-        PORT=3000 node dev-server.js > /tmp/hearst-frontend.log 2>&1 &
-        FRONTEND_PID=$!
-        sleep 2
-        FRONTEND_URL="http://localhost:3000"
-        
-        if ps -p $FRONTEND_PID > /dev/null; then
-            echo "✅ Frontend Node.js démarré (PID: $FRONTEND_PID) sur http://localhost:3000"
-        else
-            echo "❌ Erreur Node.js, passage à Python..."
-            FRONTEND_PID=""
-        fi
-    fi
-    
-    # Option 2: Python si Node.js ne fonctionne pas
-    if [ -z "$FRONTEND_PID" ] && command -v python3 &> /dev/null; then
-        cd frontend
-        python3 -m http.server 8000 > /tmp/hearst-frontend.log 2>&1 &
-        FRONTEND_PID=$!
-        cd ..
-        sleep 2
-        FRONTEND_URL="http://localhost:8000"
-        
-        if ps -p $FRONTEND_PID > /dev/null; then
-            echo "✅ Frontend Python démarré (PID: $FRONTEND_PID) sur http://localhost:8000"
-        else
-            echo "❌ Erreur au démarrage du frontend"
-            cat /tmp/hearst-frontend.log
-            exit 1
-        fi
-    fi
-fi
+# Démarrer Next.js (qui inclut les routes API)
+npm run dev &
+FRONTEND_PID=$!
 
-echo ""
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "  ✅ Serveurs démarrés!"
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo ""
-echo "🌐 Frontend: $FRONTEND_URL"
-echo "🔌 Backend:  http://localhost:5556/api"
-echo ""
-echo "📝 Logs backend:  tail -f /tmp/hearst-backend.log"
-echo "📝 Logs frontend: tail -f /tmp/hearst-frontend.log"
-echo ""
-echo "⚠️  Appuyez sur Ctrl+C pour arrêter les serveurs"
-echo ""
-
-# Attendre les processus
-wait $BACKEND_PID $FRONTEND_PID
-
-
+# Attendre que les processus se terminent
+wait

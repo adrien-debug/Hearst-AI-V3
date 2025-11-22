@@ -1,85 +1,14 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { getToken } from 'next-auth/jwt'
 
 export async function middleware(request: NextRequest) {
-  try {
-    const { pathname } = request.nextUrl
-
-    // Allow access to auth pages and public assets
-    if (
-      pathname.startsWith('/auth') ||
-      pathname.startsWith('/_next') ||
-      pathname.startsWith('/api/auth') ||
-      pathname.startsWith('/api/hashprice-lite') ||
-      pathname.startsWith('/api/calculator') ||
-      pathname === '/calculator' ||
-      pathname === '/favicon.ico' ||
-      pathname.startsWith('/js/') ||
-      pathname.startsWith('/css/') ||
-      pathname.startsWith('/public/') ||
-      pathname.endsWith('.svg') ||
-      pathname.endsWith('.png') ||
-      pathname.endsWith('.jpg') ||
-      pathname.endsWith('.ico') ||
-      pathname.endsWith('.json')
-    ) {
-      return NextResponse.next()
-    }
-
-    // En développement, permettre l'accès aux routes API customers et collateral sans authentification
-    const isDevelopment = process.env.NODE_ENV === 'development'
-    if (isDevelopment && (pathname.startsWith('/api/customers') || pathname.startsWith('/api/collateral'))) {
-      return NextResponse.next()
-    }
-
-    // Check if NEXTAUTH_SECRET is defined
-    if (!process.env.NEXTAUTH_SECRET) {
-      console.warn('NEXTAUTH_SECRET is not defined, allowing access')
-      return NextResponse.next()
-    }
-
-    // Check for authentication token
-    let token = null
-    try {
-      token = await getToken({
-        req: request,
-        secret: process.env.NEXTAUTH_SECRET,
-      })
-    } catch (error) {
-      console.error('Error getting token:', error)
-      // If token check fails, allow access to avoid blocking the app
-      return NextResponse.next()
-    }
-
-    // If no token and trying to access protected route, redirect to login
-    if (!token && pathname !== '/auth/signin') {
-      const signInUrl = new URL('/auth/signin', request.url)
-      signInUrl.searchParams.set('callbackUrl', pathname)
-      return NextResponse.redirect(signInUrl)
-    }
-
-    // If token exists and trying to access login page, redirect to home
-    if (token && pathname === '/auth/signin') {
-      return NextResponse.redirect(new URL('/', request.url))
-    }
-
-    return NextResponse.next()
-  } catch (error) {
-    console.error('Middleware error:', error)
-    // On error, allow the request to proceed to avoid blocking the app
-    return NextResponse.next()
-  }
+  // TEMPORAIRE: Désactiver complètement le middleware pour le développement local
+  // TODO: Réactiver l'authentification en production
+  return NextResponse.next()
 }
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     */
     '/((?!_next/static|_next/image|favicon.ico).*)',
   ],
 }

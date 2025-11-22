@@ -42,7 +42,10 @@
     box-sizing: border-box;
 }
 
-body {
+/* Styles pour le body uniquement si on est dans une page standalone calculator */
+/* Ces styles ne s'appliquent pas dans le contexte Next.js avec dashboard-view */
+/* Dans Next.js, le body utilise les styles globaux, donc ces styles ne s'appliquent que si calculator-container est directement dans body */
+body > .calculator-container {
     font-family: var(--font-primary);
     background: var(--primary-dark);
     color: var(--text-primary);
@@ -50,11 +53,14 @@ body {
     min-height: 100vh;
 }
 
+/* Calculator container - seulement si utilisé dans une page standalone */
 .calculator-container {
     max-width: 1400px;
     margin: 0 auto;
     padding: var(--space-6);
 }
+
+/* Dans le contexte Next.js (dashboard-view), ces styles ne s'appliquent pas car calculator-container n'existe pas */
 
 /* Header */
 .calculator-header {

@@ -5,8 +5,25 @@ import { authOptions } from '@/lib/auth'
 
 export async function GET(request: NextRequest) {
   try {
+    // En développement, permettre l'accès sans authentification
+    const isDevelopment = process.env.NODE_ENV === 'development'
+    
     const session = await getServerSession(authOptions)
     if (!session?.user?.id) {
+      // En développement, retourner des données mockées si pas de session
+      if (isDevelopment) {
+        return NextResponse.json({
+          stats: {
+            total_projects: 12,
+            total_versions: 45,
+            total_jobs: 234,
+            jobs_running: 3,
+            jobs_success_rate: 94.5,
+            last_7_days_jobs: 67,
+            total_storage_mb: 1250.75,
+          },
+        })
+      }
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 

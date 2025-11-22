@@ -8,8 +8,29 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
+    // En développement, permettre l'accès sans authentification
+    const isDevelopment = process.env.NODE_ENV === 'development'
+    
     const session = await getServerSession(authOptions)
     if (!session?.user?.id) {
+      // En développement, retourner des données mockées si pas de session
+      if (isDevelopment) {
+        return NextResponse.json({
+          project: {
+            id: params.id,
+            name: 'Project Alpha',
+            description: 'Projet de mining principal',
+            type: 'MINING',
+            repoType: 'GIT',
+            status: 'ACTIVE',
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+            versions: [],
+            jobs: [],
+            _count: { versions: 5, jobs: 12 },
+          },
+        })
+      }
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 

@@ -1,7 +1,8 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -57,7 +58,7 @@ interface DashboardProps {
   }
 }
 
-export default function Dashboard({ data }: DashboardProps) {
+export default function Dashboard({ data }: DashboardProps): JSX.Element {
   const [selectedPeriod, setSelectedPeriod] = useState<'daily' | 'monthly' | 'yearly'>('daily')
 
   useEffect(() => {
@@ -167,7 +168,7 @@ export default function Dashboard({ data }: DashboardProps) {
 
   const chartData2 = getBarChartData()
 
-  const chartOptions = {
+  const chartOptions: any = {
     responsive: true,
     maintainAspectRatio: false,
     animation: {
@@ -211,418 +212,287 @@ export default function Dashboard({ data }: DashboardProps) {
     <div className="dashboard-view">
       <div className="dashboard-content">
         {/* Hearst Corporation Section */}
-        <div className="premium-wallet-section">
-          <div className="premium-wallet-box" style={{ width: '100%' }}>
-            <div className="premium-wallet-header">
-              <h3 className="premium-wallet-title">Hearst Corporation</h3>
-            </div>
-            
-            {/* Hearst Corporation Stats - 4 boxes */}
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(4, 1fr)',
-              gap: 'var(--space-4)',
-              marginTop: 'var(--space-4)',
-            }}>
-              {/* Active Customers */}
-              <div style={{
-                padding: 'var(--space-4)',
-                backgroundColor: 'rgba(165, 255, 156, 0.05)',
-                borderRadius: 'var(--radius-md)',
-                border: '1px solid rgba(165, 255, 156, 0.1)',
-              }}>
-                <div style={{
-                  fontSize: 'var(--text-sm)',
-                  color: 'var(--text-secondary)',
-                  marginBottom: 'var(--space-2)',
-                  fontWeight: 500,
-                }}>
-                  Active Customers
-                </div>
-                <div style={{
-                  fontSize: 'var(--text-xl)',
-                  fontWeight: 700,
-                  color: 'var(--hearst-green)',
-                }}>
+        <div style={{ marginBottom: 'var(--space-6)' }}>
+          <h2 style={{ fontSize: 'var(--text-xl)', fontWeight: 600, marginBottom: 'var(--space-4)', color: 'var(--text-primary)' }}>
+            Hearst Corporation
+          </h2>
+          
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: 'var(--space-4)',
+          }}>
+            <Card>
+              <CardHeader>
+                <CardTitle>Active Customers</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: 'var(--hearst-green)', marginBottom: 'var(--space-2)' }}>
                   1,247
                 </div>
-              </div>
+                <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
+                  Clients actifs
+                </p>
+              </CardContent>
+            </Card>
 
-              {/* Number of batches */}
-              <div style={{
-                padding: 'var(--space-4)',
-                backgroundColor: 'rgba(165, 255, 156, 0.05)',
-                borderRadius: 'var(--radius-md)',
-                border: '1px solid rgba(165, 255, 156, 0.1)',
-              }}>
-                <div style={{
-                  fontSize: 'var(--text-sm)',
-                  color: 'var(--text-secondary)',
-                  marginBottom: 'var(--space-2)',
-                  fontWeight: 500,
-                }}>
-                  Number of batches
-                </div>
-                <div style={{
-                  fontSize: 'var(--text-xl)',
-                  fontWeight: 700,
-                  color: 'var(--hearst-green)',
-                }}>
+            <Card>
+              <CardHeader>
+                <CardTitle>Number of batches</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: 'var(--hearst-green)', marginBottom: 'var(--space-2)' }}>
                   3,892
                 </div>
-              </div>
+                <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
+                  Batches total
+                </p>
+              </CardContent>
+            </Card>
 
-              {/* Number of miners */}
-              <div style={{
-                padding: 'var(--space-4)',
-                backgroundColor: 'rgba(165, 255, 156, 0.05)',
-                borderRadius: 'var(--radius-md)',
-                border: '1px solid rgba(165, 255, 156, 0.1)',
-              }}>
-                <div style={{
-                  fontSize: 'var(--text-sm)',
-                  color: 'var(--text-secondary)',
-                  marginBottom: 'var(--space-2)',
-                  fontWeight: 500,
-                }}>
-                  Number of miners
-                </div>
-                <div style={{
-                  fontSize: 'var(--text-xl)',
-                  fontWeight: 700,
-                  color: 'var(--hearst-green)',
-                }}>
+            <Card>
+              <CardHeader>
+                <CardTitle>Number of miners</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: 'var(--hearst-green)', marginBottom: 'var(--space-2)' }}>
                   15,648
                 </div>
-              </div>
+                <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
+                  Mineurs actifs
+                </p>
+              </CardContent>
+            </Card>
 
-              {/* Hearst Total Hashrate */}
-              <div style={{
-                padding: 'var(--space-4)',
-                backgroundColor: 'rgba(165, 255, 156, 0.05)',
-                borderRadius: 'var(--radius-md)',
-                border: '1px solid rgba(165, 255, 156, 0.1)',
-              }}>
-                <div style={{
-                  fontSize: 'var(--text-sm)',
-                  color: 'var(--text-secondary)',
-                  marginBottom: 'var(--space-2)',
-                  fontWeight: 500,
-                }}>
-                  Hearst Total Hashrate
-                </div>
-                <div style={{
-                  fontSize: 'var(--text-xl)',
-                  fontWeight: 700,
-                  color: 'var(--hearst-green)',
-                }}>
+            <Card>
+              <CardHeader>
+                <CardTitle>Hearst Total Hashrate</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: 'var(--hearst-green)', marginBottom: 'var(--space-2)' }}>
                   2,847.5 PH/s
                 </div>
-              </div>
-            </div>
+                <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
+                  Hashrate total Hearst
+                </p>
+              </CardContent>
+            </Card>
           </div>
         </div>
 
-        {/* BTC Mined Section with Charts */}
-        <div className="premium-wallet-section">
-          <div className="premium-wallet-box" style={{ width: '100%' }}>
-            <div className="premium-wallet-header">
-              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
-                <div style={{
-                  width: '40px',
-                  height: '40px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  borderRadius: 'var(--radius-md)',
-                  background: 'rgba(165, 255, 156, 0.1)',
-                  border: '1px solid rgba(165, 255, 156, 0.2)',
-                }}>
-                  <svg className="icon" width="40" height="40" viewBox="0 0 86 86" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M43 0C19.254 0 0 19.254 0 43C0 66.746 19.254 86 43 86C66.746 86 86 66.746 86 43C86 19.254 66.746 0 43 0Z" fill="#a5ff9c"/>
-                    <path d="M57.2 28.6L52.9 26.5L51.3 32.3L46.5 30.1V23.4L43 21.5L39.5 23.4V30.1L34.7 32.3L33.1 26.5L28.8 28.6L30.4 34.4L26.1 36.5L27.7 42.3L23.4 44.4L25 50.2L29.3 48.1L30.9 53.9L35.7 56.1V62.8L39.2 64.7L42.7 62.8V56.1L47.5 53.9L49.1 48.1L53.4 50.2L51.8 44.4L56.1 42.3L54.5 36.5L58.8 34.4L57.2 28.6ZM43 50.2C38.03 50.2 34 46.17 34 41.2C34 36.23 38.03 32.2 43 32.2C47.97 32.2 52 36.23 52 41.2C52 46.17 47.97 50.2 43 50.2Z" fill="#0a0a0a"/>
-                  </svg>
-                </div>
-                <h3 className="premium-wallet-title">BTC Mined</h3>
-              </div>
-            </div>
-            
-            {/* BTC Mined Values - All Periods Side by Side */}
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(4, 1fr)',
-              gap: 'var(--space-4)',
-              marginTop: 'var(--space-3)',
-              marginBottom: 'var(--space-8)',
-            }}>
-              {/* Daily */}
-              <div style={{
-                padding: 'var(--space-4)',
-                backgroundColor: 'rgba(165, 255, 156, 0.05)',
-                borderRadius: 'var(--radius-md)',
-                border: '1px solid rgba(165, 255, 156, 0.1)',
-              }}>
-                <div style={{
-                  fontSize: 'var(--text-sm)',
-                  color: 'var(--text-secondary)',
-                  marginBottom: 'var(--space-2)',
-                  fontWeight: 500,
-                }}>
-                  Daily
-                </div>
-                <div style={{
-                  fontSize: 'var(--text-xl)',
-                  fontWeight: 700,
-                  color: 'var(--hearst-green)',
-                  marginBottom: 'var(--space-1)',
-                }}>
+        {/* BTC Mined Section */}
+        <div style={{ marginBottom: 'var(--space-6)' }}>
+          <h2 style={{ fontSize: 'var(--text-xl)', fontWeight: 600, marginBottom: 'var(--space-4)', color: 'var(--text-primary)' }}>
+            BTC Mined
+          </h2>
+          
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: 'var(--space-4)',
+            marginBottom: 'var(--space-6)',
+          }}>
+            <Card>
+              <CardHeader>
+                <CardTitle>Daily</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: 'var(--hearst-green)', marginBottom: 'var(--space-2)' }}>
                   0.084521 BTC
                 </div>
-                <div style={{
-                  fontSize: 'var(--text-sm)',
-                  color: 'var(--text-secondary)',
-                }}>
+                <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
                   $9,642.89 USD
-                </div>
-              </div>
+                </p>
+              </CardContent>
+            </Card>
 
-              {/* Weekly */}
-              <div style={{
-                padding: 'var(--space-4)',
-                backgroundColor: 'rgba(165, 255, 156, 0.05)',
-                borderRadius: 'var(--radius-md)',
-                border: '1px solid rgba(165, 255, 156, 0.1)',
-              }}>
-                <div style={{
-                  fontSize: 'var(--text-sm)',
-                  color: 'var(--text-secondary)',
-                  marginBottom: 'var(--space-2)',
-                  fontWeight: 500,
-                }}>
-                  Weekly
-                </div>
-                <div style={{
-                  fontSize: 'var(--text-xl)',
-                  fontWeight: 700,
-                  color: 'var(--hearst-green)',
-                  marginBottom: 'var(--space-1)',
-                }}>
+            <Card>
+              <CardHeader>
+                <CardTitle>Weekly</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: 'var(--hearst-green)', marginBottom: 'var(--space-2)' }}>
                   0.591647 BTC
                 </div>
-                <div style={{
-                  fontSize: 'var(--text-sm)',
-                  color: 'var(--text-secondary)',
-                }}>
+                <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
                   $67,500.23 USD
-                </div>
-              </div>
+                </p>
+              </CardContent>
+            </Card>
 
-              {/* Monthly */}
-              <div style={{
-                padding: 'var(--space-4)',
-                backgroundColor: 'rgba(165, 255, 156, 0.05)',
-                borderRadius: 'var(--radius-md)',
-                border: '1px solid rgba(165, 255, 156, 0.1)',
-              }}>
-                <div style={{
-                  fontSize: 'var(--text-sm)',
-                  color: 'var(--text-secondary)',
-                  marginBottom: 'var(--space-2)',
-                  fontWeight: 500,
-                }}>
-                  Monthly
-                </div>
-                <div style={{
-                  fontSize: 'var(--text-xl)',
-                  fontWeight: 700,
-                  color: 'var(--hearst-green)',
-                  marginBottom: 'var(--space-1)',
-                }}>
+            <Card>
+              <CardHeader>
+                <CardTitle>Monthly</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: 'var(--hearst-green)', marginBottom: 'var(--space-2)' }}>
                   2.536588 BTC
                 </div>
-                <div style={{
-                  fontSize: 'var(--text-sm)',
-                  color: 'var(--text-secondary)',
-                }}>
+                <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
                   $289,286.25 USD
-                </div>
-              </div>
+                </p>
+              </CardContent>
+            </Card>
 
-              {/* Yearly */}
-              <div style={{
-                padding: 'var(--space-4)',
-                backgroundColor: 'rgba(165, 255, 156, 0.05)',
-                borderRadius: 'var(--radius-md)',
-                border: '1px solid rgba(165, 255, 156, 0.1)',
-              }}>
-                <div style={{
-                  fontSize: 'var(--text-sm)',
-                  color: 'var(--text-secondary)',
-                  marginBottom: 'var(--space-2)',
-                  fontWeight: 500,
-                }}>
-                  Since beginning
-                </div>
-                <div style={{
-                  fontSize: 'var(--text-xl)',
-                  fontWeight: 700,
-                  color: 'var(--hearst-green)',
-                  marginBottom: 'var(--space-1)',
-                }}>
+            <Card>
+              <CardHeader>
+                <CardTitle>Since beginning</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: 'var(--hearst-green)', marginBottom: 'var(--space-2)' }}>
                   30.439056 BTC
                 </div>
-                <div style={{
-                  fontSize: 'var(--text-sm)',
-                  color: 'var(--text-secondary)',
-                }}>
+                <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
                   $3,471,435.00 USD
-                </div>
-              </div>
-            </div>
+                </p>
+              </CardContent>
+            </Card>
+          </div>
 
-            {/* Charts Container */}
-            <div className="wallet-charts-container">
-              <div className="wallet-chart-section">
-                <div className="chart-header">
-              <h2 className="chart-title">BTC Mined Performance</h2>
-              <div style={{ display: 'flex', gap: 'var(--space-2)', marginTop: 'var(--space-3)' }}>
-                <button
-                  onClick={() => setSelectedPeriod('daily')}
-                  style={{
-                    padding: 'var(--space-2) var(--space-4)',
-                    borderRadius: 'var(--radius-sm)',
-                    border: '1px solid',
-                    borderColor: selectedPeriod === 'daily' ? 'var(--hearst-green)' : 'rgba(255, 255, 255, 0.2)',
-                    backgroundColor: selectedPeriod === 'daily' ? 'rgba(165, 255, 156, 0.1)' : 'transparent',
-                    color: selectedPeriod === 'daily' ? 'var(--hearst-green)' : 'var(--text-secondary)',
-                    fontSize: 'var(--text-sm)',
-                    fontWeight: selectedPeriod === 'daily' ? 600 : 400,
-                    cursor: 'pointer',
-                    transition: 'all 0.2s ease',
-                  }}
-                >
-                  Daily
-                </button>
-                <button
-                  onClick={() => setSelectedPeriod('monthly')}
-                  style={{
-                    padding: 'var(--space-2) var(--space-4)',
-                    borderRadius: 'var(--radius-sm)',
-                    border: '1px solid',
-                    borderColor: selectedPeriod === 'monthly' ? 'var(--hearst-green)' : 'rgba(255, 255, 255, 0.2)',
-                    backgroundColor: selectedPeriod === 'monthly' ? 'rgba(165, 255, 156, 0.1)' : 'transparent',
-                    color: selectedPeriod === 'monthly' ? 'var(--hearst-green)' : 'var(--text-secondary)',
-                    fontSize: 'var(--text-sm)',
-                    fontWeight: selectedPeriod === 'monthly' ? 600 : 400,
-                    cursor: 'pointer',
-                    transition: 'all 0.2s ease',
-                  }}
-                >
-                  Monthly
-                </button>
-                <button
-                  onClick={() => setSelectedPeriod('yearly')}
-                  style={{
-                    padding: 'var(--space-2) var(--space-4)',
-                    borderRadius: 'var(--radius-sm)',
-                    border: '1px solid',
-                    borderColor: selectedPeriod === 'yearly' ? 'var(--hearst-green)' : 'rgba(255, 255, 255, 0.2)',
-                    backgroundColor: selectedPeriod === 'yearly' ? 'rgba(165, 255, 156, 0.1)' : 'transparent',
-                    color: selectedPeriod === 'yearly' ? 'var(--hearst-green)' : 'var(--text-secondary)',
-                    fontSize: 'var(--text-sm)',
-                    fontWeight: selectedPeriod === 'yearly' ? 600 : 400,
-                    cursor: 'pointer',
-                    transition: 'all 0.2s ease',
-                  }}
-                >
-                  Yearly
-                </button>
-              </div>
-              <div className="chart-legend" style={{ marginTop: 'var(--space-3)' }}>
-                <div className="legend-item">
-                  <span className="legend-dot green"></span>
-                  <span>BTC Mined</span>
+          {/* Charts Container */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(500px, 1fr))', gap: 'var(--space-6)', marginBottom: 'var(--space-6)' }}>
+            <Card>
+              <CardHeader>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--space-4)' }}>
+                  <CardTitle>BTC Mined Performance</CardTitle>
+                  <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
+                    <button
+                      onClick={() => setSelectedPeriod('daily')}
+                      style={{
+                        padding: 'var(--space-2) var(--space-3)',
+                        borderRadius: 'var(--radius-sm)',
+                        border: '1px solid',
+                        borderColor: selectedPeriod === 'daily' ? 'var(--hearst-green)' : 'rgba(255, 255, 255, 0.2)',
+                        backgroundColor: selectedPeriod === 'daily' ? 'rgba(165, 255, 156, 0.2)' : 'transparent',
+                        color: selectedPeriod === 'daily' ? 'var(--hearst-green)' : 'var(--text-secondary)',
+                        fontSize: 'var(--text-sm)',
+                        fontWeight: selectedPeriod === 'daily' ? 600 : 400,
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease',
+                      }}
+                    >
+                      Daily
+                    </button>
+                    <button
+                      onClick={() => setSelectedPeriod('monthly')}
+                      style={{
+                        padding: 'var(--space-2) var(--space-3)',
+                        borderRadius: 'var(--radius-sm)',
+                        border: '1px solid',
+                        borderColor: selectedPeriod === 'monthly' ? 'var(--hearst-green)' : 'rgba(255, 255, 255, 0.2)',
+                        backgroundColor: selectedPeriod === 'monthly' ? 'rgba(165, 255, 156, 0.2)' : 'transparent',
+                        color: selectedPeriod === 'monthly' ? 'var(--hearst-green)' : 'var(--text-secondary)',
+                        fontSize: 'var(--text-sm)',
+                        fontWeight: selectedPeriod === 'monthly' ? 600 : 400,
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease',
+                      }}
+                    >
+                      Monthly
+                    </button>
+                    <button
+                      onClick={() => setSelectedPeriod('yearly')}
+                      style={{
+                        padding: 'var(--space-2) var(--space-3)',
+                        borderRadius: 'var(--radius-sm)',
+                        border: '1px solid',
+                        borderColor: selectedPeriod === 'yearly' ? 'var(--hearst-green)' : 'rgba(255, 255, 255, 0.2)',
+                        backgroundColor: selectedPeriod === 'yearly' ? 'rgba(165, 255, 156, 0.2)' : 'transparent',
+                        color: selectedPeriod === 'yearly' ? 'var(--hearst-green)' : 'var(--text-secondary)',
+                        fontSize: 'var(--text-sm)',
+                        fontWeight: selectedPeriod === 'yearly' ? 600 : 400,
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease',
+                      }}
+                    >
+                      Yearly
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div className="chart-container" style={{ position: 'relative', width: '100%', height: '90px' }}>
-              <LineChart data={chartData1} options={chartOptions} />
-              </div>
-              </div>
+              </CardHeader>
+              <CardContent>
+                <div style={{ position: 'relative', width: '100%', height: '300px' }}>
+                  <LineChart data={chartData1} options={chartOptions} />
+                </div>
+              </CardContent>
+            </Card>
 
-              <div className="wallet-chart-section">
-            <div className="chart-header">
-              <h2 className="chart-title">BTC Mined Statistics</h2>
-              <div style={{ display: 'flex', gap: 'var(--space-2)', marginTop: 'var(--space-3)' }}>
-                <button
-                  onClick={() => setSelectedPeriod('daily')}
-                  style={{
-                    padding: 'var(--space-2) var(--space-4)',
-                    borderRadius: 'var(--radius-sm)',
-                    border: '1px solid',
-                    borderColor: selectedPeriod === 'daily' ? 'var(--hearst-green)' : 'rgba(255, 255, 255, 0.2)',
-                    backgroundColor: selectedPeriod === 'daily' ? 'rgba(165, 255, 156, 0.1)' : 'transparent',
-                    color: selectedPeriod === 'daily' ? 'var(--hearst-green)' : 'var(--text-secondary)',
-                    fontSize: 'var(--text-sm)',
-                    fontWeight: selectedPeriod === 'daily' ? 600 : 400,
-                    cursor: 'pointer',
-                    transition: 'all 0.2s ease',
-                  }}
-                >
-                  Daily
-                </button>
-                <button
-                  onClick={() => setSelectedPeriod('monthly')}
-                  style={{
-                    padding: 'var(--space-2) var(--space-4)',
-                    borderRadius: 'var(--radius-sm)',
-                    border: '1px solid',
-                    borderColor: selectedPeriod === 'monthly' ? 'var(--hearst-green)' : 'rgba(255, 255, 255, 0.2)',
-                    backgroundColor: selectedPeriod === 'monthly' ? 'rgba(165, 255, 156, 0.1)' : 'transparent',
-                    color: selectedPeriod === 'monthly' ? 'var(--hearst-green)' : 'var(--text-secondary)',
-                    fontSize: 'var(--text-sm)',
-                    fontWeight: selectedPeriod === 'monthly' ? 600 : 400,
-                    cursor: 'pointer',
-                    transition: 'all 0.2s ease',
-                  }}
-                >
-                  Monthly
-                </button>
-                <button
-                  onClick={() => setSelectedPeriod('yearly')}
-                  style={{
-                    padding: 'var(--space-2) var(--space-4)',
-                    borderRadius: 'var(--radius-sm)',
-                    border: '1px solid',
-                    borderColor: selectedPeriod === 'yearly' ? 'var(--hearst-green)' : 'rgba(255, 255, 255, 0.2)',
-                    backgroundColor: selectedPeriod === 'yearly' ? 'rgba(165, 255, 156, 0.1)' : 'transparent',
-                    color: selectedPeriod === 'yearly' ? 'var(--hearst-green)' : 'var(--text-secondary)',
-                    fontSize: 'var(--text-sm)',
-                    fontWeight: selectedPeriod === 'yearly' ? 600 : 400,
-                    cursor: 'pointer',
-                    transition: 'all 0.2s ease',
-                  }}
-                >
-                  Yearly
-                </button>
-              </div>
-            </div>
-              <div className="chart-container" style={{ position: 'relative', width: '100%', height: '90px' }}>
-                <BarChart data={chartData2} options={chartOptions} />
-              </div>
-              </div>
-            </div>
+            <Card>
+              <CardHeader>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--space-4)' }}>
+                  <CardTitle>BTC Mined Statistics</CardTitle>
+                  <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
+                    <button
+                      onClick={() => setSelectedPeriod('daily')}
+                      style={{
+                        padding: 'var(--space-2) var(--space-3)',
+                        borderRadius: 'var(--radius-sm)',
+                        border: '1px solid',
+                        borderColor: selectedPeriod === 'daily' ? 'var(--hearst-green)' : 'rgba(255, 255, 255, 0.2)',
+                        backgroundColor: selectedPeriod === 'daily' ? 'rgba(165, 255, 156, 0.2)' : 'transparent',
+                        color: selectedPeriod === 'daily' ? 'var(--hearst-green)' : 'var(--text-secondary)',
+                        fontSize: 'var(--text-sm)',
+                        fontWeight: selectedPeriod === 'daily' ? 600 : 400,
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease',
+                      }}
+                    >
+                      Daily
+                    </button>
+                    <button
+                      onClick={() => setSelectedPeriod('monthly')}
+                      style={{
+                        padding: 'var(--space-2) var(--space-3)',
+                        borderRadius: 'var(--radius-sm)',
+                        border: '1px solid',
+                        borderColor: selectedPeriod === 'monthly' ? 'var(--hearst-green)' : 'rgba(255, 255, 255, 0.2)',
+                        backgroundColor: selectedPeriod === 'monthly' ? 'rgba(165, 255, 156, 0.2)' : 'transparent',
+                        color: selectedPeriod === 'monthly' ? 'var(--hearst-green)' : 'var(--text-secondary)',
+                        fontSize: 'var(--text-sm)',
+                        fontWeight: selectedPeriod === 'monthly' ? 600 : 400,
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease',
+                      }}
+                    >
+                      Monthly
+                    </button>
+                    <button
+                      onClick={() => setSelectedPeriod('yearly')}
+                      style={{
+                        padding: 'var(--space-2) var(--space-3)',
+                        borderRadius: 'var(--radius-sm)',
+                        border: '1px solid',
+                        borderColor: selectedPeriod === 'yearly' ? 'var(--hearst-green)' : 'rgba(255, 255, 255, 0.2)',
+                        backgroundColor: selectedPeriod === 'yearly' ? 'rgba(165, 255, 156, 0.2)' : 'transparent',
+                        color: selectedPeriod === 'yearly' ? 'var(--hearst-green)' : 'var(--text-secondary)',
+                        fontSize: 'var(--text-sm)',
+                        fontWeight: selectedPeriod === 'yearly' ? 600 : 400,
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease',
+                      }}
+                    >
+                      Yearly
+                    </button>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div style={{ position: 'relative', width: '100%', height: '300px' }}>
+                  <BarChart data={chartData2} options={chartOptions} />
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
 
         {/* Transaction History Section */}
-        <div className="premium-transaction-section" style={{ marginTop: 'var(--space-4)' }}>
-          <div className="premium-section-header">
-            <h3 className="premium-section-title">Transaction history</h3>
-          </div>
-          <div className="premium-transaction-placeholder" style={{ padding: 0, textAlign: 'left' }}>
-            <div className="table-container" style={{ background: 'transparent', border: 'none', boxShadow: 'none' }}>
-              <table className="table" style={{ background: 'transparent' }}>
+        <Card style={{ marginTop: 'var(--space-6)' }}>
+          <CardHeader>
+            <CardTitle>Transaction history</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="table-container">
+              <table className="table">
                 <thead>
                   <tr>
                     <th>Date</th>
@@ -668,8 +538,8 @@ export default function Dashboard({ data }: DashboardProps) {
                 <strong>Total: <span style={{ color: 'var(--hearst-green)', marginLeft: 'var(--space-2)' }}>0.491902 BTC</span></strong>
               </div>
             </div>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   )

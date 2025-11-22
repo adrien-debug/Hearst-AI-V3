@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
+  swcMinify: false, // Désactivé temporairement pour debug
   // Next.js 14+ doesn't need experimental.appDir anymore
   // experimental: {
   //   appDir: true,

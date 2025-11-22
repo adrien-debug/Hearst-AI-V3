@@ -3,6 +3,8 @@
 /* Import design tokens and variables */
 @import '../frontend/css/main.css';
 @import './dashboard.css';
+@import './electricity.css';
+@import './design-tokens.css';
 
 /* Additional global styles */
 :root {
@@ -165,7 +167,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 400px;
+  min-height: 250px;
   gap: var(--space-4);
 }
 
