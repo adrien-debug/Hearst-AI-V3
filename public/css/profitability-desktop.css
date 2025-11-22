@@ -1,0 +1,672 @@
+/* 📊 PROFITABILITY INDEX - VERSION DESKTOP UNIQUEMENT */
+/* Optimisé pour résolution 1920x1080 minimum */
+/* Utilise la charte graphique HEARST existante */
+
+/* Container Principal */
+.profitability-container {
+  max-width: var(--grid-dashboard-width, 1600px);
+  margin: 0 auto;
+  padding: var(--space-8);
+  min-height: calc(100vh - 200px);
+}
+
+/* Header */
+.profitability-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-7);
+  padding: var(--space-6) var(--space-7);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-default);
+  border: 1px solid var(--border);
+}
+
+.profitability-header h1 {
+  font-size: var(--typography-page-title-size);
+  font-weight: var(--typography-page-title-weight);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.profitability-header h1::before {
+  content: '📊';
+  font-size: var(--typography-section-title-size);
+}
+
+.profitability-header-actions {
+  display: flex;
+  gap: var(--space-5);
+}
+
+/* Global Metrics Cards */
+.global-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+  margin-bottom: var(--space-7);
+}
+
+.metric-card-large {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-default);
+  padding: var(--space-7);
+  text-align: center;
+  transition: var(--transition-base);
+}
+
+.metric-card-large:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(165, 255, 156, 0.15);
+  border-color: var(--hearst-green);
+}
+
+.metric-value-huge {
+  font-size: var(--typography-display-size);
+  font-weight: var(--typography-display-weight);
+  line-height: 1;
+  margin-bottom: var(--space-4);
+  color: var(--hearst-green);
+}
+
+.metric-label-large {
+  font-size: var(--typography-body-size);
+  color: var(--text-secondary);
+  margin-top: var(--space-3);
+}
+
+.metric-sub-label {
+  font-size: var(--typography-body-minor-size);
+  color: var(--text-secondary);
+  margin-top: var(--space-2);
+}
+
+/* Market Conditions Box */
+.market-conditions-box {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-default);
+  padding: var(--space-6);
+  margin-bottom: var(--space-7);
+}
+
+.market-conditions-box h3 {
+  font-size: var(--typography-subsection-title-size);
+  font-weight: var(--typography-subsection-title-weight);
+  color: var(--text-primary);
+  margin-bottom: var(--space-6);
+}
+
+.market-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.market-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.market-info-label {
+  font-size: var(--typography-body-minor-size);
+  color: var(--text-secondary);
+}
+
+.market-info-value {
+  font-size: var(--typography-body-size);
+  font-weight: var(--typography-body-bold-weight);
+  color: var(--text-primary);
+}
+
+.market-info-change {
+  font-size: var(--typography-body-minor-size);
+  color: var(--color-success);
+}
+
+/* Tabs */
+.profitability-tabs {
+  display: flex;
+  gap: var(--space-3);
+  margin-bottom: var(--space-7);
+  background: var(--bg-secondary);
+  padding: var(--space-3);
+  border-radius: var(--radius-default);
+  border: 1px solid var(--border);
+}
+
+.profitability-tab {
+  flex: 1;
+  padding: var(--space-5) var(--space-7);
+  background: transparent;
+  color: var(--text-secondary);
+  border: none;
+  border-radius: var(--radius-small);
+  cursor: pointer;
+  transition: var(--transition-base);
+  font-size: var(--typography-body-size);
+  font-weight: var(--typography-body-bold-weight);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-5);
+  min-height: 48px;
+}
+
+.profitability-tab.active {
+  color: var(--hearst-green);
+  background: rgba(165, 255, 156, 0.1);
+  box-shadow: 0 0 20px rgba(165, 255, 156, 0.2);
+}
+
+.profitability-tab:hover:not(.active) {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Content Area */
+.profitability-content {
+  min-height: 800px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-default);
+  border: 1px solid var(--border);
+  padding: var(--space-7);
+}
+
+/* Profitability Table */
+.profit-table-container {
+  width: 100%;
+  overflow-x: auto;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-default);
+  border: 1px solid var(--border);
+}
+
+.profit-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.profit-table thead {
+  background: var(--bg-tertiary);
+}
+
+.profit-table th {
+  padding: var(--space-6) var(--space-6);
+  text-align: left;
+  color: var(--text-secondary);
+  font-weight: var(--typography-body-bold-weight);
+  font-size: var(--typography-body-minor-size);
+  border-bottom: 2px solid var(--border);
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+}
+
+.profit-table th:hover {
+  color: var(--hearst-green);
+}
+
+.profit-table th.sortable::after {
+  content: ' ⇅';
+  color: #444;
+  margin-left: var(--space-2);
+}
+
+.profit-table th.sorted-asc::after {
+  content: ' ↑';
+  color: var(--hearst-green);
+}
+
+.profit-table th.sorted-desc::after {
+  content: ' ↓';
+  color: var(--hearst-green);
+}
+
+.profit-table td {
+  padding: var(--space-6) var(--space-6);
+  color: var(--text-primary);
+  font-size: var(--typography-body-minor-size);
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+  height: 64px;
+}
+
+.profit-table tbody tr {
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.profit-table tbody tr:hover {
+  background: rgba(165, 255, 156, 0.05);
+}
+
+.profit-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Profit Colors */
+.profit-positive {
+  color: var(--color-success);
+  font-weight: var(--typography-body-bold-weight);
+}
+
+.profit-negative {
+  color: var(--color-error);
+  font-weight: var(--typography-body-bold-weight);
+}
+
+.profit-breakeven {
+  color: var(--color-warning);
+  font-weight: var(--typography-body-bold-weight);
+}
+
+/* Status Badges */
+.status-badge-excellent {
+  background: rgba(76, 175, 80, 0.1);
+  color: #4CAF50;
+  border: 1px solid #4CAF50;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: var(--typography-caption-size);
+  font-weight: var(--typography-caption-bold-weight);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-badge-good {
+  background: rgba(139, 195, 74, 0.1);
+  color: #8BC34A;
+  border: 1px solid #8BC34A;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: var(--typography-caption-size);
+  font-weight: var(--typography-caption-bold-weight);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-badge-marginal {
+  background: rgba(255, 193, 7, 0.1);
+  color: #FFC107;
+  border: 1px solid #FFC107;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: var(--typography-caption-size);
+  font-weight: var(--typography-caption-bold-weight);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-badge-breakeven {
+  background: rgba(255, 152, 0, 0.1);
+  color: #FF9800;
+  border: 1px solid #FF9800;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: var(--typography-caption-size);
+  font-weight: var(--typography-caption-bold-weight);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-badge-unprofitable {
+  background: rgba(244, 67, 54, 0.1);
+  color: #F44336;
+  border: 1px solid #F44336;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: var(--typography-caption-size);
+  font-weight: var(--typography-caption-bold-weight);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Calculation Box */
+.calculation-box {
+  background: var(--bg-primary);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-default);
+  padding: var(--space-6);
+  font-family: 'Courier New', monospace;
+  line-height: 1.8;
+  margin-bottom: var(--space-6);
+}
+
+.calculation-section {
+  margin-bottom: var(--space-6);
+}
+
+.calculation-section-title {
+  color: var(--hearst-green);
+  font-weight: var(--typography-body-bold-weight);
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border);
+}
+
+.calculation-formula {
+  color: var(--hearst-green);
+  font-weight: var(--typography-body-bold-weight);
+  margin-bottom: var(--space-3);
+}
+
+.calculation-step {
+  color: var(--text-primary);
+  margin-left: var(--space-6);
+  margin-bottom: var(--space-2);
+}
+
+.calculation-result {
+  color: var(--color-success);
+  font-weight: var(--typography-body-bold-weight);
+  font-size: var(--typography-body-size);
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border);
+}
+
+/* Chart Container */
+.chart-container {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-default);
+  padding: var(--space-6);
+  min-height: 400px;
+  margin-bottom: var(--space-6);
+}
+
+.chart-placeholder {
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-small);
+  border: 1px dashed var(--border);
+}
+
+/* Comparison Grid */
+.comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2px;
+  background: var(--border);
+  border-radius: var(--radius-default);
+  overflow: hidden;
+  margin-bottom: var(--space-6);
+}
+
+.comparison-cell {
+  background: var(--bg-secondary);
+  padding: var(--space-5);
+  text-align: center;
+}
+
+.comparison-header {
+  background: var(--bg-tertiary);
+  font-weight: var(--typography-body-bold-weight);
+  color: var(--hearst-green);
+}
+
+.comparison-metric-label {
+  font-weight: var(--typography-body-bold-weight);
+  color: var(--text-secondary);
+  font-size: var(--typography-body-minor-size);
+  margin-bottom: var(--space-2);
+}
+
+.comparison-value {
+  color: var(--text-primary);
+  font-size: var(--typography-body-size);
+}
+
+/* Recommendation Box */
+.recommendation-box {
+  background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-primary) 100%);
+  border: 2px solid var(--color-warning);
+  border-radius: var(--radius-default);
+  padding: var(--space-6);
+  margin-top: var(--space-6);
+}
+
+.recommendation-box h3 {
+  color: var(--color-warning);
+  margin-bottom: var(--space-5);
+  font-size: var(--typography-subsection-title-size);
+  font-weight: var(--typography-subsection-title-weight);
+}
+
+.recommendation-item {
+  padding: var(--space-5);
+  margin-bottom: var(--space-3);
+  background: rgba(255, 152, 0, 0.05);
+  border-left: 3px solid;
+  border-radius: var(--radius-small);
+}
+
+.recommendation-shutdown {
+  border-left-color: var(--color-error);
+  color: var(--color-error);
+}
+
+.recommendation-monitor {
+  border-left-color: var(--color-warning);
+  color: var(--color-warning);
+}
+
+.recommendation-expand {
+  border-left-color: var(--color-success);
+  color: var(--color-success);
+}
+
+/* Profitability Tiers */
+.profitability-tiers-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: var(--space-6);
+}
+
+.profitability-tiers-table th {
+  padding: var(--space-5) var(--space-6);
+  text-align: left;
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  font-weight: var(--typography-body-bold-weight);
+  font-size: var(--typography-body-minor-size);
+  border-bottom: 2px solid var(--border);
+}
+
+.profitability-tiers-table td {
+  padding: var(--space-5) var(--space-6);
+  color: var(--text-primary);
+  font-size: var(--typography-body-minor-size);
+  border-bottom: 1px solid var(--border);
+}
+
+.profitability-tiers-table tr:hover {
+  background: rgba(165, 255, 156, 0.05);
+}
+
+/* Daily Profit Cards */
+.daily-profit-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+  margin-bottom: var(--space-6);
+}
+
+.daily-profit-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-default);
+  padding: var(--space-6);
+}
+
+.daily-profit-card h3 {
+  font-size: var(--typography-subsection-title-size);
+  font-weight: var(--typography-subsection-title-weight);
+  color: var(--text-primary);
+  margin-bottom: var(--space-6);
+}
+
+.daily-profit-metric {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.daily-profit-metric:last-child {
+  border-bottom: none;
+}
+
+.daily-profit-label {
+  color: var(--text-secondary);
+  font-size: var(--typography-body-minor-size);
+}
+
+.daily-profit-value {
+  color: var(--text-primary);
+  font-size: var(--typography-body-size);
+  font-weight: var(--typography-body-bold-weight);
+}
+
+.daily-profit-value.positive {
+  color: var(--color-success);
+}
+
+.daily-profit-value.negative {
+  color: var(--color-error);
+}
+
+/* Breakdown Tables */
+.breakdown-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: var(--space-6);
+}
+
+.breakdown-table th {
+  padding: var(--space-5) var(--space-6);
+  text-align: left;
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  font-weight: var(--typography-body-bold-weight);
+  font-size: var(--typography-body-minor-size);
+  border-bottom: 2px solid var(--border);
+}
+
+.breakdown-table td {
+  padding: var(--space-5) var(--space-6);
+  color: var(--text-primary);
+  font-size: var(--typography-body-minor-size);
+  border-bottom: 1px solid var(--border);
+}
+
+.breakdown-table tr:hover {
+  background: rgba(165, 255, 156, 0.05);
+}
+
+/* Filters & Sort */
+.filters-panel {
+  display: flex;
+  gap: var(--space-5);
+  align-items: center;
+  margin-bottom: var(--space-6);
+  padding: var(--space-5);
+  background: var(--bg-primary);
+  border-radius: var(--radius-small);
+  border: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.filter-group label {
+  color: var(--text-secondary);
+  font-size: var(--typography-body-minor-size);
+  white-space: nowrap;
+}
+
+.filter-select {
+  padding: var(--space-3) var(--space-4);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-small);
+  color: var(--text-primary);
+  font-size: var(--typography-body-minor-size);
+  cursor: pointer;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: var(--hearst-green);
+}
+
+/* Summary Stats */
+.summary-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+  margin-top: var(--space-6);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--border);
+}
+
+.summary-stat {
+  text-align: center;
+}
+
+.summary-stat-value {
+  font-size: var(--typography-section-title-size);
+  font-weight: var(--typography-section-title-weight);
+  color: var(--hearst-green);
+  margin-bottom: var(--space-3);
+}
+
+.summary-stat-label {
+  font-size: var(--typography-body-minor-size);
+  color: var(--text-secondary);
+}
+
+/* Responsive - Desktop Only */
+@media (max-width: 1919px) {
+  .profitability-container {
+    padding: var(--space-6);
+  }
+  
+  .global-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .daily-profit-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1279px) {
+  .comparison-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .summary-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+

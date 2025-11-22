@@ -15,6 +15,10 @@ export default function Sidebar() {
     { href: '/electricity', label: 'Électricité', icon: 'energy', view: 'electricity' },
     { href: '/collateral', label: 'Collateral', icon: 'document', view: 'collateral' },
     { href: '/calculator', label: 'Calculator', icon: 'calculator', view: 'calculator' },
+    { href: '/setup', label: 'Setup', icon: 'setup', view: 'setup' },
+    { href: '/transactions', label: 'Transactions', icon: 'transactions', view: 'transactions' },
+    { href: '/wallet-scraper', label: 'Wallet Scraper', icon: 'scraper', view: 'wallet-scraper' },
+    { href: '/profitability-index', label: 'Profitability Index', icon: 'profitability', view: 'profitability-index' },
   ]
 
   const isActive = (href) => {
