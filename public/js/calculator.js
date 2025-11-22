@@ -53,11 +53,16 @@ async function initCalculator() {
     setInterval(loadMetrics, 30000);
     
     // Attacher les event listeners
-    document.getElementById('btn-calculate').addEventListener('click', calculateProfitability);
+    const btnCalculate = document.getElementById('btn-calculate');
+    if (btnCalculate) {
+        btnCalculate.addEventListener('click', calculateProfitability);
+    }
     
     // Gestion du menu de sélection de machine
     const minerTypeSelect = document.getElementById('miner-type');
-    minerTypeSelect.addEventListener('change', handleMinerTypeChange);
+    if (minerTypeSelect) {
+        minerTypeSelect.addEventListener('change', handleMinerTypeChange);
+    }
     
     // Gestion du champ quantity
     const quantityInput = document.getElementById('quantity');
@@ -98,8 +103,8 @@ async function loadMetrics() {
         updateMetricsUI(data);
         
         // Recalculer si des valeurs sont déjà saisies
-        const hashrate = document.getElementById('hashrate').value;
-        if (hashrate && parseFloat(hashrate) > 0) {
+        const hashrateInput = document.getElementById('hashrate');
+        if (hashrateInput && hashrateInput.value && parseFloat(hashrateInput.value) > 0) {
             calculateProfitability();
         }
     } catch (error) {

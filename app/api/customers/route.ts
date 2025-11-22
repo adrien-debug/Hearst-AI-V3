@@ -15,13 +15,12 @@ import { prisma } from '@/lib/db'
 // GET - Liste tous les customers
 export async function GET(request: NextRequest) {
   try {
-    // En développement, permettre l'accès sans authentification
-    const isDevelopment = process.env.NODE_ENV === 'development'
-    if (!isDevelopment) {
-      const session = await getServerSession(authOptions)
-      if (!session?.user?.id) {
-        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-      }
+    const session = await getServerSession(authOptions)
+    if (!session?.user?.id) {
+      // Retourner des données mockées si pas de session (développement et production)
+      return NextResponse.json({
+        customers: []
+      })
     }
 
     // Vérifier que Prisma et le modèle Customer sont disponibles
@@ -60,13 +59,13 @@ export async function GET(request: NextRequest) {
 // POST - Crée un nouveau customer
 export async function POST(request: NextRequest) {
   try {
-    // En développement, permettre l'accès sans authentification
-    const isDevelopment = process.env.NODE_ENV === 'development'
-    if (!isDevelopment) {
-      const session = await getServerSession(authOptions)
-      if (!session?.user?.id) {
-        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-      }
+    const session = await getServerSession(authOptions)
+    if (!session?.user?.id) {
+      // Retourner une erreur soft si pas de session (ne pas bloquer l'UI)
+      return NextResponse.json({ 
+        error: 'Authentification requise',
+        message: 'Vous devez être connecté pour créer un customer'
+      }, { status: 401 })
     }
 
     // Vérifier que Prisma est disponible
