@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import KpiBox from '@/components/ui/KpiBox'
 
 // Types
 interface Miner {
@@ -392,42 +394,44 @@ export default function SetupManager() {
 
   return (
     <div className="setup-manager">
-      {/* Header */}
-      <div className="setup-header">
-        <h1>SETUP MANAGER - Configuration Dashboard</h1>
-        <div className="setup-header-actions">
-          <button className="btn-secondary">SYNC ALL</button>
-          <button className="btn-secondary">EXPORT CONFIG</button>
-          <button className="btn-secondary">ADVANCED SETTINGS</button>
+      {/* Header - Style Projections */}
+      <div style={{ marginBottom: 'var(--space-4)' }}>
+        <h1 style={{ fontSize: 'var(--text-2xl)', fontWeight: 700, marginBottom: 'var(--space-4)' }}>Setup Manager</h1>
+        
+        {/* Navigation tabs - Style Projections */}
+        <div style={{
+          display: 'flex',
+          gap: 'var(--space-2)',
+          flexWrap: 'wrap',
+          borderBottom: '1px solid var(--border)',
+          marginBottom: 'var(--space-6)',
+          overflowX: 'auto',
+        }}>
+          {[
+            { id: 'summary', label: 'Summary' },
+            { id: 'miners', label: 'Miners Configuration' },
+            { id: 'prices', label: 'Price List' },
+            { id: 'hosters', label: 'Hosters' },
+          ].map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id as any)}
+              style={{
+                padding: 'var(--space-3) var(--space-4)',
+                background: 'transparent',
+                border: 'none',
+                borderBottom: activeTab === tab.id ? '2px solid var(--hearst-green)' : '2px solid transparent',
+                color: activeTab === tab.id ? 'var(--hearst-green)' : 'var(--text-secondary)',
+                cursor: 'pointer',
+                fontWeight: activeTab === tab.id ? 600 : 400,
+                transition: 'all var(--duration-fast) var(--ease-in-out)',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {tab.label}
+            </button>
+          ))}
         </div>
-      </div>
-
-      {/* Tabs */}
-      <div className="setup-tabs">
-        <button
-          className={`setup-tab ${activeTab === 'summary' ? 'active' : ''}`}
-          onClick={() => setActiveTab('summary')}
-        >
-          SUMMARY
-        </button>
-        <button
-          className={`setup-tab ${activeTab === 'miners' ? 'active' : ''}`}
-          onClick={() => setActiveTab('miners')}
-        >
-          MINERS CONFIGURATION
-        </button>
-        <button
-          className={`setup-tab ${activeTab === 'prices' ? 'active' : ''}`}
-          onClick={() => setActiveTab('prices')}
-        >
-          PRICE LIST
-        </button>
-        <button
-          className={`setup-tab ${activeTab === 'hosters' ? 'active' : ''}`}
-          onClick={() => setActiveTab('hosters')}
-        >
-          HOSTERS
-        </button>
       </div>
 
       {/* Content */}
@@ -841,95 +845,104 @@ function SummaryTab({
 
   return (
     <div>
-      <h2 style={{ fontSize: '24px', marginBottom: '24px' }}>SUMMARY OVERVIEW - Complete Configuration Dashboard</h2>
+      <h2 style={{ fontSize: 'var(--text-2xl)', fontWeight: 700, marginBottom: 'var(--space-6)' }}>Setup Manager</h2>
       
-      <div className="summary-stats-grid">
-        <div className="stat-card-large">
-          <div className="stat-value-large">{totalMiners}</div>
-          <div className="stat-label-large">Total Miners</div>
-        </div>
-        <div className="stat-card-large">
-          <div className="stat-value-large">{activeMiners}</div>
-          <div className="stat-label-large">Active Miners</div>
-        </div>
-        <div className="stat-card-large">
-          <div className="stat-value-large">{totalHashrate}</div>
-          <div className="stat-label-large">PH/s Hashrate</div>
-        </div>
-        <div className="stat-card-large">
-          <div className="stat-value-large">{totalPower}</div>
-          <div className="stat-label-large">kW Power</div>
-        </div>
+      {/* KPI Cards - Style Projections exact */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 'var(--space-4)', marginBottom: 'var(--space-6)' }}>
+        <KpiBox
+          label="Total Miners"
+          value={totalMiners}
+          description="Configured miners"
+        />
+        <KpiBox
+          label="Active Miners"
+          value={activeMiners}
+          description="Currently active"
+        />
+        <KpiBox
+          label="Total Hashrate"
+          value={`${totalHashrate} PH/s`}
+          description="Network hashrate"
+        />
+        <KpiBox
+          label="Total Power"
+          value={`${totalPower} kW`}
+          description="Power consumption"
+        />
       </div>
 
-      <div className="summary-dashboard">
-        <div className="summary-section">
-          <h3>DEPLOYMENT BY HOSTER</h3>
-          <div style={{ height: '300px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#888' }}>
-            [Pie Chart - Miners per hoster]
+      {/* Configuration Summary Table - Style Projections */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Configuration Summary</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="table-container">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Status</th>
+                  <th>Details</th>
+                  <th>Last Updated</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Miners</strong></td>
+                  <td>
+                    <span style={{ color: 'var(--hearst-green)', fontWeight: 700 }}>
+                      {totalMiners}/{totalMiners} configured
+                    </span>
+                  </td>
+                  <td>{activeMiners} active, {totalMiners - activeMiners} offline</td>
+                  <td>Just now</td>
+                </tr>
+                <tr>
+                  <td><strong>Prices</strong></td>
+                  <td>
+                    <span style={{ color: 'var(--hearst-green)', fontWeight: 700 }}>
+                      ACTIVE
+                    </span>
+                  </td>
+                  <td>{prices.length} cryptocurrencies tracked</td>
+                  <td>2h ago</td>
+                </tr>
+                <tr>
+                  <td><strong>Hosters</strong></td>
+                  <td>
+                    <span style={{ color: 'var(--hearst-green)', fontWeight: 700 }}>
+                      {hosters.length}/{hosters.length} configured
+                    </span>
+                  </td>
+                  <td>All contracts valid</td>
+                  <td>Just now</td>
+                </tr>
+                <tr>
+                  <td><strong>Electricity Rates</strong></td>
+                  <td>
+                    <span style={{ color: 'var(--hearst-green)', fontWeight: 700 }}>
+                      ACTIVE
+                    </span>
+                  </td>
+                  <td>All rates set</td>
+                  <td>Just now</td>
+                </tr>
+                <tr>
+                  <td><strong>Monitoring</strong></td>
+                  <td>
+                    <span style={{ color: activeMiners === totalMiners ? 'var(--hearst-green)' : '#FFA500', fontWeight: 700 }}>
+                      {activeMiners}/{totalMiners} online
+                    </span>
+                  </td>
+                  <td>{totalMiners - activeMiners > 0 ? `${totalMiners - activeMiners} miners offline` : 'All systems operational'}</td>
+                  <td>Live</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          {hosters.map((hoster) => {
-            const hosterMiners = miners.filter(m => m.hosterId === hoster.id).length
-            const percentage = ((hosterMiners / totalMiners) * 100).toFixed(0)
-            return (
-              <p key={hoster.id} style={{ marginBottom: '8px', color: '#888' }}>
-                {hoster.name.toUpperCase()}: {hosterMiners} ({percentage}%)
-              </p>
-            )
-          })}
-        </div>
-
-        <div className="summary-section">
-          <h3>MONTHLY COST ANALYSIS</h3>
-          <div style={{ fontSize: '16px', lineHeight: '2' }}>
-            <p>Electricity: ${totalElectricity.toFixed(2)}</p>
-            <p>Hosting Fees: ${totalHostingFees.toFixed(2)}</p>
-            <p style={{ borderTop: '1px solid #333', paddingTop: '12px', marginTop: '12px' }}>
-              Total OpEx: ${totalOpEx.toFixed(2)}
-            </p>
-            <p style={{ marginTop: '16px' }}>Expected Revenue: ${expectedRevenue}</p>
-            <p style={{ borderTop: '1px solid #333', paddingTop: '12px', marginTop: '12px' }}>
-              Net Profit: ${netProfit}
-            </p>
-            <p>ROI: {roi}% (annualized)</p>
-          </div>
-        </div>
-
-        <div className="summary-section">
-          <h3>HASHRATE DISTRIBUTION</h3>
-          <div style={{ height: '300px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#888' }}>
-            [Bar Chart - TH/s per model]
-          </div>
-          <div style={{ fontSize: '14px', color: '#888' }}>
-            {Array.from(new Set(miners.map(m => m.model))).map(model => {
-              const modelHashrate = miners.filter(m => m.model === model).reduce((sum, m) => sum + m.hashrate, 0)
-              return (
-                <p key={model} style={{ marginBottom: '4px' }}>
-                  {model}: {(modelHashrate / 1000).toFixed(2)} PH/s
-                </p>
-              )
-            })}
-          </div>
-        </div>
-
-        <div className="summary-section">
-          <h3>CONFIGURATION STATUS</h3>
-          <div style={{ fontSize: '14px', lineHeight: '2' }}>
-            <p>MINERS: {totalMiners}/{totalMiners} configured</p>
-            <p>PRICES: Updated 2h ago</p>
-            <p>HOSTERS: {hosters.length}/{hosters.length} configured</p>
-            <p>ELECTRICITY: All rates set</p>
-            <p>CONTRACTS: All valid</p>
-            <p>MONITORING: {activeMiners}/{totalMiners} online</p>
-            <p style={{ marginTop: '16px' }}>
-              {totalMiners - activeMiners > 0 && `WARNING: ${totalMiners - activeMiners} miners offline`}
-            </p>
-            <p style={{ marginTop: '8px', color: '#8afd81', fontWeight: '600' }}>
-              SYSTEM STATUS: OPERATIONAL
-            </p>
-          </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
 
       <div className="action-buttons" style={{ marginTop: '32px', justifyContent: 'center' }}>
         <button className="btn-add-large">EXPORT FULL CONFIGURATION</button>

@@ -585,46 +585,72 @@ export default function WalletScraper() {
   return (
     <div className="wallet-scraper">
       {/* Header */}
-      <div className="scraper-header">
+      <div className="wallet-scraper-header">
         <h1>WALLET SCRAPER - Blockchain Transaction Analysis</h1>
-        <div className="scraper-header-actions">
-          <button className="btn-add-large" onClick={() => setShowAddWalletModal(true)}>
+        <div className="wallet-scraper-header-actions">
+          <button className="wallet-scraper-btn wallet-scraper-btn-primary" onClick={() => setShowAddWalletModal(true)}>
             + Add Wallet
           </button>
-          <button className="btn-secondary" onClick={syncAllWallets}>
+          <button className="wallet-scraper-btn wallet-scraper-btn-secondary" onClick={syncAllWallets}>
             REFRESH ALL
           </button>
-          <button className="btn-secondary" onClick={() => setShowExportModal(true)}>
+          <button className="wallet-scraper-btn wallet-scraper-btn-secondary" onClick={() => setShowExportModal(true)}>
             EXPORT ALL
           </button>
-          <button className="btn-secondary">
+          <button className="wallet-scraper-btn wallet-scraper-btn-secondary">
             SETTINGS
           </button>
         </div>
       </div>
 
+      {/* Métriques KPI - Style exact PROJECTIONS */}
+      <section style={{ marginBottom: 'var(--space-6)' }}>
+        <div className="wallet-scraper-kpi-grid">
+          <div className="wallet-scraper-kpi-card">
+            <div className="wallet-scraper-kpi-label">Total Wallets</div>
+            <div className="wallet-scraper-kpi-value">{wallets.length}</div>
+            <div className="wallet-scraper-kpi-description">Monitored wallets</div>
+          </div>
+          <div className="wallet-scraper-kpi-card">
+            <div className="wallet-scraper-kpi-label">Total Transactions</div>
+            <div className="wallet-scraper-kpi-value">{totalTxs}</div>
+            <div className="wallet-scraper-kpi-description">All transactions</div>
+          </div>
+          <div className="wallet-scraper-kpi-card">
+            <div className="wallet-scraper-kpi-label">Total Volume</div>
+            <div className="wallet-scraper-kpi-value">{totalVolume.toFixed(2)} BTC</div>
+            <div className="wallet-scraper-kpi-description">All time volume</div>
+          </div>
+          <div className="wallet-scraper-kpi-card">
+            <div className="wallet-scraper-kpi-label">Unclassified</div>
+            <div className="wallet-scraper-kpi-value">{unclassifiedTxs}</div>
+            <div className="wallet-scraper-kpi-description">Pending classification</div>
+          </div>
+        </div>
+      </section>
+
       {/* Tabs */}
-      <div className="scraper-tabs">
+      <div className="wallet-scraper-tabs">
         <button
-          className={`scraper-tab ${activeTab === 'wallets' ? 'active' : ''}`}
+          className={`wallet-scraper-tab ${activeTab === 'wallets' ? 'active' : ''}`}
           onClick={() => setActiveTab('wallets')}
         >
           <ListIcon size={18} /> Monitored Wallets
         </button>
         <button
-          className={`scraper-tab ${activeTab === 'transactions' ? 'active' : ''}`}
+          className={`wallet-scraper-tab ${activeTab === 'transactions' ? 'active' : ''}`}
           onClick={() => setActiveTab('transactions')}
         >
           <ChartIcon size={18} /> All Transactions
         </button>
         <button
-          className={`scraper-tab ${activeTab === 'classifications' ? 'active' : ''}`}
+          className={`wallet-scraper-tab ${activeTab === 'classifications' ? 'active' : ''}`}
           onClick={() => setActiveTab('classifications')}
         >
           <TagIcon size={18} /> Classifications
         </button>
         <button
-          className={`scraper-tab ${activeTab === 'analytics' ? 'active' : ''}`}
+          className={`wallet-scraper-tab ${activeTab === 'analytics' ? 'active' : ''}`}
           onClick={() => setActiveTab('analytics')}
         >
           <AnalyticsIcon size={18} /> Analytics
@@ -783,8 +809,8 @@ function MonitoredWalletsTab({
         </div>
       </div>
 
-      <div className="scraper-table-container">
-        <table className="scraper-table">
+      <div className="wallet-scraper-table-container">
+        <table className="wallet-scraper-table">
           <thead>
             <tr>
               <th>ID</th>
@@ -1031,8 +1057,8 @@ function AllTransactionsTab({
       )}
 
       {/* Transactions Table */}
-      <div className="scraper-table-container">
-        <table className="scraper-table">
+      <div className="wallet-scraper-table-container">
+        <table className="wallet-scraper-table">
           <thead>
             <tr>
               <th>

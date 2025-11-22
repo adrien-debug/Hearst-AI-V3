@@ -1,0 +1,301 @@
+/* ====================================
+   CALCULATOR PAGE - CHARTE EXACTE PROJECTIONS
+   Application à la lettre du design de l'image
+   Couleur principale: #A7FB90 (vert Hearst)
+   ==================================== */
+
+/* ====================================
+   NAVIGATION HORIZONTALE - EXACTE
+   Style identique à l'image PROJECTIONS
+   ==================================== */
+.calculator-nav-tabs {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border-bottom: 1px solid rgba(167, 251, 144, 0.1);
+  margin-bottom: var(--space-6);
+  padding: 0;
+  overflow-x: auto;
+  width: 100%;
+}
+
+.calculator-nav-tab {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-5);
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: var(--font-family-primary);
+  font-size: var(--text-base);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  white-space: nowrap;
+  position: relative;
+}
+
+.calculator-nav-tab:hover {
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(167, 251, 144, 0.05);
+}
+
+.calculator-nav-tab.active {
+  color: #A7FB90;
+  border-bottom-color: #A7FB90;
+  font-weight: 600;
+}
+
+/* ====================================
+   CARTES KPI - STYLE EXACT PROJECTIONS
+   ==================================== */
+.calculator-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.calculator-kpi-card {
+  background: var(--bg-secondary);
+  border: 1px solid rgba(167, 251, 144, 0.1);
+  border-left: 3px solid #A7FB90;
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.calculator-kpi-card:hover {
+  border-color: rgba(167, 251, 144, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.calculator-kpi-label {
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+  font-family: var(--font-family-primary);
+}
+
+.calculator-kpi-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #A7FB90;
+  font-family: var(--font-family-primary);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: var(--space-2);
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.calculator-kpi-description {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  font-family: var(--font-family-primary);
+}
+
+/* ====================================
+   TABLE PROJECTS SUMMARY - STYLE EXACT
+   ==================================== */
+.calculator-table-container {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: var(--space-4);
+}
+
+.calculator-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-family-primary);
+}
+
+.calculator-table thead {
+  background: rgba(167, 251, 144, 0.05);
+}
+
+.calculator-table thead th {
+  padding: var(--space-4) var(--space-5);
+  text-align: left;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: #A7FB90;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid rgba(167, 251, 144, 0.2);
+}
+
+.calculator-table tbody tr {
+  border-bottom: 1px solid rgba(167, 251, 144, 0.1);
+  transition: background var(--transition-base);
+}
+
+.calculator-table tbody tr:hover {
+  background: rgba(167, 251, 144, 0.03);
+}
+
+.calculator-table tbody td {
+  padding: var(--space-4) var(--space-5);
+  font-size: var(--text-base);
+  color: var(--text-primary);
+}
+
+.calculator-table tbody td strong {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.calculator-table tbody td span[style*="color"] {
+  color: #A7FB90 !important;
+  font-weight: 600;
+}
+
+/* ====================================
+   CARD WRAPPER - STYLE EXACT
+   ==================================== */
+.calculator-card {
+  background: var(--bg-secondary);
+  border: 1px solid rgba(167, 251, 144, 0.1);
+  border-radius: var(--radius-md);
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.calculator-card-header {
+  padding: var(--space-6);
+  border-bottom: 1px solid rgba(167, 251, 144, 0.1);
+  background: rgba(167, 251, 144, 0.02);
+}
+
+.calculator-card-title {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+  font-family: var(--font-family-primary);
+  margin: 0;
+}
+
+.calculator-card-content {
+  padding: var(--space-6);
+}
+
+/* ====================================
+   PAGE CONTAINER - STYLE EXACT
+   ==================================== */
+.calculator-page-container {
+  padding: var(--space-6);
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.calculator-section-title {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-6);
+  font-family: var(--font-family-primary);
+  letter-spacing: -0.02em;
+}
+
+/* ====================================
+   BOUTONS - STYLE EXACT
+   ==================================== */
+.calculator-btn {
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-md);
+  font-family: var(--font-family-primary);
+  font-size: var(--text-base);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  border: none;
+}
+
+.calculator-btn-primary {
+  background: #A7FB90;
+  color: #000000;
+}
+
+.calculator-btn-primary:hover {
+  background: #8DFFA9;
+  box-shadow: 0 4px 12px rgba(167, 251, 144, 0.3);
+}
+
+.calculator-btn-secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid rgba(167, 251, 144, 0.2);
+}
+
+.calculator-btn-secondary:hover {
+  background: rgba(167, 251, 144, 0.1);
+  border-color: rgba(167, 251, 144, 0.4);
+}
+
+/* ====================================
+   OVERRIDES POUR COMPOSANTS EXISTANTS
+   ==================================== */
+.dashboard-content .calculator-section {
+  padding: 0;
+}
+
+.dashboard-content .calculator-section .card {
+  background: var(--bg-secondary);
+  border: 1px solid rgba(167, 251, 144, 0.1);
+  border-radius: var(--radius-md);
+}
+
+.dashboard-content .calculator-section .card-header {
+  background: rgba(167, 251, 144, 0.02);
+  border-bottom: 1px solid rgba(167, 251, 144, 0.1);
+}
+
+.dashboard-content .calculator-section .card-title {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.dashboard-content .calculator-section table thead th {
+  color: #A7FB90;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: rgba(167, 251, 144, 0.05);
+  border-bottom: 2px solid rgba(167, 251, 144, 0.2);
+}
+
+.dashboard-content .calculator-section table tbody tr {
+  border-bottom: 1px solid rgba(167, 251, 144, 0.1);
+}
+
+.dashboard-content .calculator-section table tbody tr:hover {
+  background: rgba(167, 251, 144, 0.03);
+}
+
+/* ====================================
+   RESPONSIVE
+   ==================================== */
+@media (max-width: 768px) {
+  .calculator-nav-tabs {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .calculator-kpi-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .calculator-table-container {
+    overflow-x: auto;
+  }
+}
+

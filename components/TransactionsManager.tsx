@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { transactionsAPI } from '@/lib/api'
 import TransactionDetailsModal from '@/components/modals/TransactionDetailsModal'
 import { Transaction, Wallet, demoTransactions, demoWallets } from '@/utils/transactionsData'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 // Données de démo (fallback)
 const demoTransactionsFallback: Transaction[] = [
@@ -342,80 +343,100 @@ export default function TransactionsManager() {
 
   return (
     <div className="transactions-manager">
-      {/* Header */}
-      <div className="tx-header">
-        <h1>TRANSACTIONS MANAGER</h1>
-        <div className="tx-header-actions">
-          <button className="btn-add-large" onClick={() => setShowNewTransactionModal(true)}>
-            + New Transaction
-          </button>
-          <button className="btn-secondary" onClick={refreshTransactions} disabled={loading}>
-            {loading ? 'LOADING...' : 'REFRESH'}
-          </button>
-          <button className="btn-secondary">EXPORT</button>
-          <Link href="/wallets">
-            <button className="btn-secondary">CONFIGURE WALLETS</button>
-          </Link>
+      {/* Header - Style Projections exact */}
+      <div style={{ marginBottom: 'var(--space-4)' }}>
+        <h1 style={{ fontSize: 'var(--text-2xl)', fontWeight: 700, marginBottom: 'var(--space-4)' }}>Transactions</h1>
+        
+        {/* Navigation tabs - Style Projections exact */}
+        <div style={{
+          display: 'flex',
+          gap: 'var(--space-2)',
+          flexWrap: 'wrap',
+          borderBottom: '1px solid var(--border)',
+          marginBottom: 'var(--space-6)',
+          overflowX: 'auto',
+        }}>
+          {[
+            { id: 'all', label: 'All' },
+            { id: 'pending', label: 'Pending' },
+            { id: 'validated', label: 'Validated' },
+            { id: 'failed', label: 'Failed' },
+          ].map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setStatusFilter(tab.id as any)}
+              style={{
+                padding: 'var(--space-3) var(--space-4)',
+                background: 'transparent',
+                border: 'none',
+                borderBottom: statusFilter === tab.id ? '2px solid var(--hearst-green)' : '2px solid transparent',
+                color: statusFilter === tab.id ? 'var(--hearst-green)' : 'var(--text-secondary)',
+                cursor: 'pointer',
+                fontWeight: statusFilter === tab.id ? 600 : 400,
+                transition: 'all var(--duration-fast) var(--ease-in-out)',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {tab.label}
+            </button>
+          ))}
         </div>
       </div>
 
-      {/* Filters */}
-      <div className="tx-filters">
-        <div className="filter-group">
-          <label>Status:</label>
-          <button
-            className={`filter-btn ${statusFilter === 'all' ? 'active' : ''}`}
-            onClick={() => setStatusFilter('all')}
-          >
-            All
-          </button>
-          <button
-            className={`filter-btn ${statusFilter === 'pending' ? 'active' : ''}`}
-            onClick={() => setStatusFilter('pending')}
-          >
-            Pending
-          </button>
-          <button
-            className={`filter-btn ${statusFilter === 'validated' ? 'active' : ''}`}
-            onClick={() => setStatusFilter('validated')}
-          >
-            Validated
-          </button>
-          <button
-            className={`filter-btn ${statusFilter === 'failed' ? 'active' : ''}`}
-            onClick={() => setStatusFilter('failed')}
-          >
-            Failed
-          </button>
-        </div>
-
-        <div className="filter-group">
-          <label>Period:</label>
-          <button
-            className={`filter-btn ${periodFilter === 'all' ? 'active' : ''}`}
-            onClick={() => setPeriodFilter('all')}
-          >
-            All Time
-          </button>
-          <button
-            className={`filter-btn ${periodFilter === 'daily' ? 'active' : ''}`}
-            onClick={() => setPeriodFilter('daily')}
-          >
-            Daily
-          </button>
-          <button
-            className={`filter-btn ${periodFilter === 'weekly' ? 'active' : ''}`}
-            onClick={() => setPeriodFilter('weekly')}
-          >
-            Weekly
-          </button>
-          <button
-            className={`filter-btn ${periodFilter === 'monthly' ? 'active' : ''}`}
-            onClick={() => setPeriodFilter('monthly')}
-          >
-            Monthly
-          </button>
-        </div>
+      {/* KPI Cards - Style Projections exact */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 'var(--space-4)', marginBottom: 'var(--space-6)' }}>
+        <Card>
+          <CardHeader>
+            <CardTitle>Total Transactions</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--hearst-green)' }}>
+              {filteredTransactions.length}
+            </div>
+            <p style={{ color: 'var(--text-secondary)', marginTop: 'var(--space-2)', fontSize: 'var(--text-sm)' }}>
+              All transactions
+            </p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>Pending</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--hearst-green)' }}>
+              {pendingTxs.length}
+            </div>
+            <p style={{ color: 'var(--text-secondary)', marginTop: 'var(--space-2)', fontSize: 'var(--text-sm)' }}>
+              Awaiting validation
+            </p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>Validated</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--hearst-green)' }}>
+              {validatedTxs.length}
+            </div>
+            <p style={{ color: 'var(--text-secondary)', marginTop: 'var(--space-2)', fontSize: 'var(--text-sm)' }}>
+              Confirmed transactions
+            </p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>Total Amount</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--hearst-green)' }}>
+              {totalAmount.toFixed(4)} BTC
+            </div>
+            <p style={{ color: 'var(--text-secondary)', marginTop: 'var(--space-2)', fontSize: 'var(--text-sm)' }}>
+              ${(totalAmount * BTC_PRICE).toLocaleString()}
+            </p>
+          </CardContent>
+        </Card>
       </div>
 
       {/* Error Message */}
@@ -443,86 +464,107 @@ export default function TransactionsManager() {
         </div>
       )}
 
-      {/* Transactions Table */}
-      {!loading || transactions.length > 0 ? (
-      <div className="tx-table-container">
-        <table className="tx-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Date</th>
-              <th>From → To</th>
-              <th>Amount</th>
-              <th>Fee</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {paginatedTransactions.length === 0 ? (
-              <tr>
-                <td colSpan={7} style={{ textAlign: 'center', padding: '40px', color: 'var(--text-muted, #999999)' }}>
-                  Aucune transaction trouvée
-                </td>
-              </tr>
-            ) : (
-              paginatedTransactions.map((tx) => (
-              <tr key={tx.id} onClick={() => openTransactionModal(tx.id)}>
-                <td>
-                  <strong>#{tx.id.split('-').pop()}</strong>
-                  <br />
-                  <small style={{ color: 'var(--text-muted, #999999)' }}>{tx.id}</small>
-                </td>
-                <td>{formatDateTime(tx.date)}</td>
-                <td>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                    <span>{tx.from.name}</span>
-                    <span style={{ color: 'var(--text-muted, #999999)', fontSize: '12px' }}>{truncateAddress(tx.from.address)}</span>
-                    <span style={{ color: 'var(--hearst-green, #8afd81)', margin: '4px 0' }}>↓</span>
-                    <span>{tx.to.name}</span>
-                    <span style={{ color: 'var(--text-muted, #999999)', fontSize: '12px' }}>{truncateAddress(tx.to.address)}</span>
-                  </div>
-                </td>
-                <td>
-                  <strong>{tx.amount.toFixed(4)} BTC</strong>
-                  <br />
-                  <small style={{ color: 'var(--text-muted, #999999)' }}>${tx.amountUSD.toLocaleString()}</small>
-                </td>
-                <td>{tx.fee.toFixed(8)} BTC</td>
-                <td>
-                  <span className={`badge-${tx.status}`}>
-                    {tx.status.toUpperCase()}
-                  </span>
-                </td>
-                <td>
-                  <button
-                    className="btn-sm"
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      openTransactionModal(tx.id)
-                    }}
-                  >
-                    View
-                  </button>
-                  {tx.status === 'pending' && (
-                    <button
-                      className="btn-validate-sm"
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        validateTransaction(tx.id)
-                      }}
-                    >
-                      Validate
-                    </button>
-                  )}
-                </td>
-              </tr>
-              ))
-            )}
-          </tbody>
-        </table>
-      </div>
-      ) : null}
+      {/* Transactions Table - Style Projections exact */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Transactions Summary</CardTitle>
+        </CardHeader>
+        <CardContent>
+          {loading && transactions.length === 0 ? (
+            <div style={{ textAlign: 'center', padding: 'var(--space-8)' }}>
+              <div className="spinner" style={{
+                width: '40px',
+                height: '40px',
+                border: '3px solid rgba(197, 255, 167, 0.2)',
+                borderTopColor: '#C5FFA7',
+                borderRadius: '50%',
+                animation: 'spin 1s linear infinite',
+                margin: '0 auto var(--space-4)',
+              }}></div>
+              <p style={{ color: 'var(--text-secondary)' }}>Loading transactions...</p>
+            </div>
+          ) : paginatedTransactions.length === 0 ? (
+            <div style={{ textAlign: 'center', padding: 'var(--space-8)' }}>
+              <p style={{ color: 'var(--text-secondary)' }}>No transactions found.</p>
+            </div>
+          ) : (
+            <div className="table-container">
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>From → To</th>
+                    <th>Amount</th>
+                    <th>Fee</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {paginatedTransactions.map((tx) => (
+                    <tr key={tx.id} onClick={() => openTransactionModal(tx.id)} style={{ cursor: 'pointer' }}>
+                      <td><strong>#{tx.id.split('-').pop()}</strong></td>
+                      <td>{formatDateTime(tx.date)}</td>
+                      <td>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                          <span>{tx.from.name}</span>
+                          <span style={{ color: 'var(--text-secondary)', fontSize: '12px' }}>{truncateAddress(tx.from.address)}</span>
+                          <span style={{ color: 'var(--hearst-green)', margin: '4px 0' }}>↓</span>
+                          <span>{tx.to.name}</span>
+                          <span style={{ color: 'var(--text-secondary)', fontSize: '12px' }}>{truncateAddress(tx.to.address)}</span>
+                        </div>
+                      </td>
+                      <td>
+                        <strong>{tx.amount.toFixed(4)} BTC</strong>
+                        <br />
+                        <small style={{ color: 'var(--text-secondary)' }}>${tx.amountUSD.toLocaleString()}</small>
+                      </td>
+                      <td>{tx.fee.toFixed(8)} BTC</td>
+                      <td>
+                        <span style={{ 
+                          color: tx.status === 'validated' ? 'var(--hearst-green)' : tx.status === 'pending' ? '#FFA500' : '#ff4d4d',
+                          fontWeight: 700 
+                        }}>
+                          {tx.status.toUpperCase()}
+                        </span>
+                      </td>
+                      <td>
+                        <button
+                          style={{
+                            padding: 'var(--space-2) var(--space-3)',
+                            background: 'transparent',
+                            border: '1px solid rgba(255, 255, 255, 0.1)',
+                            borderRadius: 'var(--radius-md)',
+                            color: 'var(--text-primary)',
+                            cursor: 'pointer',
+                            fontSize: 'var(--text-sm)',
+                            transition: 'all var(--duration-fast) var(--ease-in-out)',
+                          }}
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            openTransactionModal(tx.id)
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.borderColor = 'var(--hearst-green)'
+                            e.currentTarget.style.color = 'var(--hearst-green)'
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)'
+                            e.currentTarget.style.color = 'var(--text-primary)'
+                          }}
+                        >
+                          View
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </CardContent>
+      </Card>
 
       {/* Pagination */}
       <div className="pagination">
@@ -556,29 +598,6 @@ export default function TransactionsManager() {
         </div>
       </div>
 
-      {/* Summary Footer */}
-      <div className="stat-footer">
-        <div className="stat-box">
-          <div className="stat-value">{totalAmount.toFixed(4)} BTC</div>
-          <div className="stat-label">Total</div>
-          <div className="stat-usd">${(totalAmount * BTC_PRICE).toLocaleString()}</div>
-        </div>
-        <div className="stat-box">
-          <div className="stat-value">{pendingTxs.length} tx</div>
-          <div className="stat-label">Pending</div>
-          <div className="stat-usd">${pendingTxs.reduce((sum, tx) => sum + tx.amountUSD, 0).toLocaleString()}</div>
-        </div>
-        <div className="stat-box">
-          <div className="stat-value">{validatedTxs.length} tx</div>
-          <div className="stat-label">Validated</div>
-          <div className="stat-usd">${validatedTxs.reduce((sum, tx) => sum + tx.amountUSD, 0).toLocaleString()}</div>
-        </div>
-        <div className="stat-box">
-          <div className="stat-value">{totalFees.toFixed(8)} BTC</div>
-          <div className="stat-label">Total Fees</div>
-          <div className="stat-usd">${(totalFees * BTC_PRICE).toFixed(2)}</div>
-        </div>
-      </div>
 
       {/* Modals */}
       {showTransactionModal && selectedTransaction && (

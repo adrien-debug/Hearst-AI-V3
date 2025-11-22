@@ -10,6 +10,18 @@ storage/*.db-journal
 .env
 .env.local
 .env.production
+.env.*
+!.env.local.example
+.env.vercel*
+.env.check*
+.env.final*
+.env.last
+.env.prod
+.env.verification
+backend.pid
+frontend.pid
+.vercel_secrets.txt
+NEXTAUTH_SECRET.txt
 
 # Logs
 *.log
