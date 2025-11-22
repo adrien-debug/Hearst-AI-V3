@@ -4,12 +4,10 @@ import { authOptions } from '@/lib/auth'
 
 export async function GET(request: NextRequest) {
   try {
+    // Retourner des données mockées même si pas de session (comme les autres APIs)
     const session = await getServerSession(authOptions)
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-    }
-
-    // Données mockées réalistes pour le cockpit
+    
+    // Données mockées réalistes pour le cockpit (disponibles même sans session)
     return NextResponse.json({
       data: {
         globalHashrate: 245.8, // PH/s
