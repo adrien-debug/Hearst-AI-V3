@@ -194,14 +194,6 @@ export default function CalculatorPage() {
                         e.currentTarget.style.borderColor = 'rgba(167, 251, 144, 0.08)'
                       }
                     }}
-                      onFocus={(e) => {
-                        e.currentTarget.style.borderColor = 'var(--hearst-green)'
-                        e.currentTarget.style.boxShadow = '0 0 0 3px rgba(165, 255, 156, 0.1)'
-                      }}
-                      onBlur={(e) => {
-                        e.currentTarget.style.borderColor = 'var(--border)'
-                        e.currentTarget.style.boxShadow = 'none'
-                      }}
                     >
                       <option value="" disabled>Select a mining machine...</option>
                       <option value="custom">Custom (Manual Input)</option>
