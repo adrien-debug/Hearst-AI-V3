@@ -69,6 +69,9 @@ export default function CockpitSidebar({ activeSection, onSectionChange }: Cockp
         position: 'sticky',
         top: 0,
         alignSelf: 'flex-start',
+        zIndex: 100,
+        height: '100vh',
+        overflowY: 'auto',
       }}
     >
       <div style={{ marginBottom: 'var(--space-4)' }}>

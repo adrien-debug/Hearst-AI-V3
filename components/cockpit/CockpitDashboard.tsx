@@ -123,8 +123,12 @@ export default function CockpitDashboard() {
     miningAccounts: [],
   }
 
-  const onlinePercentage = Math.round((displayData.onlineMiners / displayData.totalMiners) * 100)
-  const efficiency = Math.round((displayData.globalHashrate / displayData.theoreticalHashrate) * 100)
+  const onlinePercentage = displayData.totalMiners > 0 
+    ? Math.round(((displayData.onlineMiners || 0) / (displayData.totalMiners || 1)) * 100)
+    : 0
+  const efficiency = (displayData.theoreticalHashrate || 0) > 0
+    ? Math.round(((displayData.globalHashrate || 0) / (displayData.theoreticalHashrate || 1)) * 100)
+    : 0
 
   // Données pour les graphiques - Style Home page
   const hashrateHistoryData = {
@@ -211,7 +215,7 @@ export default function CockpitDashboard() {
     labels: ['Online', 'Offline'],
     datasets: [
       {
-        data: [displayData.onlineMiners, displayData.totalMiners - displayData.onlineMiners],
+        data: [(displayData.onlineMiners || 0), (displayData.totalMiners || 0) - (displayData.onlineMiners || 0)],
         backgroundColor: [
           '#A7FB90', // #A7FB90 - pas de transparence
           '#ff4d4d', // Rouge - pas de transparence
@@ -305,7 +309,7 @@ export default function CockpitDashboard() {
           },
           padding: 16,
           callback: function(value: any) {
-            return value.toFixed(2)
+            return (value || 0).toFixed(2)
           },
         },
       },
@@ -336,147 +340,61 @@ export default function CockpitDashboard() {
 
   return (
     <div>
-      {/* KPI Cards enrichies */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'var(--space-6)', marginBottom: '10px' }}>
-        <Card>
+      {/* KPI Cards - Style Projections */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 'var(--space-4)', marginBottom: 'var(--space-6)' }}>
+        <Card style={{ borderLeft: '4px solid var(--hearst-green)', paddingLeft: 'calc(1.5rem - 4px)', boxShadow: 'inset -2px 0 8px rgba(138, 227, 138, 0.15), var(--shadow-sm)' }}>
           <CardHeader>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <CardTitle>Hashrate Global</CardTitle>
-              <HashrateIcon />
-            </div>
+            <CardTitle>Hashrate Global</CardTitle>
           </CardHeader>
           <CardContent>
-            <div style={{ 
-              fontSize: '2rem', 
-              fontWeight: 700, 
-              color: '#A7FB90', 
-              marginBottom: 'var(--space-2)',
-              fontFamily: 'var(--font-mono), monospace',
-              fontVariantNumeric: 'tabular-nums',
-              letterSpacing: '-0.02em',
-              lineHeight: 1.2
-            }}>
-              {displayData.globalHashrate.toFixed(1)} PH/s
+            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--hearst-green)' }}>
+              {(displayData.globalHashrate || 0).toFixed(1)} PH/s
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-2)' }}>
-              <span style={{ color: 'var(--hearst-green)', fontSize: '0.875rem' }}>↑ 2.1%</span>
-              <span style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>vs hier</span>
-            </div>
-            <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
-              Théorique: {displayData.theoreticalHashrate.toFixed(1)} PH/s
+            <p style={{ color: 'var(--text-secondary)', marginTop: 'var(--space-2)', fontSize: 'var(--text-sm)' }}>
+              Global hashrate
             </p>
-            <div style={{ marginTop: 'var(--space-3)', width: '100%', height: '6px', background: 'rgba(255, 255, 255, 0.1)', borderRadius: '3px', overflow: 'hidden' }}>
-              <div style={{ width: `${efficiency}%`, height: '100%', background: '#A7FB90', borderRadius: 'var(--radius-sm)' }}></div>
-            </div>
-            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', marginTop: 'var(--space-2)' }}>
-              Efficacité: {efficiency}%
-            </div>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card style={{ borderLeft: '4px solid var(--hearst-green)', paddingLeft: 'calc(1.5rem - 4px)', boxShadow: 'inset -2px 0 8px rgba(138, 227, 138, 0.15), var(--shadow-sm)' }}>
           <CardHeader>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <CardTitle>Production BTC (24h)</CardTitle>
-              <BitcoinIcon />
-            </div>
+            <CardTitle>Production BTC (24h)</CardTitle>
           </CardHeader>
           <CardContent>
-            <div style={{ 
-              fontSize: '2rem', 
-              fontWeight: 700, 
-              color: '#A7FB90', 
-              marginBottom: 'var(--space-2)',
-              fontFamily: 'var(--font-mono), monospace',
-              fontVariantNumeric: 'tabular-nums',
-              letterSpacing: '-0.02em',
-              lineHeight: 1.2
-            }}>
-              {displayData.btcProduction24h.toFixed(6)} BTC
+            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--hearst-green)' }}>
+              {(displayData.btcProduction24h || 0).toFixed(6)} BTC
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-2)' }}>
-              <span style={{ color: 'var(--hearst-green)', fontSize: '0.875rem' }}>↑ 0.8%</span>
-              <span style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>vs hier</span>
-            </div>
-            <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
-              ≈ ${(displayData.btcProduction24h * 114000).toFixed(2)} USD
+            <p style={{ color: 'var(--text-secondary)', marginTop: 'var(--space-2)', fontSize: 'var(--text-sm)' }}>
+              24h production
             </p>
-            <div style={{ marginTop: 'var(--space-3)', padding: 'var(--space-2)', background: '#A7FB90', borderRadius: 'var(--radius-sm)' }}>
-              <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', marginBottom: 'var(--space-1)' }}>Projection mensuelle</div>
-              <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--hearst-green)' }}>
-                {(displayData.btcProduction24h * 30).toFixed(4)} BTC
-              </div>
-            </div>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card style={{ borderLeft: '4px solid var(--hearst-green)', paddingLeft: 'calc(1.5rem - 4px)', boxShadow: 'inset -2px 0 8px rgba(138, 227, 138, 0.15), var(--shadow-sm)' }}>
           <CardHeader>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <CardTitle>Total Mineurs</CardTitle>
-              <MinerIcon />
-            </div>
+            <CardTitle>Total Mineurs</CardTitle>
           </CardHeader>
           <CardContent>
-            <div style={{ 
-              fontSize: '2rem', 
-              fontWeight: 700, 
-              color: '#A7FB90', 
-              marginBottom: 'var(--space-2)',
-              fontFamily: 'var(--font-mono), monospace',
-              fontVariantNumeric: 'tabular-nums',
-              letterSpacing: '-0.02em',
-              lineHeight: 1.2
-            }}>
+            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--hearst-green)' }}>
               {displayData.totalMiners}
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-2)' }}>
-              <span style={{ color: 'var(--hearst-green)', fontSize: '0.875rem', fontWeight: 600 }}>
-                {displayData.onlineMiners} en ligne
-              </span>
-            </div>
-            <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
-              Capacité totale de la flotte
+            <p style={{ color: 'var(--text-secondary)', marginTop: 'var(--space-2)', fontSize: 'var(--text-sm)' }}>
+              Total miners
             </p>
-            <div style={{ marginTop: 'var(--space-3)', padding: 'var(--space-2)', background: '#A7FB90', borderRadius: 'var(--radius-sm)' }}>
-              <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', marginBottom: 'var(--space-1)' }}>Mineurs hors ligne</div>
-              <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: '#ff4d4d' }}>
-                {displayData.totalMiners - displayData.onlineMiners}
-              </div>
-            </div>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card style={{ borderLeft: '4px solid var(--hearst-green)', paddingLeft: 'calc(1.5rem - 4px)', boxShadow: 'inset -2px 0 8px rgba(138, 227, 138, 0.15), var(--shadow-sm)' }}>
           <CardHeader>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <CardTitle>Mineurs En Ligne</CardTitle>
-              <OnlineIcon />
-            </div>
+            <CardTitle>Mineurs En Ligne</CardTitle>
           </CardHeader>
           <CardContent>
-            <div style={{ 
-              fontSize: '2rem', 
-              fontWeight: 700, 
-              color: '#A7FB90', 
-              marginBottom: 'var(--space-2)',
-              fontFamily: 'var(--font-mono), monospace',
-              fontVariantNumeric: 'tabular-nums',
-              letterSpacing: '-0.02em',
-              lineHeight: 1.2
-            }}>
+            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--hearst-green)' }}>
               {displayData.onlineMiners}
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-2)' }}>
-              <span style={{ color: 'var(--hearst-green)', fontSize: '0.875rem' }}>→ Stable</span>
-              <span style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>vs moyenne</span>
-            </div>
-            <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
-              {onlinePercentage}% de la flotte
+            <p style={{ color: 'var(--text-secondary)', marginTop: 'var(--space-2)', fontSize: 'var(--text-sm)' }}>
+              Online miners
             </p>
-            <div style={{ marginTop: 'var(--space-3)', width: '100%', height: '6px', background: 'rgba(255, 255, 255, 0.1)', borderRadius: '3px', overflow: 'hidden' }}>
-              <div style={{ width: `${onlinePercentage}%`, height: '100%', background: 'linear-gradient(90deg, var(--hearst-green), var(--hearst-green-dark))', borderRadius: 'var(--radius-sm)' }}></div>
-            </div>
           </CardContent>
         </Card>
       </div>
@@ -548,9 +466,9 @@ export default function CockpitDashboard() {
                     displayData.miningAccounts.map((account: any) => (
                       <tr key={account.id}>
                         <td><strong>{account.name}</strong></td>
-                        <td>{(account.hashrate / 1000).toFixed(2)} PH/s</td>
-                        <td>{account.btc24h.toFixed(6)} BTC</td>
-                        <td>${(account.btc24h * 114000).toFixed(2)}</td>
+                        <td>{((account.hashrate || 0) / 1000).toFixed(2)} PH/s</td>
+                        <td>{(account.btc24h || 0).toFixed(6)} BTC</td>
+                        <td>${((account.btc24h || 0) * 114000).toFixed(2)}</td>
                         <td>
                           <span style={{ 
                             color: account.status === 'active' ? 'var(--hearst-green)' : '#ff4d4d',

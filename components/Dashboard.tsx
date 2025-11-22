@@ -56,9 +56,15 @@ interface DashboardProps {
     last_7_days_jobs?: number
     total_storage_mb?: number
   }
+  metrics?: {
+    btcPrice: number
+    networkHashrate: number
+    hashpriceTH: number
+    hashpricePH: number
+  }
 }
 
-export default function Dashboard({ data }: DashboardProps): JSX.Element {
+export default function Dashboard({ data, metrics }: DashboardProps): JSX.Element {
   const [selectedPeriod, setSelectedPeriod] = useState<'daily' | 'monthly' | 'yearly'>('daily')
 
   useEffect(() => {
@@ -361,122 +367,85 @@ export default function Dashboard({ data }: DashboardProps): JSX.Element {
     },
   }
 
+  // Fonctions de formatage
+  const formatNumber = (num: number, decimals: number = 2) => {
+    return new Intl.NumberFormat('en-US', {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals
+    }).format(num)
+  }
+
+  const formatHashrate = (hashrate: number) => {
+    const eh = hashrate / 1000000 // Convert to EH/s
+    return formatNumber(eh, 2)
+  }
+
+  // Charger le CSS du calculator
+  useEffect(() => {
+    const link = document.createElement('link')
+    link.rel = 'stylesheet'
+    link.href = '/css/calculator-charte-exacte.css'
+    document.head.appendChild(link)
+
+    return () => {
+      const existingLink = document.querySelector('link[href="/css/calculator-charte-exacte.css"]')
+      if (existingLink && existingLink.parentNode) {
+        existingLink.parentNode.removeChild(existingLink)
+      }
+    }
+  }, [])
+
+  // Valeurs par défaut pour les métriques
+  const defaultMetrics = {
+    btcPrice: 84519,
+    networkHashrate: 600000000,
+    hashpriceTH: 0.0634,
+    hashpricePH: 63.39
+  }
+
+  const displayMetrics = metrics || defaultMetrics
+
   return (
     <div className="dashboard-view">
       <div className="dashboard-content">
-        {/* Hearst Corporation Section */}
-        <div style={{ marginBottom: '10px' }}>
-          <h2 style={{ fontSize: 'var(--text-xl)', fontWeight: 600, marginBottom: 'var(--space-4)', color: 'var(--text-primary)' }}>
-            Hearst Corporation
-          </h2>
-          
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: 'var(--space-4)',
-          }}>
-            <Card>
-              <CardHeader>
-                <CardTitle>Active Customers</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div style={{ 
-                  fontSize: '2rem', 
-                  fontWeight: 700, 
-                  color: '#A7FB90', 
-                  marginBottom: 'var(--space-2)',
-                  fontFamily: 'var(--font-mono), monospace',
-                  fontVariantNumeric: 'tabular-nums',
-                  letterSpacing: '-0.02em',
-                  lineHeight: 1.2
-                }}>
-                  1,247
-                </div>
-                <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
-                  Clients actifs
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Number of batches</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div style={{ 
-                  fontSize: '2rem', 
-                  fontWeight: 700, 
-                  color: '#A7FB90', 
-                  marginBottom: 'var(--space-2)',
-                  fontFamily: 'var(--font-mono), monospace',
-                  fontVariantNumeric: 'tabular-nums',
-                  letterSpacing: '-0.02em',
-                  lineHeight: 1.2
-                }}>
-                  3,892
-                </div>
-                <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
-                  Batches total
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Number of miners</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div style={{ 
-                  fontSize: '2rem', 
-                  fontWeight: 700, 
-                  color: '#A7FB90', 
-                  marginBottom: 'var(--space-2)',
-                  fontFamily: 'var(--font-mono), monospace',
-                  fontVariantNumeric: 'tabular-nums',
-                  letterSpacing: '-0.02em',
-                  lineHeight: 1.2
-                }}>
-                  15,648
-                </div>
-                <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
-                  Mineurs actifs
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Hearst Total Hashrate</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div style={{ 
-                  fontSize: '2rem', 
-                  fontWeight: 700, 
-                  color: '#A7FB90', 
-                  marginBottom: 'var(--space-2)',
-                  fontFamily: 'var(--font-mono), monospace',
-                  fontVariantNumeric: 'tabular-nums',
-                  letterSpacing: '-0.02em',
-                  lineHeight: 1.2
-                }}>
-                  2,847.5 PH/s
-                </div>
-                <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
-                  Hashrate total Hearst
-                </p>
-              </CardContent>
-            </Card>
+        {/* Boxes KPI - Style exact Mining Profitability Calculator */}
+        <section className="metrics-section" style={{ marginBottom: '20px' }}>
+          <div className="calculator-kpi-grid">
+            <div className="calculator-kpi-card">
+              <div className="calculator-kpi-label">BTC Price</div>
+              <div className="calculator-kpi-value">
+                ${formatNumber(displayMetrics.btcPrice, 2)}
+              </div>
+              <div className="calculator-kpi-description">Real-time price</div>
+            </div>
+            <div className="calculator-kpi-card">
+              <div className="calculator-kpi-label">Network Hashrate</div>
+              <div className="calculator-kpi-value">
+                {formatHashrate(displayMetrics.networkHashrate)} EH/s
+              </div>
+              <div className="calculator-kpi-description">Real-time</div>
+            </div>
+            <div className="calculator-kpi-card">
+              <div className="calculator-kpi-label">Hashprice (TH)</div>
+              <div className="calculator-kpi-value">
+                ${formatNumber(displayMetrics.hashpriceTH, 4)}
+              </div>
+              <div className="calculator-kpi-description">per TH/day</div>
+            </div>
+            <div className="calculator-kpi-card">
+              <div className="calculator-kpi-label">Hashprice (PH)</div>
+              <div className="calculator-kpi-value">
+                ${formatNumber(displayMetrics.hashpricePH, 2)}
+              </div>
+              <div className="calculator-kpi-description">per PH/day</div>
+            </div>
           </div>
-        </div>
+        </section>
 
         {/* BTC Mined Section - Charts Only */}
-        <div style={{ marginBottom: '10px', marginTop: '20px' }}>
-          <h2 style={{ fontSize: 'var(--text-xl)', fontWeight: 600, marginBottom: 'var(--space-4)', color: 'var(--text-primary)' }}>
-            BTC Mined
-          </h2>
-
+        <div style={{ marginBottom: '10px', marginTop: '0px' }}>
           {/* Charts Container */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(500px, 1fr))', gap: 'var(--space-6)', marginBottom: '10px', marginTop: '30px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(500px, 1fr))', gap: 'var(--space-6)', marginBottom: '10px', marginTop: '30px', width: '100%', maxWidth: '100%' }}>
             <Card>
               <CardHeader>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--space-4)' }}>
@@ -619,17 +588,16 @@ export default function Dashboard({ data }: DashboardProps): JSX.Element {
         </div>
 
         {/* Transaction History Section */}
-        <div style={{ marginTop: '-10px', width: '100%', maxWidth: '100%', gridColumn: '1 / -1' }}>
+        <div style={{ marginTop: '20px', width: '100%', maxWidth: '100%', gridColumn: '1 / -1' }}>
           <Card style={{ width: '100%', maxWidth: '100%' }}>
-            <CardHeader>
-              <CardTitle>Transaction history</CardTitle>
-            </CardHeader>
             <CardContent style={{ padding: 'var(--space-6)', width: '100%' }}>
-              <div className="table-container" style={{ marginTop: '-10px', width: '100%', maxWidth: '100%', overflowX: 'auto' }}>
+              <div className="table-container" style={{ marginTop: '-10px', width: 'calc(100% + 50px)', maxWidth: 'calc(100% + 50px)', marginLeft: '-20px', marginRight: '-30px', overflowX: 'auto' }}>
                 <table className="table" style={{ width: '100%', minWidth: '100%', tableLayout: 'auto' }}>
                 <thead>
                   <tr>
-                    <th>Date</th>
+                    <th style={{ textAlign: 'left', padding: 'var(--space-6)' }}>
+                      <h3 style={{ fontSize: 'var(--text-xl)', fontWeight: 600, lineHeight: 1.2, letterSpacing: '-0.02em', color: 'var(--text-primary)', margin: 0 }}>Transaction history</h3>
+                    </th>
                     <th>Account</th>
                     <th>Total Reward</th>
                     <th>Hashrate</th>
@@ -637,31 +605,31 @@ export default function Dashboard({ data }: DashboardProps): JSX.Element {
                 </thead>
                 <tbody>
                   <tr>
-                    <td>2025-01-18</td>
+                    <td style={{ padding: 'var(--space-6)' }}>2025-01-18</td>
                     <td>AKT04</td>
                     <td style={{ color: 'var(--hearst-green)', fontWeight: 600 }}>0.084521 BTC</td>
                     <td>2041.42 TH/s</td>
                   </tr>
                   <tr>
-                    <td>2025-01-17</td>
+                    <td style={{ padding: 'var(--space-6)' }}>2025-01-17</td>
                     <td>AKT04</td>
                     <td style={{ color: 'var(--hearst-green)', fontWeight: 600 }}>0.083247 BTC</td>
                     <td>2041.42 TH/s</td>
                   </tr>
                   <tr>
-                    <td>2025-01-16</td>
+                    <td style={{ padding: 'var(--space-6)' }}>2025-01-16</td>
                     <td>AKT05</td>
                     <td style={{ color: 'var(--hearst-green)', fontWeight: 600 }}>0.082156 BTC</td>
                     <td>1987.23 TH/s</td>
                   </tr>
                   <tr>
-                    <td>2025-01-15</td>
+                    <td style={{ padding: 'var(--space-6)' }}>2025-01-15</td>
                     <td>AKT06</td>
                     <td style={{ color: 'var(--hearst-green)', fontWeight: 600 }}>0.081234 BTC</td>
                     <td>2156.78 TH/s</td>
                   </tr>
                   <tr>
-                    <td>2025-01-14</td>
+                    <td style={{ padding: 'var(--space-6)' }}>2025-01-14</td>
                     <td>AKT04</td>
                     <td style={{ color: 'var(--hearst-green)', fontWeight: 600 }}>0.080521 BTC</td>
                     <td>2041.42 TH/s</td>

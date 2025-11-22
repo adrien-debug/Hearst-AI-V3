@@ -290,8 +290,14 @@ const minerModels = [
   'Custom Model'
 ]
 
-export default function SetupManager() {
-  const [activeTab, setActiveTab] = useState<'miners' | 'prices' | 'hosters' | 'summary'>('summary')
+interface SetupManagerProps {
+  activeTab?: 'miners' | 'prices' | 'hosters' | 'overview'
+  hideHeader?: boolean
+}
+
+export default function SetupManager({ activeTab: externalActiveTab, hideHeader = false }: SetupManagerProps = {}) {
+  const [internalActiveTab, setInternalActiveTab] = useState<'miners' | 'prices' | 'hosters' | 'summary'>('summary')
+  const activeTab = externalActiveTab || internalActiveTab
   const [miners, setMiners] = useState<Miner[]>(demoMiners)
   const [prices, setPrices] = useState<Price[]>(demoPrices)
   const [hosters, setHosters] = useState<Hoster[]>(demoHosters)
@@ -394,49 +400,51 @@ export default function SetupManager() {
 
   return (
     <div className="setup-manager">
-      {/* Header - Style Projections */}
-      <div style={{ marginBottom: 'var(--space-4)' }}>
-        <h1 style={{ fontSize: 'var(--text-2xl)', fontWeight: 700, marginBottom: 'var(--space-4)' }}>Setup Manager</h1>
-        
-        {/* Navigation tabs - Style Projections */}
-        <div style={{
-          display: 'flex',
-          gap: 'var(--space-2)',
-          flexWrap: 'wrap',
-          borderBottom: '1px solid var(--border)',
-          marginBottom: 'var(--space-6)',
-          overflowX: 'auto',
-        }}>
-          {[
-            { id: 'summary', label: 'Summary' },
-            { id: 'miners', label: 'Miners Configuration' },
-            { id: 'prices', label: 'Price List' },
-            { id: 'hosters', label: 'Hosters' },
-          ].map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id as any)}
-              style={{
-                padding: 'var(--space-3) var(--space-4)',
-                background: 'transparent',
-                border: 'none',
-                borderBottom: activeTab === tab.id ? '2px solid var(--hearst-green)' : '2px solid transparent',
-                color: activeTab === tab.id ? 'var(--hearst-green)' : 'var(--text-secondary)',
-                cursor: 'pointer',
-                fontWeight: activeTab === tab.id ? 600 : 400,
-                transition: 'all var(--duration-fast) var(--ease-in-out)',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              {tab.label}
-            </button>
-          ))}
+      {!hideHeader && (
+        /* Header - Style Projections */
+        <div style={{ marginBottom: 'var(--space-4)' }}>
+          <h1 style={{ fontSize: 'var(--text-2xl)', fontWeight: 700, marginBottom: 'var(--space-4)' }}>Setup Manager</h1>
+          
+          {/* Navigation tabs - Style Projections */}
+          <div style={{
+            display: 'flex',
+            gap: 'var(--space-2)',
+            flexWrap: 'wrap',
+            borderBottom: '1px solid var(--border)',
+            marginBottom: 'var(--space-6)',
+            overflowX: 'auto',
+          }}>
+            {[
+              { id: 'summary', label: 'Summary' },
+              { id: 'miners', label: 'Miners Configuration' },
+              { id: 'prices', label: 'Price List' },
+              { id: 'hosters', label: 'Hosters' },
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setInternalActiveTab(tab.id as any)}
+                style={{
+                  padding: 'var(--space-3) var(--space-4)',
+                  background: 'transparent',
+                  border: 'none',
+                  borderBottom: activeTab === tab.id ? '2px solid var(--hearst-green)' : '2px solid transparent',
+                  color: activeTab === tab.id ? 'var(--hearst-green)' : 'var(--text-secondary)',
+                  cursor: 'pointer',
+                  fontWeight: activeTab === tab.id ? 600 : 400,
+                  transition: 'all var(--duration-fast) var(--ease-in-out)',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Content */}
       <div className="setup-content">
-        {activeTab === 'summary' && (
+        {(activeTab === 'summary' || activeTab === 'overview') && (
           <SummaryTab
             miners={miners}
             hosters={hosters}

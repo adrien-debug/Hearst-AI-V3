@@ -8,6 +8,12 @@ export default function Home() {
   const [data, setData] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [metrics, setMetrics] = useState<any>({
+    btcPrice: 0,
+    networkHashrate: 0,
+    hashpriceTH: 0,
+    hashpricePH: 0
+  })
 
   useEffect(() => {
     const loadData = async () => {
@@ -23,13 +29,42 @@ export default function Home() {
       }
     }
 
+    const loadMetrics = async () => {
+      try {
+        const response = await fetch('/api/hashprice-lite')
+        const metricsData = await response.json()
+        
+        // Convertir les données au format attendu
+        setMetrics({
+          btcPrice: metricsData.btcPrice || 84519,
+          networkHashrate: metricsData.networkHashrate || 600000000,
+          hashpriceTH: metricsData.hashpriceTH || 0.0634,
+          hashpricePH: metricsData.hashpricePH || 63.39
+        })
+      } catch (err) {
+        console.error('Error loading metrics:', err)
+        // Valeurs par défaut si l'API échoue
+        setMetrics({
+          btcPrice: 84519,
+          networkHashrate: 600000000,
+          hashpriceTH: 0.0634,
+          hashpricePH: 63.39
+        })
+      }
+    }
+
     loadData()
+    loadMetrics()
     
     // Refresh every 30 seconds
     const interval = setInterval(() => {
       loadData()
+      loadMetrics()
     }, 30000)
-    return () => clearInterval(interval)
+    
+    return () => {
+      clearInterval(interval)
+    }
   }, [])
 
   if (loading) {
@@ -75,10 +110,11 @@ export default function Home() {
     )
   }
 
+
   return (
     <div>
       {/* Dashboard Component avec graphiques BTC Mined */}
-      <Dashboard data={data} />
+      <Dashboard data={data} metrics={metrics} />
     </div>
   )
 }

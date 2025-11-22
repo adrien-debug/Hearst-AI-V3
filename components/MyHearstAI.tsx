@@ -122,10 +122,24 @@ export default function MyHearstAI() {
       }
     }
     
+    // Charger le CSS du calculator pour les boxes
+    const link = document.createElement('link')
+    link.rel = 'stylesheet'
+    link.href = '/css/calculator-charte-exacte.css'
+    document.head.appendChild(link)
+    
     loadIcons()
     // Retry after a short delay in case icons aren't loaded yet
     const timeout = setTimeout(loadIcons, 500)
-    return () => clearTimeout(timeout)
+    
+    return () => {
+      clearTimeout(timeout)
+      // Nettoyer le CSS
+      const existingLink = document.querySelector('link[href="/css/calculator-charte-exacte.css"]')
+      if (existingLink && existingLink.parentNode) {
+        existingLink.parentNode.removeChild(existingLink)
+      }
+    }
   }, [])
 
   // Save search history to localStorage
@@ -267,22 +281,199 @@ export default function MyHearstAI() {
     })
   }
 
+  const [stats, setStats] = useState<any>(null)
+  const [loadingStats, setLoadingStats] = useState(true)
+
+  // Load stats on mount
+  useEffect(() => {
+    const loadStats = async () => {
+      try {
+        setLoadingStats(true)
+        const response = await fetch('/api/stats')
+        if (response.ok) {
+          const data = await response.json()
+          setStats(data.stats || data)
+        } else {
+          // Fallback to mock data
+          setStats({
+            total_projects: 12,
+            total_versions: 45,
+            total_jobs: 234,
+            jobs_success_rate: 94.5,
+            total_searches: searchHistory.length,
+            active_miners: 4,
+          })
+        }
+      } catch (err) {
+        console.error('Error loading stats:', err)
+        // Fallback to mock data
+        setStats({
+          total_projects: 12,
+          total_versions: 45,
+          total_jobs: 234,
+          jobs_success_rate: 94.5,
+          total_searches: searchHistory.length,
+          active_miners: 4,
+        })
+      } finally {
+        setLoadingStats(false)
+      }
+    }
+
+    loadStats()
+  }, [])
+
+  const quickLinks = [
+    { id: 'projects', label: 'Projections', icon: '📊', url: '/projects', color: '#a5ff9c' },
+    { id: 'cockpit', label: 'Cockpit', icon: '🎛️', url: '/cockpit', color: '#8afd81' },
+    { id: 'profitability', label: 'Profitability Index', icon: '💰', url: '/profitability-index', color: '#a5ff9c' },
+    { id: 'documents', label: 'Documents Vault', icon: '📁', url: '/documents-vault', color: '#8afd81' },
+    { id: 'setup', label: 'Setup Manager', icon: '⚙️', url: '/setup', color: '#a5ff9c' },
+    { id: 'wallet', label: 'Wallet Scraper', icon: '💳', url: '/wallet-scraper', color: '#8afd81' },
+    { id: 'collateral', label: 'Collateral', icon: '🔒', url: '/collateral', color: '#a5ff9c' },
+    { id: 'electricity', label: 'Electricity', icon: '⚡', url: '/electricity', color: '#8afd81' },
+  ]
+
+  const popularSearches = [
+    { query: 'mining batch', count: 45, type: 'mining-batch' },
+    { query: 'hashrate report', count: 32, type: 'hashrate' },
+    { query: 'customer transactions', count: 28, type: 'transaction' },
+    { query: 'wallet balance', count: 24, type: 'wallet' },
+    { query: 'client report', count: 19, type: 'rapport-client' },
+  ]
+
+  const [activeTab, setActiveTab] = useState('overview')
+
   return (
     <div className="dashboard-view">
       <div className="dashboard-content">
-        {/* AI Search Bar Section - Style Home page */}
-        <div style={{ marginBottom: 'var(--space-8)' }}>
-          <h2 style={{ fontSize: 'var(--text-xl)', fontWeight: 600, marginBottom: 'var(--space-4)', color: 'var(--text-primary)' }}>
-            My Hearst AI
-          </h2>
-          
-          <Card>
-            <CardHeader>
-              <CardTitle>Recherche dans toutes les données de la plateforme</CardTitle>
-            </CardHeader>
-            <CardContent>
-              {/* Search Type Filter Buttons */}
-              <div className="search-type-filters" style={{ marginBottom: 'var(--space-4)' }}>
+        {/* Navigation horizontale - Style exact PROJECTIONS */}
+        <nav className="calculator-nav-tabs">
+          <button 
+            className={`calculator-nav-tab ${activeTab === 'overview' ? 'active' : ''}`}
+            onClick={() => setActiveTab('overview')}
+          >
+            Overview
+          </button>
+          <button 
+            className={`calculator-nav-tab ${activeTab === 'search' ? 'active' : ''}`}
+            onClick={() => setActiveTab('search')}
+          >
+            Search
+          </button>
+          <button 
+            className={`calculator-nav-tab ${activeTab === 'history' ? 'active' : ''}`}
+            onClick={() => setActiveTab('history')}
+          >
+            History
+          </button>
+        </nav>
+
+        {/* KPI Cards - Style exact Mining Profitability Calculator */}
+        <section className="metrics-section" style={{ marginBottom: 'var(--space-6)' }}>
+          <div className="calculator-kpi-grid">
+            <div className="calculator-kpi-card">
+              <div className="calculator-kpi-label">Total Searches</div>
+              <div className="calculator-kpi-value">
+                {stats?.total_searches || searchHistory.length}
+              </div>
+              <div className="calculator-kpi-description">Search history</div>
+            </div>
+            <div className="calculator-kpi-card">
+              <div className="calculator-kpi-label">Total Projects</div>
+              <div className="calculator-kpi-value">
+                {stats?.total_projects || 12}
+              </div>
+              <div className="calculator-kpi-description">Active projects</div>
+            </div>
+            <div className="calculator-kpi-card">
+              <div className="calculator-kpi-label">Total Jobs</div>
+              <div className="calculator-kpi-value">
+                {stats?.total_jobs || 234}
+              </div>
+              <div className="calculator-kpi-description">All jobs</div>
+            </div>
+            <div className="calculator-kpi-card">
+              <div className="calculator-kpi-label">Success Rate</div>
+              <div className="calculator-kpi-value" style={{ color: stats?.jobs_success_rate >= 90 ? '#A7FB90' : stats?.jobs_success_rate >= 70 ? '#FFA500' : '#ff4d4d' }}>
+                {stats?.jobs_success_rate ? `${stats.jobs_success_rate.toFixed(1)}%` : '94.5%'}
+              </div>
+              <div className="calculator-kpi-description">Job success rate</div>
+            </div>
+          </div>
+        </section>
+
+        {/* Quick Access Section - Style Cockpit */}
+        {activeTab === 'overview' && (
+          <div style={{ marginBottom: 'var(--space-6)' }}>
+            <div style={{ marginBottom: 'var(--space-4)' }}>
+              <h1 style={{ fontSize: 'var(--text-2xl)', fontWeight: 700 }}>Quick Access</h1>
+            </div>
+            <div style={{
+              display: 'flex',
+              gap: 'var(--space-2)',
+              flexWrap: 'wrap',
+              borderBottom: '1px solid var(--border)',
+              marginBottom: 'var(--space-6)',
+              overflowX: 'auto',
+            }}>
+              {quickLinks.map((link) => {
+                // Déterminer si le lien est actif en fonction de l'URL actuelle
+                const isActive = typeof window !== 'undefined' && window.location.pathname === link.url
+                return (
+                  <a
+                    key={link.id}
+                    href={link.url}
+                    style={{
+                      padding: 'var(--space-3) var(--space-4)',
+                      background: 'transparent',
+                      border: 'none',
+                      borderBottom: isActive ? '2px solid var(--hearst-green)' : '2px solid transparent',
+                      color: isActive ? 'var(--hearst-green)' : 'var(--text-secondary)',
+                      cursor: 'pointer',
+                      fontWeight: isActive ? 600 : 400,
+                      transition: 'all var(--duration-fast) var(--ease-in-out)',
+                      whiteSpace: 'nowrap',
+                      textDecoration: 'none',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 'var(--space-2)',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!isActive) {
+                        e.currentTarget.style.color = 'var(--text-primary)'
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!isActive) {
+                        e.currentTarget.style.color = 'var(--text-secondary)'
+                      }
+                    }}
+                  >
+                    <span style={{ fontSize: '16px' }}>{link.icon}</span>
+                    <span>{link.label}</span>
+                  </a>
+                )
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* AI Search Bar Section - Style PROJECTIONS */}
+        {(activeTab === 'search' || activeTab === 'overview') && (
+          <div style={{ marginBottom: 'var(--space-8)' }}>
+            <Card>
+              <CardHeader>
+                <CardTitle>Recherche dans toutes les données de la plateforme</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {/* Search Type Filter Buttons - Style PROJECTIONS */}
+                <div className="search-type-filters" style={{ 
+                  marginBottom: 'var(--space-4)',
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: 'var(--space-2)'
+                }}>
               {searchTypes.map((type) => (
                 <button
                   key={type.id}
@@ -293,7 +484,36 @@ export default function MyHearstAI() {
                       setSearchTypeFilter(type.id)
                     }
                   }}
-                  className={`search-type-btn ${searchTypeFilter === type.id ? 'active' : ''}`}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 'var(--space-2)',
+                    padding: 'var(--space-2) var(--space-4)',
+                    backgroundColor: searchTypeFilter === type.id ? 'rgba(167, 251, 144, 0.1)' : 'transparent',
+                    border: `1px solid ${searchTypeFilter === type.id ? '#A7FB90' : 'rgba(167, 251, 144, 0.2)'}`,
+                    borderRadius: 'var(--radius-sm)',
+                    color: searchTypeFilter === type.id ? '#A7FB90' : 'rgba(255, 255, 255, 0.6)',
+                    fontFamily: 'var(--font-family-primary)',
+                    fontSize: 'var(--text-sm)',
+                    fontWeight: searchTypeFilter === type.id ? 600 : 500,
+                    cursor: 'pointer',
+                    transition: 'all var(--transition-base)',
+                    whiteSpace: 'nowrap',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (searchTypeFilter !== type.id) {
+                      e.currentTarget.style.backgroundColor = 'rgba(167, 251, 144, 0.05)'
+                      e.currentTarget.style.borderColor = 'rgba(167, 251, 144, 0.3)'
+                      e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)'
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (searchTypeFilter !== type.id) {
+                      e.currentTarget.style.backgroundColor = 'transparent'
+                      e.currentTarget.style.borderColor = 'rgba(167, 251, 144, 0.2)'
+                      e.currentTarget.style.color = 'rgba(255, 255, 255, 0.6)'
+                    }
+                  }}
                 >
                   <span className="search-type-btn-icon">
                     {type.id === 'rapport-client' && (
@@ -417,6 +637,112 @@ export default function MyHearstAI() {
               </div>
             )}
             
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
+        {/* Popular Searches & Suggestions */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-6)', marginBottom: 'var(--space-6)' }}>
+          {/* Popular Searches */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Popular Searches</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+                {popularSearches.map((search, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      setSearchTypeFilter(search.type)
+                      handleSearch(search.query)
+                    }}
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      padding: 'var(--space-3)',
+                      backgroundColor: 'var(--bg-secondary)',
+                      border: '1px solid var(--border)',
+                      borderRadius: 'var(--radius-sm)',
+                      textAlign: 'left',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'rgba(165, 255, 156, 0.1)'
+                      e.currentTarget.style.borderColor = 'var(--hearst-green)'
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'var(--bg-secondary)'
+                      e.currentTarget.style.borderColor = 'var(--border)'
+                    }}
+                  >
+                    <div>
+                      <div style={{ fontWeight: 600, marginBottom: '4px' }}>{search.query}</div>
+                      <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)' }}>
+                        {search.count} searches
+                      </div>
+                    </div>
+                    <span style={{ color: 'var(--hearst-green)' }}>→</span>
+                  </button>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Recent Activity */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Recent Activity</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
+                {searchHistory.slice(0, 5).map((item, index) => (
+                  <div
+                    key={item.id}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 'var(--space-3)',
+                      padding: 'var(--space-3)',
+                      backgroundColor: 'var(--bg-secondary)',
+                      borderRadius: 'var(--radius-sm)',
+                    }}
+                  >
+                    <div style={{
+                      width: '8px',
+                      height: '8px',
+                      borderRadius: '50%',
+                      backgroundColor: 'var(--hearst-green)',
+                    }}></div>
+                    <div style={{ flex: 1 }}>
+                      <div style={{ fontWeight: 600, fontSize: 'var(--text-sm)', marginBottom: '4px' }}>
+                        "{item.query}"
+                      </div>
+                      <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)' }}>
+                        {item.timestamp.toLocaleString('fr-FR', { 
+                          day: '2-digit', 
+                          month: '2-digit',
+                          hour: '2-digit',
+                          minute: '2-digit'
+                        })} • {item.resultsCount} results
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                {searchHistory.length === 0 && (
+                  <div style={{ 
+                    padding: 'var(--space-4)', 
+                    textAlign: 'center', 
+                    color: 'var(--text-secondary)',
+                    fontSize: 'var(--text-sm)',
+                  }}>
+                    No recent activity
+                  </div>
+                )}
+              </div>
             </CardContent>
           </Card>
         </div>

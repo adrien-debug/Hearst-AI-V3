@@ -418,7 +418,7 @@ export default function WalletScraper() {
   const incomingTxs = filteredTransactions.filter(tx => tx.direction === 'in').length
   const outgoingTxs = filteredTransactions.filter(tx => tx.direction === 'out').length
   const unclassifiedTxs = filteredTransactions.filter(tx => tx.classification === 'cat-005').length
-  const totalVolume = filteredTransactions.reduce((sum, tx) => sum + tx.amount, 0)
+  const totalVolume = filteredTransactions.reduce((sum, tx) => sum + (tx.amount || 0), 0)
 
   const handleSort = (key: string) => {
     setSortConfig(prev => {
@@ -551,9 +551,9 @@ export default function WalletScraper() {
           formatDateTime(tx.date),
           tx.walletName,
           tx.direction.toUpperCase(),
-          tx.amount.toFixed(8),
-          tx.amountUSD.toFixed(2),
-          tx.fee.toFixed(8),
+          (tx.amount || 0).toFixed(8),
+          (tx.amountUSD || 0).toFixed(2),
+          (tx.fee || 0).toFixed(8),
           category ? category.name : 'Unclassified',
           tx.tags.join(';'),
           tx.notes
@@ -618,7 +618,7 @@ export default function WalletScraper() {
           </div>
           <div className="wallet-scraper-kpi-card">
             <div className="wallet-scraper-kpi-label">Total Volume</div>
-            <div className="wallet-scraper-kpi-value">{totalVolume.toFixed(2)} BTC</div>
+            <div className="wallet-scraper-kpi-value">{(totalVolume || 0).toFixed(2)} BTC</div>
             <div className="wallet-scraper-kpi-description">All time volume</div>
           </div>
           <div className="wallet-scraper-kpi-card">
@@ -1132,9 +1132,9 @@ function AllTransactionsTab({
                     </small>
                   </td>
                   <td>
-                    <strong>{tx.amount.toFixed(4)} BTC</strong>
+                    <strong>{(tx.amount || 0).toFixed(4)} BTC</strong>
                     <br />
-                    <small style={{ color: '#888' }}>${tx.amountUSD.toLocaleString()}</small>
+                    <small style={{ color: '#888' }}>${(tx.amountUSD || 0).toLocaleString()}</small>
                   </td>
                   <td>
                     <span className={`classification-badge badge-${category.name.toLowerCase().replace(/\s+/g, '-')}`} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
@@ -1223,7 +1223,7 @@ function AllTransactionsTab({
 
       <div style={{ marginTop: '24px', textAlign: 'center' }}>
         <div style={{ color: '#888', fontSize: '14px', marginBottom: '16px' }}>
-          Volume: {totalVolume.toFixed(4)} BTC (${(totalVolume * 85000).toLocaleString()})
+          Volume: {(totalVolume || 0).toFixed(4)} BTC (${((totalVolume || 0) * 85000).toLocaleString()})
         </div>
         <div className="scraper-action-buttons" style={{ justifyContent: 'center' }}>
           <button className="btn-secondary" onClick={onExport} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -1253,7 +1253,7 @@ function ClassificationsTab({
 }) {
   const categoryStats = categories.map(cat => {
     const catTxs = transactions.filter(tx => tx.classification === cat.id)
-    const catVolume = catTxs.reduce((sum, tx) => sum + tx.amount, 0)
+    const catVolume = catTxs.reduce((sum, tx) => sum + (tx.amount || 0), 0)
     return {
       ...cat,
       actualCount: catTxs.length,
@@ -1291,7 +1291,7 @@ function ClassificationsTab({
               </div>
               <div className="category-card-stats">
                 <div>Count: {cat.actualCount} txs</div>
-                <div>Volume: {cat.actualVolume.toFixed(4)} BTC</div>
+                <div>Volume: {(cat.actualVolume || 0).toFixed(4)} BTC</div>
               </div>
               <div className="category-card-actions">
                 <button className="btn-sm">Edit</button>
@@ -1357,8 +1357,8 @@ function AnalyticsTab({
   categories: ClassificationCategory[]
   wallets: ScrapedWallet[]
 }) {
-  const totalIn = transactions.filter(tx => tx.direction === 'in').reduce((sum, tx) => sum + tx.amount, 0)
-  const totalOut = transactions.filter(tx => tx.direction === 'out').reduce((sum, tx) => sum + tx.amount, 0)
+  const totalIn = transactions.filter(tx => tx.direction === 'in').reduce((sum, tx) => sum + (tx.amount || 0), 0)
+  const totalOut = transactions.filter(tx => tx.direction === 'out').reduce((sum, tx) => sum + (tx.amount || 0), 0)
   const net = totalIn - totalOut
 
   // Top addresses
@@ -1369,7 +1369,7 @@ function AnalyticsTab({
         acc[tx.fromAddress!] = { address: tx.fromAddress!, count: 0, volume: 0 }
       }
       acc[tx.fromAddress!].count++
-      acc[tx.fromAddress!].volume += tx.amount
+      acc[tx.fromAddress!].volume += (tx.amount || 0)
       return acc
     }, {})
 
@@ -1380,7 +1380,7 @@ function AnalyticsTab({
         acc[tx.toAddress!] = { address: tx.toAddress!, count: 0, volume: 0 }
       }
       acc[tx.toAddress!].count++
-      acc[tx.toAddress!].volume += tx.amount
+      acc[tx.toAddress!].volume += (tx.amount || 0)
       return acc
     }, {})
 
@@ -1394,7 +1394,7 @@ function AnalyticsTab({
 
   const classificationBreakdown = categories.map(cat => {
     const catTxs = transactions.filter(tx => tx.classification === cat.id)
-    const catVolume = catTxs.reduce((sum, tx) => sum + tx.amount, 0)
+    const catVolume = catTxs.reduce((sum, tx) => sum + (tx.amount || 0), 0)
     const avgSize = catTxs.length > 0 ? catVolume / catTxs.length : 0
     const percentage = transactions.length > 0 ? ((catTxs.length / transactions.length) * 100).toFixed(0) : 0
     return {
@@ -1424,9 +1424,9 @@ function AnalyticsTab({
             [Line Chart - BTC volume over time]
           </div>
           <div style={{ marginTop: '16px', fontSize: '14px', lineHeight: '2' }}>
-            <div>Total IN: {totalIn.toFixed(4)} BTC</div>
-            <div>Total OUT: {totalOut.toFixed(4)} BTC</div>
-            <div style={{ color: '#8afd81', fontWeight: '600' }}>Net: {net >= 0 ? '+' : ''}{net.toFixed(4)} BTC</div>
+            <div>Total IN: {(totalIn || 0).toFixed(4)} BTC</div>
+            <div>Total OUT: {(totalOut || 0).toFixed(4)} BTC</div>
+            <div style={{ color: '#8afd81', fontWeight: '600' }}>Net: {net >= 0 ? '+' : ''}{(net || 0).toFixed(4)} BTC</div>
           </div>
         </div>
 
@@ -1454,7 +1454,7 @@ function AnalyticsTab({
                   <div className="top-address-address">{truncateAddress(item.address)}</div>
                   <div className="top-address-stats">{item.count} txs</div>
                 </div>
-                <div className="top-address-amount">{item.volume.toFixed(4)} BTC</div>
+                <div className="top-address-amount">{(item.volume || 0).toFixed(4)} BTC</div>
               </li>
             ))}
           </ul>
@@ -1470,7 +1470,7 @@ function AnalyticsTab({
                   <div className="top-address-address">{truncateAddress(item.address)}</div>
                   <div className="top-address-stats">{item.count} txs</div>
                 </div>
-                <div className="top-address-amount">{item.volume.toFixed(4)} BTC</div>
+                <div className="top-address-amount">{(item.volume || 0).toFixed(4)} BTC</div>
               </li>
             ))}
           </ul>
@@ -1503,8 +1503,8 @@ function AnalyticsTab({
                   </span>
                 </td>
                 <td>{item.count}</td>
-                <td>{item.volume.toFixed(4)} BTC</td>
-                <td>{item.avgSize.toFixed(4)} BTC</td>
+                <td>{(item.volume || 0).toFixed(4)} BTC</td>
+                <td>{(item.avgSize || 0).toFixed(4)} BTC</td>
                 <td>{item.percentage}%</td>
               </tr>
             ))}
@@ -1843,7 +1843,7 @@ function TransactionDetailsModal({
               </div>
               <div className="form-group">
                 <label>Fee:</label>
-                <div>{transaction.fee.toFixed(8)} BTC (${(transaction.fee * 85000).toFixed(2)})</div>
+                <div>{(transaction.fee || 0).toFixed(8)} BTC (${((transaction.fee || 0) * 85000).toFixed(2)})</div>
               </div>
             </div>
 
@@ -1926,7 +1926,7 @@ function TransactionDetailsModal({
                     <div style={{ fontSize: '12px', color: '#888', display: 'flex', alignItems: 'center', gap: '6px' }}>
                       {transaction.walletName} (Monitored <CheckIcon size={12} color="#4CAF50" />)
                     </div>
-                    <div style={{ color: '#8afd81', marginTop: '8px' }}>Amount: {(transaction.amount + transaction.fee).toFixed(8)} BTC</div>
+                    <div style={{ color: '#8afd81', marginTop: '8px' }}>Amount: {((transaction.amount || 0) + (transaction.fee || 0)).toFixed(8)} BTC</div>
                   </div>
                 </div>
                 <div style={{ textAlign: 'center', margin: '16px 0', color: '#8afd81', display: 'flex', justifyContent: 'center' }}>
@@ -1941,13 +1941,13 @@ function TransactionDetailsModal({
                         {toWallet.name} (Monitored <CheckIcon size={12} color="#4CAF50" />)
                       </div>
                     )}
-                    <div style={{ color: '#8afd81', marginTop: '8px' }}>Amount: {transaction.amount.toFixed(8)} BTC</div>
+                    <div style={{ color: '#8afd81', marginTop: '8px' }}>Amount: {(transaction.amount || 0).toFixed(8)} BTC</div>
                   </div>
                 </div>
                 {transaction.fee > 0 && (
                   <div style={{ marginTop: '12px', padding: '12px', background: '#0a0a0a', borderRadius: '8px', border: '1px solid #333' }}>
                     <div style={{ fontSize: '12px', color: '#888' }}>Miner Fee</div>
-                    <div style={{ color: '#8afd81' }}>Amount: {transaction.fee.toFixed(8)} BTC</div>
+                    <div style={{ color: '#8afd81' }}>Amount: {(transaction.fee || 0).toFixed(8)} BTC</div>
                   </div>
                 )}
               </>
@@ -1974,7 +1974,7 @@ function TransactionDetailsModal({
                     <div style={{ fontSize: '12px', color: '#888', display: 'flex', alignItems: 'center', gap: '6px' }}>
                       {transaction.walletName} (Monitored <CheckIcon size={12} color="#4CAF50" />)
                     </div>
-                    <div style={{ color: '#8afd81', marginTop: '8px' }}>Amount: {transaction.amount.toFixed(8)} BTC</div>
+                    <div style={{ color: '#8afd81', marginTop: '8px' }}>Amount: {(transaction.amount || 0).toFixed(8)} BTC</div>
                   </div>
                 </div>
               </>
