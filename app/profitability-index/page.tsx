@@ -23,13 +23,11 @@ export default function ProfitabilityIndexPage() {
   }, [])
 
   return (
-    <>
-      <div className="dashboard-view">
-        <div className="dashboard-content profitability-container">
-          <ProfitabilityIndex />
-        </div>
+    <div className="dashboard-view">
+      <div className="dashboard-content">
+        <ProfitabilityIndex />
       </div>
-    </>
+    </div>
   )
 }
 

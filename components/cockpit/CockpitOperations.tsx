@@ -109,13 +109,13 @@ export default function CockpitOperations() {
         data: providerHashrateData.hashrate,
         backgroundColor: providerHashrateData.hashrate.map((_, i) => {
           const perf = providerHashrateData.performance[i]
-          if (perf >= 98) return 'rgba(165, 255, 156, 0.8)'
+          if (perf >= 98) return 'rgba(167, 251, 144, 0.8)'
           if (perf >= 96) return 'rgba(255, 165, 0, 0.8)'
           return 'rgba(255, 77, 77, 0.8)'
         }),
         borderColor: providerHashrateData.hashrate.map((_, i) => {
           const perf = providerHashrateData.performance[i]
-          if (perf >= 98) return '#a5ff9c'
+          if (perf >= 98) return '#A7FB90'
           if (perf >= 96) return '#ffa500'
           return '#ff4d4d'
         }),
@@ -132,16 +132,16 @@ export default function CockpitOperations() {
       {
         label: 'Performance (%)',
         data: providerHashrateData.performance,
-        borderColor: '#a5ff9c',
-        backgroundColor: 'rgba(165, 255, 156, 0.1)',
+        borderColor: '#A7FB90',
+        backgroundColor: 'rgba(167, 251, 144, 0.1)',
         fill: true,
         tension: 0.4,
       },
       {
         label: 'Uptime (%)',
         data: providerHashrateData.uptime,
-        borderColor: '#8afd81',
-        backgroundColor: 'rgba(138, 253, 129, 0.1)',
+        borderColor: '#A7FB90',
+        backgroundColor: 'rgba(167, 251, 144, 0.1)',
         fill: true,
         tension: 0.4,
       },
@@ -155,8 +155,8 @@ export default function CockpitOperations() {
       {
         label: 'Hashrate (PH/s)',
         data: clientHashrateData.hashrate,
-        backgroundColor: 'rgba(165, 255, 156, 0.8)',
-        borderColor: '#a5ff9c',
+        backgroundColor: 'rgba(167, 251, 144, 0.8)',
+        borderColor: '#A7FB90',
         borderWidth: 2,
         borderRadius: 4,
       },
@@ -178,7 +178,7 @@ export default function CockpitOperations() {
         backgroundColor: 'rgba(26, 26, 26, 0.95)',
         titleColor: '#ffffff',
         bodyColor: '#ffffff',
-        borderColor: '#a5ff9c',
+        borderColor: '#A7FB90',
         borderWidth: 1,
       },
     },
@@ -411,7 +411,7 @@ export default function CockpitOperations() {
                               <div style={{ 
                                 width: `${provider.perf}%`, 
                                 height: '100%', 
-                                background: provider.perf >= 98 ? 'linear-gradient(90deg, #a5ff9c, #8afd81)' : provider.perf >= 96 ? 'linear-gradient(90deg, #ffa500, #ff8c00)' : 'linear-gradient(90deg, #ff4d4d, #ff3333)',
+                                background: provider.perf >= 98 ? 'linear-gradient(90deg, #A7FB90, #A7FB90)' : provider.perf >= 96 ? 'linear-gradient(90deg, #ffa500, #ff8c00)' : 'linear-gradient(90deg, #ff4d4d, #ff3333)',
                                 borderRadius: '2px'
                               }}></div>
                             </div>
@@ -519,7 +519,7 @@ export default function CockpitOperations() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 'var(--space-4)' }}>
               {batches.map((batch, index) => {
                 const statusColors = {
-                  healthy: { bg: 'rgba(165, 255, 156, 0.1)', color: 'var(--hearst-green)', label: 'Sain' },
+                  healthy: { bg: 'rgba(167, 251, 144, 0.1)', color: 'var(--hearst-green)', label: 'Sain' },
                   'at-risk': { bg: 'rgba(255, 165, 0, 0.1)', color: '#ffa500', label: 'À Risque' },
                   critical: { bg: 'rgba(255, 68, 68, 0.1)', color: '#ff4444', label: 'Critique' },
                 }
@@ -574,7 +574,7 @@ export default function CockpitOperations() {
                             {batch.down} mineurs
                           </span>
                         </div>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 'var(--space-2)', background: 'rgba(165, 255, 156, 0.05)', borderRadius: 'var(--radius-sm)' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 'var(--space-2)', background: 'rgba(167, 251, 144, 0.05)', borderRadius: 'var(--radius-sm)' }}>
                           <span style={{ color: 'var(--text-secondary)' }}>ROI: </span>
                           <span style={{ color: batch.roi > 0 ? 'var(--hearst-green)' : '#ff4444', fontWeight: 700, fontSize: 'var(--text-base)' }}>
                             {batch.roi > 0 ? '+' : ''}{batch.roi}%

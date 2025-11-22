@@ -1,94 +1,211 @@
-/* 🔍 WALLET SCRAPER - VERSION DESKTOP UNIQUEMENT */
+/* WALLET SCRAPER - VERSION DESKTOP UNIQUEMENT */
 /* Optimisé pour résolution 1920x1080 minimum */
 /* Utilise la charte graphique HEARST existante */
+/* Couleur principale: #8afd81 (--hearst-green) */
 
 /* Utilise les variables CSS globales définies dans globals.css et design-tokens.css */
 
-/* Container Principal */
-.scraper-container {
-  max-width: var(--grid-dashboard-width, 1600px);
-  margin: 0 auto;
-  padding: var(--space-8);
-  min-height: calc(100vh - 200px);
+/* Action Buttons - Premium Design (hérités de transactions-desktop.css) */
+.btn-add-large {
+  background: linear-gradient(135deg, #8afd81 0%, #6fdc66 100%);
+  color: #000000;
+  font-weight: 700;
+  padding: 14px 32px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  font-size: 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 48px;
 }
 
-/* Header */
+.btn-add-large:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #a5ff9c 0%, #8afd81 100%);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 14px 24px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 14px;
+  font-weight: 600;
+  height: 48px;
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-secondary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(138, 253, 129, 0.1) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(138, 253, 129, 0.4);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary:hover::before {
+  opacity: 1;
+}
+
+.btn-sm {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  padding: 6px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s ease;
+}
+
+.btn-sm:hover {
+  background: rgba(138, 253, 129, 0.1);
+  border-color: rgba(138, 253, 129, 0.4);
+  color: var(--hearst-green);
+}
+
+/* Container Principal - Premium Design */
+.scraper-container {
+  max-width: var(--grid-dashboard-width, 1800px);
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-9);
+  min-height: calc(100vh - 200px);
+  background: linear-gradient(135deg, rgba(14, 15, 15, 0.95) 0%, rgba(10, 10, 10, 0.98) 100%);
+  position: relative;
+}
+
+/* Header - Premium Glass Effect */
 .scraper-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: var(--space-7);
-  padding: var(--space-6) var(--space-7);
-  background: var(--bg-secondary);
-  border-radius: var(--radius-default);
-  border: 1px solid var(--border);
+  padding: var(--space-7) var(--space-8);
+  background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(20, 20, 20, 0.98) 100%);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  border: 1px solid rgba(138, 253, 129, 0.15);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+  position: relative;
+  overflow: hidden;
 }
 
 .scraper-header h1 {
-  font-size: var(--typography-page-title-size);
-  font-weight: var(--typography-page-title-weight);
+  font-size: 36px;
+  font-weight: 700;
   color: var(--text-primary);
   display: flex;
   align-items: center;
   gap: var(--space-5);
+  letter-spacing: -0.02em;
 }
 
-.scraper-header h1::before {
-  content: '🔍';
-  font-size: var(--typography-section-title-size);
-}
+/* Titre sans emoji - Charte HEARST professionnelle */
 
 .scraper-header-actions {
   display: flex;
   gap: var(--space-5);
 }
 
-/* Tabs Navigation */
+/* Tabs Navigation - Premium Design */
 .scraper-tabs {
   display: flex;
   gap: var(--space-3);
   margin-bottom: var(--space-7);
-  background: var(--bg-secondary);
+  background: linear-gradient(135deg, rgba(26, 26, 26, 0.8) 0%, rgba(20, 20, 20, 0.9) 100%);
+  backdrop-filter: blur(16px);
   padding: var(--space-3);
-  border-radius: var(--radius-default);
-  border: 1px solid var(--border);
+  border-radius: 16px;
+  border: 1px solid rgba(138, 253, 129, 0.1);
+  box-shadow: 
+    0 4px 24px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.03) inset;
 }
 
 .scraper-tab {
   flex: 1;
-  padding: var(--space-5) var(--space-7);
-  background: transparent;
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.03);
   color: var(--text-secondary);
-  border: none;
-  border-radius: var(--radius-small);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
   cursor: pointer;
-  transition: var(--transition-base);
-  font-size: var(--typography-body-size);
-  font-weight: var(--typography-body-bold-weight);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 14px;
+  font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: var(--space-5);
   min-height: 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.scraper-tab::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(138, 253, 129, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.scraper-tab:hover::before {
+  left: 100%;
 }
 
 .scraper-tab.active {
-  color: var(--hearst-green);
-  background: rgba(165, 255, 156, 0.1);
-  box-shadow: 0 0 20px rgba(165, 255, 156, 0.2);
+  color: var(--hearst-green, #8afd81);
+  background: linear-gradient(135deg, rgba(138, 253, 129, 0.15) 0%, rgba(138, 253, 129, 0.08) 100%);
+  border-color: rgba(138, 253, 129, 0.4);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
 }
 
 .scraper-tab:hover:not(.active) {
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Content Area */
+/* Content Area - Premium Design */
 .scraper-content {
   min-height: 800px;
-  background: var(--bg-secondary);
-  border-radius: var(--radius-default);
-  border: 1px solid var(--border);
+  background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(20, 20, 20, 0.98) 100%);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  border: 1px solid rgba(138, 253, 129, 0.15);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.03) inset;
   padding: var(--space-7);
 }
 
@@ -101,35 +218,62 @@
   flex-wrap: wrap;
 }
 
-/* Tables */
+/* Tables - Premium Design */
 .scraper-table-container {
   width: 100%;
   overflow-x: auto;
-  background: var(--bg-secondary);
-  border-radius: var(--radius-default);
-  border: 1px solid var(--border);
+  background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(20, 20, 20, 0.98) 100%);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  border: 1px solid rgba(138, 253, 129, 0.15);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+  position: relative;
+}
+
+.scraper-table-container table {
+  width: 100%;
+  min-width: 100%;
 }
 
 .scraper-table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: auto;
 }
 
 .scraper-table thead {
-  background: var(--bg-tertiary);
+  background: linear-gradient(135deg, rgba(36, 36, 36, 0.8) 0%, rgba(30, 30, 30, 0.9) 100%);
+  backdrop-filter: blur(10px);
+  display: table-header-group;
+}
+
+.scraper-table thead tr {
+  width: 100%;
+}
+
+.scraper-table tbody {
+  display: table-row-group;
+}
+
+.scraper-table tbody tr {
+  width: 100%;
 }
 
 .scraper-table th {
-  padding: var(--space-6) var(--space-6);
+  padding: 20px 24px;
   text-align: left;
-  color: var(--text-secondary);
-  font-weight: var(--typography-body-bold-weight);
-  font-size: var(--typography-body-minor-size);
-  border-bottom: 2px solid var(--border);
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid rgba(138, 253, 129, 0.2);
   text-transform: uppercase;
   white-space: nowrap;
   cursor: pointer;
   user-select: none;
+  position: relative;
 }
 
 .scraper-table th:hover {
@@ -153,26 +297,52 @@
 }
 
 .scraper-table td {
-  padding: var(--space-6) var(--space-6);
+  padding: 20px 24px;
   color: var(--text-primary);
-  font-size: var(--typography-body-minor-size);
-  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   vertical-align: middle;
-  height: 64px;
+  height: 72px;
+  transition: all 0.2s ease;
 }
 
 .scraper-table tbody tr {
   cursor: pointer;
-  transition: var(--transition-fast);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.scraper-table tbody tr::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: transparent;
+  transition: all 0.3s ease;
 }
 
 .scraper-table tbody tr:hover {
-  background: rgba(165, 255, 156, 0.05);
+  background: linear-gradient(90deg, rgba(138, 253, 129, 0.08) 0%, rgba(138, 253, 129, 0.03) 100%);
+  transform: translateX(2px);
+}
+
+.scraper-table tbody tr:hover::before {
+  background: linear-gradient(180deg, rgba(138, 253, 129, 0.6) 0%, rgba(138, 253, 129, 0.3) 100%);
+}
+
+.scraper-table tbody tr:hover td {
+  border-bottom-color: rgba(138, 253, 129, 0.2);
+  color: rgba(255, 255, 255, 0.95);
 }
 
 .scraper-table tbody tr.selected {
-  background: rgba(165, 255, 156, 0.1);
-  border-left: 3px solid var(--hearst-green);
+  background: linear-gradient(90deg, rgba(138, 253, 129, 0.12) 0%, rgba(138, 253, 129, 0.06) 100%);
+}
+
+.scraper-table tbody tr.selected::before {
+  background: linear-gradient(180deg, rgba(138, 253, 129, 0.8) 0%, rgba(138, 253, 129, 0.5) 100%);
 }
 
 .scraper-table tbody tr:last-child td {
@@ -333,10 +503,11 @@
 }
 
 .quick-stat-scraper-value {
-  font-size: var(--typography-section-title-size);
-  font-weight: var(--typography-section-title-weight);
+  font-size: 28px;
+  font-weight: 700;
   color: var(--hearst-green);
   margin-bottom: var(--space-3);
+  letter-spacing: -0.01em;
 }
 
 .quick-stat-scraper-label {
@@ -344,19 +515,26 @@
   color: var(--text-secondary);
 }
 
-/* Category Cards */
+/* Category Cards - Premium Design */
 .category-card {
-  background: var(--bg-primary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-default);
+  background: linear-gradient(135deg, rgba(26, 26, 26, 0.8) 0%, rgba(20, 20, 20, 0.9) 100%);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(138, 253, 129, 0.1);
+  border-radius: 16px;
   padding: var(--space-6);
   margin-bottom: var(--space-5);
-  transition: var(--transition-base);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.03) inset;
 }
 
 .category-card:hover {
-  border-color: var(--hearst-green);
-  box-shadow: 0 0 20px rgba(165, 255, 156, 0.1);
+  border-color: rgba(138, 253, 129, 0.3);
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(138, 253, 129, 0.1) inset;
+  transform: translateY(-2px);
 }
 
 .category-card-header {
@@ -388,13 +566,17 @@
   margin-top: var(--space-5);
 }
 
-/* Auto-Rule Panel */
+/* Auto-Rule Panel - Premium Design */
 .auto-rule-panel {
-  background: var(--bg-primary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-default);
+  background: linear-gradient(135deg, rgba(26, 26, 26, 0.8) 0%, rgba(20, 20, 20, 0.9) 100%);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(138, 253, 129, 0.1);
+  border-radius: 16px;
   padding: var(--space-6);
   margin-top: var(--space-6);
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.03) inset;
 }
 
 .auto-rule-item {
@@ -415,10 +597,14 @@
 }
 
 .analytics-chart-container {
-  background: var(--bg-primary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-default);
+  background: linear-gradient(135deg, rgba(26, 26, 26, 0.8) 0%, rgba(20, 20, 20, 0.9) 100%);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(138, 253, 129, 0.1);
+  border-radius: 16px;
   padding: var(--space-6);
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.03) inset;
 }
 
 .analytics-chart-container h3 {
@@ -512,13 +698,17 @@
   background: rgba(165, 255, 156, 0.05);
 }
 
-/* Export Options Panel */
+/* Export Options Panel - Premium Design */
 .export-options-panel {
-  background: var(--bg-primary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-default);
+  background: linear-gradient(135deg, rgba(26, 26, 26, 0.8) 0%, rgba(20, 20, 20, 0.9) 100%);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(138, 253, 129, 0.1);
+  border-radius: 16px;
   padding: var(--space-6);
   margin-top: var(--space-6);
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.03) inset;
 }
 
 .export-options-panel h3 {

@@ -104,7 +104,7 @@ export default function CockpitCrossReference() {
                     <td><strong>9</strong></td>
                     <td><strong>$45,600/day</strong></td>
                   </tr>
-                  <tr style={{ background: 'rgba(165, 255, 156, 0.05)', fontWeight: 700 }}>
+                  <tr style={{ background: 'rgba(167, 251, 144, 0.05)', fontWeight: 700 }}>
                     <td><strong>TOTAL</strong></td>
                     <td><strong>5.2 PH/s</strong></td>
                     <td><strong>4.1 PH/s</strong></td>

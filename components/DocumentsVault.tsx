@@ -134,7 +134,7 @@ const demoDocuments: Document[] = [
         changes: 'Original contract upload'
       }
     ],
-    thumbnailUrl: '/uploads/thumbnails/doc-001-thumb.jpg',
+    thumbnailUrl: null, // Thumbnail will be generated on upload
     fileUrl: '/uploads/documents/doc-001.pdf'
   },
   {
@@ -310,6 +310,23 @@ const getCategoryName = (categoryId: string): string => {
 const getCategoryIcon = (categoryId: string): JSX.Element => {
   const category = documentCategories.find(c => c.id === categoryId)
   return <FileIcon size={24} color={category?.color || '#888'} />
+}
+
+// Composant pour gérer les erreurs de chargement d'image
+function ThumbnailImage({ src, alt, fallbackIcon }: { src: string; alt: string; fallbackIcon: React.ReactNode }) {
+  const [hasError, setHasError] = useState(false)
+
+  if (hasError) {
+    return <div className="doc-icon-large">{fallbackIcon}</div>
+  }
+
+  return (
+    <img 
+      src={src} 
+      alt={alt}
+      onError={() => setHasError(true)}
+    />
+  )
 }
 
 export default function DocumentsVault() {
@@ -743,7 +760,11 @@ export default function DocumentsVault() {
                     )}
                     <div className="doc-thumbnail">
                       {doc.thumbnailUrl ? (
-                        <img src={doc.thumbnailUrl} alt={doc.filename} />
+                        <ThumbnailImage 
+                          src={doc.thumbnailUrl} 
+                          alt={doc.filename}
+                          fallbackIcon={getCategoryIcon(doc.category)}
+                        />
                       ) : (
                         <div className="doc-icon-large">{getCategoryIcon(doc.category)}</div>
                       )}

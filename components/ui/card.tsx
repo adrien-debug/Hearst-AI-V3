@@ -12,7 +12,7 @@ const Card = React.forwardRef<
       className
     )}
     style={{
-      borderRadius: 'var(--radius-md)',
+      borderRadius: 'var(--radius-md)', /* 16px default */
       border: '1px solid var(--border)',
       background: 'var(--bg-secondary)',
       color: 'var(--text-primary)',

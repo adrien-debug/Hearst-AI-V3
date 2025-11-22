@@ -591,14 +591,14 @@ export default function WalletScraper() {
           <button className="btn-add-large" onClick={() => setShowAddWalletModal(true)}>
             + Add Wallet
           </button>
-          <button className="btn-secondary" onClick={syncAllWallets} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <RefreshIcon size={16} /> Refresh All
+          <button className="btn-secondary" onClick={syncAllWallets}>
+            REFRESH ALL
           </button>
-          <button className="btn-secondary" onClick={() => setShowExportModal(true)} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <DownloadIcon size={16} /> Export All
+          <button className="btn-secondary" onClick={() => setShowExportModal(true)}>
+            EXPORT ALL
           </button>
-          <button className="btn-secondary" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <SettingsIcon size={16} /> Settings
+          <button className="btn-secondary">
+            SETTINGS
           </button>
         </div>
       </div>
@@ -764,14 +764,16 @@ function MonitoredWalletsTab({
         <button className="btn-add-large" onClick={onAddWallet}>
           + Add Wallet to Monitor
         </button>
-        <button className="btn-secondary" onClick={onSyncAll} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <SyncIcon size={16} /> Sync All
+        <button className="btn-secondary" onClick={onSyncAll}>
+          SYNC ALL
         </button>
-        <button className="btn-secondary" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <ImportIcon size={16} /> Import List
+        <button className="btn-secondary">
+          IMPORT LIST
         </button>
         <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
-          <SearchIcon size={18} style={{ position: 'absolute', left: '12px', color: '#888' }} />
+          <div style={{ position: 'absolute', left: '12px', color: '#888', pointerEvents: 'none', zIndex: 1 }}>
+            <SearchIcon size={18} />
+          </div>
           <input
             type="text"
             className="search-input-large"
@@ -814,8 +816,8 @@ function MonitoredWalletsTab({
                 <td>{wallet.txCount.toLocaleString()}</td>
                 <td>
                   <div>
-                    <span className={`sync-status-${wallet.syncStatus}`} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      {wallet.syncStatus === 'synced' ? <StatusExcellentIcon size={14} /> : wallet.syncStatus === 'syncing' ? <SyncIcon size={14} /> : wallet.syncStatus === 'error' ? <StatusErrorIcon size={14} /> : <StatusPendingIcon size={14} />} {wallet.syncStatus === 'synced' ? 'Synced' : wallet.syncStatus === 'syncing' ? 'Syncing' : wallet.syncStatus === 'error' ? 'Error' : 'Pending'}
+                    <span className={`sync-status-${wallet.syncStatus}`}>
+                      {wallet.syncStatus === 'synced' ? 'SYNCED' : wallet.syncStatus === 'syncing' ? 'SYNCING' : wallet.syncStatus === 'error' ? 'ERROR' : 'PENDING'}
                     </span>
                     {wallet.lastSync && (
                       <>
@@ -2052,9 +2054,9 @@ function CreateClassificationModal({
                         borderRadius: '8px',
                         border: formData.color === opt.value ? '2px solid #8afd81' : '1px solid #333',
                         background: opt.value,
-                        cursor: 'pointer',
-                        title: opt.label
+                        cursor: 'pointer'
                       }}
+                      title={opt.label}
                     />
                   ))}
                   <input

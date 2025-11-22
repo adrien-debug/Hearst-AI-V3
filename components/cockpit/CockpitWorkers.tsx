@@ -150,12 +150,12 @@ export default function CockpitWorkers() {
       {
         data: [workersData.onDuty, workersData.onBreak, workersData.offDuty],
         backgroundColor: [
-          'rgba(165, 255, 156, 0.8)',
+          'rgba(167, 251, 144, 0.8)',
           'rgba(255, 165, 0, 0.8)',
           'rgba(255, 77, 77, 0.8)',
         ],
         borderColor: [
-          '#a5ff9c',
+          '#A7FB90',
           '#ffa500',
           '#ff4d4d',
         ],
@@ -171,8 +171,8 @@ export default function CockpitWorkers() {
       {
         label: 'Workers Actifs',
         data: workersByTeamData.active,
-        backgroundColor: 'rgba(165, 255, 156, 0.8)',
-        borderColor: '#a5ff9c',
+        backgroundColor: 'rgba(167, 251, 144, 0.8)',
+        borderColor: '#A7FB90',
         borderWidth: 2,
         borderRadius: 4,
       },
@@ -195,13 +195,13 @@ export default function CockpitWorkers() {
         label: 'Nombre de Workers',
         data: workersByRoleData.data,
         backgroundColor: [
-          'rgba(165, 255, 156, 0.8)',
-          'rgba(138, 253, 129, 0.8)',
+          'rgba(167, 251, 144, 0.8)',
+          'rgba(167, 251, 144, 0.8)',
           'rgba(100, 200, 100, 0.8)',
         ],
         borderColor: [
-          '#a5ff9c',
-          '#8afd81',
+          '#A7FB90',
+          '#A7FB90',
           '#64c864',
         ],
         borderWidth: 2,
@@ -223,8 +223,8 @@ export default function CockpitWorkers() {
       {
         label: 'Heures Travaillées (7j)',
         data: activityData.hoursWorked,
-        backgroundColor: 'rgba(165, 255, 156, 0.8)',
-        borderColor: '#a5ff9c',
+        backgroundColor: 'rgba(167, 251, 144, 0.8)',
+        borderColor: '#A7FB90',
         borderWidth: 2,
         borderRadius: 4,
       },
@@ -237,8 +237,8 @@ export default function CockpitWorkers() {
       {
         label: 'Efficacité (%)',
         data: activityData.efficiency,
-        borderColor: '#a5ff9c',
-        backgroundColor: 'rgba(165, 255, 156, 0.1)',
+        borderColor: '#A7FB90',
+        backgroundColor: 'rgba(167, 251, 144, 0.1)',
         fill: true,
         tension: 0.4,
       },
@@ -260,7 +260,7 @@ export default function CockpitWorkers() {
         backgroundColor: 'rgba(26, 26, 26, 0.95)',
         titleColor: '#ffffff',
         bodyColor: '#ffffff',
-        borderColor: '#a5ff9c',
+        borderColor: '#A7FB90',
         borderWidth: 1,
       },
     },
@@ -302,7 +302,7 @@ export default function CockpitWorkers() {
         backgroundColor: 'rgba(26, 26, 26, 0.95)',
         titleColor: '#ffffff',
         bodyColor: '#ffffff',
-        borderColor: '#a5ff9c',
+        borderColor: '#A7FB90',
         borderWidth: 1,
       },
     },
@@ -363,14 +363,14 @@ export default function CockpitWorkers() {
               {workersData.onDuty}
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-2)' }}>
-              <span style={{ color: '#a5ff9c', fontSize: '0.875rem' }}>→ Stable</span>
+              <span style={{ color: '#A7FB90', fontSize: '0.875rem' }}>→ Stable</span>
               <span style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>vs moyenne</span>
             </div>
             <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
               Actuellement au travail
             </p>
             <div style={{ marginTop: 'var(--space-3)', width: '100%', height: '6px', background: 'rgba(255, 255, 255, 0.1)', borderRadius: '3px', overflow: 'hidden' }}>
-              <div style={{ width: `${workersData.dutyRate}%`, height: '100%', background: 'linear-gradient(90deg, #a5ff9c, #8afd81)', borderRadius: '3px' }}></div>
+              <div style={{ width: `${workersData.dutyRate}%`, height: '100%', background: 'linear-gradient(90deg, #A7FB90, #A7FB90)', borderRadius: '3px' }}></div>
             </div>
             <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', marginTop: 'var(--space-2)' }}>
               {workersData.dutyRate}% en service
@@ -397,7 +397,7 @@ export default function CockpitWorkers() {
             <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
               Organisation
             </p>
-            <div style={{ marginTop: 'var(--space-3)', padding: 'var(--space-2)', background: 'rgba(165, 255, 156, 0.05)', borderRadius: 'var(--radius-sm)' }}>
+            <div style={{ marginTop: 'var(--space-3)', padding: 'var(--space-2)', background: 'rgba(167, 251, 144, 0.05)', borderRadius: 'var(--radius-sm)' }}>
               <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', marginBottom: 'var(--space-1)' }}>Moyenne par équipe</div>
               <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--hearst-green)' }}>
                 {Math.round(workersData.total / workersData.teams.length)} workers
@@ -418,14 +418,14 @@ export default function CockpitWorkers() {
               {workersData.dutyRate}%
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-2)' }}>
-              <span style={{ color: '#a5ff9c', fontSize: '0.875rem' }}>↑ 2.5%</span>
+              <span style={{ color: '#A7FB90', fontSize: '0.875rem' }}>↑ 2.5%</span>
               <span style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>vs semaine dernière</span>
             </div>
             <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
               Workers en service
             </p>
             <div style={{ marginTop: 'var(--space-3)', width: '100%', height: '6px', background: 'rgba(255, 255, 255, 0.1)', borderRadius: '3px', overflow: 'hidden' }}>
-              <div style={{ width: `${workersData.dutyRate}%`, height: '100%', background: 'linear-gradient(90deg, #a5ff9c, #8afd81)', borderRadius: '3px' }}></div>
+              <div style={{ width: `${workersData.dutyRate}%`, height: '100%', background: 'linear-gradient(90deg, #A7FB90, #A7FB90)', borderRadius: '3px' }}></div>
             </div>
           </CardContent>
         </Card>
@@ -530,10 +530,10 @@ export default function CockpitWorkers() {
                     onClick={() => setSelectedTeam('all')}
                     style={{
                       padding: 'var(--space-2) var(--space-3)',
-                      background: selectedTeam === 'all' ? 'rgba(165, 255, 156, 0.2)' : 'transparent',
-                      border: `1px solid ${selectedTeam === 'all' ? '#a5ff9c' : 'var(--border)'}`,
+                      background: selectedTeam === 'all' ? 'rgba(167, 251, 144, 0.2)' : 'transparent',
+                      border: `1px solid ${selectedTeam === 'all' ? '#A7FB90' : 'var(--border)'}`,
                       borderRadius: 'var(--radius-sm)',
-                      color: selectedTeam === 'all' ? '#a5ff9c' : 'var(--text-secondary)',
+                      color: selectedTeam === 'all' ? '#A7FB90' : 'var(--text-secondary)',
                       cursor: 'pointer',
                       fontSize: 'var(--text-sm)',
                     }}
@@ -546,10 +546,10 @@ export default function CockpitWorkers() {
                       onClick={() => setSelectedTeam(team)}
                       style={{
                         padding: 'var(--space-2) var(--space-3)',
-                        background: selectedTeam === team ? 'rgba(165, 255, 156, 0.2)' : 'transparent',
-                        border: `1px solid ${selectedTeam === team ? '#a5ff9c' : 'var(--border)'}`,
+                        background: selectedTeam === team ? 'rgba(167, 251, 144, 0.2)' : 'transparent',
+                        border: `1px solid ${selectedTeam === team ? '#A7FB90' : 'var(--border)'}`,
                         borderRadius: 'var(--radius-sm)',
-                        color: selectedTeam === team ? '#a5ff9c' : 'var(--text-secondary)',
+                        color: selectedTeam === team ? '#A7FB90' : 'var(--text-secondary)',
                         cursor: 'pointer',
                         fontSize: 'var(--text-sm)',
                       }}
@@ -585,7 +585,7 @@ export default function CockpitWorkers() {
                             padding: 'var(--space-1) var(--space-2)',
                             borderRadius: 'var(--radius-sm)',
                             fontSize: 'var(--text-xs)',
-                            background: 'rgba(165, 255, 156, 0.1)',
+                            background: 'rgba(167, 251, 144, 0.1)',
                             color: 'var(--hearst-green)',
                             fontWeight: 600,
                           }}>
@@ -610,7 +610,7 @@ export default function CockpitWorkers() {
                                 <div style={{ 
                                   width: `${worker.efficiency}%`, 
                                   height: '100%', 
-                                  background: worker.efficiency >= 98 ? 'linear-gradient(90deg, #a5ff9c, #8afd81)' : worker.efficiency >= 96 ? 'linear-gradient(90deg, #ffa500, #ff8c00)' : 'linear-gradient(90deg, #ff4d4d, #ff3333)',
+                                  background: worker.efficiency >= 98 ? 'linear-gradient(90deg, #A7FB90, #A7FB90)' : worker.efficiency >= 96 ? 'linear-gradient(90deg, #ffa500, #ff8c00)' : 'linear-gradient(90deg, #ff4d4d, #ff3333)',
                                   borderRadius: '2px'
                                 }}></div>
                               </div>
@@ -674,7 +674,7 @@ export default function CockpitWorkers() {
                   </CardHeader>
                   <CardContent>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
-                      <div style={{ padding: 'var(--space-4)', background: 'rgba(165, 255, 156, 0.05)', borderRadius: 'var(--radius-md)', border: '1px solid rgba(165, 255, 156, 0.1)' }}>
+                      <div style={{ padding: 'var(--space-4)', background: 'rgba(167, 251, 144, 0.05)', borderRadius: 'var(--radius-md)', border: '1px solid rgba(167, 251, 144, 0.1)' }}>
                         <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', marginBottom: 'var(--space-2)' }}>Workers</div>
                         <div style={{ fontSize: 'var(--text-2xl)', fontWeight: 700, color: 'var(--hearst-green)' }}>
                           {teamWorkers.length}
@@ -684,17 +684,17 @@ export default function CockpitWorkers() {
                         </div>
                       </div>
 
-                      <div style={{ padding: 'var(--space-4)', background: 'rgba(165, 255, 156, 0.05)', borderRadius: 'var(--radius-md)', border: '1px solid rgba(165, 255, 156, 0.1)' }}>
+                      <div style={{ padding: 'var(--space-4)', background: 'rgba(167, 251, 144, 0.05)', borderRadius: 'var(--radius-md)', border: '1px solid rgba(167, 251, 144, 0.1)' }}>
                         <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', marginBottom: 'var(--space-2)' }}>Efficacité Moyenne</div>
                         <div style={{ fontSize: 'var(--text-2xl)', fontWeight: 700, color: 'var(--hearst-green)' }}>
                           {avgEfficiency.toFixed(1)}%
                         </div>
                         <div style={{ width: '100%', height: '8px', background: 'rgba(255, 255, 255, 0.1)', borderRadius: '4px', overflow: 'hidden', marginTop: 'var(--space-2)' }}>
-                          <div style={{ width: `${avgEfficiency}%`, height: '100%', background: 'linear-gradient(90deg, #a5ff9c, #8afd81)', borderRadius: '4px' }}></div>
+                          <div style={{ width: `${avgEfficiency}%`, height: '100%', background: 'linear-gradient(90deg, #A7FB90, #A7FB90)', borderRadius: '4px' }}></div>
                         </div>
                       </div>
 
-                      <div style={{ padding: 'var(--space-4)', background: 'rgba(165, 255, 156, 0.05)', borderRadius: 'var(--radius-md)', border: '1px solid rgba(165, 255, 156, 0.1)' }}>
+                      <div style={{ padding: 'var(--space-4)', background: 'rgba(167, 251, 144, 0.05)', borderRadius: 'var(--radius-md)', border: '1px solid rgba(167, 251, 144, 0.1)' }}>
                         <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', marginBottom: 'var(--space-2)' }}>Heures Travaillées (7j)</div>
                         <div style={{ fontSize: 'var(--text-2xl)', fontWeight: 700, color: 'var(--hearst-green)' }}>
                           {totalHours}h
@@ -704,7 +704,7 @@ export default function CockpitWorkers() {
                         </div>
                       </div>
 
-                      <div style={{ padding: 'var(--space-4)', background: 'rgba(165, 255, 156, 0.05)', borderRadius: 'var(--radius-md)', border: '1px solid rgba(165, 255, 156, 0.1)' }}>
+                      <div style={{ padding: 'var(--space-4)', background: 'rgba(167, 251, 144, 0.05)', borderRadius: 'var(--radius-md)', border: '1px solid rgba(167, 251, 144, 0.1)' }}>
                         <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', marginBottom: 'var(--space-2)' }}>Tâches Complétées</div>
                         <div style={{ fontSize: 'var(--text-2xl)', fontWeight: 700, color: 'var(--hearst-green)' }}>
                           {totalTasks}
@@ -780,7 +780,7 @@ export default function CockpitWorkers() {
                               padding: 'var(--space-1) var(--space-2)',
                               borderRadius: 'var(--radius-sm)',
                               fontSize: 'var(--text-xs)',
-                              background: 'rgba(165, 255, 156, 0.1)',
+                              background: 'rgba(167, 251, 144, 0.1)',
                               color: 'var(--hearst-green)',
                               fontWeight: 600,
                             }}>
@@ -805,7 +805,7 @@ export default function CockpitWorkers() {
                                   <div style={{ 
                                     width: `${worker.efficiency}%`, 
                                     height: '100%', 
-                                    background: worker.efficiency >= 98 ? 'linear-gradient(90deg, #a5ff9c, #8afd81)' : worker.efficiency >= 96 ? 'linear-gradient(90deg, #ffa500, #ff8c00)' : 'linear-gradient(90deg, #ff4d4d, #ff3333)',
+                                    background: worker.efficiency >= 98 ? 'linear-gradient(90deg, #A7FB90, #A7FB90)' : worker.efficiency >= 96 ? 'linear-gradient(90deg, #ffa500, #ff8c00)' : 'linear-gradient(90deg, #ff4d4d, #ff3333)',
                                     borderRadius: '2px'
                                   }}></div>
                                 </div>
@@ -829,7 +829,7 @@ export default function CockpitWorkers() {
                                   <div style={{ 
                                     width: `${completionRate}%`, 
                                     height: '100%', 
-                                    background: 'linear-gradient(90deg, #a5ff9c, #8afd81)',
+                                    background: 'linear-gradient(90deg, #A7FB90, #A7FB90)',
                                     borderRadius: '2px'
                                   }}></div>
                                 </div>

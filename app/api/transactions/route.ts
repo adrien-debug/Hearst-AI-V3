@@ -27,6 +27,84 @@ let transactions = [
     validated: false,
     validatedAt: null,
     txHash: null
+  },
+  {
+    id: 'TX-2024-002',
+    date: '2024-11-22T09:15:00Z',
+    timestamp: 1732263300000,
+    from: {
+      walletId: 'wallet-001',
+      name: 'Main Mining Wallet',
+      address: '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa'
+    },
+    to: {
+      walletId: 'wallet-102',
+      name: 'Exchange Wallet',
+      address: 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh'
+    },
+    amount: 0.2500,
+    currency: 'BTC',
+    amountUSD: 21250.00,
+    fee: 0.00008,
+    total: 0.25008,
+    status: 'validated',
+    notes: 'Daily operations transfer',
+    period: 'daily',
+    validated: true,
+    validatedAt: '2024-11-22T09:20:00Z',
+    txHash: 'a1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d'
+  },
+  {
+    id: 'TX-2024-003',
+    date: '2024-11-21T18:00:00Z',
+    timestamp: 1732208400000,
+    from: {
+      walletId: 'wallet-002',
+      name: 'Secondary Wallet',
+      address: '1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2'
+    },
+    to: {
+      walletId: 'wallet-101',
+      name: 'Cold Storage Vault',
+      address: '3J98t1WpEZ73CNmYviecrnyiWrnqRhWNLy'
+    },
+    amount: 1.0000,
+    currency: 'BTC',
+    amountUSD: 85000.00,
+    fee: 0.00012,
+    total: 1.00012,
+    status: 'validated',
+    notes: 'Monthly consolidation transfer',
+    period: 'monthly',
+    validated: true,
+    validatedAt: '2024-11-21T18:05:00Z',
+    txHash: 'b2186ec55e527d4ca288g66c7195f3226c0456f27d6dg413gd91fa6egcg6e59e'
+  },
+  {
+    id: 'TX-2024-004',
+    date: '2024-11-22T12:00:00Z',
+    timestamp: 1732273200000,
+    from: {
+      walletId: 'wallet-001',
+      name: 'Main Mining Wallet',
+      address: '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa'
+    },
+    to: {
+      walletId: 'wallet-103',
+      name: 'Payment Processor',
+      address: '3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5'
+    },
+    amount: 0.1500,
+    currency: 'BTC',
+    amountUSD: 12750.00,
+    fee: 0.00006,
+    total: 0.15006,
+    status: 'pending',
+    notes: 'Supplier payment',
+    period: 'daily',
+    validated: false,
+    validatedAt: null,
+    txHash: null
   }
 ]
 

@@ -25,7 +25,7 @@ const mockDocuments = [
     signedBy: ['john.smith@datacenterusa.com', 'admin@hearstai.com'],
     signedDate: '2024-01-15T14:00:00Z',
     fileUrl: '/uploads/documents/doc-001.pdf',
-    thumbnailUrl: '/uploads/thumbnails/doc-001-thumb.jpg'
+    thumbnailUrl: null // Thumbnail will be generated on upload
   },
   {
     id: 'doc-002',

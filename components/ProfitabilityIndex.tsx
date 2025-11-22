@@ -1,23 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import {
-  StatusExcellentIcon,
-  StatusGoodIcon,
-  StatusWarningIcon,
-  StatusErrorIcon,
-  StatusPendingIcon,
-  RefreshIcon,
-  DownloadIcon,
-  SettingsIcon,
-  ChartIcon,
-  MoneyIcon,
-  TrendingUpIcon,
-  TrendingDownIcon,
-  CompareIcon,
-  ReportIcon,
-  WarningIcon
-} from '@/components/icons/PremiumIcons'
 
 // Types
 interface Batch {
@@ -63,16 +46,7 @@ interface HashpriceData {
 }
 
 // Helper functions
-const getStatusIcon = (status: string, size: number = 16): JSX.Element => {
-  const icons: Record<string, JSX.Element> = {
-    excellent: <StatusExcellentIcon key="excellent" size={size} />,
-    good: <StatusGoodIcon key="good" size={size} />,
-    marginal: <StatusWarningIcon key="marginal" size={size} />,
-    breakeven: <StatusWarningIcon key="breakeven" size={size} />,
-    unprofitable: <StatusErrorIcon key="unprofitable" size={size} />
-  }
-  return icons[status] || <StatusPendingIcon key="pending" size={size} />
-}
+// Fonction supprimée - Plus d'icônes SVG, seulement du texte
 
 const getStatusLabel = (status: string) => {
   const labels: Record<string, string> = {
@@ -196,62 +170,7 @@ export default function ProfitabilityIndex() {
   }
 
   return (
-    <div className="profitability-index">
-      {/* Header */}
-      <div className="profitability-header">
-        <h1>PROFITABILITY INDEX - Mining Revenue vs Electricity Analysis</h1>
-        <div className="profitability-header-actions">
-          <button className="btn-secondary" onClick={loadData} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <RefreshIcon size={16} /> Refresh Data
-          </button>
-          <button className="btn-secondary" onClick={() => setShowExportModal(true)} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <DownloadIcon size={16} /> Export Report
-          </button>
-          <button className="btn-secondary" onClick={() => setShowSettingsModal(true)} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <SettingsIcon size={16} /> Settings
-          </button>
-          <button className="btn-secondary" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <TrendingUpIcon size={16} /> Historical View
-          </button>
-        </div>
-      </div>
-
-      {/* Global Metrics */}
-      <div className="global-metrics-grid">
-        <div className="metric-card-large">
-          <div className="metric-value-huge">{totalHashrate.toFixed(2)}</div>
-          <div className="metric-label-large">Total Hashrate</div>
-          <div className="metric-sub-label">PH/s</div>
-        </div>
-        <div className="metric-card-large">
-          <div className="metric-value-huge" style={{ color: '#4CAF50' }}>
-            {profitableBatches} ({batches.length > 0 ? Math.round((profitableBatches / batches.length) * 100) : 0}%)
-          </div>
-          <div className="metric-label-large">Profitable Batches</div>
-          <div className="metric-sub-label" style={{ display: 'flex', justifyContent: 'center' }}>
-            <StatusExcellentIcon size={16} />
-          </div>
-        </div>
-        <div className="metric-card-large">
-          <div className="metric-value-huge" style={{ color: '#FFC107' }}>
-            {breakEvenBatches} ({batches.length > 0 ? Math.round((breakEvenBatches / batches.length) * 100) : 0}%)
-          </div>
-          <div className="metric-label-large">Break-even Batches</div>
-          <div className="metric-sub-label" style={{ display: 'flex', justifyContent: 'center' }}>
-            <StatusWarningIcon size={16} />
-          </div>
-        </div>
-        <div className="metric-card-large">
-          <div className="metric-value-huge" style={{ color: '#F44336' }}>
-            {unprofitableBatches} ({batches.length > 0 ? Math.round((unprofitableBatches / batches.length) * 100) : 0}%)
-          </div>
-          <div className="metric-label-large">In Loss Batches</div>
-          <div className="metric-sub-label" style={{ display: 'flex', justifyContent: 'center' }}>
-            <StatusErrorIcon size={16} />
-          </div>
-        </div>
-      </div>
-
+    <div className="profitability-container">
       {/* Market Conditions */}
       <div className="market-conditions-box">
         <h3>CURRENT MARKET CONDITIONS</h3>
@@ -260,10 +179,7 @@ export default function ProfitabilityIndex() {
             <div className="market-info-label">Daily Avg Hashprice Index</div>
             <div className="market-info-value">{formatCurrency(hashprice.current)} / PH / Day</div>
             <div className="market-info-change">
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                {hashprice.change24h >= 0 ? <TrendingUpIcon size={14} color="#4CAF50" /> : <TrendingDownIcon size={14} color="#F44336" />}
-                {formatPercent(hashprice.change24h)} (24h)
-              </span>
+              {hashprice.change24h >= 0 ? '↑' : '↓'} {formatPercent(hashprice.change24h)} (24h)
             </div>
           </div>
           <div className="market-info-item">
@@ -289,25 +205,25 @@ export default function ProfitabilityIndex() {
           className={`profitability-tab ${activeTab === 'batch' ? 'active' : ''}`}
           onClick={() => setActiveTab('batch')}
         >
-          <ChartIcon size={18} /> Batch Analysis
+          BATCH ANALYSIS
         </button>
         <button
           className={`profitability-tab ${activeTab === 'daily' ? 'active' : ''}`}
           onClick={() => setActiveTab('daily')}
         >
-          <MoneyIcon size={18} /> Daily Profit
+          DAILY PROFIT
         </button>
         <button
           className={`profitability-tab ${activeTab === 'roi' ? 'active' : ''}`}
           onClick={() => setActiveTab('roi')}
         >
-          <TrendingUpIcon size={18} /> Profitability ROI
+          PROFITABILITY ROI
         </button>
         <button
           className={`profitability-tab ${activeTab === 'compare' ? 'active' : ''}`}
           onClick={() => setActiveTab('compare')}
         >
-          <CompareIcon size={18} /> Compare
+          COMPARE BATCHES
         </button>
       </div>
 
@@ -502,7 +418,7 @@ function BatchAnalysisTab({
                 </td>
                 <td>
                   <span className={`status-badge-${batch.status}`}>
-                    {getStatusIcon(batch.status)} {getStatusLabel(batch.status)}
+                    {getStatusLabel(batch.status).toUpperCase()}
                   </span>
                 </td>
               </tr>
@@ -738,7 +654,7 @@ function ROIAnalysisTab({
                 <td>{batch.roiDays > 0 ? Math.round(batch.roiDays) + ' days' : 'Never'}</td>
                 <td>
                   <span className={`status-badge-${batch.status}`}>
-                    {getStatusIcon(batch.status)} {getStatusLabel(batch.status)}
+                    {getStatusLabel(batch.status).toUpperCase()}
                   </span>
                 </td>
               </tr>
@@ -764,8 +680,8 @@ function ROIAnalysisTab({
         <tbody>
           <tr>
             <td>
-              <span className="status-badge-excellent" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                <StatusExcellentIcon size={14} /> Excellent (&lt;150d)
+              <span className="status-badge-excellent">
+                EXCELLENT (&lt;150d)
               </span>
             </td>
             <td>{excellentBatches.length} ({batches.length > 0 ? Math.round((excellentBatches.length / batches.length) * 100) : 0}%)</td>
@@ -781,8 +697,8 @@ function ROIAnalysisTab({
           </tr>
           <tr>
             <td>
-              <span className="status-badge-good" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                <StatusGoodIcon size={14} /> Good (150-250d)
+              <span className="status-badge-good">
+                GOOD (150-250d)
               </span>
             </td>
             <td>{goodBatches.length} ({batches.length > 0 ? Math.round((goodBatches.length / batches.length) * 100) : 0}%)</td>
@@ -798,8 +714,8 @@ function ROIAnalysisTab({
           </tr>
           <tr>
             <td>
-              <span className="status-badge-marginal" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                <StatusWarningIcon size={14} /> Marginal (250-400d)
+              <span className="status-badge-marginal">
+                MARGINAL (250-400d)
               </span>
             </td>
             <td>{marginalBatches.length} ({batches.length > 0 ? Math.round((marginalBatches.length / batches.length) * 100) : 0}%)</td>
@@ -815,8 +731,8 @@ function ROIAnalysisTab({
           </tr>
           <tr>
             <td>
-              <span className="status-badge-breakeven" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                <StatusWarningIcon size={14} /> Break-even (&gt;400d)
+              <span className="status-badge-breakeven">
+                BREAK-EVEN (&gt;400d)
               </span>
             </td>
             <td>{breakevenBatches.length} ({batches.length > 0 ? Math.round((breakevenBatches.length / batches.length) * 100) : 0}%)</td>
@@ -832,8 +748,8 @@ function ROIAnalysisTab({
           </tr>
           <tr>
             <td>
-              <span className="status-badge-unprofitable" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                <StatusErrorIcon size={14} /> Unprofitable
+              <span className="status-badge-unprofitable">
+                UNPROFITABLE
               </span>
             </td>
             <td>{unprofitableBatches.length} ({batches.length > 0 ? Math.round((unprofitableBatches.length / batches.length) * 100) : 0}%)</td>
@@ -849,12 +765,12 @@ function ROIAnalysisTab({
       {/* Recommendations */}
       {unprofitableBatches.length > 0 && (
         <div className="recommendation-box">
-          <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <WarningIcon size={20} /> IMMEDIATE ACTIONS RECOMMENDED
+          <h3>
+            IMMEDIATE ACTIONS RECOMMENDED
           </h3>
           <div className="recommendation-item recommendation-shutdown">
             <strong style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <StatusErrorIcon size={16} /> Shutdown Candidates ({unprofitableBatches.length} batches):
+              SHUTDOWN CANDIDATES ({unprofitableBatches.length} batches):
             </strong>
             <ul style={{ marginTop: '8px', paddingLeft: '20px' }}>
               {unprofitableBatches.map(batch => (
@@ -1012,10 +928,10 @@ function BatchDetailsModal({
       <div className="modal-large" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h2 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <ChartIcon size={24} /> BATCH DETAILED ANALYSIS - Batch #{batch.batchNumber}
+            BATCH DETAILED ANALYSIS - Batch #{batch.batchNumber}
           </h2>
-          <button className="modal-close" onClick={onClose} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <XIcon size={20} />
+          <button className="modal-close" onClick={onClose}>
+            ×
           </button>
         </div>
         <div className="modal-body">
@@ -1041,8 +957,8 @@ function BatchDetailsModal({
               <div className="form-group">
                 <div>
                   <strong>Status:</strong>{' '}
-                  <span className={`status-badge-${batch.status}`} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                    {getStatusIcon(batch.status, 14)} {getStatusLabel(batch.status)}
+                  <span className={`status-badge-${batch.status}`}>
+                    {getStatusLabel(batch.status).toUpperCase()}
                   </span>
                 </div>
                 <div><strong>Daily Profit:</strong> <span className="profit-positive">+{formatCurrency(batch.dailyProfit)}</span></div>
@@ -1157,10 +1073,10 @@ function ExportModal({
       <div className="modal-medium" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h2 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <DownloadIcon size={24} /> EXPORT PROFITABILITY REPORT
+            EXPORT PROFITABILITY REPORT
           </h2>
-          <button className="modal-close" onClick={onClose} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <XIcon size={20} />
+          <button className="modal-close" onClick={onClose}>
+            ×
           </button>
         </div>
         <div className="modal-body">
@@ -1220,10 +1136,10 @@ function SettingsModal({
       <div className="modal-medium" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h2 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <SettingsIcon size={24} /> PROFITABILITY INDEX SETTINGS
+            PROFITABILITY INDEX SETTINGS
           </h2>
-          <button className="modal-close" onClick={onClose} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <XIcon size={20} />
+          <button className="modal-close" onClick={onClose}>
+            ×
           </button>
         </div>
         <div className="modal-body">
@@ -1253,28 +1169,28 @@ function SettingsModal({
           <div className="form-section">
             <h3>PROFITABILITY THRESHOLDS</h3>
             <div className="form-group">
-              <label style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <StatusExcellentIcon size={16} /> Excellent: Profit margin &gt; 150% or ROI &lt; 150 days
+              <label>
+                EXCELLENT: Profit margin &gt; 150% or ROI &lt; 150 days
               </label>
             </div>
             <div className="form-group">
-              <label style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <StatusGoodIcon size={16} /> Good: Profit margin &gt; 80% or ROI &lt; 250 days
+              <label>
+                GOOD: Profit margin &gt; 80% or ROI &lt; 250 days
               </label>
             </div>
             <div className="form-group">
-              <label style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <StatusWarningIcon size={16} /> Marginal: Profit margin &gt; 20% or ROI &lt; 400 days
+              <label>
+                MARGINAL: Profit margin &gt; 20% or ROI &lt; 400 days
               </label>
             </div>
             <div className="form-group">
-              <label style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <StatusWarningIcon size={16} /> Break-even: Profit margin 0-20% or ROI &gt; 400 days
+              <label>
+                BREAK-EVEN: Profit margin 0-20% or ROI &gt; 400 days
               </label>
             </div>
             <div className="form-group">
-              <label style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <StatusErrorIcon size={16} /> Unprofitable: Negative profit
+              <label>
+                UNPROFITABLE: Negative profit
               </label>
             </div>
           </div>

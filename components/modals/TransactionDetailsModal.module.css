@@ -1,0 +1,402 @@
+/* Transaction Details Modal - Charte HEARST */
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 24px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modalContent {
+  background: #111111;
+  border: 1px solid #333333;
+  border-radius: 16px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  border-bottom: 1px solid #333333;
+}
+
+.modalTitle {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.btnClose {
+  background: transparent;
+  border: none;
+  color: #888888;
+  font-size: 32px;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  line-height: 1;
+}
+
+.btnClose:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.modalBody {
+  padding: 24px;
+}
+
+.txInfo {
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #333333;
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.infoRow:last-child {
+  margin-bottom: 0;
+}
+
+.infoLabel {
+  font-size: 14px;
+  color: #888888;
+  font-weight: 500;
+}
+
+.infoValue {
+  font-size: 14px;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.walletBox {
+  background: rgba(138, 253, 129, 0.05);
+  border: 1px solid rgba(138, 253, 129, 0.2);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.walletBoxTitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: #8afd81;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.walletInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.walletName {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.walletAddressRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.walletAddress {
+  font-size: 13px;
+  color: #888888;
+  font-family: 'SF Mono', 'Monaco', 'Menlo', monospace;
+  flex: 1;
+  word-break: break-all;
+}
+
+.btnCopy {
+  background: rgba(138, 253, 129, 0.1);
+  border: 1px solid #8afd81;
+  color: #8afd81;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.btnCopy:hover {
+  background: rgba(138, 253, 129, 0.2);
+}
+
+.walletBalance {
+  font-size: 14px;
+  color: #888888;
+  margin-top: 8px;
+}
+
+.amountDisplay {
+  text-align: center;
+  margin: 32px 0;
+  padding: 24px;
+  background: rgba(138, 253, 129, 0.1);
+  border-radius: 12px;
+}
+
+.amountArrow {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.amountLabel {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #8afd81;
+  margin-bottom: 12px;
+}
+
+.amountBig {
+  font-size: 36px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.amountUSD {
+  font-size: 16px;
+  color: #888888;
+}
+
+.txFees {
+  margin: 24px 0;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+  border-top: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+}
+
+.feeRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #888888;
+}
+
+.feeRowTotal {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #333333;
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.txNotes {
+  margin: 24px 0;
+  padding: 16px;
+  background: rgba(138, 253, 129, 0.05);
+  border-radius: 8px;
+  border-left: 3px solid #8afd81;
+}
+
+.txNotes strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #8afd81;
+  font-size: 14px;
+}
+
+.txNotes p {
+  margin: 0;
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.txHash {
+  margin: 24px 0;
+  padding: 16px;
+  background: rgba(138, 253, 129, 0.05);
+  border-radius: 8px;
+}
+
+.txHash strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #8afd81;
+  font-size: 14px;
+}
+
+.hashValue {
+  font-family: 'SF Mono', 'Monaco', 'Menlo', monospace;
+  font-size: 12px;
+  color: #888888;
+  word-break: break-all;
+  margin-bottom: 8px;
+}
+
+.validatedAt {
+  font-size: 12px;
+  color: #888888;
+  margin-top: 8px;
+}
+
+.badgePending {
+  background: rgba(138, 253, 129, 0.1);
+  color: #8afd81;
+  border: 1px solid #8afd81;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badgeValidated {
+  background: rgba(76, 175, 80, 0.1);
+  color: #4CAF50;
+  border: 1px solid #4CAF50;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badgeFailed {
+  background: rgba(255, 68, 68, 0.1);
+  color: #ff4444;
+  border: 1px solid #ff4444;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.modalActions {
+  display: flex;
+  gap: 12px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #333333;
+}
+
+.btnSecondary {
+  flex: 1;
+  padding: 12px 24px;
+  background: transparent;
+  color: #888888;
+  border: 1px solid #333333;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.btnSecondary:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: #8afd81;
+  color: #ffffff;
+}
+
+.btnValidate {
+  flex: 1;
+  background: #8afd81;
+  color: #000000;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(138, 253, 129, 0.3);
+  font-size: 15px;
+}
+
+.btnValidate:hover:not(:disabled) {
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px rgba(138, 253, 129, 0.5);
+}
+
+.btnValidate:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.validatedInfo {
+  flex: 1;
+  padding: 12px 24px;
+  background: rgba(76, 175, 80, 0.1);
+  border: 1px solid #4CAF50;
+  border-radius: 8px;
+  color: #4CAF50;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .modalContent {
+    max-width: 100%;
+    margin: 16px;
+  }
+
+  .modalBody {
+    padding: 16px;
+  }
+
+  .amountBig {
+    font-size: 28px;
+  }
+}
+

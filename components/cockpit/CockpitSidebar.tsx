@@ -150,7 +150,7 @@ export default function CockpitSidebar({ activeSection, onSectionChange }: Cockp
                       width: '100%',
                       textAlign: 'left',
                       padding: 'var(--space-2) var(--space-4)',
-                      background: activeSection === item.id ? 'rgba(165, 255, 156, 0.1)' : 'transparent',
+                      background: activeSection === item.id ? '#A7FB90' : 'transparent',
                       border: 'none',
                       borderLeft:
                         activeSection === item.id ? '3px solid var(--hearst-green)' : '3px solid transparent',
@@ -163,7 +163,7 @@ export default function CockpitSidebar({ activeSection, onSectionChange }: Cockp
                     }}
                     onMouseEnter={(e) => {
                       if (activeSection !== item.id) {
-                        e.currentTarget.style.background = 'rgba(165, 255, 156, 0.05)'
+                        e.currentTarget.style.background = 'rgba(167, 251, 144, 0.1)'
                         e.currentTarget.style.color = 'var(--hearst-green)'
                       }
                     }}

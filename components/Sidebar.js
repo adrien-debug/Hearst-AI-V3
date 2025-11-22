@@ -1,11 +1,33 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import Image from 'next/image'
+import { transactionsAPI } from '@/lib/api'
 
 export default function Sidebar() {
   const pathname = usePathname()
+  const [pendingTransactionsCount, setPendingTransactionsCount] = useState(0)
+
+  useEffect(() => {
+    // Charger le nombre de transactions pending depuis l'API
+    const loadPendingCount = async () => {
+      try {
+        const count = await transactionsAPI.getPendingCount()
+        setPendingTransactionsCount(count)
+      } catch (error) {
+        console.error('Error loading pending transactions count:', error)
+        // Fallback sur un nombre par défaut en cas d'erreur
+        setPendingTransactionsCount(0)
+      }
+    }
+
+    loadPendingCount()
+    // Rafraîchir toutes les 30 secondes
+    const interval = setInterval(loadPendingCount, 30000)
+    return () => clearInterval(interval)
+  }, [])
 
   const navItems = [
     { href: '/', label: 'Home', icon: 'home', view: 'dashboard' },
@@ -56,6 +78,21 @@ export default function Sidebar() {
               {/* Icons will be injected by JS */}
             </span>
             <span className="nav-label">{item.label}</span>
+            {item.href === '/transactions' && pendingTransactionsCount > 0 && (
+              <span className="nav-badge" style={{
+                marginLeft: 'auto',
+                background: 'var(--hearst-green)',
+                color: '#000000',
+                fontSize: '11px',
+                fontWeight: '700',
+                padding: '4px 8px',
+                borderRadius: '12px',
+                minWidth: '20px',
+                textAlign: 'center'
+              }}>
+                {pendingTransactionsCount}
+              </span>
+            )}
           </Link>
         ))}
       </nav>

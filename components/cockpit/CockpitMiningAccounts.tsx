@@ -205,16 +205,16 @@ export default function CockpitMiningAccounts() {
       {
         label: 'Hashrate Temps Réel (PH/s)',
         data: hashrateByAccountData.realtime,
-        backgroundColor: 'rgba(165, 255, 156, 0.8)',
-        borderColor: '#a5ff9c',
+        backgroundColor: 'rgba(167, 251, 144, 0.8)',
+        borderColor: '#A7FB90',
         borderWidth: 2,
         borderRadius: 4,
       },
       {
         label: 'Hashrate 24h (PH/s)',
         data: hashrateByAccountData.last24h,
-        backgroundColor: 'rgba(138, 253, 129, 0.8)',
-        borderColor: '#8afd81',
+        backgroundColor: 'rgba(167, 251, 144, 0.8)',
+        borderColor: '#A7FB90',
         borderWidth: 2,
         borderRadius: 4,
       },
@@ -228,8 +228,8 @@ export default function CockpitMiningAccounts() {
       {
         label: 'Mineurs Actifs',
         data: minersByAccountData.active,
-        backgroundColor: 'rgba(165, 255, 156, 0.8)',
-        borderColor: '#a5ff9c',
+        backgroundColor: 'rgba(167, 251, 144, 0.8)',
+        borderColor: '#A7FB90',
         borderWidth: 2,
         borderRadius: 4,
       },
@@ -251,8 +251,8 @@ export default function CockpitMiningAccounts() {
       {
         label: 'Efficacité (%)',
         data: efficiencyByAccountData.efficiency,
-        borderColor: '#a5ff9c',
-        backgroundColor: 'rgba(165, 255, 156, 0.1)',
+        borderColor: '#A7FB90',
+        backgroundColor: 'rgba(167, 251, 144, 0.1)',
         fill: true,
         tension: 0.4,
       },
@@ -270,13 +270,13 @@ export default function CockpitMiningAccounts() {
           miningAccounts.filter(a => a.client === 'Jason Wilson Family').length,
         ],
         backgroundColor: [
-          'rgba(165, 255, 156, 0.8)',
-          'rgba(138, 253, 129, 0.8)',
+          'rgba(167, 251, 144, 0.8)',
+          'rgba(167, 251, 144, 0.8)',
           'rgba(100, 200, 100, 0.8)',
         ],
         borderColor: [
-          '#a5ff9c',
-          '#8afd81',
+          '#A7FB90',
+          '#A7FB90',
           '#64c864',
         ],
         borderWidth: 2,
@@ -299,7 +299,7 @@ export default function CockpitMiningAccounts() {
         backgroundColor: 'rgba(26, 26, 26, 0.95)',
         titleColor: '#ffffff',
         bodyColor: '#ffffff',
-        borderColor: '#a5ff9c',
+        borderColor: '#A7FB90',
         borderWidth: 1,
       },
     },
@@ -341,7 +341,7 @@ export default function CockpitMiningAccounts() {
         backgroundColor: 'rgba(26, 26, 26, 0.95)',
         titleColor: '#ffffff',
         bodyColor: '#ffffff',
-        borderColor: '#a5ff9c',
+        borderColor: '#A7FB90',
         borderWidth: 1,
       },
     },
@@ -401,13 +401,13 @@ export default function CockpitMiningAccounts() {
               {accountsData.totalHashrate.toFixed(2)} PH/s
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-2)' }}>
-              <span style={{ color: '#a5ff9c', fontSize: '0.875rem' }}>↑ 2.1%</span>
+              <span style={{ color: '#A7FB90', fontSize: '0.875rem' }}>↑ 2.1%</span>
               <span style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>vs hier</span>
             </div>
             <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
               Capacité totale
             </p>
-            <div style={{ marginTop: 'var(--space-3)', padding: 'var(--space-2)', background: 'rgba(165, 255, 156, 0.05)', borderRadius: 'var(--radius-sm)' }}>
+            <div style={{ marginTop: 'var(--space-3)', padding: 'var(--space-2)', background: 'rgba(167, 251, 144, 0.05)', borderRadius: 'var(--radius-sm)' }}>
               <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', marginBottom: 'var(--space-1)' }}>Moyenne par compte</div>
               <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--hearst-green)' }}>
                 {(accountsData.totalHashrate / accountsData.total).toFixed(2)} PH/s
@@ -428,13 +428,13 @@ export default function CockpitMiningAccounts() {
               {accountsData.totalMiners}
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-2)' }}>
-              <span style={{ color: '#a5ff9c', fontSize: '0.875rem' }}>→ Stable</span>
+              <span style={{ color: '#A7FB90', fontSize: '0.875rem' }}>→ Stable</span>
               <span style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>vs moyenne</span>
             </div>
             <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
               Tous comptes confondus
             </p>
-            <div style={{ marginTop: 'var(--space-3)', padding: 'var(--space-2)', background: 'rgba(165, 255, 156, 0.05)', borderRadius: 'var(--radius-sm)' }}>
+            <div style={{ marginTop: 'var(--space-3)', padding: 'var(--space-2)', background: 'rgba(167, 251, 144, 0.05)', borderRadius: 'var(--radius-sm)' }}>
               <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', marginBottom: 'var(--space-1)' }}>Moyenne par compte</div>
               <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--hearst-green)' }}>
                 {Math.round(accountsData.totalMiners / accountsData.total)} mineurs
@@ -455,14 +455,14 @@ export default function CockpitMiningAccounts() {
               {accountsData.averageEfficiency.toFixed(1)}%
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-2)' }}>
-              <span style={{ color: '#a5ff9c', fontSize: '0.875rem' }}>↑ 1.2%</span>
+              <span style={{ color: '#A7FB90', fontSize: '0.875rem' }}>↑ 1.2%</span>
               <span style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>vs moyenne</span>
             </div>
             <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
               Performance globale
             </p>
             <div style={{ marginTop: 'var(--space-3)', width: '100%', height: '6px', background: 'rgba(255, 255, 255, 0.1)', borderRadius: '3px', overflow: 'hidden' }}>
-              <div style={{ width: `${accountsData.averageEfficiency}%`, height: '100%', background: 'linear-gradient(90deg, #a5ff9c, #8afd81)', borderRadius: '3px' }}></div>
+              <div style={{ width: `${accountsData.averageEfficiency}%`, height: '100%', background: 'linear-gradient(90deg, #A7FB90, #A7FB90)', borderRadius: '3px' }}></div>
             </div>
           </CardContent>
         </Card>
@@ -595,7 +595,7 @@ export default function CockpitMiningAccounts() {
                               <div style={{ 
                                 width: `${account.efficiency}%`, 
                                 height: '100%', 
-                                background: account.efficiency >= 97 ? 'linear-gradient(90deg, #a5ff9c, #8afd81)' : account.efficiency >= 95 ? 'linear-gradient(90deg, #ffa500, #ff8c00)' : 'linear-gradient(90deg, #ff4d4d, #ff3333)',
+                                background: account.efficiency >= 97 ? 'linear-gradient(90deg, #A7FB90, #A7FB90)' : account.efficiency >= 95 ? 'linear-gradient(90deg, #ffa500, #ff8c00)' : 'linear-gradient(90deg, #ff4d4d, #ff3333)',
                                 borderRadius: '2px'
                               }}></div>
                             </div>
@@ -676,7 +676,7 @@ export default function CockpitMiningAccounts() {
                                 <div style={{ 
                                   width: `${account.efficiency}%`, 
                                   height: '100%', 
-                                  background: account.efficiency >= 97 ? 'linear-gradient(90deg, #a5ff9c, #8afd81)' : account.efficiency >= 95 ? 'linear-gradient(90deg, #ffa500, #ff8c00)' : 'linear-gradient(90deg, #ff4d4d, #ff3333)',
+                                  background: account.efficiency >= 97 ? 'linear-gradient(90deg, #A7FB90, #A7FB90)' : account.efficiency >= 95 ? 'linear-gradient(90deg, #ffa500, #ff8c00)' : 'linear-gradient(90deg, #ff4d4d, #ff3333)',
                                   borderRadius: '3px'
                                 }}></div>
                               </div>
@@ -697,7 +697,7 @@ export default function CockpitMiningAccounts() {
                                 <div style={{ 
                                   width: `${activationRate}%`, 
                                   height: '100%', 
-                                  background: 'linear-gradient(90deg, #a5ff9c, #8afd81)',
+                                  background: 'linear-gradient(90deg, #A7FB90, #A7FB90)',
                                   borderRadius: '3px'
                                 }}></div>
                               </div>
@@ -771,7 +771,7 @@ export default function CockpitMiningAccounts() {
                             <span style={{ color: 'var(--text-secondary)' }}>Efficacité Moyenne: </span>
                             <span style={{ color: 'var(--hearst-green)', fontWeight: 600 }}>{avgEfficiency.toFixed(1)}%</span>
                           </div>
-                          <div style={{ marginTop: 'var(--space-2)', padding: 'var(--space-2)', background: 'rgba(165, 255, 156, 0.05)', borderRadius: 'var(--radius-sm)' }}>
+                          <div style={{ marginTop: 'var(--space-2)', padding: 'var(--space-2)', background: 'rgba(167, 251, 144, 0.05)', borderRadius: 'var(--radius-sm)' }}>
                             <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', marginBottom: 'var(--space-1)' }}>Production BTC 24h</div>
                             <div style={{ fontSize: 'var(--text-base)', fontWeight: 700, color: 'var(--hearst-green)' }}>
                               {clientAccounts.reduce((sum, a) => sum + a.btc24h, 0).toFixed(6)} BTC

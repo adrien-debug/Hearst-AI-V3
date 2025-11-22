@@ -135,8 +135,8 @@ export default function CockpitProduction() {
       {
         label: 'Production BTC',
         data: chartData.data,
-        borderColor: '#a5ff9c',
-        backgroundColor: 'rgba(165, 255, 156, 0.1)',
+        borderColor: '#A7FB90',
+        backgroundColor: 'rgba(167, 251, 144, 0.1)',
         fill: true,
         tension: 0.4,
       },
@@ -150,10 +150,10 @@ export default function CockpitProduction() {
         label: 'Production BTC',
         data: chartData.data,
         backgroundColor: chartData.data.map((_, i) => 
-          i % 2 === 0 ? 'rgba(165, 255, 156, 0.8)' : 'rgba(138, 253, 129, 0.8)'
+          i % 2 === 0 ? 'rgba(167, 251, 144, 0.8)' : 'rgba(167, 251, 144, 0.8)'
         ),
         borderColor: chartData.data.map((_, i) => 
-          i % 2 === 0 ? '#a5ff9c' : '#8afd81'
+          i % 2 === 0 ? '#A7FB90' : '#A7FB90'
         ),
         borderWidth: 2,
         borderRadius: 4,
@@ -174,8 +174,8 @@ export default function CockpitProduction() {
       {
         label: 'Année en cours',
         data: monthlyComparisonData.currentYear,
-        borderColor: '#a5ff9c',
-        backgroundColor: 'rgba(165, 255, 156, 0.1)',
+        borderColor: '#A7FB90',
+        backgroundColor: 'rgba(167, 251, 144, 0.1)',
         fill: true,
         tension: 0.4,
       },
@@ -198,15 +198,15 @@ export default function CockpitProduction() {
       {
         data: [33.3, 15.3, 13.2, 17.4, 20.8],
         backgroundColor: [
-          'rgba(165, 255, 156, 0.8)',
-          'rgba(138, 253, 129, 0.8)',
+          'rgba(167, 251, 144, 0.8)',
+          'rgba(167, 251, 144, 0.8)',
           'rgba(100, 200, 100, 0.8)',
           'rgba(80, 180, 80, 0.8)',
           'rgba(60, 160, 60, 0.8)',
         ],
         borderColor: [
-          '#a5ff9c',
-          '#8afd81',
+          '#A7FB90',
+          '#A7FB90',
           '#64c864',
           '#50b450',
           '#3ca03c',
@@ -231,7 +231,7 @@ export default function CockpitProduction() {
         backgroundColor: 'rgba(26, 26, 26, 0.95)',
         titleColor: '#ffffff',
         bodyColor: '#ffffff',
-        borderColor: '#a5ff9c',
+        borderColor: '#A7FB90',
         borderWidth: 1,
         callbacks: {
           label: function(context: any) {
@@ -279,7 +279,7 @@ export default function CockpitProduction() {
         backgroundColor: 'rgba(26, 26, 26, 0.95)',
         titleColor: '#ffffff',
         bodyColor: '#ffffff',
-        borderColor: '#a5ff9c',
+        borderColor: '#A7FB90',
         borderWidth: 1,
         callbacks: {
           label: function(context: any) {
@@ -319,13 +319,13 @@ export default function CockpitProduction() {
               {productionData.daily.toFixed(6)} BTC
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-2)' }}>
-              <span style={{ color: '#a5ff9c', fontSize: '0.875rem' }}>↑ 0.8%</span>
+              <span style={{ color: '#A7FB90', fontSize: '0.875rem' }}>↑ 0.8%</span>
               <span style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>vs hier</span>
             </div>
             <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
               Dernières 24 heures
             </p>
-            <div style={{ marginTop: 'var(--space-3)', padding: 'var(--space-2)', background: 'rgba(165, 255, 156, 0.05)', borderRadius: 'var(--radius-sm)' }}>
+            <div style={{ marginTop: 'var(--space-3)', padding: 'var(--space-2)', background: 'rgba(167, 251, 144, 0.05)', borderRadius: 'var(--radius-sm)' }}>
               <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', marginBottom: 'var(--space-1)' }}>Valeur USD</div>
               <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--hearst-green)' }}>
                 ≈ ${(productionData.daily * productionData.btcPrice).toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
@@ -346,13 +346,13 @@ export default function CockpitProduction() {
               {productionData.monthly.toFixed(6)} BTC
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-2)' }}>
-              <span style={{ color: '#a5ff9c', fontSize: '0.875rem' }}>↑ 5.2%</span>
+              <span style={{ color: '#A7FB90', fontSize: '0.875rem' }}>↑ 5.2%</span>
               <span style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>vs mois dernier</span>
             </div>
             <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
               Mois en cours
             </p>
-            <div style={{ marginTop: 'var(--space-3)', padding: 'var(--space-2)', background: 'rgba(165, 255, 156, 0.05)', borderRadius: 'var(--radius-sm)' }}>
+            <div style={{ marginTop: 'var(--space-3)', padding: 'var(--space-2)', background: 'rgba(167, 251, 144, 0.05)', borderRadius: 'var(--radius-sm)' }}>
               <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', marginBottom: 'var(--space-1)' }}>Valeur USD</div>
               <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--hearst-green)' }}>
                 ≈ ${(productionData.monthly * productionData.btcPrice).toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
@@ -373,13 +373,13 @@ export default function CockpitProduction() {
               {productionData.yearly.toFixed(2)} BTC
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-2)' }}>
-              <span style={{ color: '#a5ff9c', fontSize: '0.875rem' }}>↑ 8.5%</span>
+              <span style={{ color: '#A7FB90', fontSize: '0.875rem' }}>↑ 8.5%</span>
               <span style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>vs année dernière</span>
             </div>
             <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
               Projection annuelle
             </p>
-            <div style={{ marginTop: 'var(--space-3)', padding: 'var(--space-2)', background: 'rgba(165, 255, 156, 0.05)', borderRadius: 'var(--radius-sm)' }}>
+            <div style={{ marginTop: 'var(--space-3)', padding: 'var(--space-2)', background: 'rgba(167, 251, 144, 0.05)', borderRadius: 'var(--radius-sm)' }}>
               <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', marginBottom: 'var(--space-1)' }}>Valeur USD</div>
               <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--hearst-green)' }}>
                 ≈ ${(productionData.yearly * productionData.btcPrice).toLocaleString('fr-FR', { maximumFractionDigits: 0 })}
@@ -400,14 +400,14 @@ export default function CockpitProduction() {
               {productionData.efficiency.toFixed(1)}%
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-2)' }}>
-              <span style={{ color: '#a5ff9c', fontSize: '0.875rem' }}>↑ 2.1%</span>
+              <span style={{ color: '#A7FB90', fontSize: '0.875rem' }}>↑ 2.1%</span>
               <span style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>vs cible ({productionData.targetEfficiency}%)</span>
             </div>
             <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
               Efficacité moyenne
             </p>
             <div style={{ marginTop: 'var(--space-3)', width: '100%', height: '8px', background: 'rgba(255, 255, 255, 0.1)', borderRadius: '4px', overflow: 'hidden' }}>
-              <div style={{ width: `${productionData.efficiency}%`, height: '100%', background: 'linear-gradient(90deg, #a5ff9c, #8afd81)', borderRadius: '4px' }}></div>
+              <div style={{ width: `${productionData.efficiency}%`, height: '100%', background: 'linear-gradient(90deg, #A7FB90, #A7FB90)', borderRadius: '4px' }}></div>
             </div>
           </CardContent>
         </Card>
@@ -429,7 +429,7 @@ export default function CockpitProduction() {
             <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
               Sur 30 jours
             </p>
-            <div style={{ marginTop: 'var(--space-3)', padding: 'var(--space-2)', background: 'rgba(165, 255, 156, 0.05)', borderRadius: 'var(--radius-sm)' }}>
+            <div style={{ marginTop: 'var(--space-3)', padding: 'var(--space-2)', background: 'rgba(167, 251, 144, 0.05)', borderRadius: 'var(--radius-sm)' }}>
               <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', marginBottom: 'var(--space-1)' }}>Minimum</div>
               <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--hearst-green)' }}>
                 {productionData.lowDaily.toFixed(6)} BTC
@@ -502,10 +502,10 @@ export default function CockpitProduction() {
                       onClick={() => setSelectedPeriod('daily')}
                       style={{
                         padding: 'var(--space-2) var(--space-3)',
-                        background: selectedPeriod === 'daily' ? 'rgba(165, 255, 156, 0.2)' : 'transparent',
-                        border: `1px solid ${selectedPeriod === 'daily' ? '#a5ff9c' : 'var(--border)'}`,
+                        background: selectedPeriod === 'daily' ? 'rgba(167, 251, 144, 0.2)' : 'transparent',
+                        border: `1px solid ${selectedPeriod === 'daily' ? '#A7FB90' : 'var(--border)'}`,
                         borderRadius: 'var(--radius-sm)',
-                        color: selectedPeriod === 'daily' ? '#a5ff9c' : 'var(--text-secondary)',
+                        color: selectedPeriod === 'daily' ? '#A7FB90' : 'var(--text-secondary)',
                         cursor: 'pointer',
                         fontSize: 'var(--text-sm)',
                       }}
@@ -516,10 +516,10 @@ export default function CockpitProduction() {
                       onClick={() => setSelectedPeriod('weekly')}
                       style={{
                         padding: 'var(--space-2) var(--space-3)',
-                        background: selectedPeriod === 'weekly' ? 'rgba(165, 255, 156, 0.2)' : 'transparent',
-                        border: `1px solid ${selectedPeriod === 'weekly' ? '#a5ff9c' : 'var(--border)'}`,
+                        background: selectedPeriod === 'weekly' ? 'rgba(167, 251, 144, 0.2)' : 'transparent',
+                        border: `1px solid ${selectedPeriod === 'weekly' ? '#A7FB90' : 'var(--border)'}`,
                         borderRadius: 'var(--radius-sm)',
-                        color: selectedPeriod === 'weekly' ? '#a5ff9c' : 'var(--text-secondary)',
+                        color: selectedPeriod === 'weekly' ? '#A7FB90' : 'var(--text-secondary)',
                         cursor: 'pointer',
                         fontSize: 'var(--text-sm)',
                       }}
@@ -530,10 +530,10 @@ export default function CockpitProduction() {
                       onClick={() => setSelectedPeriod('monthly')}
                       style={{
                         padding: 'var(--space-2) var(--space-3)',
-                        background: selectedPeriod === 'monthly' ? 'rgba(165, 255, 156, 0.2)' : 'transparent',
-                        border: `1px solid ${selectedPeriod === 'monthly' ? '#a5ff9c' : 'var(--border)'}`,
+                        background: selectedPeriod === 'monthly' ? 'rgba(167, 251, 144, 0.2)' : 'transparent',
+                        border: `1px solid ${selectedPeriod === 'monthly' ? '#A7FB90' : 'var(--border)'}`,
                         borderRadius: 'var(--radius-sm)',
-                        color: selectedPeriod === 'monthly' ? '#a5ff9c' : 'var(--text-secondary)',
+                        color: selectedPeriod === 'monthly' ? '#A7FB90' : 'var(--text-secondary)',
                         cursor: 'pointer',
                         fontSize: 'var(--text-sm)',
                       }}
@@ -600,7 +600,7 @@ export default function CockpitProduction() {
                         <td>{detail.efficiency}%</td>
                         <td>
                           <span style={{ 
-                            color: detail.trend.startsWith('+') ? '#a5ff9c' : detail.trend.startsWith('-') ? '#ffa500' : 'var(--text-secondary)',
+                            color: detail.trend.startsWith('+') ? '#A7FB90' : detail.trend.startsWith('-') ? '#ffa500' : 'var(--text-secondary)',
                             fontWeight: 600,
                           }}>
                             {detail.trend}
@@ -646,11 +646,11 @@ export default function CockpitProduction() {
                   Efficacité moyenne actuelle
                 </div>
                 <div style={{ width: '100%', height: '12px', background: 'rgba(255, 255, 255, 0.1)', borderRadius: '6px', overflow: 'hidden', marginBottom: 'var(--space-4)' }}>
-                  <div style={{ width: `${productionData.efficiency}%`, height: '100%', background: 'linear-gradient(90deg, #a5ff9c, #8afd81)', borderRadius: '6px' }}></div>
+                  <div style={{ width: `${productionData.efficiency}%`, height: '100%', background: 'linear-gradient(90deg, #A7FB90, #A7FB90)', borderRadius: '6px' }}></div>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 'var(--text-sm)', color: 'var(--text-secondary)' }}>
                   <span>Cible: {productionData.targetEfficiency}%</span>
-                  <span style={{ color: '#a5ff9c' }}>+{(productionData.efficiency - productionData.targetEfficiency).toFixed(1)}%</span>
+                  <span style={{ color: '#A7FB90' }}>+{(productionData.efficiency - productionData.targetEfficiency).toFixed(1)}%</span>
                 </div>
               </div>
             </CardContent>
@@ -662,29 +662,29 @@ export default function CockpitProduction() {
             </CardHeader>
             <CardContent>
               <div style={{ display: 'grid', gap: 'var(--space-4)' }}>
-                <div style={{ padding: 'var(--space-4)', background: 'rgba(165, 255, 156, 0.05)', borderRadius: 'var(--radius-md)', border: '1px solid rgba(165, 255, 156, 0.1)' }}>
+                <div style={{ padding: 'var(--space-4)', background: 'rgba(167, 251, 144, 0.05)', borderRadius: 'var(--radius-md)', border: '1px solid rgba(167, 251, 144, 0.1)' }}>
                   <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', marginBottom: 'var(--space-2)' }}>Efficacité Moyenne</div>
                   <div style={{ fontSize: 'var(--text-2xl)', fontWeight: 700, color: 'var(--hearst-green)' }}>
                     {productionData.efficiency.toFixed(1)}%
                   </div>
                   <div style={{ width: '100%', height: '8px', background: 'rgba(255, 255, 255, 0.1)', borderRadius: '4px', overflow: 'hidden', marginTop: 'var(--space-2)' }}>
-                    <div style={{ width: `${productionData.efficiency}%`, height: '100%', background: 'linear-gradient(90deg, #a5ff9c, #8afd81)', borderRadius: '4px' }}></div>
+                    <div style={{ width: `${productionData.efficiency}%`, height: '100%', background: 'linear-gradient(90deg, #A7FB90, #A7FB90)', borderRadius: '4px' }}></div>
                   </div>
                 </div>
 
-                <div style={{ padding: 'var(--space-4)', background: 'rgba(165, 255, 156, 0.05)', borderRadius: 'var(--radius-md)', border: '1px solid rgba(165, 255, 156, 0.1)' }}>
+                <div style={{ padding: 'var(--space-4)', background: 'rgba(167, 251, 144, 0.05)', borderRadius: 'var(--radius-md)', border: '1px solid rgba(167, 251, 144, 0.1)' }}>
                   <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', marginBottom: 'var(--space-2)' }}>Cible d'Efficacité</div>
                   <div style={{ fontSize: 'var(--text-2xl)', fontWeight: 700, color: 'var(--hearst-green)' }}>
                     {productionData.targetEfficiency.toFixed(1)}%
                   </div>
                   <div style={{ width: '100%', height: '8px', background: 'rgba(255, 255, 255, 0.1)', borderRadius: '4px', overflow: 'hidden', marginTop: 'var(--space-2)' }}>
-                    <div style={{ width: `${productionData.targetEfficiency}%`, height: '100%', background: 'linear-gradient(90deg, #8afd81, #64c864)', borderRadius: '4px' }}></div>
+                    <div style={{ width: `${productionData.targetEfficiency}%`, height: '100%', background: 'linear-gradient(90deg, #A7FB90, #64c864)', borderRadius: '4px' }}></div>
                   </div>
                 </div>
 
-                <div style={{ padding: 'var(--space-4)', background: 'rgba(165, 255, 156, 0.05)', borderRadius: 'var(--radius-md)', border: '1px solid rgba(165, 255, 156, 0.1)' }}>
+                <div style={{ padding: 'var(--space-4)', background: 'rgba(167, 251, 144, 0.05)', borderRadius: 'var(--radius-md)', border: '1px solid rgba(167, 251, 144, 0.1)' }}>
                   <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', marginBottom: 'var(--space-2)' }}>Amélioration vs Cible</div>
-                  <div style={{ fontSize: 'var(--text-2xl)', fontWeight: 700, color: '#a5ff9c' }}>
+                  <div style={{ fontSize: 'var(--text-2xl)', fontWeight: 700, color: '#A7FB90' }}>
                     +{(productionData.efficiency - productionData.targetEfficiency).toFixed(1)}%
                   </div>
                   <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', marginTop: 'var(--space-2)' }}>

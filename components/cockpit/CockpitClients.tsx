@@ -197,8 +197,8 @@ export default function CockpitClients() {
       {
         label: 'Hashrate (PH/s)',
         data: clientHashrateData.hashrate,
-        backgroundColor: 'rgba(165, 255, 156, 0.8)',
-        borderColor: '#a5ff9c',
+        backgroundColor: 'rgba(167, 251, 144, 0.8)',
+        borderColor: '#A7FB90',
         borderWidth: 2,
         borderRadius: 4,
       },
@@ -212,8 +212,8 @@ export default function CockpitClients() {
       {
         label: 'Uptime (%)',
         data: clientUptimeData.uptime,
-        borderColor: '#a5ff9c',
-        backgroundColor: 'rgba(165, 255, 156, 0.1)',
+        borderColor: '#A7FB90',
+        backgroundColor: 'rgba(167, 251, 144, 0.1)',
         fill: true,
         tension: 0.4,
       },
@@ -269,7 +269,7 @@ export default function CockpitClients() {
         backgroundColor: 'rgba(26, 26, 26, 0.95)',
         titleColor: '#ffffff',
         bodyColor: '#ffffff',
-        borderColor: '#a5ff9c',
+        borderColor: '#A7FB90',
         borderWidth: 1,
       },
     },
@@ -375,13 +375,13 @@ export default function CockpitClients() {
               {clientsData.contracts}
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-2)' }}>
-              <span style={{ color: '#a5ff9c', fontSize: '0.875rem' }}>↑ 2</span>
+              <span style={{ color: '#A7FB90', fontSize: '0.875rem' }}>↑ 2</span>
               <span style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>vs mois dernier</span>
             </div>
             <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
               Contrats en cours
             </p>
-            <div style={{ marginTop: 'var(--space-3)', padding: 'var(--space-2)', background: 'rgba(165, 255, 156, 0.05)', borderRadius: 'var(--radius-sm)' }}>
+            <div style={{ marginTop: 'var(--space-3)', padding: 'var(--space-2)', background: 'rgba(167, 251, 144, 0.05)', borderRadius: 'var(--radius-sm)' }}>
               <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', marginBottom: 'var(--space-1)' }}>Moyenne par client</div>
               <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--hearst-green)' }}>
                 {(clientsData.contracts / clientsData.total).toFixed(1)} contrats
@@ -429,14 +429,14 @@ export default function CockpitClients() {
               +{clientsData.growthRate}%
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-2)' }}>
-              <span style={{ color: '#a5ff9c', fontSize: '0.875rem' }}>↑ {clientsData.growthRate}%</span>
+              <span style={{ color: '#A7FB90', fontSize: '0.875rem' }}>↑ {clientsData.growthRate}%</span>
               <span style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>vs année dernière</span>
             </div>
             <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
               Croissance annuelle
             </p>
             <div style={{ marginTop: 'var(--space-3)', width: '100%', height: '6px', background: 'rgba(255, 255, 255, 0.1)', borderRadius: '3px', overflow: 'hidden' }}>
-              <div style={{ width: `${Math.min(clientsData.growthRate * 10, 100)}%`, height: '100%', background: 'linear-gradient(90deg, #a5ff9c, #8afd81)', borderRadius: '3px' }}></div>
+              <div style={{ width: `${Math.min(clientsData.growthRate * 10, 100)}%`, height: '100%', background: 'linear-gradient(90deg, #A7FB90, #A7FB90)', borderRadius: '3px' }}></div>
             </div>
           </CardContent>
         </Card>
@@ -639,7 +639,7 @@ export default function CockpitClients() {
                             </div>
                           </td>
                           <td>
-                            <span style={{ color: '#a5ff9c', fontWeight: 600 }}>↑ +5.2%</span>
+                            <span style={{ color: '#A7FB90', fontWeight: 600 }}>↑ +5.2%</span>
                           </td>
                         </tr>
                       )
@@ -700,7 +700,7 @@ export default function CockpitClients() {
                                 <div style={{ 
                                   width: `${client.uptime}%`, 
                                   height: '100%', 
-                                  background: slaCompliance ? 'linear-gradient(90deg, #a5ff9c, #8afd81)' : 'linear-gradient(90deg, #ffa500, #ff8c00)',
+                                  background: slaCompliance ? 'linear-gradient(90deg, #A7FB90, #A7FB90)' : 'linear-gradient(90deg, #ffa500, #ff8c00)',
                                   borderRadius: '3px'
                                 }}></div>
                               </div>

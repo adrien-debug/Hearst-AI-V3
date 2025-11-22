@@ -2,48 +2,12 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { transactionsAPI } from '@/lib/api'
+import TransactionDetailsModal from '@/components/modals/TransactionDetailsModal'
+import { Transaction, Wallet, demoTransactions, demoWallets } from '@/utils/transactionsData'
 
-// Types
-interface Wallet {
-  id: string
-  name: string
-  address: string
-  type: 'source' | 'destination'
-  balance?: number
-  currency: string
-  network: string
-  enabled: boolean
-}
-
-interface Transaction {
-  id: string
-  date: string
-  timestamp: number
-  from: {
-    walletId: string
-    name: string
-    address: string
-  }
-  to: {
-    walletId: string
-    name: string
-    address: string
-  }
-  amount: number
-  currency: string
-  amountUSD: number
-  fee: number
-  total: number
-  status: 'pending' | 'validated' | 'failed'
-  notes: string
-  period: 'daily' | 'weekly' | 'monthly'
-  validated: boolean
-  validatedAt: string | null
-  txHash: string | null
-}
-
-// Données de démo
-const demoTransactions: Transaction[] = [
+// Données de démo (fallback)
+const demoTransactionsFallback: Transaction[] = [
   {
     id: 'TX-2024-001',
     date: '2024-11-22T14:30:00Z',
@@ -150,7 +114,7 @@ const demoTransactions: Transaction[] = [
   }
 ]
 
-const demoWallets = {
+const demoWalletsFallback = {
   source: [
     {
       id: 'wallet-001',
@@ -179,6 +143,7 @@ const demoWallets = {
       name: 'Cold Storage Vault',
       address: '3J98t1WpEZ73CNmYviecrnyiWrnqRhWNLy',
       type: 'destination' as const,
+      currency: 'BTC',
       network: 'Bitcoin Mainnet',
       enabled: true
     },
@@ -187,6 +152,7 @@ const demoWallets = {
       name: 'Exchange Wallet',
       address: 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh',
       type: 'destination' as const,
+      currency: 'BTC',
       network: 'Bitcoin Mainnet',
       enabled: true
     },
@@ -195,6 +161,7 @@ const demoWallets = {
       name: 'Payment Processor',
       address: '3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5',
       type: 'destination' as const,
+      currency: 'BTC',
       network: 'Bitcoin Mainnet',
       enabled: true
     }
@@ -219,15 +186,71 @@ const truncateAddress = (address: string, start: number = 6, end: number = 4) =>
 const BTC_PRICE = 85000
 
 export default function TransactionsManager() {
-  const [transactions, setTransactions] = useState<Transaction[]>(demoTransactions)
-  const [wallets] = useState(demoWallets)
+  const [transactions, setTransactions] = useState<Transaction[]>([])
+  const [wallets] = useState(demoWalletsFallback)
   const [statusFilter, setStatusFilter] = useState<'all' | 'pending' | 'validated' | 'failed'>('all')
   const [periodFilter, setPeriodFilter] = useState<'all' | 'daily' | 'weekly' | 'monthly'>('all')
   const [selectedTransaction, setSelectedTransaction] = useState<Transaction | null>(null)
   const [showTransactionModal, setShowTransactionModal] = useState(false)
   const [showNewTransactionModal, setShowNewTransactionModal] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
   const itemsPerPage = 20
+
+  // Charger les transactions depuis l'API
+  useEffect(() => {
+    const loadTransactions = async () => {
+      try {
+        setLoading(true)
+        setError(null)
+        const params: { status?: string; period?: string } = {}
+        if (statusFilter !== 'all') params.status = statusFilter
+        if (periodFilter !== 'all') params.period = periodFilter
+        
+        console.log('[TransactionsManager] Loading transactions with params:', params)
+        const response = await transactionsAPI.getAll(params)
+        console.log('[TransactionsManager] API response:', response)
+        
+        if (response.success && response.data && response.data.length > 0) {
+          console.log('[TransactionsManager] Setting transactions:', response.data.length)
+          setTransactions(response.data as Transaction[])
+        } else {
+          console.log('[TransactionsManager] No data from API, using demo data')
+          // Fallback sur les données de démo si l'API ne retourne pas de données
+          setTransactions(demoTransactionsFallback)
+        }
+      } catch (err) {
+        console.error('[TransactionsManager] Error loading transactions:', err)
+        setError('Erreur lors du chargement des transactions')
+        // Fallback sur les données de démo en cas d'erreur
+        setTransactions(demoTransactionsFallback)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadTransactions()
+  }, [statusFilter, periodFilter])
+
+  // Rafraîchir les transactions
+  const refreshTransactions = async () => {
+    try {
+      setLoading(true)
+      const params: { status?: string; period?: string } = {}
+      if (statusFilter !== 'all') params.status = statusFilter
+      if (periodFilter !== 'all') params.period = periodFilter
+      
+      const response = await transactionsAPI.getAll(params)
+      if (response.success && response.data) {
+        setTransactions(response.data as Transaction[])
+      }
+    } catch (err) {
+      console.error('Error refreshing transactions:', err)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   // Filter transactions
   const filteredTransactions = transactions.filter(tx => {
@@ -278,32 +301,43 @@ export default function TransactionsManager() {
     setSelectedTransaction(null)
   }
 
-  const validateTransaction = (txId: string) => {
-    if (confirm('Êtes-vous sûr de vouloir valider et envoyer cette transaction ?')) {
-      setTransactions(transactions.map(tx => 
-        tx.id === txId 
-          ? { 
-              ...tx, 
-              status: 'validated' as const,
-              validated: true,
-              validatedAt: new Date().toISOString(),
-              txHash: `tx_${Math.random().toString(36).substr(2, 64)}`
-            }
-          : tx
-      ))
-      closeTransactionModal()
+  const validateTransaction = async (txId: string) => {
+    try {
+      const { validateTransaction: validateTx } = await import('@/utils/transactionsApi')
+      const result = await validateTx(txId)
+      if (result.success) {
+        await refreshTransactions()
+        closeTransactionModal()
+      } else {
+        alert(`Erreur: ${result.message || 'Validation échouée'}`)
+      }
+    } catch (err) {
+      console.error('Error validating transaction:', err)
+      alert('Erreur lors de la validation de la transaction')
     }
   }
 
-  const saveNewTransaction = (txData: Partial<Transaction>) => {
-    const newTx: Transaction = {
-      id: `TX-2024-${String(transactions.length + 1).padStart(3, '0')}`,
-      date: new Date().toISOString(),
-      timestamp: Date.now(),
-      ...txData
-    } as Transaction
-    setTransactions([newTx, ...transactions])
-    setShowNewTransactionModal(false)
+  const saveNewTransaction = async (txData: Partial<Transaction>) => {
+    try {
+      const response = await transactionsAPI.create(txData)
+      if (response.success && response.data) {
+        setTransactions([response.data as Transaction, ...transactions])
+        setShowNewTransactionModal(false)
+      } else {
+        alert('Erreur lors de la création de la transaction')
+      }
+    } catch (err) {
+      console.error('Error creating transaction:', err)
+      // Fallback: créer localement si l'API échoue
+      const newTx: Transaction = {
+        id: `TX-2024-${String(transactions.length + 1).padStart(3, '0')}`,
+        date: new Date().toISOString(),
+        timestamp: Date.now(),
+        ...txData
+      } as Transaction
+      setTransactions([newTx, ...transactions])
+      setShowNewTransactionModal(false)
+    }
   }
 
   return (
@@ -315,10 +349,12 @@ export default function TransactionsManager() {
           <button className="btn-add-large" onClick={() => setShowNewTransactionModal(true)}>
             + New Transaction
           </button>
-          <button className="btn-secondary">🔄 Refresh</button>
-          <button className="btn-secondary">📥 Export</button>
+          <button className="btn-secondary" onClick={refreshTransactions} disabled={loading}>
+            {loading ? 'LOADING...' : 'REFRESH'}
+          </button>
+          <button className="btn-secondary">EXPORT</button>
           <Link href="/wallets">
-            <button className="btn-secondary">⚙️ Configure Wallets</button>
+            <button className="btn-secondary">CONFIGURE WALLETS</button>
           </Link>
         </div>
       </div>
@@ -382,7 +418,33 @@ export default function TransactionsManager() {
         </div>
       </div>
 
+      {/* Error Message */}
+      {error && (
+        <div style={{ 
+          padding: '16px', 
+          background: 'rgba(255, 107, 107, 0.1)', 
+          border: '1px solid rgba(255, 107, 107, 0.3)', 
+          borderRadius: '8px',
+          marginBottom: '16px',
+          color: 'var(--accent-danger, #ff6b6b)'
+        }}>
+          WARNING: {error}
+        </div>
+      )}
+
+      {/* Loading State */}
+      {loading && transactions.length === 0 && (
+        <div style={{ 
+          padding: '40px', 
+          textAlign: 'center',
+          color: 'var(--text-muted, #999999)'
+        }}>
+          LOADING TRANSACTIONS...
+        </div>
+      )}
+
       {/* Transactions Table */}
+      {!loading || transactions.length > 0 ? (
       <div className="tx-table-container">
         <table className="tx-table">
           <thead>
@@ -397,32 +459,39 @@ export default function TransactionsManager() {
             </tr>
           </thead>
           <tbody>
-            {paginatedTransactions.map((tx) => (
+            {paginatedTransactions.length === 0 ? (
+              <tr>
+                <td colSpan={7} style={{ textAlign: 'center', padding: '40px', color: 'var(--text-muted, #999999)' }}>
+                  Aucune transaction trouvée
+                </td>
+              </tr>
+            ) : (
+              paginatedTransactions.map((tx) => (
               <tr key={tx.id} onClick={() => openTransactionModal(tx.id)}>
                 <td>
                   <strong>#{tx.id.split('-').pop()}</strong>
                   <br />
-                  <small style={{ color: '#888' }}>{tx.id}</small>
+                  <small style={{ color: 'var(--text-muted, #999999)' }}>{tx.id}</small>
                 </td>
                 <td>{formatDateTime(tx.date)}</td>
                 <td>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                     <span>{tx.from.name}</span>
-                    <span style={{ color: '#888', fontSize: '12px' }}>{truncateAddress(tx.from.address)}</span>
-                    <span style={{ color: '#8afd81', margin: '4px 0' }}>↓</span>
+                    <span style={{ color: 'var(--text-muted, #999999)', fontSize: '12px' }}>{truncateAddress(tx.from.address)}</span>
+                    <span style={{ color: 'var(--hearst-green, #8afd81)', margin: '4px 0' }}>↓</span>
                     <span>{tx.to.name}</span>
-                    <span style={{ color: '#888', fontSize: '12px' }}>{truncateAddress(tx.to.address)}</span>
+                    <span style={{ color: 'var(--text-muted, #999999)', fontSize: '12px' }}>{truncateAddress(tx.to.address)}</span>
                   </div>
                 </td>
                 <td>
                   <strong>{tx.amount.toFixed(4)} BTC</strong>
                   <br />
-                  <small style={{ color: '#888' }}>${tx.amountUSD.toLocaleString()}</small>
+                  <small style={{ color: 'var(--text-muted, #999999)' }}>${tx.amountUSD.toLocaleString()}</small>
                 </td>
                 <td>{tx.fee.toFixed(8)} BTC</td>
                 <td>
                   <span className={`badge-${tx.status}`}>
-                    {tx.status === 'pending' ? '🟢' : tx.status === 'validated' ? '✅' : '❌'} {tx.status.toUpperCase()}
+                    {tx.status.toUpperCase()}
                   </span>
                 </td>
                 <td>
@@ -448,10 +517,12 @@ export default function TransactionsManager() {
                   )}
                 </td>
               </tr>
-            ))}
+              ))
+            )}
           </tbody>
         </table>
       </div>
+      ) : null}
 
       {/* Pagination */}
       <div className="pagination">
@@ -513,7 +584,6 @@ export default function TransactionsManager() {
       {showTransactionModal && selectedTransaction && (
         <TransactionDetailsModal
           transaction={selectedTransaction}
-          wallets={wallets}
           onClose={closeTransactionModal}
           onValidate={validateTransaction}
         />
@@ -530,156 +600,6 @@ export default function TransactionsManager() {
   )
 }
 
-// Modal Transaction Details
-function TransactionDetailsModal({
-  transaction,
-  wallets,
-  onClose,
-  onValidate
-}: {
-  transaction: Transaction
-  wallets: typeof demoWallets
-  onClose: () => void
-  onValidate: (id: string) => void
-}) {
-  const fromWallet = [...wallets.source, ...wallets.destination].find(w => w.id === transaction.from.walletId)
-  const toWallet = [...wallets.source, ...wallets.destination].find(w => w.id === transaction.to.walletId)
-
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text)
-    alert('Copied to clipboard!')
-  }
-
-  return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-large" onClick={(e) => e.stopPropagation()}>
-        <div className="modal-header">
-          <h2>💸 TRANSACTION DETAILS</h2>
-          <button className="modal-close" onClick={onClose}>×</button>
-        </div>
-        <div className="modal-body">
-          <div className="two-col-layout">
-            <div className="form-section">
-              <h3>TRANSACTION INFO</h3>
-              <div className="form-group">
-                <label>Transaction ID:</label>
-                <div>{transaction.id}</div>
-              </div>
-              <div className="form-group">
-                <label>Date:</label>
-                <div>{new Date(transaction.date).toLocaleString()}</div>
-              </div>
-              <div className="form-group">
-                <label>Status:</label>
-                <span className={`badge-${transaction.status}`}>
-                  {transaction.status === 'pending' ? '🟢' : transaction.status === 'validated' ? '✅' : '❌'} {transaction.status.toUpperCase()}
-                </span>
-              </div>
-              <div className="form-group">
-                <label>Period:</label>
-                <div>{transaction.period}</div>
-              </div>
-            </div>
-
-            <div className="form-section">
-              <h3>BLOCKCHAIN INFO</h3>
-              <div className="form-group">
-                <label>Network:</label>
-                <div>Bitcoin Mainnet</div>
-              </div>
-              <div className="form-group">
-                <label>Confirmations:</label>
-                <div>{transaction.status === 'validated' ? 'Confirmed' : 'Pending'}</div>
-              </div>
-              <div className="form-group">
-                <label>TX Hash:</label>
-                <div style={{ fontFamily: 'monospace', fontSize: '12px' }}>
-                  {transaction.txHash || 'N/A (not sent)'}
-                </div>
-              </div>
-              <div className="form-group">
-                <label>Block:</label>
-                <div>{transaction.txHash ? 'N/A' : 'N/A'}</div>
-              </div>
-            </div>
-          </div>
-
-          <div className="form-section">
-            <h3>📤 FROM WALLET</h3>
-            <div className="form-group">
-              <label>Name:</label>
-              <div>{transaction.from.name}</div>
-            </div>
-            <div className="form-group">
-              <label>Address:</label>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ fontFamily: 'monospace' }}>{transaction.from.address}</span>
-                <button className="btn-copy" onClick={() => copyToClipboard(transaction.from.address)}>
-                  Copy 📋
-                </button>
-              </div>
-            </div>
-            {fromWallet?.balance !== undefined && (
-              <div className="form-group">
-                <label>Current Balance:</label>
-                <div>{fromWallet.balance.toFixed(4)} BTC (~${(fromWallet.balance * BTC_PRICE).toLocaleString()})</div>
-              </div>
-            )}
-          </div>
-
-          <div className="amount-display">
-            <div className="amount-big">{transaction.amount.toFixed(4)} BTC</div>
-            <div className="amount-usd">~${transaction.amountUSD.toLocaleString()} USD</div>
-            <div style={{ marginTop: '16px', fontSize: '14px', color: '#888' }}>
-              Network Fee: {transaction.fee.toFixed(8)} BTC
-            </div>
-            <div style={{ fontSize: '14px', color: '#888' }}>
-              Total Debit: {transaction.total.toFixed(8)} BTC
-            </div>
-          </div>
-
-          <div className="form-section">
-            <h3>📥 TO WALLET</h3>
-            <div className="form-group">
-              <label>Name:</label>
-              <div>{transaction.to.name}</div>
-            </div>
-            <div className="form-group">
-              <label>Address:</label>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ fontFamily: 'monospace' }}>{transaction.to.address}</span>
-                <button className="btn-copy" onClick={() => copyToClipboard(transaction.to.address)}>
-                  Copy 📋
-                </button>
-              </div>
-            </div>
-            <div className="form-group">
-              <label>Type:</label>
-              <div>Destination ({toWallet?.type === 'destination' ? 'Cold Storage' : 'Standard'})</div>
-            </div>
-          </div>
-
-          {transaction.notes && (
-            <div className="form-section">
-              <h3>📝 NOTES & DETAILS</h3>
-              <div style={{ color: '#ffffff', fontSize: '14px', lineHeight: '1.6' }}>
-                {transaction.notes}
-              </div>
-            </div>
-          )}
-        </div>
-        <div className="modal-footer">
-          <button className="btn-secondary" onClick={onClose}>Cancel</button>
-          {transaction.status === 'pending' && (
-            <button className="btn-validate-large" onClick={() => onValidate(transaction.id)}>
-              ✅ Validate & Send Transaction
-            </button>
-          )}
-        </div>
-      </div>
-    </div>
-  )
-}
 
 // Modal New Transaction
 function NewTransactionModal({
@@ -687,7 +607,7 @@ function NewTransactionModal({
   onClose,
   onSave
 }: {
-  wallets: typeof demoWallets
+  wallets: typeof demoWalletsFallback
   onClose: () => void
   onSave: (data: Partial<Transaction>) => void
 }) {
@@ -727,7 +647,7 @@ function NewTransactionModal({
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-large" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
-          <h2>💸 CREATE NEW TRANSACTION</h2>
+          <h2>CREATE NEW TRANSACTION</h2>
           <button className="modal-close" onClick={onClose}>×</button>
         </div>
         <div className="modal-body">
@@ -804,7 +724,7 @@ function NewTransactionModal({
                       <h4>{selectedToWallet.name}</h4>
                       <div className="address">{selectedToWallet.address}</div>
                       <div className="network">{selectedToWallet.network}</div>
-                      <div className="status">✅ Active</div>
+                      <div className="status">ACTIVE</div>
                     </div>
                   )}
                 </div>
@@ -823,7 +743,7 @@ function NewTransactionModal({
                     onChange={(e) => setFormData({ ...formData, amount: parseFloat(e.target.value) })}
                     placeholder="0.0000"
                   />
-                  <div style={{ color: '#888', fontSize: '12px', marginTop: '4px' }}>
+                  <div style={{ color: 'var(--text-muted, #999999)', fontSize: '12px', marginTop: '4px' }}>
                     ≈ ${((formData.amount || 0) * BTC_PRICE).toLocaleString()} USD (at current rate: ${BTC_PRICE.toLocaleString()}/BTC)
                   </div>
                 </div>
@@ -903,7 +823,7 @@ function NewTransactionModal({
                     <strong>{((formData.amount || 0) + (formData.fee || 0)).toFixed(8)} BTC</strong>
                   </div>
                   {selectedFromWallet?.balance && (
-                    <div style={{ display: 'flex', justifyContent: 'space-between', color: '#888' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-muted, #999999)' }}>
                       <span>Remaining Balance:</span>
                       <span>{(selectedFromWallet.balance - (formData.amount || 0) - (formData.fee || 0)).toFixed(8)} BTC</span>
                     </div>

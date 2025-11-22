@@ -7,9 +7,19 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || '/api'
 
 // Ensure API_BASE_URL ends with /api if it's a full URL
 const getBaseUrl = () => {
+  // In browser environment, detect the current port and use it for API calls
+  if (typeof window !== 'undefined') {
+    const base = API_BASE_URL
+    if (base.startsWith('http')) {
+      // If it's a full URL, ensure it ends with /api
+      return base.endsWith('/api') ? base : `${base}/api`
+    }
+    // Use relative path - Next.js will handle routing to the correct port
+    return base
+  }
+  // Server-side: use the configured base URL
   const base = API_BASE_URL
   if (base.startsWith('http')) {
-    // If it's a full URL, ensure it ends with /api
     return base.endsWith('/api') ? base : `${base}/api`
   }
   return base
@@ -114,5 +124,37 @@ export const customersAPI = {
 // Cockpit API
 export const cockpitAPI = {
   getData: () => fetchAPI<any>('/cockpit'),
+}
+
+// Transactions API
+export const transactionsAPI = {
+  getAll: (params?: { status?: string; period?: string }) => {
+    const queryParams = new URLSearchParams()
+    if (params?.status) queryParams.append('status', params.status)
+    if (params?.period) queryParams.append('period', params.period)
+    const query = queryParams.toString()
+    return fetchAPI<{ success: boolean; data: any[] }>(`/transactions${query ? `?${query}` : ''}`)
+  },
+  getById: (id: string) => fetchAPI<{ success: boolean; data: any }>(`/transactions/${id}`),
+  create: (data: any) => fetchAPI<{ success: boolean; data: any }>('/transactions', { 
+    method: 'POST', 
+    body: JSON.stringify(data) 
+  }),
+  update: (id: string, data: any) => fetchAPI<{ success: boolean; data: any }>('/transactions', { 
+    method: 'PUT', 
+    body: JSON.stringify({ id, ...data }) 
+  }),
+  delete: (id: string) => fetchAPI<{ success: boolean }>(`/transactions?id=${id}`, { 
+    method: 'DELETE' 
+  }),
+  getPendingCount: async () => {
+    try {
+      const response = await fetchAPI<{ success: boolean; data: any[] }>('/transactions?status=pending')
+      return response.data?.filter((tx: any) => tx.status === 'pending').length || 0
+    } catch (error) {
+      console.error('Error fetching pending transactions count:', error)
+      return 0
+    }
+  },
 }
 

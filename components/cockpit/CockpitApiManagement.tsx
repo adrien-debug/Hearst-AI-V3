@@ -89,7 +89,7 @@ export default function CockpitApiManagement() {
                     width: '32px',
                     height: '32px',
                     borderRadius: '50%',
-                    background: 'rgba(165, 255, 156, 0.2)',
+                    background: 'rgba(167, 251, 144, 0.2)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',

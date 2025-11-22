@@ -396,9 +396,9 @@ export default function SetupManager() {
       <div className="setup-header">
         <h1>SETUP MANAGER - Configuration Dashboard</h1>
         <div className="setup-header-actions">
-          <button className="btn-secondary">🔄 Sync All</button>
-          <button className="btn-secondary">📥 Export Config</button>
-          <button className="btn-secondary">⚙️ Advanced Settings</button>
+          <button className="btn-secondary">SYNC ALL</button>
+          <button className="btn-secondary">EXPORT CONFIG</button>
+          <button className="btn-secondary">ADVANCED SETTINGS</button>
         </div>
       </div>
 
@@ -408,25 +408,25 @@ export default function SetupManager() {
           className={`setup-tab ${activeTab === 'summary' ? 'active' : ''}`}
           onClick={() => setActiveTab('summary')}
         >
-          📊 Summary
+          SUMMARY
         </button>
         <button
           className={`setup-tab ${activeTab === 'miners' ? 'active' : ''}`}
           onClick={() => setActiveTab('miners')}
         >
-          ⛏️ Miners Configuration
+          MINERS CONFIGURATION
         </button>
         <button
           className={`setup-tab ${activeTab === 'prices' ? 'active' : ''}`}
           onClick={() => setActiveTab('prices')}
         >
-          💰 Price List
+          PRICE LIST
         </button>
         <button
           className={`setup-tab ${activeTab === 'hosters' ? 'active' : ''}`}
           onClick={() => setActiveTab('hosters')}
         >
-          🏢 Hosters
+          HOSTERS
         </button>
       </div>
 
@@ -534,7 +534,7 @@ function MinersTab({
         <button className="btn-add-large" onClick={onAddMiner}>
           + Add New Miner
         </button>
-        <button className="btn-secondary">📥 Import CSV</button>
+        <button className="btn-secondary">IMPORT CSV</button>
         <input
           type="text"
           className="search-bar"
@@ -665,14 +665,14 @@ function MinersTab({
 function PricesTab({ prices }: { prices: Price[] }) {
   return (
     <div>
-      <h2 style={{ fontSize: '24px', marginBottom: '24px' }}>💰 PRICE LIST CONFIGURATION</h2>
+      <h2 style={{ fontSize: '24px', marginBottom: '24px' }}>PRICE LIST CONFIGURATION</h2>
       
       <div className="price-list-container">
         <div className="price-section">
           <h3>CRYPTOCURRENCY PRICES</h3>
           <div style={{ marginBottom: '16px', color: '#888', fontSize: '14px' }}>
             Last Updated: {new Date().toLocaleString()}
-            <button className="btn-secondary" style={{ marginLeft: '12px' }}>🔄 Refresh Now</button>
+            <button className="btn-secondary" style={{ marginLeft: '12px' }}>REFRESH NOW</button>
           </div>
           
           {prices.map((price) => (
@@ -750,11 +750,11 @@ function HostersTab({
         <button className="btn-add-large" onClick={onAddHoster}>
           + Add New Hoster
         </button>
-        <button className="btn-secondary">📥 Import</button>
+        <button className="btn-secondary">IMPORT</button>
         <input
           type="text"
           className="search-bar"
-          placeholder="🔍 Search hosters..."
+          placeholder="SEARCH HOSTERS..."
         />
       </div>
 
@@ -762,30 +762,30 @@ function HostersTab({
         {hosters.map((hoster) => (
           <div key={hoster.id} className="hoster-card">
             <div className="hoster-header">
-              <h3>🏢 {hoster.name.toUpperCase()}</h3>
+              <h3>{hoster.name.toUpperCase()}</h3>
               <span className="status-badge-active">Active</span>
             </div>
             <div className="hoster-info">
               <p><strong>{hoster.company}</strong></p>
               <p>{hoster.location}</p>
-              <p>📧 {hoster.email}</p>
-              <p>📞 {hoster.phone}</p>
+              <p>EMAIL: {hoster.email}</p>
+              <p>PHONE: {hoster.phone}</p>
             </div>
             <div className="hoster-pricing">
-              <p>⚡ {hoster.electricityRate} USD/kWh</p>
-              <p>💰 {hoster.hostingFee} USD/miner/month</p>
-              <p>🔧 {hoster.setupFee} USD setup fee</p>
+              <p>ELECTRICITY: {hoster.electricityRate} USD/kWh</p>
+              <p>HOSTING FEE: {hoster.hostingFee} USD/miner/month</p>
+              <p>SETUP FEE: {hoster.setupFee} USD</p>
             </div>
             <div className="hoster-stats">
-              <p>📊 {hoster.activeMiners} active miners</p>
-              <p>💪 {hoster.totalHashrate} TH/s</p>
-              <p>💵 ${hoster.monthlyCost.toLocaleString()}/month</p>
-              <p>✅ {hoster.uptimeSLA}% uptime SLA</p>
-              <p>🔒 {hoster.securityLevel} security</p>
+              <p>ACTIVE MINERS: {hoster.activeMiners}</p>
+              <p>HASHRATE: {hoster.totalHashrate} TH/s</p>
+              <p>MONTHLY COST: ${hoster.monthlyCost.toLocaleString()}</p>
+              <p>UPTIME SLA: {hoster.uptimeSLA}%</p>
+              <p>SECURITY: {hoster.securityLevel}</p>
             </div>
             <div className="hoster-contract">
-              <p>📅 Start: {hoster.contractStart}</p>
-              <p>🔄 Auto-renew: {hoster.autoRenew ? 'Yes' : 'No'}</p>
+              <p>CONTRACT START: {hoster.contractStart}</p>
+              <p>AUTO-RENEW: {hoster.autoRenew ? 'Yes' : 'No'}</p>
             </div>
             <div className="hoster-actions">
               <button className="btn-secondary" onClick={() => onEditHoster(hoster.id)}>View Details</button>
@@ -841,7 +841,7 @@ function SummaryTab({
 
   return (
     <div>
-      <h2 style={{ fontSize: '24px', marginBottom: '24px' }}>📊 SUMMARY OVERVIEW - Complete Configuration Dashboard</h2>
+      <h2 style={{ fontSize: '24px', marginBottom: '24px' }}>SUMMARY OVERVIEW - Complete Configuration Dashboard</h2>
       
       <div className="summary-stats-grid">
         <div className="stat-card-large">
@@ -850,7 +850,7 @@ function SummaryTab({
         </div>
         <div className="stat-card-large">
           <div className="stat-value-large">{activeMiners}</div>
-          <div className="stat-label-large">Active Miners 🟢</div>
+          <div className="stat-label-large">Active Miners</div>
         </div>
         <div className="stat-card-large">
           <div className="stat-value-large">{totalHashrate}</div>
@@ -873,7 +873,7 @@ function SummaryTab({
             const percentage = ((hosterMiners / totalMiners) * 100).toFixed(0)
             return (
               <p key={hoster.id} style={{ marginBottom: '8px', color: '#888' }}>
-                🏢 {hoster.name}: {hosterMiners} ({percentage}%)
+                {hoster.name.toUpperCase()}: {hosterMiners} ({percentage}%)
               </p>
             )
           })}
@@ -915,26 +915,26 @@ function SummaryTab({
         <div className="summary-section">
           <h3>CONFIGURATION STATUS</h3>
           <div style={{ fontSize: '14px', lineHeight: '2' }}>
-            <p>✅ Miners: {totalMiners}/{totalMiners} configured</p>
-            <p>✅ Prices: Updated 2h ago</p>
-            <p>✅ Hosters: {hosters.length}/{hosters.length} configured</p>
-            <p>✅ Electricity: All rates set</p>
-            <p>✅ Contracts: All valid</p>
-            <p>✅ Monitoring: {activeMiners}/{totalMiners} online</p>
+            <p>MINERS: {totalMiners}/{totalMiners} configured</p>
+            <p>PRICES: Updated 2h ago</p>
+            <p>HOSTERS: {hosters.length}/{hosters.length} configured</p>
+            <p>ELECTRICITY: All rates set</p>
+            <p>CONTRACTS: All valid</p>
+            <p>MONITORING: {activeMiners}/{totalMiners} online</p>
             <p style={{ marginTop: '16px' }}>
-              {totalMiners - activeMiners > 0 && `⚠️ ${totalMiners - activeMiners} miners offline`}
+              {totalMiners - activeMiners > 0 && `WARNING: ${totalMiners - activeMiners} miners offline`}
             </p>
             <p style={{ marginTop: '8px', color: '#8afd81', fontWeight: '600' }}>
-              System Status: 🟢 OPERATIONAL
+              SYSTEM STATUS: OPERATIONAL
             </p>
           </div>
         </div>
       </div>
 
       <div className="action-buttons" style={{ marginTop: '32px', justifyContent: 'center' }}>
-        <button className="btn-add-large">📥 Export Full Configuration</button>
-        <button className="btn-secondary">📊 Generate Report</button>
-        <button className="btn-secondary">🔄 Sync Dashboard</button>
+        <button className="btn-add-large">EXPORT FULL CONFIGURATION</button>
+        <button className="btn-secondary">GENERATE REPORT</button>
+        <button className="btn-secondary">SYNC DASHBOARD</button>
       </div>
     </div>
   )
@@ -981,7 +981,7 @@ function MinerModal({
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-large" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
-          <h2>⛏️ {miner ? 'EDIT MINER' : 'ADD NEW MINER'}</h2>
+          <h2>{miner ? 'EDIT MINER' : 'ADD NEW MINER'}</h2>
           <button className="modal-close" onClick={onClose}>×</button>
         </div>
         <form onSubmit={handleSubmit}>
@@ -1228,7 +1228,7 @@ function HosterModal({
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-large" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
-          <h2>🏢 {hoster ? 'EDIT HOSTER' : 'ADD NEW HOSTER'}</h2>
+          <h2>{hoster ? 'EDIT HOSTER' : 'ADD NEW HOSTER'}</h2>
           <button className="modal-close" onClick={onClose}>×</button>
         </div>
         <form onSubmit={handleSubmit}>

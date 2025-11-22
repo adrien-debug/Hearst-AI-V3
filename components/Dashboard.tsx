@@ -90,10 +90,26 @@ export default function Dashboard({ data }: DashboardProps): JSX.Element {
       {
         label: 'BTC Mined',
         data: [0.082156, 0.081234, 0.080521, 0.081892, 0.082156, 0.083247, 0.084521],
-        borderColor: '#a5ff9c',
-        backgroundColor: 'rgba(165, 255, 156, 0.1)',
+        borderColor: '#A7FB90',
+        backgroundColor: (context: any) => {
+          const ctx = context.chart.ctx
+          const gradient = ctx.createLinearGradient(0, 0, 0, 400)
+          gradient.addColorStop(0, 'rgba(167, 251, 144, 0.3)')
+          gradient.addColorStop(0.5, 'rgba(167, 251, 144, 0.15)')
+          gradient.addColorStop(1, 'rgba(167, 251, 144, 0)')
+          return gradient
+        },
         fill: true,
-        tension: 0.4,
+        tension: 0.5,
+        borderWidth: 3,
+        pointRadius: 0,
+        pointHoverRadius: 6,
+        pointHoverBackgroundColor: '#A7FB90',
+        pointHoverBorderColor: '#000000',
+        pointHoverBorderWidth: 2,
+        pointBackgroundColor: '#A7FB90',
+        pointBorderColor: '#000000',
+        pointBorderWidth: 2,
       },
     ],
   }
@@ -105,10 +121,26 @@ export default function Dashboard({ data }: DashboardProps): JSX.Element {
       {
         label: 'BTC Mined',
         data: [2.1, 2.3, 2.2, 2.4, 2.5, 2.3, 2.6, 2.4, 2.5, 2.6, 2.5, 2.536588],
-        borderColor: '#a5ff9c',
-        backgroundColor: 'rgba(165, 255, 156, 0.1)',
+        borderColor: '#A7FB90',
+        backgroundColor: (context: any) => {
+          const ctx = context.chart.ctx
+          const gradient = ctx.createLinearGradient(0, 0, 0, 400)
+          gradient.addColorStop(0, 'rgba(167, 251, 144, 0.3)')
+          gradient.addColorStop(0.5, 'rgba(167, 251, 144, 0.15)')
+          gradient.addColorStop(1, 'rgba(167, 251, 144, 0)')
+          return gradient
+        },
         fill: true,
-        tension: 0.4,
+        tension: 0.5,
+        borderWidth: 3,
+        pointRadius: 0,
+        pointHoverRadius: 6,
+        pointHoverBackgroundColor: '#A7FB90',
+        pointHoverBorderColor: '#000000',
+        pointHoverBorderWidth: 2,
+        pointBackgroundColor: '#A7FB90',
+        pointBorderColor: '#000000',
+        pointBorderWidth: 2,
       },
     ],
   }
@@ -120,10 +152,26 @@ export default function Dashboard({ data }: DashboardProps): JSX.Element {
       {
         label: 'BTC Mined',
         data: [25.2, 27.8, 28.5, 29.1, 30.439056],
-        borderColor: '#a5ff9c',
-        backgroundColor: 'rgba(165, 255, 156, 0.1)',
+        borderColor: '#A7FB90',
+        backgroundColor: (context: any) => {
+          const ctx = context.chart.ctx
+          const gradient = ctx.createLinearGradient(0, 0, 0, 400)
+          gradient.addColorStop(0, 'rgba(167, 251, 144, 0.3)')
+          gradient.addColorStop(0.5, 'rgba(167, 251, 144, 0.15)')
+          gradient.addColorStop(1, 'rgba(167, 251, 144, 0)')
+          return gradient
+        },
         fill: true,
-        tension: 0.4,
+        tension: 0.5,
+        borderWidth: 3,
+        pointRadius: 0,
+        pointHoverRadius: 6,
+        pointHoverBackgroundColor: '#A7FB90',
+        pointHoverBorderColor: '#000000',
+        pointHoverBorderWidth: 2,
+        pointBackgroundColor: '#A7FB90',
+        pointBorderColor: '#000000',
+        pointBorderWidth: 2,
       },
     ],
   }
@@ -143,13 +191,8 @@ export default function Dashboard({ data }: DashboardProps): JSX.Element {
       ? [2.1, 2.3, 2.2, 2.4, 2.5, 2.3, 2.6, 2.4, 2.5, 2.6, 2.5, 2.536588]
       : [25.2, 27.8, 28.5, 29.1, 30.439056]
     
-    const backgroundColor = data.map((_, index) => 
-      index % 2 === 0 ? 'rgba(165, 255, 156, 0.8)' : 'rgba(138, 253, 129, 0.8)'
-    )
-    
-    const borderColor = data.map((_, index) => 
-      index % 2 === 0 ? '#a5ff9c' : '#8afd81'
-    )
+    // Create premium gradient for each bar
+    const maxValue = Math.max(...data)
     
     return {
       labels,
@@ -157,10 +200,41 @@ export default function Dashboard({ data }: DashboardProps): JSX.Element {
         {
           label: 'BTC Mined',
           data,
-          backgroundColor,
-          borderColor,
-          borderWidth: 2,
-          borderRadius: 4,
+          backgroundColor: (context: any) => {
+            const chart = context.chart
+            const {ctx, chartArea} = chart
+            if (!chartArea) return '#A7FB90'
+            
+            const value = context.parsed.y
+            const percentage = value / maxValue
+            const barTop = chartArea.top
+            const barBottom = chartArea.bottom
+            
+            // Create premium multi-stop gradient from bottom to top
+            const gradient = ctx.createLinearGradient(0, barBottom, 0, barTop)
+            
+            // Premium gradient: darker at bottom, lighter at top
+            gradient.addColorStop(0, 'rgba(140, 220, 115, 0.8)') // Darker at bottom
+            gradient.addColorStop(0.2, 'rgba(140, 220, 115, 0.85)') // Slightly lighter
+            gradient.addColorStop(0.4, 'rgba(150, 230, 125, 0.9)') // Mid tone
+            gradient.addColorStop(0.6, 'rgba(160, 240, 135, 0.95)') // Lighter
+            gradient.addColorStop(0.8, 'rgba(167, 251, 144, 0.98)') // Almost full brightness
+            gradient.addColorStop(1, 'rgba(167, 251, 144, 1)') // Full brightness at top
+            
+            return gradient
+          },
+          borderColor: '#A7FB90',
+          borderWidth: 0,
+          borderRadius: {
+            topLeft: 16,
+            topRight: 16,
+            bottomLeft: 0,
+            bottomRight: 0,
+          },
+          barThickness: 'flex' as const,
+          maxBarThickness: 80,
+          categoryPercentage: 0.7,
+          barPercentage: 0.8,
         },
       ],
     }
@@ -172,37 +246,116 @@ export default function Dashboard({ data }: DashboardProps): JSX.Element {
     responsive: true,
     maintainAspectRatio: false,
     animation: {
-      duration: 0,
+      duration: 1200,
+      easing: 'easeOutCubic' as const,
+      delay: (context: any) => {
+        return context.dataIndex * 50
+      },
+    },
+    interaction: {
+      intersect: false,
+      mode: 'index' as const,
+    },
+    onHover: (event: any, activeElements: any) => {
+      const chart = event.chart
+      if (activeElements.length > 0) {
+        chart.canvas.style.cursor = 'pointer'
+        // Add glow effect on hover
+        const datasetIndex = activeElements[0].datasetIndex
+        const index = activeElements[0].index
+        chart.data.datasets[datasetIndex].borderWidth = 2
+        chart.data.datasets[datasetIndex].borderColor = '#A7FB90'
+        chart.update('none')
+      } else {
+        chart.canvas.style.cursor = 'default'
+        chart.data.datasets.forEach((dataset: any) => {
+          dataset.borderWidth = 0
+        })
+        chart.update('none')
+      }
     },
     plugins: {
       legend: {
         display: false,
       },
       tooltip: {
+        enabled: true,
         mode: 'index' as const,
         intersect: false,
-        backgroundColor: 'rgba(26, 26, 26, 0.9)',
-        titleColor: '#ffffff',
+        backgroundColor: 'rgba(14, 15, 15, 0.98)',
+        titleColor: '#A7FB90',
         bodyColor: '#ffffff',
-        borderColor: '#a5ff9c',
-        borderWidth: 1,
+        borderColor: '#A7FB90',
+        borderWidth: 2,
+        padding: 16,
+        titleFont: {
+          size: 13,
+          weight: '700' as const,
+          family: 'var(--font-mono), monospace',
+        },
+        bodyFont: {
+          size: 15,
+          weight: '600' as const,
+          family: 'var(--font-mono), monospace',
+        },
+        cornerRadius: 12,
+        displayColors: false,
+        boxPadding: 8,
+        callbacks: {
+          title: (context: any) => {
+            return context[0].label
+          },
+          label: (context: any) => {
+            return `${context.parsed.y.toFixed(6)} BTC`
+          },
+          labelTextColor: () => {
+            return '#A7FB90'
+          },
+        },
+        filter: (tooltipItem: any) => {
+          return tooltipItem.datasetIndex === 0
+        },
       },
     },
     scales: {
       x: {
         grid: {
-          color: 'rgba(255, 255, 255, 0.05)',
+          display: false,
+        },
+        border: {
+          display: false,
         },
         ticks: {
           color: 'rgba(255, 255, 255, 0.6)',
+          font: {
+            size: 12,
+            weight: '600' as const,
+            family: 'var(--font-mono), monospace',
+          },
+          padding: 16,
         },
       },
       y: {
         grid: {
-          color: 'rgba(255, 255, 255, 0.05)',
+          color: 'rgba(255, 255, 255, 0.03)',
+          drawBorder: false,
+          lineWidth: 1,
+          drawTicks: false,
+        },
+        border: {
+          display: false,
         },
         ticks: {
-          color: 'rgba(255, 255, 255, 0.6)',
+          color: 'rgba(255, 255, 255, 0.5)',
+          font: {
+            size: 11,
+            weight: '500' as const,
+            family: 'var(--font-mono), monospace',
+          },
+          padding: 16,
+          callback: function(value: any) {
+            return value.toFixed(2)
+          },
         },
       },
     },
@@ -212,7 +365,7 @@ export default function Dashboard({ data }: DashboardProps): JSX.Element {
     <div className="dashboard-view">
       <div className="dashboard-content">
         {/* Hearst Corporation Section */}
-        <div style={{ marginBottom: 'var(--space-6)' }}>
+        <div style={{ marginBottom: '10px' }}>
           <h2 style={{ fontSize: 'var(--text-xl)', fontWeight: 600, marginBottom: 'var(--space-4)', color: 'var(--text-primary)' }}>
             Hearst Corporation
           </h2>
@@ -227,7 +380,16 @@ export default function Dashboard({ data }: DashboardProps): JSX.Element {
                 <CardTitle>Active Customers</CardTitle>
               </CardHeader>
               <CardContent>
-                <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: 'var(--hearst-green)', marginBottom: 'var(--space-2)' }}>
+                <div style={{ 
+                  fontSize: '2rem', 
+                  fontWeight: 700, 
+                  color: '#A7FB90', 
+                  marginBottom: 'var(--space-2)',
+                  fontFamily: 'var(--font-mono), monospace',
+                  fontVariantNumeric: 'tabular-nums',
+                  letterSpacing: '-0.02em',
+                  lineHeight: 1.2
+                }}>
                   1,247
                 </div>
                 <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
@@ -241,7 +403,16 @@ export default function Dashboard({ data }: DashboardProps): JSX.Element {
                 <CardTitle>Number of batches</CardTitle>
               </CardHeader>
               <CardContent>
-                <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: 'var(--hearst-green)', marginBottom: 'var(--space-2)' }}>
+                <div style={{ 
+                  fontSize: '2rem', 
+                  fontWeight: 700, 
+                  color: '#A7FB90', 
+                  marginBottom: 'var(--space-2)',
+                  fontFamily: 'var(--font-mono), monospace',
+                  fontVariantNumeric: 'tabular-nums',
+                  letterSpacing: '-0.02em',
+                  lineHeight: 1.2
+                }}>
                   3,892
                 </div>
                 <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
@@ -255,7 +426,16 @@ export default function Dashboard({ data }: DashboardProps): JSX.Element {
                 <CardTitle>Number of miners</CardTitle>
               </CardHeader>
               <CardContent>
-                <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: 'var(--hearst-green)', marginBottom: 'var(--space-2)' }}>
+                <div style={{ 
+                  fontSize: '2rem', 
+                  fontWeight: 700, 
+                  color: '#A7FB90', 
+                  marginBottom: 'var(--space-2)',
+                  fontFamily: 'var(--font-mono), monospace',
+                  fontVariantNumeric: 'tabular-nums',
+                  letterSpacing: '-0.02em',
+                  lineHeight: 1.2
+                }}>
                   15,648
                 </div>
                 <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
@@ -269,7 +449,16 @@ export default function Dashboard({ data }: DashboardProps): JSX.Element {
                 <CardTitle>Hearst Total Hashrate</CardTitle>
               </CardHeader>
               <CardContent>
-                <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: 'var(--hearst-green)', marginBottom: 'var(--space-2)' }}>
+                <div style={{ 
+                  fontSize: '2rem', 
+                  fontWeight: 700, 
+                  color: '#A7FB90', 
+                  marginBottom: 'var(--space-2)',
+                  fontFamily: 'var(--font-mono), monospace',
+                  fontVariantNumeric: 'tabular-nums',
+                  letterSpacing: '-0.02em',
+                  lineHeight: 1.2
+                }}>
                   2,847.5 PH/s
                 </div>
                 <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
@@ -280,77 +469,14 @@ export default function Dashboard({ data }: DashboardProps): JSX.Element {
           </div>
         </div>
 
-        {/* BTC Mined Section */}
-        <div style={{ marginBottom: 'var(--space-6)' }}>
+        {/* BTC Mined Section - Charts Only */}
+        <div style={{ marginBottom: '10px', marginTop: '20px' }}>
           <h2 style={{ fontSize: 'var(--text-xl)', fontWeight: 600, marginBottom: 'var(--space-4)', color: 'var(--text-primary)' }}>
             BTC Mined
           </h2>
-          
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: 'var(--space-4)',
-            marginBottom: 'var(--space-6)',
-          }}>
-            <Card>
-              <CardHeader>
-                <CardTitle>Daily</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: 'var(--hearst-green)', marginBottom: 'var(--space-2)' }}>
-                  0.084521 BTC
-                </div>
-                <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
-                  $9,642.89 USD
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Weekly</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: 'var(--hearst-green)', marginBottom: 'var(--space-2)' }}>
-                  0.591647 BTC
-                </div>
-                <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
-                  $67,500.23 USD
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Monthly</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: 'var(--hearst-green)', marginBottom: 'var(--space-2)' }}>
-                  2.536588 BTC
-                </div>
-                <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
-                  $289,286.25 USD
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Since beginning</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: 'var(--hearst-green)', marginBottom: 'var(--space-2)' }}>
-                  30.439056 BTC
-                </div>
-                <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
-                  $3,471,435.00 USD
-                </p>
-              </CardContent>
-            </Card>
-          </div>
 
           {/* Charts Container */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(500px, 1fr))', gap: 'var(--space-6)', marginBottom: 'var(--space-6)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(500px, 1fr))', gap: 'var(--space-6)', marginBottom: '10px', marginTop: '30px' }}>
             <Card>
               <CardHeader>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--space-4)' }}>
@@ -363,8 +489,8 @@ export default function Dashboard({ data }: DashboardProps): JSX.Element {
                         borderRadius: 'var(--radius-sm)',
                         border: '1px solid',
                         borderColor: selectedPeriod === 'daily' ? 'var(--hearst-green)' : 'rgba(255, 255, 255, 0.2)',
-                        backgroundColor: selectedPeriod === 'daily' ? 'rgba(165, 255, 156, 0.2)' : 'transparent',
-                        color: selectedPeriod === 'daily' ? 'var(--hearst-green)' : 'var(--text-secondary)',
+                        backgroundColor: selectedPeriod === 'daily' ? '#A7FB90' : 'transparent',
+                        color: selectedPeriod === 'daily' ? '#000000' : 'var(--text-secondary)',
                         fontSize: 'var(--text-sm)',
                         fontWeight: selectedPeriod === 'daily' ? 600 : 400,
                         cursor: 'pointer',
@@ -380,8 +506,8 @@ export default function Dashboard({ data }: DashboardProps): JSX.Element {
                         borderRadius: 'var(--radius-sm)',
                         border: '1px solid',
                         borderColor: selectedPeriod === 'monthly' ? 'var(--hearst-green)' : 'rgba(255, 255, 255, 0.2)',
-                        backgroundColor: selectedPeriod === 'monthly' ? 'rgba(165, 255, 156, 0.2)' : 'transparent',
-                        color: selectedPeriod === 'monthly' ? 'var(--hearst-green)' : 'var(--text-secondary)',
+                        backgroundColor: selectedPeriod === 'monthly' ? '#A7FB90' : 'transparent',
+                        color: selectedPeriod === 'monthly' ? '#000000' : 'var(--text-secondary)',
                         fontSize: 'var(--text-sm)',
                         fontWeight: selectedPeriod === 'monthly' ? 600 : 400,
                         cursor: 'pointer',
@@ -397,8 +523,8 @@ export default function Dashboard({ data }: DashboardProps): JSX.Element {
                         borderRadius: 'var(--radius-sm)',
                         border: '1px solid',
                         borderColor: selectedPeriod === 'yearly' ? 'var(--hearst-green)' : 'rgba(255, 255, 255, 0.2)',
-                        backgroundColor: selectedPeriod === 'yearly' ? 'rgba(165, 255, 156, 0.2)' : 'transparent',
-                        color: selectedPeriod === 'yearly' ? 'var(--hearst-green)' : 'var(--text-secondary)',
+                        backgroundColor: selectedPeriod === 'yearly' ? '#A7FB90' : 'transparent',
+                        color: selectedPeriod === 'yearly' ? '#000000' : 'var(--text-secondary)',
                         fontSize: 'var(--text-sm)',
                         fontWeight: selectedPeriod === 'yearly' ? 600 : 400,
                         cursor: 'pointer',
@@ -429,8 +555,8 @@ export default function Dashboard({ data }: DashboardProps): JSX.Element {
                         borderRadius: 'var(--radius-sm)',
                         border: '1px solid',
                         borderColor: selectedPeriod === 'daily' ? 'var(--hearst-green)' : 'rgba(255, 255, 255, 0.2)',
-                        backgroundColor: selectedPeriod === 'daily' ? 'rgba(165, 255, 156, 0.2)' : 'transparent',
-                        color: selectedPeriod === 'daily' ? 'var(--hearst-green)' : 'var(--text-secondary)',
+                        backgroundColor: selectedPeriod === 'daily' ? '#A7FB90' : 'transparent',
+                        color: selectedPeriod === 'daily' ? '#000000' : 'var(--text-secondary)',
                         fontSize: 'var(--text-sm)',
                         fontWeight: selectedPeriod === 'daily' ? 600 : 400,
                         cursor: 'pointer',
@@ -446,8 +572,8 @@ export default function Dashboard({ data }: DashboardProps): JSX.Element {
                         borderRadius: 'var(--radius-sm)',
                         border: '1px solid',
                         borderColor: selectedPeriod === 'monthly' ? 'var(--hearst-green)' : 'rgba(255, 255, 255, 0.2)',
-                        backgroundColor: selectedPeriod === 'monthly' ? 'rgba(165, 255, 156, 0.2)' : 'transparent',
-                        color: selectedPeriod === 'monthly' ? 'var(--hearst-green)' : 'var(--text-secondary)',
+                        backgroundColor: selectedPeriod === 'monthly' ? '#A7FB90' : 'transparent',
+                        color: selectedPeriod === 'monthly' ? '#000000' : 'var(--text-secondary)',
                         fontSize: 'var(--text-sm)',
                         fontWeight: selectedPeriod === 'monthly' ? 600 : 400,
                         cursor: 'pointer',
@@ -463,8 +589,8 @@ export default function Dashboard({ data }: DashboardProps): JSX.Element {
                         borderRadius: 'var(--radius-sm)',
                         border: '1px solid',
                         borderColor: selectedPeriod === 'yearly' ? 'var(--hearst-green)' : 'rgba(255, 255, 255, 0.2)',
-                        backgroundColor: selectedPeriod === 'yearly' ? 'rgba(165, 255, 156, 0.2)' : 'transparent',
-                        color: selectedPeriod === 'yearly' ? 'var(--hearst-green)' : 'var(--text-secondary)',
+                        backgroundColor: selectedPeriod === 'yearly' ? '#A7FB90' : 'transparent',
+                        color: selectedPeriod === 'yearly' ? '#000000' : 'var(--text-secondary)',
                         fontSize: 'var(--text-sm)',
                         fontWeight: selectedPeriod === 'yearly' ? 600 : 400,
                         cursor: 'pointer',
@@ -477,7 +603,14 @@ export default function Dashboard({ data }: DashboardProps): JSX.Element {
                 </div>
               </CardHeader>
               <CardContent>
-                <div style={{ position: 'relative', width: '100%', height: '300px' }}>
+                <div style={{ 
+                  position: 'relative', 
+                  width: '100%', 
+                  height: '300px',
+                  padding: 'var(--space-2)',
+                  background: 'linear-gradient(135deg, rgba(167, 251, 144, 0.02) 0%, rgba(167, 251, 144, 0) 100%)',
+                  borderRadius: 'var(--radius-sm)'
+                }}>
                   <BarChart data={chartData2} options={chartOptions} />
                 </div>
               </CardContent>
@@ -486,13 +619,14 @@ export default function Dashboard({ data }: DashboardProps): JSX.Element {
         </div>
 
         {/* Transaction History Section */}
-        <Card style={{ marginTop: 'var(--space-6)' }}>
-          <CardHeader>
-            <CardTitle>Transaction history</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="table-container">
-              <table className="table">
+        <div style={{ marginTop: '-10px', width: '100%', maxWidth: '100%', gridColumn: '1 / -1' }}>
+          <Card style={{ width: '100%', maxWidth: '100%' }}>
+            <CardHeader>
+              <CardTitle>Transaction history</CardTitle>
+            </CardHeader>
+            <CardContent style={{ padding: 'var(--space-6)', width: '100%' }}>
+              <div className="table-container" style={{ marginTop: '-10px', width: '100%', maxWidth: '100%', overflowX: 'auto' }}>
+                <table className="table" style={{ width: '100%', minWidth: '100%', tableLayout: 'auto' }}>
                 <thead>
                   <tr>
                     <th>Date</th>
@@ -538,8 +672,9 @@ export default function Dashboard({ data }: DashboardProps): JSX.Element {
                 <strong>Total: <span style={{ color: 'var(--hearst-green)', marginLeft: 'var(--space-2)' }}>0.491902 BTC</span></strong>
               </div>
             </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   )

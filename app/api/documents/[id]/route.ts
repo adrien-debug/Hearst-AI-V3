@@ -56,7 +56,7 @@ const mockDocuments: Record<string, any> = {
       }
     ],
     fileUrl: '/uploads/documents/doc-001.pdf',
-    thumbnailUrl: '/uploads/thumbnails/doc-001-thumb.jpg'
+    thumbnailUrl: null // Thumbnail will be generated on upload
   }
 }
 

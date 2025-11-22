@@ -148,8 +148,8 @@ export default function CockpitIncidents() {
       {
         label: 'Incidents Résolus',
         data: incidentsByDay.resolved,
-        borderColor: '#a5ff9c',
-        backgroundColor: 'rgba(165, 255, 156, 0.1)',
+        borderColor: '#A7FB90',
+        backgroundColor: 'rgba(167, 251, 144, 0.1)',
         fill: true,
         tension: 0.4,
       },
@@ -167,15 +167,15 @@ export default function CockpitIncidents() {
           'rgba(255, 68, 68, 0.8)',
           'rgba(255, 165, 0, 0.8)',
           'rgba(255, 200, 0, 0.8)',
-          'rgba(165, 255, 156, 0.8)',
-          'rgba(138, 253, 129, 0.8)',
+          'rgba(167, 251, 144, 0.8)',
+          'rgba(167, 251, 144, 0.8)',
         ],
         borderColor: [
           '#ff4444',
           '#ffa500',
           '#ffc800',
-          '#a5ff9c',
-          '#8afd81',
+          '#A7FB90',
+          '#A7FB90',
         ],
         borderWidth: 2,
         borderRadius: 4,
@@ -198,7 +198,7 @@ export default function CockpitIncidents() {
         backgroundColor: 'rgba(26, 26, 26, 0.95)',
         titleColor: '#ffffff',
         bodyColor: '#ffffff',
-        borderColor: '#a5ff9c',
+        borderColor: '#A7FB90',
         borderWidth: 1,
       },
     },
@@ -319,13 +319,13 @@ export default function CockpitIncidents() {
               {incidentsData.resolved24h}
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-2)' }}>
-              <span style={{ color: '#a5ff9c', fontSize: '0.875rem' }}>↑ 12.5%</span>
+              <span style={{ color: '#A7FB90', fontSize: '0.875rem' }}>↑ 12.5%</span>
               <span style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>vs hier</span>
             </div>
             <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
               Dernières 24 heures
             </p>
-            <div style={{ marginTop: 'var(--space-3)', padding: 'var(--space-2)', background: 'rgba(165, 255, 156, 0.05)', borderRadius: 'var(--radius-sm)' }}>
+            <div style={{ marginTop: 'var(--space-3)', padding: 'var(--space-2)', background: 'rgba(167, 251, 144, 0.05)', borderRadius: 'var(--radius-sm)' }}>
               <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', marginBottom: 'var(--space-1)' }}>Résolus (7j)</div>
               <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--hearst-green)' }}>
                 {incidentsData.resolved7d} incidents
@@ -346,14 +346,14 @@ export default function CockpitIncidents() {
               {incidentsData.averageResolution}h
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-2)' }}>
-              <span style={{ color: '#a5ff9c', fontSize: '0.875rem' }}>↓ 15%</span>
+              <span style={{ color: '#A7FB90', fontSize: '0.875rem' }}>↓ 15%</span>
               <span style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>vs moyenne</span>
             </div>
             <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
               Temps moyen de résolution
             </p>
             <div style={{ marginTop: 'var(--space-3)', width: '100%', height: '6px', background: 'rgba(255, 255, 255, 0.1)', borderRadius: '3px', overflow: 'hidden' }}>
-              <div style={{ width: '85%', height: '100%', background: 'linear-gradient(90deg, #a5ff9c, #8afd81)', borderRadius: '3px' }}></div>
+              <div style={{ width: '85%', height: '100%', background: 'linear-gradient(90deg, #A7FB90, #A7FB90)', borderRadius: '3px' }}></div>
             </div>
           </CardContent>
         </Card>
@@ -370,14 +370,14 @@ export default function CockpitIncidents() {
               {incidentsData.slaCompliance}%
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-2)' }}>
-              <span style={{ color: '#a5ff9c', fontSize: '0.875rem' }}>↑ 2.3%</span>
+              <span style={{ color: '#A7FB90', fontSize: '0.875rem' }}>↑ 2.3%</span>
               <span style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>vs mois dernier</span>
             </div>
             <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
               Taux de conformité
             </p>
             <div style={{ marginTop: 'var(--space-3)', width: '100%', height: '6px', background: 'rgba(255, 255, 255, 0.1)', borderRadius: '3px', overflow: 'hidden' }}>
-              <div style={{ width: `${incidentsData.slaCompliance}%`, height: '100%', background: 'linear-gradient(90deg, #a5ff9c, #8afd81)', borderRadius: '3px' }}></div>
+              <div style={{ width: `${incidentsData.slaCompliance}%`, height: '100%', background: 'linear-gradient(90deg, #A7FB90, #A7FB90)', borderRadius: '3px' }}></div>
             </div>
           </CardContent>
         </Card>
@@ -427,7 +427,7 @@ export default function CockpitIncidents() {
           </CardHeader>
           <CardContent>
             <div style={{ display: 'grid', gap: 'var(--space-4)' }}>
-              <div style={{ padding: 'var(--space-4)', background: 'rgba(165, 255, 156, 0.05)', borderRadius: 'var(--radius-md)', border: '1px solid rgba(165, 255, 156, 0.1)' }}>
+              <div style={{ padding: 'var(--space-4)', background: 'rgba(167, 251, 144, 0.05)', borderRadius: 'var(--radius-md)', border: '1px solid rgba(167, 251, 144, 0.1)' }}>
                 <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', marginBottom: 'var(--space-2)' }}>Résolus (30 jours)</div>
                 <div style={{ fontSize: 'var(--text-2xl)', fontWeight: 700, color: 'var(--hearst-green)' }}>
                   {incidentsData.resolved30d}
@@ -437,7 +437,7 @@ export default function CockpitIncidents() {
                 </div>
               </div>
 
-              <div style={{ padding: 'var(--space-4)', background: 'rgba(165, 255, 156, 0.05)', borderRadius: 'var(--radius-md)', border: '1px solid rgba(165, 255, 156, 0.1)' }}>
+              <div style={{ padding: 'var(--space-4)', background: 'rgba(167, 251, 144, 0.05)', borderRadius: 'var(--radius-md)', border: '1px solid rgba(167, 251, 144, 0.1)' }}>
                 <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', marginBottom: 'var(--space-2)' }}>Taux de Résolution</div>
                 <div style={{ fontSize: 'var(--text-2xl)', fontWeight: 700, color: 'var(--hearst-green)' }}>
                   {((incidentsData.resolved24h / (incidentsData.resolved24h + incidentsData.open)) * 100).toFixed(1)}%
@@ -471,10 +471,10 @@ export default function CockpitIncidents() {
                 onClick={() => setSelectedSeverity('all')}
                 style={{
                   padding: 'var(--space-2) var(--space-3)',
-                  background: selectedSeverity === 'all' ? 'rgba(165, 255, 156, 0.2)' : 'transparent',
-                  border: `1px solid ${selectedSeverity === 'all' ? '#a5ff9c' : 'var(--border)'}`,
+                  background: selectedSeverity === 'all' ? 'rgba(167, 251, 144, 0.2)' : 'transparent',
+                  border: `1px solid ${selectedSeverity === 'all' ? '#A7FB90' : 'var(--border)'}`,
                   borderRadius: 'var(--radius-sm)',
-                  color: selectedSeverity === 'all' ? '#a5ff9c' : 'var(--text-secondary)',
+                  color: selectedSeverity === 'all' ? '#A7FB90' : 'var(--text-secondary)',
                   cursor: 'pointer',
                   fontSize: 'var(--text-sm)',
                 }}

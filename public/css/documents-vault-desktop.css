@@ -3,9 +3,9 @@
 @import url('../css/design-tokens.css');
 
 .documents-vault {
-  max-width: 1600px;
+  max-width: 1800px;
   margin: 0 auto;
-  padding: 40px;
+  padding: var(--space-8) var(--space-9);
   min-height: 100vh;
   background: var(--black-bg);
   color: var(--text-primary);

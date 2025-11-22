@@ -88,20 +88,20 @@ export default function Header() {
                 alignItems: 'center',
                 gap: 'var(--space-2)',
                 padding: 'var(--space-1) var(--space-3)',
-                background: 'rgba(165, 255, 156, 0.1)',
-                border: '1px solid rgba(165, 255, 156, 0.3)',
+                background: 'rgba(167, 251, 144, 0.1)',
+                border: '1px solid rgba(167, 251, 144, 0.3)',
                 borderRadius: 'var(--radius-full)',
                 fontSize: 'var(--text-xs)',
                 fontWeight: 600,
-                color: 'var(--hearst-green)',
+                color: '#A7FB90',
               }}>
                 <div style={{
                   width: '6px',
                   height: '6px',
-                  background: 'var(--hearst-green)',
+                  background: '#A7FB90',
                   borderRadius: '50%',
                   animation: 'pulse 2s infinite',
-                  boxShadow: '0 0 6px rgba(165, 255, 156, 0.5)',
+                  boxShadow: '0 0 6px rgba(167, 251, 144, 0.5)',
                 }}></div>
                 <span>Live</span>
               </div>
@@ -110,7 +110,7 @@ export default function Header() {
                 fontFamily: 'monospace',
                 fontVariantNumeric: 'tabular-nums',
                 letterSpacing: '0.02em',
-                color: 'var(--hearst-green)',
+                color: '#A7FB90',
               }}>
                 {formatTime(currentTime)}
               </div>
@@ -120,7 +120,7 @@ export default function Header() {
                   fontFamily: 'monospace',
                   fontVariantNumeric: 'tabular-nums',
                   letterSpacing: '0.02em',
-                  color: 'var(--hearst-green)',
+                  color: '#A7FB90',
                   width: '80px',
                   height: '20px',
                 }}>
@@ -148,7 +148,7 @@ export default function Header() {
         }}>
           <div style={{
             fontSize: 'var(--text-xs)',
-            color: 'var(--hearst-green)',
+            color: '#A7FB90',
             textTransform: 'uppercase',
             letterSpacing: '0.5px',
             fontWeight: 600,
@@ -158,7 +158,7 @@ export default function Header() {
           <div style={{
             fontSize: 'var(--text-sm)',
             fontWeight: 700,
-            color: 'var(--hearst-green)',
+            color: '#A7FB90',
             fontVariantNumeric: 'tabular-nums',
           }}>
             $67,234.56
@@ -167,7 +167,7 @@ export default function Header() {
         <div style={{
           width: '1px',
           height: '32px',
-          background: 'rgba(165, 255, 156, 0.2)',
+          background: 'rgba(167, 251, 144, 0.2)',
         }}></div>
         <div style={{
           display: 'flex',
@@ -177,7 +177,7 @@ export default function Header() {
         }}>
           <div style={{
             fontSize: 'var(--text-xs)',
-            color: 'var(--hearst-green)',
+            color: '#A7FB90',
             textTransform: 'uppercase',
             letterSpacing: '0.5px',
             fontWeight: 600,
@@ -187,7 +187,7 @@ export default function Header() {
           <div style={{
             fontSize: 'var(--text-sm)',
             fontWeight: 700,
-            color: 'var(--hearst-green)',
+            color: '#A7FB90',
             fontVariantNumeric: 'tabular-nums',
           }}>
             93.73T
@@ -196,7 +196,7 @@ export default function Header() {
         <div style={{
           width: '1px',
           height: '32px',
-          background: 'rgba(165, 255, 156, 0.2)',
+          background: 'rgba(167, 251, 144, 0.2)',
         }}></div>
         <div style={{
           display: 'flex',
@@ -206,7 +206,7 @@ export default function Header() {
         }}>
           <div style={{
             fontSize: 'var(--text-xs)',
-            color: 'var(--hearst-green)',
+            color: '#A7FB90',
             textTransform: 'uppercase',
             letterSpacing: '0.5px',
             fontWeight: 600,
@@ -216,7 +216,7 @@ export default function Header() {
           <div style={{
             fontSize: 'var(--text-sm)',
             fontWeight: 700,
-            color: 'var(--hearst-green)',
+            color: '#A7FB90',
             fontVariantNumeric: 'tabular-nums',
           }}>
             678.45 EH/s
@@ -232,11 +232,11 @@ export default function Header() {
         @keyframes pulse {
           0%, 100% {
             opacity: 1;
-            box-shadow: 0 0 6px rgba(165, 255, 156, 0.5);
+            box-shadow: 0 0 6px rgba(167, 251, 144, 0.5);
           }
           50% {
             opacity: 0.5;
-            box-shadow: 0 0 12px rgba(165, 255, 156, 0.8);
+            box-shadow: 0 0 12px rgba(167, 251, 144, 0.8);
           }
         }
       `}</style>
