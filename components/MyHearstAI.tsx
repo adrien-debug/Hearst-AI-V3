@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 interface SearchHistoryItem {
   id: string
@@ -269,53 +270,19 @@ export default function MyHearstAI() {
   return (
     <div className="dashboard-view">
       <div className="dashboard-content">
-        {/* AI Search Bar Section */}
-        <div className="ai-search-section">
-          <div className="ai-search-container">
-            <div className="ai-search-header">
-              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
-                <div style={{
-                  width: '40px',
-                  height: '40px',
-                  borderRadius: 'var(--radius-md)',
-                  background: 'linear-gradient(135deg, rgba(165, 255, 156, 0.2) 0%, rgba(138, 253, 129, 0.2) 100%)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  border: '1px solid rgba(165, 255, 156, 0.3)',
-                }}>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="#a5ff9c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </div>
-                <div>
-                  <h2 style={{ 
-                    fontSize: 'var(--text-xl)', 
-                    fontWeight: 600, 
-                    color: 'var(--text-primary)',
-                    margin: 0,
-                    marginBottom: '4px',
-                  }}>
-                    My Hearst AI
-                  </h2>
-                  <p style={{ 
-                    fontSize: 'var(--text-sm)', 
-                    color: 'var(--text-secondary)',
-                    margin: 0,
-                  }}>
-                    Recherchez dans toutes les données de la plateforme
-                  </p>
-                </div>
-              </div>
-            </div>
-            
-            {/* Search Type Filter Buttons */}
-            <div style={{
-              marginBottom: 'var(--space-4)',
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: 'var(--space-2)',
-            }}>
+        {/* AI Search Bar Section - Style Home page */}
+        <div style={{ marginBottom: 'var(--space-8)' }}>
+          <h2 style={{ fontSize: 'var(--text-xl)', fontWeight: 600, marginBottom: 'var(--space-4)', color: 'var(--text-primary)' }}>
+            My Hearst AI
+          </h2>
+          
+          <Card>
+            <CardHeader>
+              <CardTitle>Recherche dans toutes les données de la plateforme</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {/* Search Type Filter Buttons */}
+              <div className="search-type-filters" style={{ marginBottom: 'var(--space-4)' }}>
               {searchTypes.map((type) => (
                 <button
                   key={type.id}
@@ -326,47 +293,9 @@ export default function MyHearstAI() {
                       setSearchTypeFilter(type.id)
                     }
                   }}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 'var(--space-2)',
-                    padding: 'var(--space-2) var(--space-4)',
-                    borderRadius: 'var(--radius-md)',
-                    border: '1px solid',
-                    borderColor: searchTypeFilter === type.id 
-                      ? 'var(--hearst-green)' 
-                      : 'rgba(255, 255, 255, 0.2)',
-                    backgroundColor: searchTypeFilter === type.id
-                      ? 'rgba(165, 255, 156, 0.15)'
-                      : 'rgba(14, 14, 14, 0.75)',
-                    color: searchTypeFilter === type.id
-                      ? 'var(--hearst-green)'
-                      : 'var(--text-secondary)',
-                    fontSize: 'var(--text-sm)',
-                    fontWeight: searchTypeFilter === type.id ? 600 : 400,
-                    cursor: 'pointer',
-                    transition: 'all 0.2s ease',
-                  }}
-                  onMouseEnter={(e) => {
-                    if (searchTypeFilter !== type.id) {
-                      e.currentTarget.style.backgroundColor = 'rgba(165, 255, 156, 0.05)'
-                      e.currentTarget.style.borderColor = 'rgba(165, 255, 156, 0.3)'
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (searchTypeFilter !== type.id) {
-                      e.currentTarget.style.backgroundColor = 'rgba(14, 14, 14, 0.75)'
-                      e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)'
-                    }
-                  }}
+                  className={`search-type-btn ${searchTypeFilter === type.id ? 'active' : ''}`}
                 >
-                  <span style={{
-                    width: '16px',
-                    height: '16px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}>
+                  <span className="search-type-btn-icon">
                     {type.id === 'rapport-client' && (
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -418,50 +347,17 @@ export default function MyHearstAI() {
               ))}
             </div>
             
-            <div className="ai-search-input-wrapper" style={{ position: 'relative' }}>
+            <div className="ai-search-input-wrapper">
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => handleSearch(e.target.value)}
                 placeholder="Rechercher dans les données Bitcoin Mining (rapports, batches, customers, transactions, hash rate, wallets)..."
                 className="ai-search-input"
-                style={{
-                  width: '100%',
-                  padding: 'var(--space-4) var(--space-5)',
-                  paddingLeft: '48px',
-                  fontSize: 'var(--text-base)',
-                  backgroundColor: 'rgba(14, 14, 14, 0.75)',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
-                  borderRadius: 'var(--radius-lg)',
-                  color: 'var(--text-primary)',
-                  transition: 'all 0.3s ease',
-                  outline: 'none',
-                }}
-                onFocus={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--hearst-green)'
-                  e.currentTarget.style.boxShadow = '0 0 0 3px rgba(165, 255, 156, 0.1)'
-                }}
-                onBlur={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)'
-                  e.currentTarget.style.boxShadow = 'none'
-                }}
               />
-              <div style={{
-                position: 'absolute',
-                left: 'var(--space-4)',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                pointerEvents: 'none',
-              }}>
+              <div>
                 {isSearching ? (
-                  <div style={{
-                    width: '20px',
-                    height: '20px',
-                    border: '2px solid rgba(165, 255, 156, 0.3)',
-                    borderTopColor: '#a5ff9c',
-                    borderRadius: '50%',
-                    animation: 'spin 0.8s linear infinite',
-                  }}></div>
+                  <div className="spinner"></div>
                 ) : (
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="var(--text-secondary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -470,15 +366,7 @@ export default function MyHearstAI() {
               </div>
             </div>
             {searchResults.length > 0 && (
-              <div className="ai-search-results" style={{
-                marginTop: 'var(--space-4)',
-                padding: 'var(--space-3)',
-                backgroundColor: 'rgba(14, 14, 14, 0.75)',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-                borderRadius: 'var(--radius-lg)',
-                maxHeight: '300px',
-                overflowY: 'auto',
-              }}>
+              <div className="ai-search-results">
                 {searchResults.map((result, index) => {
                   // Pour les jobs, aller directement à la page Job sans passer par la page intermédiaire
                   const href = result.type === 'job' ? result.url : result.url
@@ -487,21 +375,6 @@ export default function MyHearstAI() {
                   <a
                     key={index}
                     href={href}
-                    style={{
-                      display: 'block',
-                      padding: 'var(--space-3)',
-                      borderRadius: 'var(--radius-md)',
-                      textDecoration: 'none',
-                      color: 'var(--text-primary)',
-                      transition: 'background-color 0.2s',
-                      marginBottom: index < searchResults.length - 1 ? 'var(--space-2)' : 0,
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = 'rgba(165, 255, 156, 0.1)'
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = 'transparent'
-                    }}
                   >
                     <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
                       <div style={{
@@ -544,212 +417,24 @@ export default function MyHearstAI() {
               </div>
             )}
             
-            {/* Last 5 Search Results Boxes */}
-            {searchHistory.length > 0 && (
-              <div style={{ marginTop: 'var(--space-6)', paddingTop: 'var(--space-6)', borderTop: '1px solid rgba(255, 255, 255, 0.1)' }}>
-                <div style={{
-                  marginBottom: 'var(--space-4)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 'var(--space-2)',
-                }}>
-                  <h3 style={{
-                    fontSize: 'var(--text-lg)',
-                    fontWeight: 600,
-                    color: 'var(--text-primary)',
-                    margin: 0,
-                  }}>
-                    5 Dernières recherches
-                  </h3>
-                </div>
-                <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-                  gap: 'var(--space-4)',
-                }}>
-                  {searchHistory.slice(0, 5).map((historyItem) => (
-                    <div
-                      key={historyItem.id}
-                      style={{
-                        display: 'block',
-                        padding: 'var(--space-5)',
-                        backgroundColor: 'rgba(14, 14, 14, 0.75)',
-                        border: '0.5px solid rgba(255, 255, 255, 0.04)',
-                        borderLeft: '3px solid var(--hearst-green)',
-                        borderRadius: 'var(--radius-lg)',
-                        color: 'var(--text-primary)',
-                        transition: 'all 0.3s ease',
-                        boxShadow: '0 4px 24px rgba(0, 0, 0, 0.4), 0 1px 4px rgba(0, 0, 0, 0.2)',
-                        cursor: 'pointer',
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.transform = 'translateY(-4px)'
-                        e.currentTarget.style.borderColor = 'rgba(165, 255, 156, 0.3)'
-                        e.currentTarget.style.boxShadow = '0 12px 48px rgba(0, 0, 0, 0.5), 0 4px 16px rgba(0, 0, 0, 0.4)'
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.transform = 'translateY(0)'
-                        e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.04)'
-                        e.currentTarget.style.boxShadow = '0 4px 24px rgba(0, 0, 0, 0.4), 0 1px 4px rgba(0, 0, 0, 0.2)'
-                      }}
-                      onClick={() => {
-                        window.location.href = `/hearst-ai/search/${historyItem.id}`
-                      }}
-                    >
-                      <div style={{ marginBottom: 'var(--space-3)' }}>
-                        <div style={{
-                          fontSize: 'var(--text-sm)',
-                          color: 'var(--text-secondary)',
-                          marginBottom: 'var(--space-1)',
-                        }}>
-                          {historyItem.timestamp.toLocaleString('fr-FR', { 
-                            day: '2-digit', 
-                            month: '2-digit', 
-                            year: 'numeric',
-                            hour: '2-digit',
-                            minute: '2-digit'
-                          })}
-                        </div>
-                        <div style={{
-                          fontSize: 'var(--text-base)',
-                          fontWeight: 600,
-                          color: 'var(--hearst-green)',
-                          marginBottom: 'var(--space-2)',
-                        }}>
-                          "{historyItem.query}"
-                        </div>
-                        <div style={{
-                          fontSize: 'var(--text-xs)',
-                          color: 'var(--text-secondary)',
-                        }}>
-                          {historyItem.resultsCount} résultat{historyItem.resultsCount > 1 ? 's' : ''}
-                        </div>
-                      </div>
-                      <div style={{
-                        display: 'flex',
-                        flexWrap: 'wrap',
-                        gap: 'var(--space-2)',
-                      }}>
-                        {historyItem.results.slice(0, 3).map((result, idx) => {
-                            // Pour les jobs, aller directement à la page Job
-                            const href = result.type === 'job' ? result.url : `/hearst-ai/search/${historyItem.id}`
-                            
-                            return (
-                          <a
-                            key={idx}
-                            href={href}
-                            style={{
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: 'var(--space-2)',
-                              padding: 'var(--space-2) var(--space-3)',
-                              backgroundColor: result.type === 'project' ? 'rgba(165, 255, 156, 0.1)' :
-                                              result.type === 'job' ? 'rgba(255, 165, 0, 0.1)' :
-                                              'rgba(138, 253, 129, 0.1)',
-                              border: `1px solid ${result.type === 'project' ? 'rgba(165, 255, 156, 0.2)' :
-                                                 result.type === 'job' ? 'rgba(255, 165, 0, 0.2)' :
-                                                 'rgba(138, 253, 129, 0.2)'}`,
-                              borderRadius: 'var(--radius-sm)',
-                              textDecoration: 'none',
-                              color: 'var(--text-primary)',
-                              fontSize: 'var(--text-xs)',
-                              transition: 'all 0.2s ease',
-                            }}
-                            onMouseEnter={(e) => {
-                              e.currentTarget.style.backgroundColor = result.type === 'project' ? 'rgba(165, 255, 156, 0.2)' :
-                                                                      result.type === 'job' ? 'rgba(255, 165, 0, 0.2)' :
-                                                                      'rgba(138, 253, 129, 0.2)'
-                            }}
-                            onMouseLeave={(e) => {
-                              e.currentTarget.style.backgroundColor = result.type === 'project' ? 'rgba(165, 255, 156, 0.1)' :
-                                                                      result.type === 'job' ? 'rgba(255, 165, 0, 0.1)' :
-                                                                      'rgba(138, 253, 129, 0.1)'
-                            }}
-                          >
-                            <span style={{
-                              width: '16px',
-                              height: '16px',
-                              borderRadius: 'var(--radius-sm)',
-                              backgroundColor: result.type === 'project' ? '#a5ff9c' :
-                                              result.type === 'job' ? '#FFA500' :
-                                              '#8afd81',
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              fontSize: '8px',
-                              fontWeight: 700,
-                              color: '#0a0a0a',
-                            }}>
-                              {result.type === 'project' ? 'P' : result.type === 'job' ? 'J' : 'C'}
-                            </span>
-                            <span style={{ 
-                              maxWidth: '120px',
-                              overflow: 'hidden',
-                              textOverflow: 'ellipsis',
-                              whiteSpace: 'nowrap',
-                            }}>
-                              {result.title}
-                            </span>
-                          </a>
-                          )
-                        })}
-                        {historyItem.results.length > 3 && (
-                          <div style={{
-                            padding: 'var(--space-2) var(--space-3)',
-                            fontSize: 'var(--text-xs)',
-                            color: 'var(--text-secondary)',
-                          }}>
-                            +{historyItem.results.length - 3} autres
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
+            </CardContent>
+          </Card>
         </div>
-
-        {/* Search History Table Section */}
-        <div className="ai-search-section" style={{ marginTop: 'var(--space-6)' }}>
-          <div className="ai-search-container">
-            <div className="ai-search-header">
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 'var(--space-4)' }}>
-                <h2 style={{ 
-                  fontSize: 'var(--text-xl)', 
-                  fontWeight: 600, 
-                  color: 'var(--text-primary)',
-                  margin: 0,
-                }}>
-                  Historique des recherches
-                </h2>
+        
+        {/* Search History Table Section - Style Home page */}
+        <div style={{ marginTop: '-10px', width: '100%', maxWidth: '100%', gridColumn: '1 / -1' }}>
+          <Card style={{ width: '100%', maxWidth: '100%' }}>
+            <CardHeader>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--space-4)' }}>
+                <CardTitle>Historique des recherches</CardTitle>
                 <div style={{ position: 'relative', width: '300px' }}>
                   <input
                     type="text"
                     value={historyFilter}
                     onChange={(e) => setHistoryFilter(e.target.value)}
                     placeholder="Rechercher dans l'historique..."
-                    style={{
-                      width: '100%',
-                      padding: 'var(--space-3) var(--space-4)',
-                      paddingLeft: '40px',
-                      fontSize: 'var(--text-sm)',
-                      backgroundColor: 'rgba(14, 14, 14, 0.75)',
-                      border: '1px solid rgba(255, 255, 255, 0.1)',
-                      borderRadius: 'var(--radius-md)',
-                      color: 'var(--text-primary)',
-                      transition: 'all 0.3s ease',
-                      outline: 'none',
-                    }}
-                    onFocus={(e) => {
-                      e.currentTarget.style.borderColor = 'var(--hearst-green)'
-                      e.currentTarget.style.boxShadow = '0 0 0 3px rgba(165, 255, 156, 0.1)'
-                    }}
-                    onBlur={(e) => {
-                      e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)'
-                      e.currentTarget.style.boxShadow = 'none'
-                    }}
+                    className="ai-search-input"
+                    style={{ paddingLeft: '40px', fontSize: 'var(--text-sm)' }}
                   />
                   <svg 
                     width="16" 
@@ -770,66 +455,16 @@ export default function MyHearstAI() {
                   </svg>
                 </div>
               </div>
-            </div>
-            
-            <div style={{
-              overflowX: 'auto',
-              borderRadius: 'var(--radius-md)',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-            }}>
-              <table style={{
-                width: '100%',
-                borderCollapse: 'collapse',
-                backgroundColor: 'rgba(14, 14, 14, 0.5)',
-              }}>
+            </CardHeader>
+            <CardContent style={{ padding: 'var(--space-6)', width: '100%' }}>
+              <div className="table-container" style={{ marginTop: '-10px', width: '100%', maxWidth: '100%', overflowX: 'auto' }}>
+                <table className="table" style={{ width: '100%', minWidth: '100%', tableLayout: 'auto' }}>
                 <thead>
-                  <tr style={{
-                    borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-                  }}>
-                    <th style={{
-                      padding: 'var(--space-4)',
-                      textAlign: 'left',
-                      fontSize: 'var(--text-sm)',
-                      fontWeight: 600,
-                      color: 'var(--text-secondary)',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.5px',
-                    }}>
-                      Date
-                    </th>
-                    <th style={{
-                      padding: 'var(--space-4)',
-                      textAlign: 'left',
-                      fontSize: 'var(--text-sm)',
-                      fontWeight: 600,
-                      color: 'var(--text-secondary)',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.5px',
-                    }}>
-                      Recherche
-                    </th>
-                    <th style={{
-                      padding: 'var(--space-4)',
-                      textAlign: 'left',
-                      fontSize: 'var(--text-sm)',
-                      fontWeight: 600,
-                      color: 'var(--text-secondary)',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.5px',
-                    }}>
-                      Résultats
-                    </th>
-                    <th style={{
-                      padding: 'var(--space-4)',
-                      textAlign: 'left',
-                      fontSize: 'var(--text-sm)',
-                      fontWeight: 600,
-                      color: 'var(--text-secondary)',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.5px',
-                    }}>
-                      Actions
-                    </th>
+                  <tr>
+                    <th>Date</th>
+                    <th>Recherche</th>
+                    <th>Résultats</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -843,24 +478,8 @@ export default function MyHearstAI() {
                       )
                     )
                     .map((historyItem, index) => (
-                    <tr 
-                      key={historyItem.id}
-                      style={{
-                        borderBottom: index < searchHistory.length - 1 ? '1px solid rgba(255, 255, 255, 0.05)' : 'none',
-                        transition: 'background-color 0.2s ease',
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = 'rgba(165, 255, 156, 0.05)'
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = 'transparent'
-                      }}
-                    >
-                      <td style={{
-                        padding: 'var(--space-4)',
-                        fontSize: 'var(--text-sm)',
-                        color: 'var(--text-primary)',
-                      }}>
+                    <tr key={historyItem.id}>
+                      <td>
                         {historyItem.timestamp.toLocaleString('fr-FR', { 
                           day: '2-digit', 
                           month: '2-digit', 
@@ -869,28 +488,13 @@ export default function MyHearstAI() {
                           minute: '2-digit'
                         })}
                       </td>
-                      <td style={{
-                        padding: 'var(--space-4)',
-                        fontSize: 'var(--text-sm)',
-                        color: 'var(--hearst-green)',
-                        fontWeight: 500,
-                      }}>
+                      <td style={{ color: 'var(--hearst-green)', fontWeight: 500 }}>
                         "{historyItem.query}"
                       </td>
-                      <td style={{
-                        padding: 'var(--space-4)',
-                        fontSize: 'var(--text-sm)',
-                        color: 'var(--text-primary)',
-                      }}>
-                        <div style={{
-                          display: 'flex',
-                          flexWrap: 'wrap',
-                          gap: 'var(--space-2)',
-                        }}>
+                      <td>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-2)' }}>
                           {historyItem.results.slice(0, 3).map((result, idx) => {
-                            // Pour les jobs, aller directement à la page Job
                             const href = result.type === 'job' ? result.url : `/hearst-ai/search/${historyItem.id}`
-                            
                             return (
                             <a
                               key={idx}
@@ -912,16 +516,6 @@ export default function MyHearstAI() {
                                 fontSize: 'var(--text-xs)',
                                 transition: 'all 0.2s ease',
                               }}
-                              onMouseEnter={(e) => {
-                                e.currentTarget.style.backgroundColor = result.type === 'project' ? 'rgba(165, 255, 156, 0.2)' :
-                                                                        result.type === 'job' ? 'rgba(255, 165, 0, 0.2)' :
-                                                                        'rgba(138, 253, 129, 0.2)'
-                              }}
-                              onMouseLeave={(e) => {
-                                e.currentTarget.style.backgroundColor = result.type === 'project' ? 'rgba(165, 255, 156, 0.1)' :
-                                                                        result.type === 'job' ? 'rgba(255, 165, 0, 0.1)' :
-                                                                        'rgba(138, 253, 129, 0.1)'
-                              }}
                             >
                               <span style={{
                                 width: '12px',
@@ -937,39 +531,17 @@ export default function MyHearstAI() {
                             )
                           })}
                           {historyItem.results.length > 3 && (
-                            <span style={{
-                              padding: 'var(--space-1) var(--space-2)',
-                              fontSize: 'var(--text-xs)',
-                              color: 'var(--text-secondary)',
-                            }}>
+                            <span style={{ padding: 'var(--space-1) var(--space-2)', fontSize: 'var(--text-xs)', color: 'var(--text-secondary)' }}>
                               +{historyItem.results.length - 3}
                             </span>
                           )}
                         </div>
                       </td>
-                      <td style={{
-                        padding: 'var(--space-4)',
-                      }}>
+                      <td>
                         <a
                           href={`/hearst-ai/search/${historyItem.id}`}
-                          style={{
-                            display: 'inline-block',
-                            padding: 'var(--space-2) var(--space-3)',
-                            backgroundColor: 'rgba(165, 255, 156, 0.1)',
-                            border: '1px solid rgba(165, 255, 156, 0.3)',
-                            borderRadius: 'var(--radius-sm)',
-                            color: 'var(--hearst-green)',
-                            fontSize: 'var(--text-xs)',
-                            fontWeight: 500,
-                            textDecoration: 'none',
-                            transition: 'all 0.2s ease',
-                          }}
-                          onMouseEnter={(e) => {
-                            e.currentTarget.style.backgroundColor = 'rgba(165, 255, 156, 0.2)'
-                          }}
-                          onMouseLeave={(e) => {
-                            e.currentTarget.style.backgroundColor = 'rgba(165, 255, 156, 0.1)'
-                          }}
+                          className="btn-secondary"
+                          style={{ fontSize: 'var(--text-xs)', padding: 'var(--space-2) var(--space-3)' }}
                         >
                           Voir détails
                         </a>
@@ -997,8 +569,9 @@ export default function MyHearstAI() {
                   )}
                 </tbody>
               </table>
-            </div>
-          </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>

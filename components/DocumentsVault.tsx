@@ -51,7 +51,7 @@ interface Document {
   signedBy?: string[]
   signedDate?: string
   versions?: DocumentVersion[]
-  thumbnailUrl?: string
+  thumbnailUrl?: string | null
   fileUrl: string
   selected?: boolean
 }
@@ -332,6 +332,7 @@ function ThumbnailImage({ src, alt, fallbackIcon }: { src: string; alt: string; 
 export default function DocumentsVault() {
   const [documents, setDocuments] = useState<Document[]>([])
   const [loading, setLoading] = useState(true)
+  const [activeSection, setActiveSection] = useState<string>('overview')
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
   const [selectedTags, setSelectedTags] = useState<string[]>([])
   const [viewMode, setViewMode] = useState<'grid' | 'list' | 'table'>('grid')
@@ -350,6 +351,17 @@ export default function DocumentsVault() {
   const [dragOver, setDragOver] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const dropZoneRef = useRef<HTMLDivElement>(null)
+
+  const sections = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'all', label: 'All Documents' },
+    { id: 'contracts', label: 'Contracts' },
+    { id: 'invoices', label: 'Invoices' },
+    { id: 'purchase-orders', label: 'Purchase Orders' },
+    { id: 'insurance', label: 'Insurance' },
+    { id: 'warranties', label: 'Warranties' },
+    { id: 'other', label: 'Other' },
+  ]
 
   // Load documents on mount
   useEffect(() => {
@@ -569,120 +581,58 @@ export default function DocumentsVault() {
     )
   }
 
+  // Handle section change and update category filter
+  const handleSectionChange = (sectionId: string) => {
+    setActiveSection(sectionId)
+    if (sectionId === 'all') {
+      setSelectedCategory('all')
+    } else if (sectionId !== 'overview') {
+      setSelectedCategory(sectionId)
+    }
+  }
+
   return (
     <div className="documents-vault">
-      {/* Header */}
-      <div className="vault-header">
-        <h1>DOCUMENTS VAULT - Secure Document Management System</h1>
-        <div className="vault-header-actions">
-          <button className="btn-add-large" onClick={() => setShowUploadModal(true)} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <UploadIcon size={18} /> Upload
-          </button>
-          <button className="btn-secondary" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <FolderIcon size={16} /> New Folder
-          </button>
-          <button className="btn-secondary" onClick={() => setShowSearchModal(true)} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <SearchIcon size={16} /> Search
-          </button>
-          <button className="btn-secondary" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <SettingsIcon size={16} /> Settings
-          </button>
-          {selectedDocuments.size > 0 && (
-            <button className="btn-secondary" onClick={bulkDownload} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <DownloadIcon size={16} /> Bulk Download ({selectedDocuments.size})
+      {/* Header with Title */}
+      <div style={{ marginBottom: 'var(--space-6)' }}>
+        <div style={{ marginBottom: 'var(--space-4)' }}>
+          <h1 style={{ fontSize: 'var(--text-2xl)', fontWeight: 700, color: 'var(--text-primary)' }}>Documents Vault</h1>
+        </div>
+        
+        {/* Navigation tabs - Style Projections */}
+        <div style={{
+          display: 'flex',
+          gap: 'var(--space-2)',
+          flexWrap: 'wrap',
+          borderBottom: '1px solid rgba(197, 255, 167, 0.15)',
+          marginBottom: 'var(--space-6)',
+          overflowX: 'auto',
+        }}>
+          {sections.map((section) => (
+            <button
+              key={section.id}
+              onClick={() => handleSectionChange(section.id)}
+              style={{
+                padding: 'var(--space-3) var(--space-4)',
+                background: 'transparent',
+                border: 'none',
+                borderBottom: activeSection === section.id ? '2px solid #C5FFA7' : '2px solid transparent',
+                color: activeSection === section.id ? '#C5FFA7' : 'var(--text-secondary)',
+                cursor: 'pointer',
+                fontWeight: activeSection === section.id ? 600 : 400,
+                transition: 'all var(--duration-fast) var(--ease-in-out)',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {section.label}
             </button>
-          )}
+          ))}
         </div>
       </div>
 
-      {/* Quick Stats */}
-      <div className="vault-stats">
-        <div className="stat-card">
-          <div className="stat-value">{totalDocuments}</div>
-          <div className="stat-label">Total Documents</div>
-        </div>
-        <div className="stat-card">
-          <div className="stat-value" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            {expiringSoon}
-            {expiringSoon > 0 && <WarningIcon size={20} color="#FFC107" />}
-          </div>
-          <div className="stat-label">Expiring Soon</div>
-        </div>
-        <div className="stat-card">
-          <div className="stat-value">{formatFileSize(totalSize)}</div>
-          <div className="stat-label">Size Used</div>
-        </div>
-        <div className="stat-card">
-          <div className="stat-value">{recentUploads}</div>
-          <div className="stat-label">Recent Uploads (7d)</div>
-        </div>
-      </div>
 
-      {/* Main Layout */}
-      <div className="vault-main-layout">
-        {/* Sidebar */}
-        <div className="vault-sidebar">
-          <div className="sidebar-section">
-            <h3>ALL DOCUMENTS</h3>
-            <div className="sidebar-category" onClick={() => setSelectedCategory('all')}>
-              <span>All Documents</span>
-              <span className="category-count">{totalDocuments}</span>
-            </div>
-          </div>
-
-          <div className="sidebar-section">
-            <h3>CATEGORIES</h3>
-            {documentCategories.map(cat => (
-              <div
-                key={cat.id}
-                className={`sidebar-category ${selectedCategory === cat.id ? 'active' : ''}`}
-                onClick={() => setSelectedCategory(cat.id)}
-              >
-                <span>{cat.name}</span>
-                <span className="category-count">{cat.count}</span>
-              </div>
-            ))}
-          </div>
-
-          <div className="sidebar-section">
-            <h3>TAGS</h3>
-            {documentTags.map(tag => (
-              <div
-                key={tag.id}
-                className={`sidebar-tag ${selectedTags.includes(tag.id) ? 'active' : ''}`}
-                onClick={() => {
-                  if (selectedTags.includes(tag.id)) {
-                    setSelectedTags(selectedTags.filter(t => t !== tag.id))
-                  } else {
-                    setSelectedTags([...selectedTags, tag.id])
-                  }
-                }}
-              >
-                <TagIcon size={14} />
-                <span>{tag.name}</span>
-                <span className="tag-count">({tag.count})</span>
-              </div>
-            ))}
-            <button className="btn-add-tag" onClick={() => {}}>+ Add tag</button>
-          </div>
-
-          <div className="sidebar-section">
-            <h3>EXPIRING SOON</h3>
-            {documents
-              .filter(d => d.daysUntilExpiration !== undefined && d.daysUntilExpiration <= 30)
-              .slice(0, 5)
-              .map(doc => (
-                <div key={doc.id} className="expiring-item">
-                  <WarningIcon size={14} color={doc.daysUntilExpiration! <= 7 ? '#F44336' : '#FFC107'} />
-                  <span>{truncateFilename(doc.filename, 20)}</span>
-                  <span className="expiring-days">({doc.daysUntilExpiration}d)</span>
-                </div>
-              ))}
-          </div>
-        </div>
-
-        {/* Main Content */}
-        <div className="vault-content">
+      {/* Main Content */}
+      <div className="vault-content">
           {/* Toolbar */}
           <div className="vault-toolbar">
             <div className="view-mode-selector">
@@ -874,6 +824,26 @@ export default function DocumentsVault() {
             <span>Showing 1-{sortedDocuments.length} of {sortedDocuments.length} documents</span>
           </div>
         </div>
+
+      {/* Actions Footer */}
+      <div className="vault-header" style={{ marginTop: 'var(--space-6)', display: 'flex', justifyContent: 'center', gap: 'var(--space-4)', padding: 'var(--space-6)', background: '#1A1A1A', border: '1px solid rgba(197, 255, 167, 0.15)', borderRadius: 'var(--radius-xl)' }}>
+        <button className="btn-add-large" onClick={() => setShowUploadModal(true)} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <UploadIcon size={18} /> Upload
+        </button>
+        <button className="btn-secondary" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <FolderIcon size={16} /> New Folder
+        </button>
+        <button className="btn-secondary" onClick={() => setShowSearchModal(true)} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <SearchIcon size={16} /> Search
+        </button>
+        <button className="btn-secondary" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <SettingsIcon size={16} /> Settings
+        </button>
+        {selectedDocuments.size > 0 && (
+          <button className="btn-secondary" onClick={bulkDownload} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <DownloadIcon size={16} /> Bulk Download ({selectedDocuments.size})
+          </button>
+        )}
       </div>
 
       {/* Upload Modal */}

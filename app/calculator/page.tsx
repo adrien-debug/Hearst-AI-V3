@@ -2,6 +2,9 @@
 
 import { useEffect } from 'react'
 import Script from 'next/script'
+import KpiBox from '@/components/ui/KpiBox'
+import CardWrapper from '@/components/ui/CardWrapper'
+import SectionTitle from '@/components/ui/SectionTitle'
 
 export default function CalculatorPage() {
   useEffect(() => {
@@ -27,9 +30,11 @@ export default function CalculatorPage() {
         @keyframes pulse {
           0%, 100% {
             opacity: 1;
+            box-shadow: 0 0 8px var(--hearst-green);
           }
           50% {
             opacity: 0.5;
+            box-shadow: 0 0 16px var(--hearst-green);
           }
         }
       `}</style>
@@ -38,9 +43,7 @@ export default function CalculatorPage() {
         <div className="dashboard-content">
           {/* Header */}
           <div style={{ marginBottom: 'var(--space-6)' }}>
-            <h1 style={{ fontSize: 'var(--text-2xl)', fontWeight: 700, marginBottom: 'var(--space-4)' }}>
-              Mining Profitability Calculator
-            </h1>
+            <SectionTitle level={1}>Mining Profitability Calculator</SectionTitle>
             
             <div style={{
               display: 'flex',
@@ -71,130 +74,39 @@ export default function CalculatorPage() {
             </div>
           </div>
 
-          {/* Métriques temps réel */}
-          <section className="metrics-section" style={{ marginBottom: 'var(--space-6)' }}>
-            <div className="metrics-grid" style={{
+          {/* Métriques temps réel - Style HOME */}
+          <section className="premium-stats-section" style={{ marginBottom: 'var(--space-8)' }}>
+            <div className="premium-stats-grid" style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-              gap: 'var(--space-4)',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: 'var(--space-6)',
+              width: '100%',
             }}>
-              <div className="metric-card" style={{
-                padding: 'var(--space-4)',
-                background: 'var(--bg-secondary)',
-                borderRadius: 'var(--radius-md)',
-                border: '1px solid var(--border)',
-              }}>
-                <div className="metric-label" style={{
-                  fontSize: 'var(--text-sm)',
-                  color: 'var(--text-secondary)',
-                  marginBottom: 'var(--space-2)',
-                }}>
-                  BTC Price
-                </div>
-                <div className="metric-value" id="btc-price" style={{
-                  fontSize: 'var(--text-xl)',
-                  fontWeight: 700,
-                  color: 'var(--text-primary)',
-                  marginBottom: 'var(--space-1)',
-                }}>
-                  $0
-                </div>
-                <div className="metric-change" id="btc-change" style={{
-                  fontSize: 'var(--text-xs)',
-                  color: 'var(--text-secondary)',
-                }}>
-                  --
-                </div>
-              </div>
-              <div className="metric-card" style={{
-                padding: 'var(--space-4)',
-                background: 'var(--bg-secondary)',
-                borderRadius: 'var(--radius-md)',
-                border: '1px solid var(--border)',
-              }}>
-                <div className="metric-label" style={{
-                  fontSize: 'var(--text-sm)',
-                  color: 'var(--text-secondary)',
-                  marginBottom: 'var(--space-2)',
-                }}>
-                  Network Hashrate
-                </div>
-                <div className="metric-value" id="network-hashrate" style={{
-                  fontSize: 'var(--text-xl)',
-                  fontWeight: 700,
-                  color: 'var(--text-primary)',
-                  marginBottom: 'var(--space-1)',
-                }}>
-                  0 EH/s
-                </div>
-                <div className="metric-subtitle" style={{
-                  fontSize: 'var(--text-xs)',
-                  color: 'var(--text-secondary)',
-                }}>
-                  Real-time
-                </div>
-              </div>
-              <div className="metric-card" style={{
-                padding: 'var(--space-4)',
-                background: 'var(--bg-secondary)',
-                borderRadius: 'var(--radius-md)',
-                border: '1px solid var(--border)',
-              }}>
-                <div className="metric-label" style={{
-                  fontSize: 'var(--text-sm)',
-                  color: 'var(--text-secondary)',
-                  marginBottom: 'var(--space-2)',
-                }}>
-                  Hashprice (TH)
-                </div>
-                <div className="metric-value" id="hashprice-th" style={{
-                  fontSize: 'var(--text-xl)',
-                  fontWeight: 700,
-                  color: 'var(--text-primary)',
-                  marginBottom: 'var(--space-1)',
-                }}>
-                  $0
-                </div>
-                <div className="metric-subtitle" style={{
-                  fontSize: 'var(--text-xs)',
-                  color: 'var(--text-secondary)',
-                }}>
-                  per TH/day
-                </div>
-              </div>
-              <div className="metric-card" style={{
-                padding: 'var(--space-4)',
-                background: 'var(--bg-secondary)',
-                borderRadius: 'var(--radius-md)',
-                border: '1px solid var(--border)',
-              }}>
-                <div className="metric-label" style={{
-                  fontSize: 'var(--text-sm)',
-                  color: 'var(--text-secondary)',
-                  marginBottom: 'var(--space-2)',
-                }}>
-                  Hashprice (PH)
-                </div>
-                <div className="metric-value" id="hashprice-ph" style={{
-                  fontSize: 'var(--text-xl)',
-                  fontWeight: 700,
-                  color: 'var(--text-primary)',
-                  marginBottom: 'var(--space-1)',
-                }}>
-                  $0
-                </div>
-                <div className="metric-subtitle" style={{
-                  fontSize: 'var(--text-xs)',
-                  color: 'var(--text-secondary)',
-                }}>
-                  per PH/day
-                </div>
-              </div>
+              <KpiBox
+                label="BTC Price"
+                value={<><span id="btc-price">$0</span><span id="btc-change" style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', marginLeft: 'var(--space-2)' }}>--</span></>}
+                description="Real-time price"
+              />
+              <KpiBox
+                label="Network Hashrate"
+                value={<span id="network-hashrate">0 EH/s</span>}
+                description="Real-time"
+              />
+              <KpiBox
+                label="Hashprice (TH)"
+                value={<span id="hashprice-th">$0</span>}
+                description="per TH/day"
+              />
+              <KpiBox
+                label="Hashprice (PH)"
+                value={<span id="hashprice-ph">$0</span>}
+                description="per PH/day"
+              />
             </div>
           </section>
 
-          {/* Formulaire de calcul */}
-          <section className="calculator-section" style={{ marginBottom: 'var(--space-6)' }}>
+          {/* Formulaire de calcul - Style HOME */}
+          <section className="calculator-section" style={{ marginBottom: 'var(--space-8)' }}>
             <div className="calculator-grid" style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
@@ -202,15 +114,8 @@ export default function CalculatorPage() {
               alignItems: 'start',
             }}>
               {/* Colonne gauche : Formulaire */}
-              <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-                <h2 className="section-title" style={{
-                  fontSize: 'var(--text-lg)',
-                  fontWeight: 600,
-                  marginBottom: 'var(--space-4)',
-                  color: 'var(--text-primary)',
-                }}>
-                  Mining Parameters
-                </h2>
+              <CardWrapper>
+                <SectionTitle level={2}>Mining Parameters</SectionTitle>
                 
                 <div className="calculator-form" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                 <div className="form-group" style={{ marginBottom: 'var(--space-4)' }}>
@@ -234,6 +139,15 @@ export default function CalculatorPage() {
                       borderRadius: 'var(--radius-md)',
                       color: 'var(--text-primary)',
                       fontSize: 'var(--text-sm)',
+                      transition: 'all var(--duration-fast) var(--ease-in-out)',
+                    }}
+                    onFocus={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--hearst-green)'
+                      e.currentTarget.style.boxShadow = '0 0 0 3px rgba(165, 255, 156, 0.1)'
+                    }}
+                    onBlur={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--border)'
+                      e.currentTarget.style.boxShadow = 'none'
                     }}
                   >
                     <option value="" disabled>Select a mining machine...</option>
@@ -306,6 +220,7 @@ export default function CalculatorPage() {
                       borderRadius: 'var(--radius-md)',
                       color: 'var(--text-primary)',
                       fontSize: 'var(--text-sm)',
+                      transition: 'all var(--duration-fast) var(--ease-in-out)',
                     }}
                   />
                   <span className="input-hint" style={{
@@ -343,6 +258,7 @@ export default function CalculatorPage() {
                       borderRadius: 'var(--radius-md)',
                       color: 'var(--text-primary)',
                       fontSize: 'var(--text-sm)',
+                      transition: 'all var(--duration-fast) var(--ease-in-out)',
                     }}
                   />
                   <span className="input-hint" style={{
@@ -416,6 +332,15 @@ export default function CalculatorPage() {
                       borderRadius: 'var(--radius-md)',
                       color: 'var(--text-primary)',
                       fontSize: 'var(--text-sm)',
+                      transition: 'all var(--duration-fast) var(--ease-in-out)',
+                    }}
+                    onFocus={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--hearst-green)'
+                      e.currentTarget.style.boxShadow = '0 0 0 3px rgba(165, 255, 156, 0.1)'
+                    }}
+                    onBlur={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--border)'
+                      e.currentTarget.style.boxShadow = 'none'
                     }}
                   />
                   <span className="input-hint" style={{
@@ -452,6 +377,15 @@ export default function CalculatorPage() {
                       borderRadius: 'var(--radius-md)',
                       color: 'var(--text-primary)',
                       fontSize: 'var(--text-sm)',
+                      transition: 'all var(--duration-fast) var(--ease-in-out)',
+                    }}
+                    onFocus={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--hearst-green)'
+                      e.currentTarget.style.boxShadow = '0 0 0 3px rgba(165, 255, 156, 0.1)'
+                    }}
+                    onBlur={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--border)'
+                      e.currentTarget.style.boxShadow = 'none'
                     }}
                   />
                   <span className="input-hint" style={{
@@ -479,31 +413,28 @@ export default function CalculatorPage() {
                     cursor: 'pointer',
                     transition: 'all var(--duration-fast) var(--ease-in-out)',
                   }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = '#B0FF8F'
+                    e.currentTarget.style.transform = 'translateY(-1px)'
+                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(165, 255, 156, 0.3)'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'var(--hearst-green)'
+                    e.currentTarget.style.transform = 'translateY(0)'
+                    e.currentTarget.style.boxShadow = 'none'
+                  }}
                 >
                   Calculate
                 </button>
                 </div>
-              </div>
+              </CardWrapper>
 
-              {/* Colonne droite : Résultats */}
+              {/* Colonne droite : Résultats - Style HOME */}
               <div className="calculator-results">
-                <h2 className="section-title" style={{
-                  fontSize: 'var(--text-lg)',
-                  fontWeight: 600,
-                  marginBottom: 'var(--space-4)',
-                  color: 'var(--text-primary)',
-                }}>
-                  Results
-                </h2>
+                <SectionTitle level={2}>Results</SectionTitle>
                 
                 {/* Résultats quotidiens */}
-                <div className="results-card" style={{
-                  padding: 'var(--space-3)',
-                  background: 'var(--bg-secondary)',
-                  borderRadius: 'var(--radius-md)',
-                  border: '1px solid var(--border)',
-                  marginBottom: 'var(--space-2)',
-                }}>
+                <CardWrapper>
                   <h3 className="results-title" style={{
                     fontSize: 'var(--text-sm)',
                     fontWeight: 600,
@@ -591,16 +522,10 @@ export default function CalculatorPage() {
                       </span>
                     </div>
                   </div>
-                </div>
+                </CardWrapper>
 
                 {/* Résultats mensuels */}
-                <div className="results-card" style={{
-                  padding: 'var(--space-3)',
-                  background: 'var(--bg-secondary)',
-                  borderRadius: 'var(--radius-md)',
-                  border: '1px solid var(--border)',
-                  marginBottom: 'var(--space-2)',
-                }}>
+                <CardWrapper>
                   <h3 className="results-title" style={{
                     fontSize: 'var(--text-sm)',
                     fontWeight: 600,
@@ -688,16 +613,10 @@ export default function CalculatorPage() {
                       </span>
                     </div>
                   </div>
-                </div>
+                </CardWrapper>
 
                 {/* Résultats annuels */}
-                <div className="results-card" style={{
-                  padding: 'var(--space-3)',
-                  background: 'var(--bg-secondary)',
-                  borderRadius: 'var(--radius-md)',
-                  border: '1px solid var(--border)',
-                  marginBottom: 'var(--space-2)',
-                }}>
+                <CardWrapper>
                   <h3 className="results-title" style={{
                     fontSize: 'var(--text-sm)',
                     fontWeight: 600,
@@ -785,103 +704,114 @@ export default function CalculatorPage() {
                       </span>
                     </div>
                   </div>
-                </div>
+                </CardWrapper>
 
                 {/* ROI Break-even */}
-                <div className="results-card" id="roi-card" style={{
-                  display: 'none',
-                  padding: 'var(--space-4)',
-                  background: 'var(--bg-secondary)',
-                  borderRadius: 'var(--radius-md)',
-                  border: '1px solid var(--border)',
-                }}>
-                  <h3 className="results-title" style={{
-                    fontSize: 'var(--text-sm)',
-                    fontWeight: 600,
-                    marginBottom: 'var(--space-2)',
-                    color: 'var(--text-primary)',
-                  }}>
-                    ROI & Break-even
-                  </h3>
-                  <div className="results-grid" style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(2, 1fr)',
-                    gap: 'var(--space-2)',
-                  }}>
-                    <div className="result-item">
-                      <span className="result-label" style={{
-                        display: 'block',
-                        fontSize: 'var(--text-xs)',
-                        color: 'var(--text-secondary)',
-                        marginBottom: 'var(--space-1)',
-                      }}>
-                        Break-even
-                      </span>
-                      <span className="result-value" id="break-even-days" style={{
-                        fontSize: 'var(--text-lg)',
-                        fontWeight: 700,
-                        color: 'var(--text-primary)',
-                      }}>
-                        --
-                      </span>
-                    </div>
-                    <div className="result-item">
-                      <span className="result-label" style={{
-                        display: 'block',
-                        fontSize: 'var(--text-xs)',
-                        color: 'var(--text-secondary)',
-                        marginBottom: 'var(--space-1)',
-                      }}>
-                        ROI (1 year)
-                      </span>
-                      <span className="result-value" id="roi-1year" style={{
-                        fontSize: 'var(--text-lg)',
-                        fontWeight: 700,
-                        color: 'var(--text-primary)',
-                      }}>
-                        --
-                      </span>
-                    </div>
-                    <div className="result-item">
-                      <span className="result-label" style={{
-                        display: 'block',
-                        fontSize: 'var(--text-xs)',
-                        color: 'var(--text-secondary)',
-                        marginBottom: 'var(--space-1)',
-                      }}>
-                        ROI (2 years)
-                      </span>
-                      <span className="result-value" id="roi-2years" style={{
-                        fontSize: 'var(--text-lg)',
-                        fontWeight: 700,
-                        color: 'var(--text-primary)',
-                      }}>
-                        --
-                      </span>
+                <CardWrapper>
+                  <div id="roi-card" style={{ display: 'none' }}>
+                    <h3 className="results-title" style={{
+                      fontSize: 'var(--text-sm)',
+                      fontWeight: 600,
+                      marginBottom: 'var(--space-2)',
+                      color: 'var(--text-primary)',
+                    }}>
+                      ROI & Break-even
+                    </h3>
+                    <div className="results-grid" style={{
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(2, 1fr)',
+                      gap: 'var(--space-2)',
+                    }}>
+                      <div className="result-item">
+                        <span className="result-label" style={{
+                          display: 'block',
+                          fontSize: 'var(--text-xs)',
+                          color: 'var(--text-secondary)',
+                          marginBottom: 'var(--space-1)',
+                        }}>
+                          Break-even
+                        </span>
+                        <span className="result-value" id="break-even-days" style={{
+                          fontSize: 'var(--text-lg)',
+                          fontWeight: 700,
+                          color: 'var(--text-primary)',
+                        }}>
+                          --
+                        </span>
+                      </div>
+                      <div className="result-item">
+                        <span className="result-label" style={{
+                          display: 'block',
+                          fontSize: 'var(--text-xs)',
+                          color: 'var(--text-secondary)',
+                          marginBottom: 'var(--space-1)',
+                        }}>
+                          ROI (1 year)
+                        </span>
+                        <span className="result-value" id="roi-1year" style={{
+                          fontSize: 'var(--text-lg)',
+                          fontWeight: 700,
+                          color: 'var(--text-primary)',
+                        }}>
+                          --
+                        </span>
+                      </div>
+                      <div className="result-item">
+                        <span className="result-label" style={{
+                          display: 'block',
+                          fontSize: 'var(--text-xs)',
+                          color: 'var(--text-secondary)',
+                          marginBottom: 'var(--space-1)',
+                        }}>
+                          ROI (2 years)
+                        </span>
+                        <span className="result-value" id="roi-2years" style={{
+                          fontSize: 'var(--text-lg)',
+                          fontWeight: 700,
+                          color: 'var(--text-primary)',
+                        }}>
+                          --
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </CardWrapper>
               </div>
             </div>
           </section>
 
-          {/* Graphique projection 12 mois */}
-          <section className="chart-section">
-            <div className="chart-container" style={{
-              padding: 'var(--space-4)',
-              background: 'var(--bg-secondary)',
-              borderRadius: 'var(--radius-md)',
-              border: '1px solid var(--border)',
+          {/* Graphique projection 12 mois - Style HOME */}
+          <section className="chart-section" style={{ marginBottom: 'var(--space-8)' }}>
+            <div className="wallet-chart-section" style={{
+              width: '100%',
+              minHeight: '320px',
+              background: 'rgba(26, 26, 26, 0.7)',
+              backdropFilter: 'blur(20px) saturate(180%)',
+              WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+              border: '1px solid rgba(255, 255, 255, 0.05)',
+              borderRadius: 'var(--radius-lg)',
+              padding: 'var(--space-6)',
+              boxShadow: `
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 2px 8px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05)
+              `,
+              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+              position: 'relative',
+              overflow: 'hidden',
             }}>
-              <h2 className="section-title" style={{
-                fontSize: 'var(--text-lg)',
-                fontWeight: 600,
-                marginBottom: 'var(--space-4)',
-                color: 'var(--text-primary)',
+              <SectionTitle level={2}>12-Month Projection</SectionTitle>
+              <div className="chart-container" style={{
+                position: 'relative',
+                width: '100%',
+                height: '240px',
+                minHeight: '240px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}>
-                12-Month Projection
-              </h2>
-              <canvas id="projection-chart"></canvas>
+                <canvas id="projection-chart"></canvas>
+              </div>
             </div>
           </section>
         </div>

@@ -12,13 +12,13 @@ body {
 .header {
     margin-bottom: 40px;
     padding-bottom: 20px;
-    border-bottom: 1px solid rgba(138, 253, 129, 0.2);
+    border-bottom: 1px solid rgba(167, 251, 144, 0.2);
 }
 
 .header h1 {
     font-size: 32px;
     font-weight: 700;
-    color: #a5ff9c;
+    color: #A7FB90;
     margin-bottom: 8px;
 }
 
@@ -39,20 +39,20 @@ body {
 }
 
 .nav a:hover, .nav a.active {
-    background: rgba(138, 253, 129, 0.1);
-    color: #a5ff9c;
+    background: rgba(167, 251, 144, 0.1);
+    color: #A7FB90;
 }
 
 .card {
-    background: rgba(138, 253, 129, 0.05);
-    border: 1px solid rgba(138, 253, 129, 0.2);
+    background: rgba(167, 251, 144, 0.05);
+    border: 1px solid rgba(167, 251, 144, 0.2);
     border-radius: 12px;
     padding: 24px;
     margin-bottom: 20px;
 }
 
 .btn {
-    background: #a5ff9c;
+    background: #A7FB90;
     color: #000000;
     border: none;
     padding: 12px 24px;
@@ -82,13 +82,13 @@ table {
 table th {
     text-align: left;
     padding: 12px;
-    color: #a5ff9c;
-    border-bottom: 1px solid rgba(138, 253, 129, 0.2);
+    color: #A7FB90;
+    border-bottom: 1px solid rgba(167, 251, 144, 0.2);
 }
 
 table td {
     padding: 12px;
-    border-bottom: 1px solid rgba(138, 253, 129, 0.1);
+    border-bottom: 1px solid rgba(167, 251, 144, 0.1);
 }
 
 .loading { text-align: center; padding: 60px 20px; color: #888; }

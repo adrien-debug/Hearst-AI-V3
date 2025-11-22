@@ -126,34 +126,86 @@ export default function CockpitDashboard() {
   const onlinePercentage = Math.round((displayData.onlineMiners / displayData.totalMiners) * 100)
   const efficiency = Math.round((displayData.globalHashrate / displayData.theoreticalHashrate) * 100)
 
-  // Données pour les graphiques
+  // Données pour les graphiques - Style Home page
   const hashrateHistoryData = {
     labels: ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'],
     datasets: [
       {
         label: 'Hashrate (PH/s)',
         data: [240.5, 242.8, 245.2, 244.1, 245.8, 246.2, 245.8],
-        borderColor: '#A7FB90', // #A7FB90 - pas de transparence
-        backgroundColor: '#A7FB90', // #A7FB90 - pas de transparence
+        borderColor: '#A7FB90',
+        backgroundColor: (context: any) => {
+          const ctx = context.chart.ctx
+          const gradient = ctx.createLinearGradient(0, 0, 0, 400)
+          gradient.addColorStop(0, 'rgba(167, 251, 144, 0.3)')
+          gradient.addColorStop(0.5, 'rgba(167, 251, 144, 0.15)')
+          gradient.addColorStop(1, 'rgba(167, 251, 144, 0)')
+          return gradient
+        },
         fill: true,
-        tension: 0.4,
+        tension: 0.5,
+        borderWidth: 3,
+        pointRadius: 0,
+        pointHoverRadius: 6,
+        pointHoverBackgroundColor: '#A7FB90',
+        pointHoverBorderColor: '#000000',
+        pointHoverBorderWidth: 2,
+        pointBackgroundColor: '#A7FB90',
+        pointBorderColor: '#000000',
+        pointBorderWidth: 2,
       },
     ],
   }
 
-  const btcProductionData = {
-    labels: ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'],
-    datasets: [
-      {
-        label: 'BTC Production',
-        data: [0.082156, 0.081234, 0.080521, 0.081892, 0.082156, 0.083247, 0.084521],
-        backgroundColor: '#A7FB90', // #A7FB90 - pas de transparence
-        borderColor: '#A7FB90', // #A7FB90 - pas de transparence
-        borderWidth: 2,
-        borderRadius: 4,
-      },
-    ],
+  const getBarChartData = () => {
+    const labels = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim']
+    const data = [0.082156, 0.081234, 0.080521, 0.081892, 0.082156, 0.083247, 0.084521]
+    const maxValue = Math.max(...data)
+    
+    return {
+      labels,
+      datasets: [
+        {
+          label: 'BTC Production',
+          data,
+          backgroundColor: (context: any) => {
+            const chart = context.chart
+            const {ctx, chartArea} = chart
+            if (!chartArea) return '#A7FB90'
+            
+            const value = context.parsed.y
+            const percentage = value / maxValue
+            const barTop = chartArea.top
+            const barBottom = chartArea.bottom
+            
+            const gradient = ctx.createLinearGradient(0, barBottom, 0, barTop)
+            gradient.addColorStop(0, 'rgba(140, 220, 115, 0.8)')
+            gradient.addColorStop(0.2, 'rgba(140, 220, 115, 0.85)')
+            gradient.addColorStop(0.4, 'rgba(150, 230, 125, 0.9)')
+            gradient.addColorStop(0.6, 'rgba(160, 240, 135, 0.95)')
+            gradient.addColorStop(0.8, 'rgba(167, 251, 144, 0.98)')
+            gradient.addColorStop(1, 'rgba(167, 251, 144, 1)')
+            
+            return gradient
+          },
+          borderColor: '#A7FB90',
+          borderWidth: 0,
+          borderRadius: {
+            topLeft: 16,
+            topRight: 16,
+            bottomLeft: 0,
+            bottomRight: 0,
+          },
+          barThickness: 'flex' as const,
+          maxBarThickness: 80,
+          categoryPercentage: 0.7,
+          barPercentage: 0.8,
+        },
+      ],
+    }
   }
+
+  const btcProductionData = getBarChartData()
 
   const minersStatusData = {
     labels: ['Online', 'Offline'],
@@ -173,40 +225,88 @@ export default function CockpitDashboard() {
     ],
   }
 
-  const chartOptions = {
+  const chartOptions: any = {
     responsive: true,
     maintainAspectRatio: false,
+    animation: {
+      duration: 1200,
+      easing: 'easeOutCubic' as const,
+      delay: (context: any) => {
+        return context.dataIndex * 50
+      },
+    },
+    interaction: {
+      intersect: false,
+      mode: 'index' as const,
+    },
     plugins: {
       legend: {
-        display: true,
-        position: 'top' as const,
-        labels: {
-          color: 'rgba(255, 255, 255, 0.8)',
-        },
+        display: false,
       },
       tooltip: {
-        backgroundColor: 'rgba(26, 26, 26, 0.95)',
-        titleColor: '#ffffff',
+        enabled: true,
+        mode: 'index' as const,
+        intersect: false,
+        backgroundColor: 'rgba(14, 15, 15, 0.98)',
+        titleColor: '#A7FB90',
         bodyColor: '#ffffff',
-        borderColor: '#A7FB90', // var(--hearst-green)
-        borderWidth: 1,
+        borderColor: '#A7FB90',
+        borderWidth: 2,
+        padding: 16,
+        titleFont: {
+          size: 13,
+          weight: '700' as const,
+          family: 'var(--font-mono), monospace',
+        },
+        bodyFont: {
+          size: 15,
+          weight: '600' as const,
+          family: 'var(--font-mono), monospace',
+        },
+        cornerRadius: 12,
+        displayColors: false,
+        boxPadding: 8,
       },
     },
     scales: {
       x: {
         grid: {
-          color: 'rgba(255, 255, 255, 0.05)',
+          display: false,
+        },
+        border: {
+          display: false,
         },
         ticks: {
           color: 'rgba(255, 255, 255, 0.6)',
+          font: {
+            size: 12,
+            weight: '600' as const,
+            family: 'var(--font-mono), monospace',
+          },
+          padding: 16,
         },
       },
       y: {
         grid: {
-          color: 'rgba(255, 255, 255, 0.05)',
+          color: 'rgba(255, 255, 255, 0.03)',
+          drawBorder: false,
+          lineWidth: 1,
+          drawTicks: false,
+        },
+        border: {
+          display: false,
         },
         ticks: {
-          color: 'rgba(255, 255, 255, 0.6)',
+          color: 'rgba(255, 255, 255, 0.5)',
+          font: {
+            size: 11,
+            weight: '500' as const,
+            family: 'var(--font-mono), monospace',
+          },
+          padding: 16,
+          callback: function(value: any) {
+            return value.toFixed(2)
+          },
         },
       },
     },
@@ -381,29 +481,37 @@ export default function CockpitDashboard() {
         </Card>
       </div>
 
-      {/* Graphiques visuels */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(500px, 1fr))', gap: 'var(--space-6)', marginBottom: '10px' }}>
-        <Card>
-          <CardHeader>
-            <CardTitle>Évolution du Hashrate (7 jours)</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div style={{ position: 'relative', width: '100%', height: '300px' }}>
-              <LineChart data={hashrateHistoryData} options={chartOptions} />
+      {/* Charts Container - Style Home page */}
+      <div className="wallet-charts-container">
+        <div className="wallet-chart-section">
+          <div className="chart-header">
+            <h2 className="chart-title">Évolution du Hashrate (7 jours)</h2>
+            <div className="chart-legend">
+              <div className="legend-item">
+                <span className="legend-dot green"></span>
+                <span>Hashrate (PH/s)</span>
+              </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+          <div className="chart-container" style={{ position: 'relative', width: '100%', height: '240px' }}>
+            <LineChart data={hashrateHistoryData} options={chartOptions} />
+          </div>
+        </div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Production BTC (7 jours)</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div style={{ position: 'relative', width: '100%', height: '300px' }}>
-              <BarChart data={btcProductionData} options={chartOptions} />
+        <div className="wallet-chart-section">
+          <div className="chart-header">
+            <h2 className="chart-title">Production BTC (7 jours)</h2>
+            <div className="chart-legend">
+              <div className="legend-item">
+                <span className="legend-dot green"></span>
+                <span>BTC Production</span>
+              </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+          <div className="chart-container" style={{ position: 'relative', width: '100%', height: '240px' }}>
+            <BarChart data={btcProductionData} options={chartOptions} />
+          </div>
+        </div>
       </div>
 
       {/* Graphique en donut et tableau */}

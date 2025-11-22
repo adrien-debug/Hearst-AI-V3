@@ -295,57 +295,6 @@ export default function ElectricityView({ data }: ElectricityViewProps) {
         <Card>
           <CardHeader>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <CardTitle>Puissance Actuelle</CardTitle>
-              <PowerIcon />
-            </div>
-          </CardHeader>
-          <CardContent>
-            <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: 'var(--hearst-green)', marginBottom: 'var(--space-2)' }}>
-              {(displayData.current_power || 0).toLocaleString('fr-FR', { maximumFractionDigits: 1 })} kW
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-2)' }}>
-              <span style={{ color: '#a5ff9c', fontSize: '0.875rem' }}>↑ 2.3%</span>
-              <span style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>vs hier</span>
-            </div>
-            <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
-              Consommation en temps réel
-            </p>
-            <div style={{ marginTop: 'var(--space-3)', padding: 'var(--space-2)', background: 'rgba(165, 255, 156, 0.05)', borderRadius: 'var(--radius-sm)' }}>
-              <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', marginBottom: 'var(--space-1)' }}>Pic de demande</div>
-              <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--hearst-green)' }}>
-                {(displayData.peakDemand || 1350.8).toFixed(1)} kW
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <CardTitle>Consommation Quotidienne</CardTitle>
-              <ChartIcon />
-            </div>
-          </CardHeader>
-          <CardContent>
-            <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: 'var(--hearst-green)', marginBottom: 'var(--space-2)' }}>
-              {(displayData.daily_consumption || 0).toLocaleString('fr-FR', { maximumFractionDigits: 1 })} kWh
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-2)' }}>
-              <span style={{ color: '#a5ff9c', fontSize: '0.875rem' }}>↓ 1.2%</span>
-              <span style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>vs moyenne</span>
-            </div>
-            <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
-              Dernières 24 heures
-            </p>
-            <div style={{ marginTop: 'var(--space-3)', width: '100%', height: '4px', background: 'rgba(255, 255, 255, 0.1)', borderRadius: '2px', overflow: 'hidden' }}>
-              <div style={{ width: '85%', height: '100%', background: 'linear-gradient(90deg, #a5ff9c, #8afd81)', borderRadius: '2px' }}></div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <CardTitle>Consommation Mensuelle</CardTitle>
               <TrendIcon />
             </div>
