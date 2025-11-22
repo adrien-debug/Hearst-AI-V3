@@ -2,9 +2,33 @@
 
 import { useEffect, useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { formatDate } from '@/lib/utils'
+import Link from 'next/link'
 import { statsAPI } from '@/lib/api'
 
-export default function ProjectsOverview() {
+interface Project {
+  id: string
+  name: string
+  description?: string
+  type: string
+  repoType: string
+  status: string
+  createdAt: string
+  updatedAt: string
+  _count?: {
+    versions: number
+    jobs: number
+  }
+}
+
+interface ProjectsOverviewProps {
+  projects?: Project[]
+  loading?: boolean
+  getStatusColor?: (status: string) => string
+}
+
+export default function ProjectsOverview({ projects = [], loading = false, getStatusColor }: ProjectsOverviewProps) {
   const [stats, setStats] = useState<any>(null)
 
   useEffect(() => {
@@ -83,67 +107,75 @@ export default function ProjectsOverview() {
         </Card>
       </div>
 
+      {/* Projects List Table */}
       <Card>
         <CardHeader>
           <CardTitle>Projects Summary</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="table-container">
-            <table className="table">
-              <thead>
-                <tr>
-                  <th>Project Name</th>
-                  <th>Type</th>
-                  <th>Versions</th>
-                  <th>Jobs</th>
-                  <th>Status</th>
-                  <th>Last Updated</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>HearstAI Dashboard</td>
-                  <td>DASHBOARD</td>
-                  <td>8</td>
-                  <td>45</td>
-                  <td><span style={{ color: 'var(--hearst-green)' }}>ACTIVE</span></td>
-                  <td>2 days ago</td>
-                </tr>
-                <tr>
-                  <td>Mining Analytics Platform</td>
-                  <td>DASHBOARD</td>
-                  <td>12</td>
-                  <td>78</td>
-                  <td><span style={{ color: 'var(--hearst-green)' }}>ACTIVE</span></td>
-                  <td>1 day ago</td>
-                </tr>
-                <tr>
-                  <td>Electricity Monitor</td>
-                  <td>NODEJS_APP</td>
-                  <td>6</td>
-                  <td>34</td>
-                  <td><span style={{ color: 'var(--hearst-green)' }}>ACTIVE</span></td>
-                  <td>5 hours ago</td>
-                </tr>
-                <tr>
-                  <td>Collateral Tracker</td>
-                  <td>DASHBOARD</td>
-                  <td>9</td>
-                  <td>56</td>
-                  <td><span style={{ color: 'var(--hearst-green)' }}>ACTIVE</span></td>
-                  <td>3 days ago</td>
-                </tr>
-                <tr>
-                  <td>Cockpit Management</td>
-                  <td>DASHBOARD</td>
-                  <td>15</td>
-                  <td>21</td>
-                  <td><span style={{ color: 'var(--hearst-green)' }}>ACTIVE</span></td>
-                  <td>12 hours ago</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          {loading ? (
+            <div style={{ textAlign: 'center', padding: 'var(--space-8)' }}>
+              <div className="spinner" style={{
+                width: '40px',
+                height: '40px',
+                border: '3px solid rgba(165, 255, 156, 0.2)',
+                borderTopColor: '#a5ff9c',
+                borderRadius: '50%',
+                animation: 'spin 1s linear infinite',
+                margin: '0 auto var(--space-4)',
+              }}></div>
+              <p style={{ color: 'var(--text-secondary)' }}>Loading projects...</p>
+            </div>
+          ) : projects.length === 0 ? (
+            <div style={{ textAlign: 'center', padding: 'var(--space-8)' }}>
+              <p style={{ color: 'var(--text-secondary)' }}>No projects yet.</p>
+            </div>
+          ) : (
+            <div className="table-container">
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>Project Name</th>
+                    <th>Type</th>
+                    <th>Repository</th>
+                    <th>Versions</th>
+                    <th>Jobs</th>
+                    <th>Status</th>
+                    <th>Last Updated</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {projects.map((project) => (
+                    <tr key={project.id}>
+                      <td><strong>{project.name}</strong></td>
+                      <td>{project.type}</td>
+                      <td>{project.repoType}</td>
+                      <td>{project._count?.versions || 0}</td>
+                      <td>{project._count?.jobs || 0}</td>
+                      <td>
+                        {getStatusColor ? (
+                          <span style={{ color: getStatusColor(project.status) }}>
+                            {project.status}
+                          </span>
+                        ) : (
+                          <span style={{ color: project.status.toUpperCase() === 'ACTIVE' ? 'var(--hearst-green)' : '#888' }}>
+                            {project.status}
+                          </span>
+                        )}
+                      </td>
+                      <td>{formatDate(project.updatedAt)}</td>
+                      <td>
+                        <Link href={`/projects/${project.id}`}>
+                          <Button variant="outline" size="sm">View</Button>
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>

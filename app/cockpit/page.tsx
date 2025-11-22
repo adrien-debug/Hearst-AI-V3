@@ -2,29 +2,46 @@
 
 import { useState } from 'react'
 import CockpitDashboard from '@/components/cockpit/CockpitDashboard'
+import CockpitOperations from '@/components/cockpit/CockpitOperations'
 import CockpitProduction from '@/components/cockpit/CockpitProduction'
 import CockpitIncidents from '@/components/cockpit/CockpitIncidents'
 import CockpitClients from '@/components/cockpit/CockpitClients'
 import CockpitMiningAccounts from '@/components/cockpit/CockpitMiningAccounts'
 import CockpitWorkers from '@/components/cockpit/CockpitWorkers'
-import CockpitMiners from '@/components/cockpit/CockpitMiners'
-import CockpitReports from '@/components/cockpit/CockpitReports'
-import CockpitHosters from '@/components/cockpit/CockpitHosters'
+
+const sections = [
+  { id: 'dashboard', label: 'Dashboard' },
+  { id: 'operations', label: 'Operations' },
+  { id: 'production', label: 'Production' },
+  { id: 'incidents', label: 'Incidents & SLA' },
+  { id: 'clients', label: 'Clients' },
+  { id: 'mining-accounts', label: 'Customer Batch' },
+  { id: 'workers', label: 'Miners Activity' },
+]
 
 export default function CockpitPage() {
   const [activeSection, setActiveSection] = useState('dashboard')
 
-  const sections = [
-    { id: 'dashboard', label: 'Dashboard' },
-    { id: 'production', label: 'Production' },
-    { id: 'incidents', label: 'Incidents' },
-    { id: 'clients', label: 'Clients' },
-    { id: 'mining-accounts', label: 'Mining Accounts' },
-    { id: 'workers', label: 'Workers' },
-    { id: 'miners', label: 'Miners' },
-    { id: 'reports', label: 'Reports' },
-    { id: 'hosters', label: 'Hosters' },
-  ]
+  const renderSection = () => {
+    switch (activeSection) {
+      case 'dashboard':
+        return <CockpitDashboard />
+      case 'operations':
+        return <CockpitOperations />
+      case 'production':
+        return <CockpitProduction />
+      case 'incidents':
+        return <CockpitIncidents />
+      case 'clients':
+        return <CockpitClients />
+      case 'mining-accounts':
+        return <CockpitMiningAccounts />
+      case 'workers':
+        return <CockpitWorkers />
+      default:
+        return <CockpitDashboard />
+    }
+  }
 
   return (
     <div className="dashboard-view">
@@ -66,15 +83,7 @@ export default function CockpitPage() {
         </div>
 
         {/* Section Content */}
-        {activeSection === 'dashboard' && <CockpitDashboard />}
-        {activeSection === 'production' && <CockpitProduction />}
-        {activeSection === 'incidents' && <CockpitIncidents />}
-        {activeSection === 'clients' && <CockpitClients />}
-        {activeSection === 'mining-accounts' && <CockpitMiningAccounts />}
-        {activeSection === 'workers' && <CockpitWorkers />}
-        {activeSection === 'miners' && <CockpitMiners />}
-        {activeSection === 'reports' && <CockpitReports />}
-        {activeSection === 'hosters' && <CockpitHosters />}
+        {renderSection()}
       </div>
     </div>
   )

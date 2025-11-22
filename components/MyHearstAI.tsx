@@ -479,10 +479,14 @@ export default function MyHearstAI() {
                 maxHeight: '300px',
                 overflowY: 'auto',
               }}>
-                {searchResults.map((result, index) => (
+                {searchResults.map((result, index) => {
+                  // Pour les jobs, aller directement à la page Job sans passer par la page intermédiaire
+                  const href = result.type === 'job' ? result.url : result.url
+                  
+                  return (
                   <a
                     key={index}
-                    href={result.url}
+                    href={href}
                     style={{
                       display: 'block',
                       padding: 'var(--space-3)',
@@ -535,7 +539,8 @@ export default function MyHearstAI() {
                       </div>
                     </div>
                   </a>
-                ))}
+                  )
+                })}
               </div>
             )}
             
@@ -623,10 +628,14 @@ export default function MyHearstAI() {
                         flexWrap: 'wrap',
                         gap: 'var(--space-2)',
                       }}>
-                        {historyItem.results.slice(0, 3).map((result, idx) => (
+                        {historyItem.results.slice(0, 3).map((result, idx) => {
+                            // Pour les jobs, aller directement à la page Job
+                            const href = result.type === 'job' ? result.url : `/hearst-ai/search/${historyItem.id}`
+                            
+                            return (
                           <a
                             key={idx}
-                            href={result.url}
+                            href={href}
                             style={{
                               display: 'flex',
                               alignItems: 'center',
@@ -680,7 +689,8 @@ export default function MyHearstAI() {
                               {result.title}
                             </span>
                           </a>
-                        ))}
+                          )
+                        })}
                         {historyItem.results.length > 3 && (
                           <div style={{
                             padding: 'var(--space-2) var(--space-3)',
@@ -875,10 +885,14 @@ export default function MyHearstAI() {
                           flexWrap: 'wrap',
                           gap: 'var(--space-2)',
                         }}>
-                          {historyItem.results.slice(0, 3).map((result, idx) => (
+                          {historyItem.results.slice(0, 3).map((result, idx) => {
+                            // Pour les jobs, aller directement à la page Job
+                            const href = result.type === 'job' ? result.url : `/hearst-ai/search/${historyItem.id}`
+                            
+                            return (
                             <a
                               key={idx}
-                              href={result.url}
+                              href={href}
                               style={{
                                 display: 'inline-flex',
                                 alignItems: 'center',
@@ -918,7 +932,8 @@ export default function MyHearstAI() {
                               }}></span>
                               {result.title}
                             </a>
-                          ))}
+                            )
+                          })}
                           {historyItem.results.length > 3 && (
                             <span style={{
                               padding: 'var(--space-1) var(--space-2)',

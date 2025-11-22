@@ -545,7 +545,7 @@ export default function Dashboard({ data }: DashboardProps) {
                 </div>
               </div>
             </div>
-            <div className="chart-container" style={{ position: 'relative', width: '100%', height: '180px' }}>
+            <div className="chart-container" style={{ position: 'relative', width: '100%', height: '90px' }}>
               <LineChart data={chartData1} options={chartOptions} />
               </div>
               </div>
@@ -607,7 +607,7 @@ export default function Dashboard({ data }: DashboardProps) {
                 </button>
               </div>
             </div>
-              <div className="chart-container" style={{ position: 'relative', width: '100%', height: '180px' }}>
+              <div className="chart-container" style={{ position: 'relative', width: '100%', height: '90px' }}>
                 <BarChart data={chartData2} options={chartOptions} />
               </div>
               </div>
