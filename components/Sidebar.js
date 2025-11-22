@@ -19,6 +19,7 @@ export default function Sidebar() {
     { href: '/transactions', label: 'Transactions', icon: 'transactions', view: 'transactions' },
     { href: '/wallet-scraper', label: 'Wallet Scraper', icon: 'scraper', view: 'wallet-scraper' },
     { href: '/profitability-index', label: 'Profitability Index', icon: 'profitability', view: 'profitability-index' },
+    { href: '/documents-vault', label: 'Documents Vault', icon: 'documents', view: 'documents-vault' },
   ]
 
   const isActive = (href) => {
