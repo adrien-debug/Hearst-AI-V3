@@ -1,5 +1,5 @@
 // Projects Sections - Mining Intelligence Platform
-// Toutes les sections de projections avec design system HEARST (#8afd81)
+// Toutes les sections de projections avec design system HEARST (#a5ff9c)
 
 import { Icons } from '../icons.js';
 
@@ -31,19 +31,19 @@ export function renderProjectionSection(sectionId) {
 function renderProjectionCard(name, date, number, hashrate, btc) {
     return `
 <div style="background: rgba(26, 26, 26, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 24px; cursor: pointer; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3); transition: all 0.3s ease;" 
-     onmouseover="this.style.borderColor='#8afd81'; this.style.transform='translateY(-2px)'" 
+     onmouseover="this.style.borderColor='#a5ff9c'; this.style.transform='translateY(-2px)'" 
      onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.1)'; this.style.transform='translateY(0)'">
     <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
         <div>
             <div style="font-size: 11px; color: #888; text-transform: uppercase; margin-bottom: 4px;">Projection ${name}</div>
             <div style="font-size: 11px; color: #aaa;">${date}</div>
         </div>
-        <div style="width: 32px; height: 32px; background: rgba(138, 253, 129, 0.2); border: 1px solid #8afd81; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #8afd81; font-weight: 600;">${number}</div>
+        <div style="width: 32px; height: 32px; background: rgba(138, 253, 129, 0.2); border: 1px solid #a5ff9c; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #a5ff9c; font-weight: 600;">${number}</div>
     </div>
     <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 16px;">
         <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
             <span style="font-size: 11px; color: #aaa;">Hashrate</span>
-            <span style="font-size: 14px; font-weight: 600; color: #8afd81;">${hashrate}</span>
+            <span style="font-size: 14px; font-weight: 600; color: #a5ff9c;">${hashrate}</span>
         </div>
         <div style="display: flex; justify-content: space-between;">
             <span style="font-size: 11px; color: #aaa;">BTC</span>
@@ -57,8 +57,8 @@ function renderProjectionCard(name, date, number, hashrate, btc) {
 // Helper function pour les lignes du tableau (définie AVANT renderOverviewSection)
 function renderProjectionTableRow(name, date, hashrate, btc, status) {
     const statusColors = {
-        'active': { bg: 'rgba(138, 253, 129, 0.15)', color: '#8afd81', text: 'Active' },
-        'completed': { bg: 'rgba(138, 253, 129, 0.1)', color: '#8afd81', text: 'Completed' },
+        'active': { bg: 'rgba(138, 253, 129, 0.15)', color: '#a5ff9c', text: 'Active' },
+        'completed': { bg: 'rgba(138, 253, 129, 0.1)', color: '#a5ff9c', text: 'Completed' },
         'pending': { bg: 'rgba(255, 255, 255, 0.1)', color: '#aaa', text: 'Pending' }
     };
     const statusStyle = statusColors[status] || statusColors.pending;
@@ -67,7 +67,7 @@ function renderProjectionTableRow(name, date, hashrate, btc, status) {
 <tr style="cursor: pointer;" onmouseover="this.style.background='rgba(138, 253, 129, 0.03)'" onmouseout="this.style.background='transparent'">
     <td style="font-weight: 600; color: var(--text-primary);">Projection ${name}</td>
     <td style="color: var(--text-secondary);">${date}</td>
-    <td style="color: #8afd81; font-weight: 600;">${hashrate}</td>
+    <td style="color: #a5ff9c; font-weight: 600;">${hashrate}</td>
     <td style="color: var(--text-primary); font-weight: 600;">${btc}</td>
     <td>
         <span style="padding: 4px 10px; background: ${statusStyle.bg}; border: 1px solid ${statusStyle.color}; border-radius: 4px; font-size: 10px; font-weight: 700; color: ${statusStyle.color}; text-transform: uppercase;">
@@ -76,13 +76,13 @@ function renderProjectionTableRow(name, date, hashrate, btc, status) {
     </td>
     <td>
         <div style="display: flex; gap: 8px;">
-            <button style="padding: 6px 12px; background: rgba(138, 253, 129, 0.1); border: 1px solid #8afd81; border-radius: 6px; color: #8afd81; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.2s;" 
+            <button style="padding: 6px 12px; background: rgba(138, 253, 129, 0.1); border: 1px solid #a5ff9c; border-radius: 6px; color: #a5ff9c; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.2s;" 
                     onmouseover="this.style.background='rgba(138, 253, 129, 0.2)'" 
                     onmouseout="this.style.background='rgba(138, 253, 129, 0.1)'">
                 View
             </button>
             <button style="padding: 6px 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 6px; color: var(--text-secondary); font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.2s;" 
-                    onmouseover="this.style.borderColor='#8afd81'; this.style.color='#8afd81'" 
+                    onmouseover="this.style.borderColor='#a5ff9c'; this.style.color='#a5ff9c'" 
                     onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.1)'; this.style.color='var(--text-secondary)'">
                 Edit
             </button>
@@ -171,7 +171,7 @@ function renderMarketMetrics() {
         <div class="section-premium">
             <div style="display: flex; justify-content: flex-end; align-items: center; margin-bottom: 40px;">
                 <div style="display: flex; align-items: center; gap: 6px; padding: 6px 12px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 20px;">
-                    <div style="width: 6px; height: 6px; background: #8afd81; border-radius: 50%; animation: pulse 2s infinite;"></div>
+                    <div style="width: 6px; height: 6px; background: #a5ff9c; border-radius: 50%; animation: pulse 2s infinite;"></div>
                     <span style="font-size: 11px; color: var(--text-muted); font-weight: 600;">Updated: <span id="lastUpdate" style="color: var(--text-primary);">Just now</span></span>
                 </div>
             </div>
@@ -189,7 +189,7 @@ function renderMetricCard(color, label, value, description, icon) {
     return `
         <div class="metric-card ${color}">
             <div class="metric-icon-wrapper ${color}">
-                <svg fill="#8afd81" height="17" viewBox="0 0 24 24" width="17">
+                <svg fill="#a5ff9c" height="17" viewBox="0 0 24 24" width="17">
                     ${getMetricIcon(icon)}
                 </svg>
             </div>
@@ -217,7 +217,7 @@ function renderLiveNewsFeed() {
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
                 <div style="display: flex; align-items: center; gap: 12px;">
                     <div style="width: 40px; height: 40px; background: linear-gradient(135deg, rgba(138, 253, 129, 0.2), rgba(138, 253, 129, 0.05)); border-radius: 10px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(138, 253, 129, 0.3);">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8afd81" stroke-width="2">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a5ff9c" stroke-width="2">
                             <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"/>
                         </svg>
                     </div>
@@ -227,9 +227,9 @@ function renderLiveNewsFeed() {
                     </div>
                 </div>
                 <div style="display: flex; align-items: center; gap: 8px;">
-                    <div style="display: flex; align-items: center; gap: 6px; padding: 6px 12px; background: rgba(138, 253, 129, 0.1); border: 1px solid #8afd81; border-radius: 20px;">
-                        <div style="width: 6px; height: 6px; background: #8afd81; border-radius: 50%; animation: pulse 2s infinite;"></div>
-                        <span style="font-size: 11px; color: #8afd81; font-weight: 700;">8 NEW</span>
+                    <div style="display: flex; align-items: center; gap: 6px; padding: 6px 12px; background: rgba(138, 253, 129, 0.1); border: 1px solid #a5ff9c; border-radius: 20px;">
+                        <div style="width: 6px; height: 6px; background: #a5ff9c; border-radius: 50%; animation: pulse 2s infinite;"></div>
+                        <span style="font-size: 11px; color: #a5ff9c; font-weight: 700;">8 NEW</span>
                     </div>
                     <button onclick="refreshNewsFeed()" class="btn btn-sm btn-secondary">
                         <span class="icon-inline">${getRefreshIcon()}</span> Refresh
@@ -261,10 +261,10 @@ function renderNewsItems() {
     ];
     
     return news.map(item => `
-        <div class="news-item" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; transition: all 0.2s; cursor: pointer;" onmouseover="this.style.borderColor='#8afd81'" onmouseout="this.style.borderColor='var(--border-color)'">
+        <div class="news-item" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; transition: all 0.2s; cursor: pointer;" onmouseover="this.style.borderColor='#a5ff9c'" onmouseout="this.style.borderColor='var(--border-color)'">
             <div style="display: flex; gap: 14px;">
                 <div style="width: 44px; height: 44px; background: rgba(138, 253, 129, 0.15); border: 1px solid rgba(138, 253, 129, 0.3); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8afd81" stroke-width="1.5">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a5ff9c" stroke-width="1.5">
                         <rect x="2" y="4" width="20" height="4" rx="1" stroke-linejoin="round"/>
                         <rect x="2" y="10" width="20" height="4" rx="1" stroke-linejoin="round"/>
                         <rect x="2" y="16" width="20" height="4" rx="1" stroke-linejoin="round"/>
@@ -272,7 +272,7 @@ function renderNewsItems() {
                 </div>
                 <div style="flex: 1;">
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap;">
-                        <span style="padding: 3px 8px; background: rgba(138, 253, 129, 0.15); border: 1px solid #8afd81; border-radius: 4px; font-size: 9px; font-weight: 700; color: #8afd81; text-transform: uppercase; letter-spacing: 0.5px;">${item.type}</span>
+                        <span style="padding: 3px 8px; background: rgba(138, 253, 129, 0.15); border: 1px solid #a5ff9c; border-radius: 4px; font-size: 9px; font-weight: 700; color: #a5ff9c; text-transform: uppercase; letter-spacing: 0.5px;">${item.type}</span>
                         <span style="font-size: 11px; color: var(--text-muted); font-weight: 500;">${item.time}</span>
                     </div>
                     <h3 style="font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; line-height: 1.4;">${item.title}</h3>
@@ -319,21 +319,21 @@ function renderMiningEquipment() {
                                 <td>605 TH/s</td>
                                 <td>9.7 J/TH</td>
                                 <td>5,870 W</td>
-                                <td style="color: #8afd81; font-weight: 600;">$8,500</td>
+                                <td style="color: #a5ff9c; font-weight: 600;">$8,500</td>
                             </tr>
                             <tr>
                                 <td style="font-weight: 600; color: var(--text-primary);">Antminer S21 Pro</td>
                                 <td>234 TH/s</td>
                                 <td>15.0 J/TH</td>
                                 <td>3,510 W</td>
-                                <td style="color: #8afd81; font-weight: 600;">$4,008</td>
+                                <td style="color: #a5ff9c; font-weight: 600;">$4,008</td>
                             </tr>
                             <tr>
                                 <td style="font-weight: 600; color: var(--text-primary);">Whatsminer M60S++</td>
                                 <td>188 TH/s</td>
                                 <td>18.5 J/TH</td>
                                 <td>3,478 W</td>
-                                <td style="color: #8afd81; font-weight: 600;">$5,800</td>
+                                <td style="color: #a5ff9c; font-weight: 600;">$5,800</td>
                             </tr>
                         </tbody>
                     </table>
@@ -373,7 +373,7 @@ function renderMiningPools() {
                                 <td style="font-weight: 600; color: var(--text-primary);">Foundry USA</td>
                                 <td>29.8%</td>
                                 <td>42</td>
-                                <td style="color: #8afd81;">0%</td>
+                                <td style="color: #a5ff9c;">0%</td>
                             </tr>
                             <tr>
                                 <td style="font-weight: 600; color: var(--text-primary);">Antpool</td>
@@ -437,25 +437,25 @@ function renderEnergyCosts() {
                                 <td style="font-weight: 600; color: var(--text-primary);">North America</td>
                                 <td>$0.045/kWh</td>
                                 <td>$0.03 - $0.08</td>
-                                <td><span style="color: #8afd81;">Stable</span></td>
+                                <td><span style="color: #a5ff9c;">Stable</span></td>
                             </tr>
                             <tr>
                                 <td style="font-weight: 600; color: var(--text-primary);">Central Asia</td>
                                 <td>$0.038/kWh</td>
                                 <td>$0.025 - $0.055</td>
-                                <td><span style="color: #8afd81;">Growing</span></td>
+                                <td><span style="color: #a5ff9c;">Growing</span></td>
                             </tr>
                             <tr>
                                 <td style="font-weight: 600; color: var(--text-primary);">Europe</td>
                                 <td>$0.085/kWh</td>
                                 <td>$0.06 - $0.12</td>
-                                <td><span style="color: #8afd81;">High</span></td>
+                                <td><span style="color: #a5ff9c;">High</span></td>
                             </tr>
                             <tr>
                                 <td style="font-weight: 600; color: var(--text-primary);">South America</td>
                                 <td>$0.052/kWh</td>
                                 <td>$0.035 - $0.075</td>
-                                <td><span style="color: #8afd81;">Stable</span></td>
+                                <td><span style="color: #a5ff9c;">Stable</span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -493,12 +493,12 @@ function renderNetworkStats() {
                             <tr>
                                 <td style="font-weight: 600; color: var(--text-primary);">Total Hashrate</td>
                                 <td>742 EH/s</td>
-                                <td style="color: #8afd81;">+2.3%</td>
+                                <td style="color: #a5ff9c;">+2.3%</td>
                             </tr>
                             <tr>
                                 <td style="font-weight: 600; color: var(--text-primary);">Difficulty</td>
                                 <td>107.3T</td>
-                                <td style="color: #8afd81;">+1.8%</td>
+                                <td style="color: #a5ff9c;">+1.8%</td>
                             </tr>
                             <tr>
                                 <td style="font-weight: 600; color: var(--text-primary);">Avg Block Time</td>
@@ -508,7 +508,7 @@ function renderNetworkStats() {
                             <tr>
                                 <td style="font-weight: 600; color: var(--text-primary);">Transactions/Block</td>
                                 <td>3,247</td>
-                                <td style="color: #8afd81;">+5.1%</td>
+                                <td style="color: #a5ff9c;">+5.1%</td>
                             </tr>
                         </tbody>
                     </table>
@@ -960,7 +960,7 @@ function renderCalculatorStep3() {
                     <div>
                         <label class="form-label">Budget for Rigs (%)</label>
                         <input type="range" class="form-input" id="rigBudgetPercent" min="0" max="100" value="70">
-                        <div style="text-align: center; margin-top: 8px; font-size: 18px; font-weight: 700; color: #8afd81;">
+                        <div style="text-align: center; margin-top: 8px; font-size: 18px; font-weight: 700; color: #a5ff9c;">
                             70% = $1,750,000
                         </div>
                         <div style="text-align: center; margin-top: 4px; font-size: 13px; color: var(--text-muted);">
@@ -971,7 +971,7 @@ function renderCalculatorStep3() {
                     <div>
                         <label class="form-label">Budget for Infrastructure (%)</label>
                         <input type="range" class="form-input" id="infraBudgetPercent" min="0" max="100" value="30">
-                        <div style="text-align: center; margin-top: 8px; font-size: 18px; font-weight: 700; color: #8afd81;">
+                        <div style="text-align: center; margin-top: 8px; font-size: 18px; font-weight: 700; color: #a5ff9c;">
                             30% = $750,000
                         </div>
                         <div style="text-align: center; margin-top: 4px; font-size: 13px; color: var(--text-muted);">
@@ -1311,7 +1311,7 @@ function renderCalculatorSummary() {
                 <span class="summary-value">1.21 MW</span>
             </div>
             
-            <div class="summary-item" style="padding-top: 12px; margin-top: 12px; border-top: 1px solid #8afd81;">
+            <div class="summary-item" style="padding-top: 12px; margin-top: 12px; border-top: 1px solid #a5ff9c;">
                 <span class="summary-label">Total Budget</span>
                 <span class="summary-value highlight">$2,500,000</span>
             </div>
@@ -1326,7 +1326,7 @@ function renderCalculatorSummary() {
                 <span class="summary-value">$322,504</span>
             </div>
             
-            <div class="summary-item" style="padding-top: 12px; margin-top: 12px; border-top: 1px solid #8afd81;">
+            <div class="summary-item" style="padding-top: 12px; margin-top: 12px; border-top: 1px solid #a5ff9c;">
                 <span class="summary-label">Annual ROI</span>
                 <span class="summary-value highlight">57.8%</span>
             </div>
@@ -1469,7 +1469,7 @@ function renderResultsSection() {
                                 <td>$9,403,216</td>
                                 <td>$8,750,861</td>
                                 <td>$8,149,301</td>
-                                <td style="color: #8afd81; font-weight: 600;">$36,414,578</td>
+                                <td style="color: #a5ff9c; font-weight: 600;">$36,414,578</td>
                             </tr>
                             <tr>
                                 <td style="font-weight: 600; color: var(--text-primary);">OPEX</td>
@@ -1481,11 +1481,11 @@ function renderResultsSection() {
                             </tr>
                             <tr>
                                 <td style="font-weight: 600; color: var(--text-primary);">Net Profit</td>
-                                <td style="color: #8afd81; font-weight: 600;">$5,617,008</td>
-                                <td style="color: #8afd81; font-weight: 600;">$4,979,851</td>
-                                <td style="color: #8afd81; font-weight: 600;">$4,392,732</td>
-                                <td style="color: #8afd81; font-weight: 600;">$3,851,328</td>
-                                <td style="color: #8afd81; font-weight: 600;">$18,840,919</td>
+                                <td style="color: #a5ff9c; font-weight: 600;">$5,617,008</td>
+                                <td style="color: #a5ff9c; font-weight: 600;">$4,979,851</td>
+                                <td style="color: #a5ff9c; font-weight: 600;">$4,392,732</td>
+                                <td style="color: #a5ff9c; font-weight: 600;">$3,851,328</td>
+                                <td style="color: #a5ff9c; font-weight: 600;">$18,840,919</td>
                             </tr>
                         </tbody>
                     </table>
@@ -1564,8 +1564,8 @@ function renderMonteCarloSection() {
                         <p style="font-size: 12px; color: var(--text-muted); font-weight: 500;">Probabilistic analysis with 10,000 scenarios</p>
                     </div>
                 </div>
-                <div style="background: rgba(138, 253, 129, 0.1); border: 1px solid #8afd81; border-radius: 12px; padding: 16px; margin-bottom: 32px;">
-                    <strong style="color: #8afd81;">Stochastic Modeling:</strong> 
+                <div style="background: rgba(138, 253, 129, 0.1); border: 1px solid #a5ff9c; border-radius: 12px; padding: 16px; margin-bottom: 32px;">
+                    <strong style="color: #a5ff9c;">Stochastic Modeling:</strong> 
                     <span style="color: var(--text-secondary);">This simulation runs 10,000 iterations with randomized BTC price, network hashrate, and electricity cost variations to provide probability distributions of outcomes.</span>
                 </div>
                 <div class="param-card" style="max-width: 600px;">
@@ -1605,9 +1605,9 @@ function renderMonteCarloSection() {
                                 <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase;">25th Percentile</div>
                                 <div style="font-size: 24px; font-weight: 700; color: var(--text-primary);" id="p25">-- months</div>
                             </div>
-                            <div style="padding: 16px; background: rgba(138, 253, 129, 0.1); border: 1px solid #8afd81; border-radius: 12px; text-align: center;">
+                            <div style="padding: 16px; background: rgba(138, 253, 129, 0.1); border: 1px solid #a5ff9c; border-radius: 12px; text-align: center;">
                                 <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase;">Median (50th)</div>
-                                <div style="font-size: 24px; font-weight: 700; color: #8afd81;" id="p50">-- months</div>
+                                <div style="font-size: 24px; font-weight: 700; color: #a5ff9c;" id="p50">-- months</div>
                             </div>
                             <div style="padding: 16px; background: rgba(26, 26, 26, 0.9); border: 1px solid rgba(138, 253, 129, 0.1); border-radius: 12px; text-align: center;">
                                 <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase;">75th Percentile</div>
@@ -1711,40 +1711,40 @@ function renderHardwareSection() {
                                         <td>234 TH/s</td>
                                         <td>3,510W</td>
                                         <td>15 J/TH</td>
-                                        <td style="color: #8afd81; font-weight: 600;">$5,600</td>
-                                        <td style="color: #8afd81; font-weight: 600;">$7.80</td>
+                                        <td style="color: #a5ff9c; font-weight: 600;">$5,600</td>
+                                        <td style="color: #a5ff9c; font-weight: 600;">$7.80</td>
                                     </tr>
                                     <tr>
                                         <td style="font-weight: 600; color: var(--text-primary);">Antminer S21 XP</td>
                                         <td>270 TH/s</td>
                                         <td>3,645W</td>
                                         <td>13.5 J/TH</td>
-                                        <td style="color: #8afd81; font-weight: 600;">$6,450</td>
-                                        <td style="color: #8afd81; font-weight: 600;">$9.20</td>
+                                        <td style="color: #a5ff9c; font-weight: 600;">$6,450</td>
+                                        <td style="color: #a5ff9c; font-weight: 600;">$9.20</td>
                                     </tr>
                                     <tr>
                                         <td style="font-weight: 600; color: var(--text-primary);">Whatsminer M60S</td>
                                         <td>186 TH/s</td>
                                         <td>3,441W</td>
                                         <td>18.5 J/TH</td>
-                                        <td style="color: #8afd81; font-weight: 600;">$3,400</td>
-                                        <td style="color: #8afd81; font-weight: 600;">$5.22</td>
+                                        <td style="color: #a5ff9c; font-weight: 600;">$3,400</td>
+                                        <td style="color: #a5ff9c; font-weight: 600;">$5.22</td>
                                     </tr>
                                     <tr>
                                         <td style="font-weight: 600; color: var(--text-primary);">Whatsminer M63S</td>
                                         <td>390 TH/s</td>
                                         <td>7,215W</td>
                                         <td>18.5 J/TH</td>
-                                        <td style="color: #8afd81; font-weight: 600;">$5,100</td>
-                                        <td style="color: #8afd81; font-weight: 600;">$10.50</td>
+                                        <td style="color: #a5ff9c; font-weight: 600;">$5,100</td>
+                                        <td style="color: #a5ff9c; font-weight: 600;">$10.50</td>
                                     </tr>
                                     <tr>
                                         <td style="font-weight: 600; color: var(--text-primary);">Canaan Avalon Q</td>
                                         <td>120 TH/s</td>
                                         <td>3,200W</td>
                                         <td>26.7 J/TH</td>
-                                        <td style="color: #8afd81; font-weight: 600;">$1,800</td>
-                                        <td style="color: #8afd81; font-weight: 600;">$2.85</td>
+                                        <td style="color: #a5ff9c; font-weight: 600;">$1,800</td>
+                                        <td style="color: #a5ff9c; font-weight: 600;">$2.85</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -1786,7 +1786,7 @@ function renderHardwareSection() {
                             </div>
                         </div>
                         <div style="background: rgba(26, 26, 26, 0.9); padding: 20px; border-radius: 12px; border: 1px solid rgba(138, 253, 129, 0.2);">
-                            <h3 style="font-size: 14px; margin-bottom: 16px; color: #8afd81; font-weight: 700;">Calculation Results</h3>
+                            <h3 style="font-size: 14px; margin-bottom: 16px; color: #a5ff9c; font-weight: 700;">Calculation Results</h3>
                             <div class="grid-2">
                                 <div>
                                     <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 4px;">Total Hashrate</p>
@@ -1794,15 +1794,15 @@ function renderHardwareSection() {
                                 </div>
                                 <div>
                                     <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 4px;">Power Consumption</p>
-                                    <p style="font-size: 20px; font-weight: 700; color: #8afd81;" id="hw_totalPower">35.1 kW</p>
+                                    <p style="font-size: 20px; font-weight: 700; color: #a5ff9c;" id="hw_totalPower">35.1 kW</p>
                                 </div>
                                 <div>
                                     <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 4px;">Daily Revenue</p>
-                                    <p style="font-size: 20px; font-weight: 700; color: #8afd81;" id="hw_dailyRev">$780.00</p>
+                                    <p style="font-size: 20px; font-weight: 700; color: #a5ff9c;" id="hw_dailyRev">$780.00</p>
                                 </div>
                                 <div>
                                     <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 4px;">Daily Profit</p>
-                                    <p style="font-size: 20px; font-weight: 700; color: #8afd81;" id="hw_dailyProfit">$729.46</p>
+                                    <p style="font-size: 20px; font-weight: 700; color: #a5ff9c;" id="hw_dailyProfit">$729.46</p>
                                 </div>
                             </div>
                         </div>
@@ -1833,7 +1833,7 @@ function renderEnergySection() {
                     <div class="accordion-content">
                         <div class="grid-2">
                             <div>
-                                <h4 style="color: #8afd81; margin-bottom: 16px; font-weight: 700;">${Icons.sun} Solar Power</h4>
+                                <h4 style="color: #a5ff9c; margin-bottom: 16px; font-weight: 700;">${Icons.sun} Solar Power</h4>
                                 <div style="margin-bottom: 16px;">
                                     <label class="form-label">Installed Capacity (MW)</label>
                                     <input type="number" class="form-input" id="en_solarCap" value="10" min="0" step="0.1" onchange="updateEnergyMix()">
@@ -1848,7 +1848,7 @@ function renderEnergySection() {
                                 </div>
                             </div>
                             <div>
-                                <h4 style="color: #8afd81; margin-bottom: 16px; font-weight: 700;">${Icons.wind} Wind Power</h4>
+                                <h4 style="color: #a5ff9c; margin-bottom: 16px; font-weight: 700;">${Icons.wind} Wind Power</h4>
                                 <div style="margin-bottom: 16px;">
                                     <label class="form-label">Installed Capacity (MW)</label>
                                     <input type="number" class="form-input" id="en_windCap" value="15" min="0" step="0.1" onchange="updateEnergyMix()">
@@ -1862,7 +1862,7 @@ function renderEnergySection() {
                                 </div>
                             </div>
                             <div>
-                                <h4 style="color: #8afd81; margin-bottom: 16px; font-weight: 700;">${Icons.battery} Battery Storage</h4>
+                                <h4 style="color: #a5ff9c; margin-bottom: 16px; font-weight: 700;">${Icons.battery} Battery Storage</h4>
                                 <div style="margin-bottom: 16px;">
                                     <label class="form-label">Storage Capacity (MWh)</label>
                                     <input type="number" class="form-input" id="en_batteryCap" value="20" min="0" step="0.5" onchange="updateEnergyMix()">
@@ -1877,7 +1877,7 @@ function renderEnergySection() {
                                 </div>
                             </div>
                             <div>
-                                <h4 style="color: #8afd81; margin-bottom: 16px; font-weight: 700;">${Icons.energy} Grid Power</h4>
+                                <h4 style="color: #a5ff9c; margin-bottom: 16px; font-weight: 700;">${Icons.energy} Grid Power</h4>
                                 <div style="margin-bottom: 16px;">
                                     <label class="form-label">Grid Connection (MW)</label>
                                     <input type="number" class="form-input" id="en_gridCap" value="5" min="0" step="0.1" onchange="updateEnergyMix()">
@@ -2129,7 +2129,7 @@ function initRevenueChartAnalysis() {
                 {
                     label: 'Revenue',
                     data: [842600, 856200, 869800, 883400, 897000, 910600, 924200, 937800, 951400, 965000, 978600, 992200],
-                    borderColor: '#8afd81',
+                    borderColor: '#a5ff9c',
                     backgroundColor: revenueGradient,
                     borderWidth: 3,
                     fill: true,
@@ -2140,7 +2140,7 @@ function initRevenueChartAnalysis() {
                 {
                     label: 'Profit',
                     data: [468000, 475200, 482400, 489600, 496800, 504000, 511200, 518400, 525600, 532800, 540000, 547200],
-                    borderColor: '#8afd81',
+                    borderColor: '#a5ff9c',
                     backgroundColor: profitGradient,
                     borderWidth: 3,
                     fill: true,
@@ -2165,7 +2165,7 @@ function initRevenueChartAnalysis() {
                 },
                 tooltip: {
                     backgroundColor: 'rgba(0, 0, 0, 0.95)',
-                    titleColor: '#8afd81',
+                    titleColor: '#a5ff9c',
                     bodyColor: '#E8E8E8',
                     borderColor: 'rgba(138, 253, 129, 0.3)',
                     borderWidth: 1,
@@ -2213,7 +2213,7 @@ function initCashflowChartAnalysis() {
             datasets: [{
                 label: 'Cumulative Cash Flow',
                 data: [-2500000, -2031400, -1562800, -1094200, -625600, -157000, 311600, 780200, 1248800, 1717400, 2186000, 2654600],
-                borderColor: '#8afd81',
+                borderColor: '#a5ff9c',
                 backgroundColor: cashflowGradient,
                 borderWidth: 3,
                 fill: true,
@@ -2229,7 +2229,7 @@ function initCashflowChartAnalysis() {
                 legend: { display: false },
                 tooltip: {
                     backgroundColor: 'rgba(0, 0, 0, 0.95)',
-                    titleColor: '#8afd81',
+                    titleColor: '#a5ff9c',
                     bodyColor: '#E8E8E8',
                     borderColor: 'rgba(138, 253, 129, 0.3)',
                     callbacks: {
@@ -2269,8 +2269,8 @@ function initCostChartAnalysis() {
             labels: ['CAPEX', 'OPEX'],
             datasets: [{
                 data: [2500000, 4644000],
-                backgroundColor: ['#8afd81', 'rgba(138, 253, 129, 0.6)'],
-                borderColor: ['#8afd81', '#8afd81'],
+                backgroundColor: ['#a5ff9c', 'rgba(138, 253, 129, 0.6)'],
+                borderColor: ['#a5ff9c', '#a5ff9c'],
                 borderWidth: 2
             }]
         },
@@ -2289,7 +2289,7 @@ function initCostChartAnalysis() {
                 },
                 tooltip: {
                     backgroundColor: 'rgba(0, 0, 0, 0.95)',
-                    titleColor: '#8afd81',
+                    titleColor: '#a5ff9c',
                     bodyColor: '#E8E8E8',
                     callbacks: {
                         label: function(context) {
@@ -2343,7 +2343,7 @@ function initCashflowChart() {
             datasets: [{
                 label: 'Cumulative Cash Flow',
                 data: [-2500000, -2031400, -1562800, -1094200, -625600, -157000, 311600, 780200, 1248800, 1717400, 2186000, 2654600],
-                borderColor: '#8afd81',
+                borderColor: '#a5ff9c',
                 backgroundColor: cashflowGradient,
                 borderWidth: 3,
                 fill: true,
@@ -2357,7 +2357,7 @@ function initCashflowChart() {
                 legend: { display: false },
                 tooltip: {
                     backgroundColor: 'rgba(0, 0, 0, 0.95)',
-                    titleColor: '#8afd81',
+                    titleColor: '#a5ff9c',
                     bodyColor: '#E8E8E8',
                     borderColor: 'rgba(138, 253, 129, 0.3)'
                 }
@@ -2388,8 +2388,8 @@ function initRevenueChart() {
                 {
                     label: 'Revenue',
                     data: [842600, 856200, 869800, 883400, 897000, 910600, 924200, 937800, 951400, 965000, 978600, 992200],
-                    backgroundColor: '#8afd81',
-                    borderColor: '#8afd81'
+                    backgroundColor: '#a5ff9c',
+                    borderColor: '#a5ff9c'
                 },
                 {
                     label: 'Costs',
@@ -2406,7 +2406,7 @@ function initRevenueChart() {
                 legend: { labels: { color: '#E8E8E8' } },
                 tooltip: {
                     backgroundColor: 'rgba(0, 0, 0, 0.95)',
-                    titleColor: '#8afd81',
+                    titleColor: '#a5ff9c',
                     bodyColor: '#E8E8E8',
                     borderColor: 'rgba(138, 253, 129, 0.3)'
                 }
@@ -2431,7 +2431,7 @@ function initSensitivityChart() {
             datasets: [{
                 label: 'ROI %',
                 data: [12.5, 28.3, 44.1, 57.8, 71.5, 85.2],
-                borderColor: '#8afd81',
+                borderColor: '#a5ff9c',
                 backgroundColor: 'rgba(138, 253, 129, 0.1)',
                 borderWidth: 3,
                 fill: true,
@@ -2445,7 +2445,7 @@ function initSensitivityChart() {
                 legend: { labels: { color: '#E8E8E8' } },
                 tooltip: {
                     backgroundColor: 'rgba(0, 0, 0, 0.95)',
-                    titleColor: '#8afd81',
+                    titleColor: '#a5ff9c',
                     bodyColor: '#E8E8E8',
                     borderColor: 'rgba(138, 253, 129, 0.3)'
                 }
@@ -2469,8 +2469,8 @@ function initCostBreakdownChart() {
             labels: ['Energy', 'Hardware', 'Infrastructure', 'Other'],
             datasets: [{
                 data: [387000, 250000, 150000, 50000],
-                backgroundColor: ['#8afd81', 'rgba(138, 253, 129, 0.7)', 'rgba(138, 253, 129, 0.5)', 'rgba(138, 253, 129, 0.3)'],
-                borderColor: '#8afd81',
+                backgroundColor: ['#a5ff9c', 'rgba(138, 253, 129, 0.7)', 'rgba(138, 253, 129, 0.5)', 'rgba(138, 253, 129, 0.3)'],
+                borderColor: '#a5ff9c',
                 borderWidth: 2
             }]
         },
@@ -2481,7 +2481,7 @@ function initCostBreakdownChart() {
                 legend: { labels: { color: '#E8E8E8' } },
                 tooltip: {
                     backgroundColor: 'rgba(0, 0, 0, 0.95)',
-                    titleColor: '#8afd81',
+                    titleColor: '#a5ff9c',
                     bodyColor: '#E8E8E8',
                     borderColor: 'rgba(138, 253, 129, 0.3)'
                 }
@@ -2502,8 +2502,8 @@ function initHashrateImpactChart() {
             datasets: [{
                 label: 'Monthly Profit',
                 data: [420000, 380000, 340000, 300000, 260000],
-                backgroundColor: '#8afd81',
-                borderColor: '#8afd81'
+                backgroundColor: '#a5ff9c',
+                borderColor: '#a5ff9c'
             }]
         },
         options: {
@@ -2513,7 +2513,7 @@ function initHashrateImpactChart() {
                 legend: { display: false },
                 tooltip: {
                     backgroundColor: 'rgba(0, 0, 0, 0.95)',
-                    titleColor: '#8afd81',
+                    titleColor: '#a5ff9c',
                     bodyColor: '#E8E8E8',
                     borderColor: 'rgba(138, 253, 129, 0.3)'
                 }

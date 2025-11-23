@@ -9,12 +9,14 @@ export default function Sidebar() {
 
   const navItems = [
     { href: '/', label: 'Home', icon: 'home', view: 'dashboard' },
-    { href: '/projects', label: 'Projects', icon: 'document', view: 'projects' },
-    { href: '/jobs', label: 'Jobs', icon: 'dashboard', view: 'jobs' },
-    { href: '/versions', label: 'Versions', icon: 'document', view: 'versions' },
-    { href: '/prompts', label: 'Prompts', icon: 'document', view: 'prompts' },
-    { href: '/logs', label: 'Logs', icon: 'document', view: 'logs' },
     { href: '/cockpit', label: 'Cockpit', icon: 'dashboard', view: 'cockpit' },
+    { href: '/myearthai', label: 'MyEarthAI', icon: 'dashboard', view: 'myearthai' },
+    { href: '/projects', label: 'Projects', icon: 'document', view: 'projects' },
+    { href: '/projection', label: 'Projection', icon: 'document', view: 'projection' },
+    { href: '/transactions', label: 'Transactions', icon: 'document', view: 'transactions' },
+    { href: '/wallet-scraper', label: 'Wallet Scraper', icon: 'document', view: 'wallet-scraper' },
+    { href: '/profitability-index', label: 'Profitability Index', icon: 'document', view: 'profitability-index' },
+    { href: '/documents-vault', label: 'Documents Vault', icon: 'document', view: 'documents-vault' },
     { href: '/electricity', label: 'Électricité', icon: 'energy', view: 'electricity' },
     { href: '/collateral', label: 'Collateral', icon: 'document', view: 'collateral' },
   ]

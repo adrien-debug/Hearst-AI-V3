@@ -1,8 +1,10 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
+import { useEffect } from 'react'
 import Sidebar from './Sidebar'
 import Header from './Header'
+import IconsLoader from './IconsLoader'
 
 export default function LayoutWrapper({
   children,
@@ -17,13 +19,16 @@ export default function LayoutWrapper({
   }
 
   return (
-    <div className="cockpit-layout">
-      <Sidebar />
-      <div className="main-content">
-        <Header />
-        <main className="content-area">{children}</main>
+    <>
+      <IconsLoader />
+      <div className="cockpit-layout">
+        <Sidebar />
+        <div className="main-content">
+          <Header />
+          <main className="content-area">{children}</main>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

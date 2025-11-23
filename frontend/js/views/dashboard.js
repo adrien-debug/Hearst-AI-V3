@@ -361,7 +361,7 @@ const dashboardStyles = `
 .wallet-balance-btc {
     font-size: var(--text-4xl);
     font-weight: var(--font-bold);
-    color: #8afd81;
+    color: #a5ff9c;
     letter-spacing: -0.02em;
     line-height: var(--leading-tight);
     text-shadow: 0 0 20px rgba(138, 253, 129, 0.3);
@@ -413,7 +413,7 @@ const dashboardStyles = `
 
 .wallet-address-copy:hover {
     background: rgba(138, 253, 129, 0.1);
-    color: #8afd81;
+    color: #a5ff9c;
     box-shadow: 0 0 12px rgba(138, 253, 129, 0.2);
 }
 
@@ -516,7 +516,7 @@ const dashboardStyles = `
 }
 
 .legend-dot.green {
-    background-color: #8afd81;
+    background-color: #a5ff9c;
     box-shadow: 0 0 8px rgba(138, 253, 129, 0.5);
 }
 
@@ -614,7 +614,7 @@ const dashboardStyles = `
         rgba(138, 253, 129, 0.1) 50%,
         rgba(138, 253, 129, 0.05) 100%
     ) !important;
-    box-shadow: inset 2px 0 0 #8afd81 !important;
+    box-shadow: inset 2px 0 0 #a5ff9c !important;
     transform: translateX(2px) !important;
 }
 
@@ -628,7 +628,7 @@ const dashboardStyles = `
 
 
 .transaction-amount {
-    color: #8afd81;
+    color: #a5ff9c;
     font-weight: var(--font-semibold);
     font-family: var(--font-mono);
     text-shadow: 0 0 10px rgba(138, 253, 129, 0.2);
@@ -678,7 +678,7 @@ const dashboardStyles = `
 }
 
 .btn-see-more:hover {
-    color: #8afd81;
+    color: #a5ff9c;
     opacity: 1;
     background: rgba(138, 253, 129, 0.03);
 }
@@ -799,7 +799,7 @@ const dashboardStyles = `
 .transaction-history-controls .date-range-select:focus,
 .transaction-history-controls .contract-select:focus {
     outline: none !important;
-    border-color: #8afd81 !important;
+    border-color: #a5ff9c !important;
     box-shadow: 0 0 0 3px rgba(138, 253, 129, 0.1) !important;
 }
 
@@ -830,14 +830,14 @@ const dashboardStyles = `
 
 .date-range-select:hover,
 .contract-select:hover {
-    border-color: #8afd81;
+    border-color: #a5ff9c;
     background: rgba(138, 253, 129, 0.05);
 }
 
 .date-range-select:focus,
 .contract-select:focus {
     outline: none;
-    border-color: #8afd81;
+    border-color: #a5ff9c;
     box-shadow: 0 0 0 1px rgba(138, 253, 129, 0.2);
 }
 
@@ -854,7 +854,7 @@ const dashboardStyles = `
     font-size: var(--text-sm) !important;
     font-weight: var(--font-semibold) !important;
     border-radius: var(--radius-full) !important;
-    background: #8afd81 !important;
+    background: #a5ff9c !important;
     color: #000000 !important;
     border: none !important;
     transition: all var(--transition-normal) !important;
@@ -942,7 +942,7 @@ const dashboardStyles = `
         rgba(138, 253, 129, 0.1) 50%,
         rgba(138, 253, 129, 0.05) 100%
     ) !important;
-    box-shadow: inset 2px 0 0 #8afd81 !important;
+    box-shadow: inset 2px 0 0 #a5ff9c !important;
     transform: translateX(2px) !important;
 }
 
@@ -955,7 +955,7 @@ const dashboardStyles = `
 
 .transaction-amount,
 .transaction-reward {
-    color: #8afd81;
+    color: #a5ff9c;
     font-weight: var(--font-semibold);
     font-family: var(--font-mono);
     text-shadow: 0 0 10px rgba(138, 253, 129, 0.2);
@@ -973,7 +973,7 @@ const dashboardStyles = `
 }
 
 .transaction-history-total .total-amount {
-    color: #8afd81;
+    color: #a5ff9c;
     margin-left: var(--space-2);
     text-shadow: 0 0 10px rgba(138, 253, 129, 0.2);
 }
@@ -981,7 +981,7 @@ const dashboardStyles = `
 /* Button Transaction History - Premium Style */
 .btn.btn-transaction-history,
 button.btn-transaction-history {
-    background-color: #8afd81 !important;
+    background-color: #a5ff9c !important;
     color: #000 !important;
     border-radius: 30px !important;
     font-weight: 600 !important;
@@ -1132,14 +1132,14 @@ function initWalletPerformanceChart() {
                 {
                     label: 'BTC Wallet',
                     data: [0.025, 0.027, 0.029, 0.031, 0.030, 0.032, 0.031, 0.030, 0.032, 0.031, 0.031, 0.032],
-                    borderColor: '#8afd81',
+                    borderColor: '#a5ff9c',
                     backgroundColor: btcGradient,
                     borderWidth: 3,
                     fill: true,
                     tension: 0.4,
                     pointRadius: 0,
                     pointHoverRadius: 8,
-                    pointHoverBackgroundColor: '#8afd81',
+                    pointHoverBackgroundColor: '#a5ff9c',
                     pointHoverBorderColor: '#FFFFFF',
                     pointHoverBorderWidth: 3,
                     yAxisID: 'y'
@@ -1174,7 +1174,7 @@ function initWalletPerformanceChart() {
                 },
                 tooltip: {
                     backgroundColor: 'rgba(0, 0, 0, 0.95)',
-                    titleColor: '#8afd81',
+                    titleColor: '#a5ff9c',
                     titleFont: { size: 13, family: 'Inter', weight: '700' },
                     bodyColor: '#E8E8E8',
                     bodyFont: { size: 12, family: 'Inter', weight: '500' },
@@ -1260,7 +1260,7 @@ function initWalletBarChart() {
                     label: 'BTC Wallet',
                     data: [0.025, 0.027, 0.029, 0.031, 0.030, 0.032, 0.031, 0.030, 0.032, 0.031, 0.031, 0.032],
                     backgroundColor: btcGradient,
-                    borderColor: '#8afd81',
+                    borderColor: '#a5ff9c',
                     borderWidth: 2,
                     borderRadius: 4,
                     borderSkipped: false,
@@ -1289,7 +1289,7 @@ function initWalletBarChart() {
                 },
                 tooltip: {
                     backgroundColor: 'rgba(0, 0, 0, 0.95)',
-                    titleColor: '#8afd81',
+                    titleColor: '#a5ff9c',
                     titleFont: { size: 13, family: 'Inter', weight: '700' },
                     bodyColor: '#E8E8E8',
                     bodyFont: { size: 12, family: 'Inter', weight: '500' },

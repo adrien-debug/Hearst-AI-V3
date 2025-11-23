@@ -5,8 +5,8 @@
 
 /* Couleurs HEARST */
 :root {
-    --hearst-green: #9EFF00;
-    --hearst-green-alt: #A3FF8B;
+    --hearst-green: #a5ff9c;
+    --hearst-green-alt: #a5ff9c;
     --hearst-black: #000000;
     --hearst-dark: #0a0a0a;
     --hearst-white: #ffffff;
@@ -60,7 +60,7 @@
 .stat-card:hover {
     transform: translateY(-4px);
     border-color: var(--hearst-green-alt);
-    box-shadow: 0 0 20px rgba(158, 255, 0, 0.3);
+    box-shadow: 0 0 20px rgba(165, 255, 156, 0.3);
 }
 
 .stat-label {
@@ -136,7 +136,7 @@
 .electricity-view .card:hover {
     transform: translateY(-4px);
     border-color: var(--hearst-green-alt);
-    box-shadow: 0 0 20px rgba(158, 255, 0, 0.3);
+    box-shadow: 0 0 20px rgba(165, 255, 156, 0.3);
 }
 
 .electricity-view .card-title {
@@ -157,7 +157,7 @@
 }
 
 .electricity-view .table-container:hover {
-    box-shadow: 0 0 20px rgba(158, 255, 0, 0.3);
+    box-shadow: 0 0 20px rgba(165, 255, 156, 0.3);
     transform: translateY(-2px);
 }
 
@@ -190,11 +190,11 @@
 }
 
 .electricity-view .table-container table tbody tr:nth-child(even) {
-    background: rgba(158, 255, 0, 0.03);
+    background: rgba(165, 255, 156, 0.03);
 }
 
 .electricity-view .table-container table tbody tr:hover {
-    background: rgba(158, 255, 0, 0.1);
+    background: rgba(165, 255, 156, 0.1);
 }
 
 .electricity-view .table-container table tbody tr.total-row {
@@ -253,7 +253,7 @@
 .electricity-view .filter-group select:focus {
     outline: none;
     border-color: var(--hearst-green);
-    box-shadow: 0 0 0 3px rgba(158, 255, 0, 0.2);
+    box-shadow: 0 0 0 3px rgba(165, 255, 156, 0.2);
 }
 
 .electricity-view .filter-group input:hover,
@@ -275,12 +275,12 @@
 .electricity-view .filters .btn-primary {
     background: var(--hearst-green);
     color: var(--hearst-black);
-    box-shadow: 0 4px 16px rgba(158, 255, 0, 0.3);
+    box-shadow: 0 4px 16px rgba(165, 255, 156, 0.3);
 }
 
 .electricity-view .filters .btn-primary:hover {
     background: var(--hearst-green-alt);
-    box-shadow: 0 6px 24px rgba(158, 255, 0, 0.4);
+    box-shadow: 0 6px 24px rgba(165, 255, 156, 0.4);
     transform: translateY(-2px);
 }
 
@@ -292,7 +292,7 @@
 
 .electricity-view .filters .btn-secondary:hover {
     border-color: var(--hearst-green);
-    background: rgba(158, 255, 0, 0.1);
+    background: rgba(165, 255, 156, 0.1);
 }
 
 /* Tabs */
@@ -346,7 +346,7 @@
 
 .electricity-view .provider-btn:hover {
     border-color: var(--hearst-green);
-    background: rgba(158, 255, 0, 0.1);
+    background: rgba(165, 255, 156, 0.1);
 }
 
 .electricity-view .provider-btn.active {
@@ -382,7 +382,7 @@
 }
 
 .electricity-view .chart-container:hover {
-    box-shadow: 0 0 20px rgba(158, 255, 0, 0.3);
+    box-shadow: 0 0 20px rgba(165, 255, 156, 0.3);
     transform: translateY(-2px);
     border-color: var(--hearst-green-alt);
 }

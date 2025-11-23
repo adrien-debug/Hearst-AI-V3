@@ -1,52 +1,32 @@
 'use client'
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
+import './Cockpit.css'
 
 export default function CockpitWorkers() {
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-4)' }}>
-        <h2 style={{ fontSize: 'var(--text-xl)', fontWeight: 600 }}>Workers</h2>
-        <Button>+ Add Worker</Button>
+      {/* KPI Cards - Dashboard Style (UNIFIED STRUCTURE) */}
+      <div className="kpi-grid">
+        <div className="kpi-card">
+          <div className="kpi-label">Total Workers</div>
+          <div className="kpi-value">0</div>
+          <div className="kpi-description">Active workers</div>
+        </div>
+        <div className="kpi-card">
+          <div className="kpi-label">On Duty</div>
+          <div className="kpi-value">0</div>
+          <div className="kpi-description">Currently working</div>
+        </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 'var(--space-4)', marginBottom: 'var(--space-6)' }}>
-        <Card>
-          <CardHeader>
-            <CardTitle>Total Workers</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--hearst-green)' }}>
-              0
-            </div>
-            <p style={{ color: 'var(--text-secondary)', marginTop: 'var(--space-2)', fontSize: 'var(--text-sm)' }}>
-              Active workers
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>On Duty</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--hearst-green)' }}>
-              0
-            </div>
-            <p style={{ color: 'var(--text-secondary)', marginTop: 'var(--space-2)', fontSize: 'var(--text-sm)' }}>
-              Currently working
-            </p>
-          </CardContent>
-        </Card>
-      </div>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>Workers List</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="table-container">
-            <table className="table">
+      {/* Workers List Table - Dashboard Style */}
+      <div className="cockpit-card">
+        <div className="cockpit-card-header">
+          <h3 className="cockpit-card-title">Workers List</h3>
+        </div>
+        <div className="cockpit-card-body">
+          <div className="cockpit-table-container">
+            <table className="cockpit-table">
               <thead>
                 <tr>
                   <th>Name</th>
@@ -58,16 +38,15 @@ export default function CockpitWorkers() {
               </thead>
               <tbody>
                 <tr>
-                  <td colSpan={5} style={{ textAlign: 'center', color: 'var(--text-secondary)' }}>
+                  <td colSpan={5} style={{ textAlign: 'center', color: 'var(--text-secondary)', padding: 'var(--space-8)' }}>
                     No workers registered yet
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   )
 }
-

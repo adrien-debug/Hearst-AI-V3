@@ -1,0 +1,353 @@
+/* Collateral Styles - EXACT copy from STYLE_GUIDE_HOME_PAGE.md */
+
+/* Ensure the dashboard view is visible */
+.dashboard-view {
+    padding: 0;
+    padding-top: 10px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+}
+
+.dashboard-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+}
+
+/* ====================================
+   NAVIGATION TABS
+   ==================================== */
+.collateral-nav-tabs {
+    display: flex;
+    gap: var(--space-2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    margin-bottom: var(--space-6);
+    padding-bottom: 0;
+    overflow-x: auto;
+}
+
+.collateral-nav-tab {
+    padding: var(--space-3) var(--space-4);
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text-secondary);
+    font-size: var(--text-base);
+    font-weight: var(--font-medium);
+    font-family: var(--font-primary);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-in-out);
+    white-space: nowrap;
+}
+
+.collateral-nav-tab:hover {
+    color: var(--text-primary);
+}
+
+.collateral-nav-tab.active {
+    color: #C5FFA7;
+    border-bottom-color: #C5FFA7;
+    font-weight: var(--font-semibold);
+}
+
+/* ====================================
+   KPI CARDS (Dashboard Style - UNIFIED)
+   ==================================== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+}
+
+.kpi-card {
+    background: rgba(26, 26, 26, 0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: var(--border-thin) solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-xl);
+    padding: var(--space-4);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    transition: all var(--duration-normal) var(--ease-in-out);
+    position: relative;
+    overflow: hidden;
+}
+
+.kpi-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at top right,
+        rgba(197, 255, 167, 0.05) 0%,
+        transparent 50%
+    );
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.kpi-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.kpi-card:hover {
+    box-shadow: 
+        0 12px 48px rgba(0, 0, 0, 0.5),
+        0 4px 16px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(197, 255, 167, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transform: translateY(-4px);
+}
+
+.kpi-label {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: var(--font-medium);
+}
+
+.kpi-value {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+    color: #C5FFA7;
+    margin-bottom: var(--space-1);
+    letter-spacing: -0.02em;
+    line-height: var(--leading-tight);
+    text-shadow: 0 0 10px rgba(197, 255, 167, 0.2);
+}
+
+.kpi-description {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* ====================================
+   CARDS (Dashboard Style)
+   ==================================== */
+.collateral-card {
+    background: rgba(26, 26, 26, 0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: var(--border-thin) solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    transition: all var(--duration-normal) var(--ease-in-out);
+    margin-bottom: var(--space-6);
+    position: relative;
+}
+
+.collateral-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at top right,
+        rgba(197, 255, 167, 0.05) 0%,
+        transparent 50%
+    );
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.collateral-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.collateral-card:hover {
+    box-shadow: 
+        0 12px 48px rgba(0, 0, 0, 0.5),
+        0 4px 16px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(197, 255, 167, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.collateral-card-header {
+    padding: var(--space-4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.collateral-card-title {
+    font-size: var(--text-lg);
+    font-weight: var(--font-semibold);
+    color: var(--text-primary);
+    margin: 0;
+    letter-spacing: -0.01em;
+}
+
+.collateral-card-body {
+    padding: var(--space-4);
+}
+
+/* ====================================
+   TABLES (Dashboard Style)
+   ==================================== */
+.collateral-table-container {
+    background: transparent;
+    border-radius: 0;
+    overflow: hidden;
+}
+
+.collateral-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.collateral-table thead tr {
+    background: linear-gradient(180deg, #454646 0%, #3a3a3a 100%);
+    border-bottom: var(--border-medium) solid rgba(197, 255, 167, 0.3);
+}
+
+.collateral-table thead th {
+    padding: var(--space-3) var(--space-4);
+    text-align: left;
+    font-size: var(--text-xs);
+    font-weight: var(--font-normal);
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: none;
+}
+
+.collateral-table tbody tr {
+    transition: all var(--duration-fast) var(--ease-in-out);
+}
+
+.collateral-table tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.collateral-table tbody tr:hover {
+    background: linear-gradient(
+        90deg,
+        rgba(197, 255, 167, 0.05) 0%,
+        rgba(197, 255, 167, 0.1) 50%,
+        rgba(197, 255, 167, 0.05) 100%
+    );
+    box-shadow: inset 2px 0 0 #C5FFA7;
+    transform: translateX(2px);
+}
+
+.collateral-table tbody td {
+    padding: var(--space-4);
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+    border-bottom: var(--border-thin) solid rgba(255, 255, 255, 0.05);
+}
+
+.collateral-table tbody td strong {
+    color: var(--text-primary);
+    font-weight: var(--font-semibold);
+}
+
+.collateral-value-green {
+    color: #C5FFA7;
+    font-weight: var(--font-semibold);
+    font-family: var(--font-mono);
+    text-shadow: 0 0 10px rgba(197, 255, 167, 0.2);
+}
+
+.collateral-value-red {
+    color: #ff4d4d;
+    font-weight: var(--font-semibold);
+    font-family: var(--font-mono);
+}
+
+/* ====================================
+   BUTTONS (Dashboard Style)
+   ==================================== */
+.collateral-btn {
+    padding: var(--space-3) var(--space-6);
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    border-radius: var(--radius-full);
+    background: #C5FFA7;
+    color: #000000;
+    border: none;
+    transition: all var(--duration-normal) var(--ease-in-out);
+    cursor: pointer;
+    letter-spacing: -0.01em;
+    box-shadow: 
+        0 4px 16px rgba(197, 255, 167, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    font-family: var(--font-primary);
+}
+
+.collateral-btn:hover:not(:disabled) {
+    background: #B0FF8F;
+    box-shadow: 
+        0 6px 24px rgba(197, 255, 167, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    transform: translateY(-1px) scale(1.02);
+}
+
+.collateral-btn:active:not(:disabled) {
+    transform: translateY(0) scale(1);
+}
+
+.collateral-btn-secondary {
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--text-xs);
+    font-weight: var(--font-medium);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: #C5FFA7;
+    border: 1px solid rgba(197, 255, 167, 0.3);
+    transition: all var(--duration-fast) var(--ease-in-out);
+    cursor: pointer;
+    font-family: var(--font-primary);
+}
+
+.collateral-btn-secondary:hover {
+    background: rgba(197, 255, 167, 0.1);
+    border-color: #C5FFA7;
+}
+
+/* ====================================
+   RESPONSIVE
+   ==================================== */
+@media (max-width: 1024px) {
+    .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .kpi-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .kpi-value {
+        font-size: var(--text-3xl);
+    }
+    
+    .collateral-nav-tabs {
+        overflow-x: auto;
+    }
+    
+    .collateral-table {
+        font-size: 12px;
+    }
+    
+    .collateral-table thead th,
+    .collateral-table tbody td {
+        padding: 8px 12px;
+    }
+}
+

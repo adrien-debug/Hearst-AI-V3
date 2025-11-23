@@ -323,7 +323,7 @@ body {
 }
 
 .nav-item:hover {
-    background: rgba(158, 255, 0, 0.1);
+    background: rgba(165, 255, 156, 0.1);
     color: var(--hearst-white);
 }
 
@@ -546,7 +546,7 @@ body {
 
 .user-badge:hover {
     background: rgba(42, 42, 42, 0.8);
-    border-color: rgba(158, 255, 0, 0.3);
+    border-color: rgba(165, 255, 156, 0.3);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
@@ -559,7 +559,7 @@ body {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    box-shadow: 0 2px 8px rgba(163, 255, 139, 0.3) !important;
+    box-shadow: 0 2px 8px rgba(165, 255, 156, 0.3) !important;
 }
 
 .user-avatar-initials {
@@ -750,7 +750,7 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(180deg, var(--color-primary-light-green) 0%, var(--color-primary-light-green-5) 100%) !important;
-    box-shadow: 0 0 10px rgba(163, 255, 139, 0.5) !important;
+    box-shadow: 0 0 10px rgba(165, 255, 156, 0.5) !important;
 }
 
 /* ====================================
@@ -787,12 +787,12 @@ body {
 }
 
 .sidebar-version .nav-item:hover {
-    background: rgba(163, 255, 139, 0.1) !important;
+    background: rgba(165, 255, 156, 0.1) !important;
     color: var(--color-primary-light-green) !important;
 }
 
 .sidebar-version .nav-item.active {
-    background: rgba(163, 255, 139, 0.15) !important;
+    background: rgba(165, 255, 156, 0.15) !important;
     color: var(--color-primary-light-green) !important;
 }
 
@@ -828,7 +828,7 @@ body {
 }
 
 .notification-btn:hover {
-    background: rgba(163, 255, 139, 0.1) !important;
+    background: rgba(165, 255, 156, 0.1) !important;
     color: var(--primary-green) !important;
 }
 
@@ -841,14 +841,14 @@ body {
 
 .user-badge:hover {
     background: rgba(26, 26, 26, 0.95) !important;
-    border-color: rgba(163, 255, 139, 0.3) !important;
+    border-color: rgba(165, 255, 156, 0.3) !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
 }
 
 .user-avatar-circle {
     width: 28px !important;
     height: 28px !important;
-    box-shadow: 0 2px 8px rgba(163, 255, 139, 0.4) !important;
+    box-shadow: 0 2px 8px rgba(165, 255, 156, 0.4) !important;
 }
 
 /* ====================================
@@ -935,10 +935,10 @@ body {
 
 .footer-premium {
     background: linear-gradient(180deg, rgba(10, 10, 10, 0.95) 0%, rgba(0, 0, 0, 1) 100%) !important;
-    border-top: 1px solid rgba(163, 255, 139, 0.1) !important;
+    border-top: 1px solid rgba(165, 255, 156, 0.1) !important;
     box-shadow: 
         0 -4px 32px rgba(0, 0, 0, 0.6),
-        inset 0 1px 0 rgba(163, 255, 139, 0.05) !important;
+        inset 0 1px 0 rgba(165, 255, 156, 0.05) !important;
     padding: 40px var(--space-8) 40px var(--space-8) !important;
     margin-top: auto;
     position: relative;
@@ -955,9 +955,9 @@ body {
     background: linear-gradient(
         90deg,
         transparent,
-        rgba(163, 255, 139, 0.3) 20%,
-        rgba(163, 255, 139, 0.5) 50%,
-        rgba(163, 255, 139, 0.3) 80%,
+        rgba(165, 255, 156, 0.3) 20%,
+        rgba(165, 255, 156, 0.5) 50%,
+        rgba(165, 255, 156, 0.3) 80%,
         transparent
     );
     opacity: 0.6;
@@ -973,7 +973,7 @@ body {
     background: linear-gradient(
         90deg,
         transparent,
-        rgba(163, 255, 139, 0.1) 50%,
+        rgba(165, 255, 156, 0.1) 50%,
         transparent
     );
 }
@@ -1101,8 +1101,8 @@ body {
     font-weight: var(--font-semibold);
     letter-spacing: 0.2px;
     padding: var(--space-1) var(--space-3);
-    background: rgba(163, 255, 139, 0.1);
-    border: 1px solid rgba(163, 255, 139, 0.2);
+    background: rgba(165, 255, 156, 0.1);
+    border: 1px solid rgba(165, 255, 156, 0.2);
     border-radius: var(--radius-sm);
     transform: translateY(-10px);
 }

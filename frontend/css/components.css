@@ -53,7 +53,7 @@
 .btn-primary,
 .btn,
 button[type="submit"] {
-    background: linear-gradient(135deg, #8afd81 0%, #7bed9f 100%) !important;
+    background: linear-gradient(135deg, #a5ff9c 0%, #7bed9f 100%) !important;
     color: var(--primary-dark);
     padding: var(--space-3) var(--space-6);
     border-radius: var(--radius-md);
@@ -197,7 +197,7 @@ button.btn-transaction-history:active {
 .btn-premium,
 .btn-luxe {
     position: relative;
-    background: linear-gradient(135deg, #8afd81 0%, #7bed9f 50%, #6fdc66 100%) !important;
+    background: linear-gradient(135deg, #a5ff9c 0%, #7bed9f 50%, #6fdc66 100%) !important;
     color: #000000 !important;
     padding: 16px 32px !important;
     border-radius: 12px !important;
@@ -266,7 +266,7 @@ button.btn-transaction-history:active {
 
 .btn-premium:hover:not(:disabled),
 .btn-luxe:hover:not(:disabled) {
-    background: linear-gradient(135deg, #9aff91 0%, #8afd81 50%, #7bed9f 100%) !important;
+    background: linear-gradient(135deg, #9aff91 0%, #a5ff9c 50%, #7bed9f 100%) !important;
     box-shadow: 
         0 12px 48px rgba(138, 253, 129, 0.5),
         0 6px 24px rgba(138, 253, 129, 0.4),
@@ -554,7 +554,7 @@ button.btn-transaction-history:active {
     left: 0;
     width: 4px;
     height: 100%;
-    background: linear-gradient(180deg, #8afd81 0%, transparent 100%);
+    background: linear-gradient(180deg, #a5ff9c 0%, transparent 100%);
     opacity: 0;
     transition: opacity 0.3s;
     z-index: 0;
@@ -707,7 +707,7 @@ button.btn-transaction-history:active {
         rgba(138, 253, 129, 0.1) 50%,
         rgba(138, 253, 129, 0.05) 100%
     ) !important;
-    box-shadow: inset 2px 0 0 #8afd81 !important;
+    box-shadow: inset 2px 0 0 #a5ff9c !important;
     transform: translateX(2px) !important;
 }
 

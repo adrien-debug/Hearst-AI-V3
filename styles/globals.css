@@ -2,12 +2,13 @@
 
 /* Import design tokens and variables */
 @import '../frontend/css/main.css';
+@import './dashboard.css';
 
 /* Additional global styles */
 :root {
   /* HEARST specific colors */
-  --hearst-green: #9EFF00;
-  --hearst-green-dark: #8afd81;
+  --hearst-green: #a5ff9c;
+  --hearst-green-dark: #a5ff9c;
   
   /* Text colors */
   --text-primary: #ffffff;
@@ -15,14 +16,46 @@
   --text-muted: #999999;
   --text-error: #ff4d4d;
   
+  /* Typography sizes */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 2rem;
+  --text-4xl: 2.5rem;
+  
+  /* Font weights */
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  
+  /* Font families */
+  --font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --font-mono: 'Fira Code', 'Consolas', 'Monaco', monospace;
+  
+  /* Line heights */
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.75;
+  
   /* Background colors */
   --bg-primary: #0a0a0a;
   --bg-secondary: #1a1a1a;
   --bg-tertiary: #242424;
+  --primary-dark: #000000;
+  --primary-grey: #1a1a1a;
   
   /* Border colors */
   --border: #2a2a2a;
   --border-light: #3a3a3a;
+  --border-color: rgba(255, 255, 255, 0.05);
+  
+  /* Border widths */
+  --border-thin: 1px;
+  --border-medium: 2px;
   
   /* Spacing */
   --space-1: 0.25rem;
@@ -37,11 +70,15 @@
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
   
   /* Transitions */
   --duration-fast: 150ms;
   --duration-normal: 250ms;
+  --duration-slow: 350ms;
   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: var(--duration-normal) var(--ease-in-out);
 }
 
 * {
@@ -144,6 +181,18 @@ body {
 
 .spinner {
   animation: spin 1s linear infinite;
+}
+
+/* Pulse animation for live indicators */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 6px rgba(165, 255, 156, 0.5);
+  }
+  50% {
+    opacity: 0.5;
+    box-shadow: 0 0 12px rgba(165, 255, 156, 0.8);
+  }
 }
 
 /* Utility classes */

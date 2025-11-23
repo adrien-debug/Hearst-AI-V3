@@ -1,63 +1,49 @@
 'use client'
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import './Cockpit.css'
 
 export default function CockpitProduction() {
   return (
     <div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 'var(--space-4)', marginBottom: 'var(--space-6)' }}>
-        <Card>
-          <CardHeader>
-            <CardTitle>Daily Production</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--hearst-green)' }}>
-              0 BTC
-            </div>
-            <p style={{ color: 'var(--text-secondary)', marginTop: 'var(--space-2)', fontSize: 'var(--text-sm)' }}>
-              Last 24 hours
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Monthly Production</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--hearst-green)' }}>
-              0 BTC
-            </div>
-            <p style={{ color: 'var(--text-secondary)', marginTop: 'var(--space-2)', fontSize: 'var(--text-sm)' }}>
-              Current month
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Efficiency</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--hearst-green)' }}>
-              0%
-            </div>
-            <p style={{ color: 'var(--text-secondary)', marginTop: 'var(--space-2)', fontSize: 'var(--text-sm)' }}>
-              Average efficiency
-            </p>
-          </CardContent>
-        </Card>
+      {/* KPI Cards - Dashboard Style (UNIFIED STRUCTURE) */}
+      <div className="kpi-grid">
+        <div className="kpi-card">
+          <div className="kpi-label">Daily Production</div>
+          <div className="kpi-value">0 BTC</div>
+          <div className="kpi-description">Last 24 hours</div>
+        </div>
+        <div className="kpi-card">
+          <div className="kpi-label">Monthly Production</div>
+          <div className="kpi-value">0 BTC</div>
+          <div className="kpi-description">Current month</div>
+        </div>
+        <div className="kpi-card">
+          <div className="kpi-label">Efficiency</div>
+          <div className="kpi-value">0%</div>
+          <div className="kpi-description">Average efficiency</div>
+        </div>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Production History</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div style={{ padding: 'var(--space-4)', background: 'var(--bg-tertiary)', borderRadius: 'var(--radius-md)', textAlign: 'center' }}>
+      {/* Production History - Dashboard Style */}
+      <div className="cockpit-card">
+        <div className="cockpit-card-header">
+          <h3 className="cockpit-card-title">Production History</h3>
+        </div>
+        <div className="cockpit-card-body">
+          <div style={{ 
+            padding: 'var(--space-8)', 
+            background: 'rgba(255, 255, 255, 0.02)', 
+            borderRadius: 'var(--radius-md)', 
+            textAlign: 'center',
+            minHeight: '300px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
             <p style={{ color: 'var(--text-secondary)' }}>Production charts will be displayed here</p>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   )
 }
-

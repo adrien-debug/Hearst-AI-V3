@@ -18,7 +18,7 @@ body {
 .header h1 {
     font-size: 32px;
     font-weight: 700;
-    color: #8afd81;
+    color: #a5ff9c;
     margin-bottom: 8px;
 }
 
@@ -40,7 +40,7 @@ body {
 
 .nav a:hover, .nav a.active {
     background: rgba(138, 253, 129, 0.1);
-    color: #8afd81;
+    color: #a5ff9c;
 }
 
 .card {
@@ -52,7 +52,7 @@ body {
 }
 
 .btn {
-    background: #8afd81;
+    background: #a5ff9c;
     color: #000000;
     border: none;
     padding: 12px 24px;
@@ -82,7 +82,7 @@ table {
 table th {
     text-align: left;
     padding: 12px;
-    color: #8afd81;
+    color: #a5ff9c;
     border-bottom: 1px solid rgba(138, 253, 129, 0.2);
 }
 

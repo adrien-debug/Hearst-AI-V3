@@ -1,52 +1,32 @@
 'use client'
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
+import './Cockpit.css'
 
 export default function CockpitHosters() {
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-4)' }}>
-        <h2 style={{ fontSize: 'var(--text-xl)', fontWeight: 600 }}>Hosting Providers</h2>
-        <Button>+ Add Provider</Button>
+      {/* KPI Cards - Dashboard Style (UNIFIED STRUCTURE) */}
+      <div className="kpi-grid">
+        <div className="kpi-card">
+          <div className="kpi-label">Total Providers</div>
+          <div className="kpi-value">0</div>
+          <div className="kpi-description">Active providers</div>
+        </div>
+        <div className="kpi-card">
+          <div className="kpi-label">Total Capacity</div>
+          <div className="kpi-value">0 MW</div>
+          <div className="kpi-description">Combined capacity</div>
+        </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 'var(--space-4)', marginBottom: 'var(--space-6)' }}>
-        <Card>
-          <CardHeader>
-            <CardTitle>Total Providers</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--hearst-green)' }}>
-              0
-            </div>
-            <p style={{ color: 'var(--text-secondary)', marginTop: 'var(--space-2)', fontSize: 'var(--text-sm)' }}>
-              Active providers
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Total Capacity</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--hearst-green)' }}>
-              0 MW
-            </div>
-            <p style={{ color: 'var(--text-secondary)', marginTop: 'var(--space-2)', fontSize: 'var(--text-sm)' }}>
-              Combined capacity
-            </p>
-          </CardContent>
-        </Card>
-      </div>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>Hosting Providers</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="table-container">
-            <table className="table">
+      {/* Hosting Providers Table - Dashboard Style */}
+      <div className="cockpit-card">
+        <div className="cockpit-card-header">
+          <h3 className="cockpit-card-title">Hosting Providers</h3>
+        </div>
+        <div className="cockpit-card-body">
+          <div className="cockpit-table-container">
+            <table className="cockpit-table">
               <thead>
                 <tr>
                   <th>Provider Name</th>
@@ -59,16 +39,15 @@ export default function CockpitHosters() {
               </thead>
               <tbody>
                 <tr>
-                  <td colSpan={6} style={{ textAlign: 'center', color: 'var(--text-secondary)' }}>
+                  <td colSpan={6} style={{ textAlign: 'center', color: 'var(--text-secondary)', padding: 'var(--space-8)' }}>
                     No hosting providers configured yet
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   )
 }
-

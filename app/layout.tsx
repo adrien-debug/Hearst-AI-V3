@@ -1,7 +1,4 @@
 import '../styles/globals.css'
-import Sidebar from '@/components/Sidebar'
-import Header from '@/components/Header'
-import IconsLoader from '@/components/IconsLoader'
 import Providers from '@/components/Providers'
 import type { Metadata } from 'next'
 import LayoutWrapper from '@/components/LayoutWrapper'
@@ -26,7 +23,6 @@ export default function RootLayout({
       </head>
       <body>
         <Providers>
-          <IconsLoader />
           <LayoutWrapper>{children}</LayoutWrapper>
         </Providers>
       </body>

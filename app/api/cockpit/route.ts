@@ -9,19 +9,37 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    // Pour l'instant, retourner des données mockées
-    // TODO: Implémenter la logique réelle pour récupérer les données du cockpit
+    // Données mockées réalistes pour le cockpit
     return NextResponse.json({
       data: {
-        globalHashrate: 0,
-        btcProduction24h: 0,
-        totalMiners: 0,
-        onlineMiners: 0,
-        degradedMiners: 0,
-        offlineMiners: 0,
-        miningAccounts: [],
-        workers: [],
-        miners: [],
+        globalHashrate: 245.8, // PH/s
+        theoreticalHashrate: 250.0, // PH/s
+        btcProduction24h: 0.084521,
+        btcProduction7d: 0.591647,
+        totalMiners: 124,
+        onlineMiners: 118,
+        degradedMiners: 4,
+        offlineMiners: 2,
+        totalWorkers: 342,
+        activeWorkers: 328,
+        totalRevenue: 2450000, // USD
+        electricityCost: 125000, // USD
+        profit: 2325000, // USD
+        miningAccounts: [
+          { id: '1', name: 'AKT04', hashrate: 2041.42, btc24h: 0.084521, status: 'active' },
+          { id: '2', name: 'AKT05', hashrate: 1987.23, btc24h: 0.082156, status: 'active' },
+          { id: '3', name: 'AKT06', hashrate: 2156.78, btc24h: 0.089234, status: 'active' },
+        ],
+        workers: [
+          { id: '1', name: 'Worker-001', hashrate: 98.5, status: 'online', miner: 'Antminer S21' },
+          { id: '2', name: 'Worker-002', hashrate: 97.2, status: 'online', miner: 'Antminer S21' },
+          { id: '3', name: 'Worker-003', hashrate: 0, status: 'offline', miner: 'Antminer S19' },
+        ],
+        miners: [
+          { id: '1', model: 'Antminer S21', count: 45, hashrate: 98.5, status: 'active' },
+          { id: '2', model: 'Antminer S19 Pro', count: 38, hashrate: 110.0, status: 'active' },
+          { id: '3', model: 'Antminer S19', count: 41, hashrate: 95.0, status: 'degraded' },
+        ],
       },
       message: 'Cockpit data retrieved successfully',
     })

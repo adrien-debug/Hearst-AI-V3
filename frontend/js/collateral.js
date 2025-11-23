@@ -424,80 +424,121 @@ function initCollateralSection() {
     });
 }
 
-// Load collateral positions data
-function loadCollateralPositions() {
-    const positionsData = [
-        {
-            id: 1,
-            customer: 'Alpha Capital',
-            protocol: 'Vancelian',
-            collateral: '45.2 BTC',
-            collateralValue: '$4,285,600',
-            borrowed: '$2,850,000 USDT',
-            healthFactor: '1.85',
-            status: 'safe',
-            ltv: '66.5%'
-        },
-        {
-            id: 2,
-            customer: 'Beta Ventures',
-            protocol: 'Morpho',
-            collateral: '28.5 BTC',
-            collateralValue: '$2,703,300',
-            borrowed: '$1,650,000 USDC',
-            healthFactor: '1.64',
-            status: 'safe',
-            ltv: '61.0%'
-        },
-        {
-            id: 3,
-            customer: 'Epsilon Fund',
-            protocol: 'Compound',
-            collateral: '35.8 BTC',
-            collateralValue: '$3,395,840',
-            borrowed: '$2,200,000 USDT',
-            healthFactor: '1.54',
-            status: 'safe',
-            ltv: '64.8%'
-        },
-        {
-            id: 4,
-            customer: 'Gamma Holdings',
-            protocol: 'Vancelian',
-            collateral: '12.3 BTC',
-            collateralValue: '$1,166,670',
-            borrowed: '$850,000 USDC',
-            healthFactor: '1.37',
-            status: 'at-risk',
-            ltv: '72.9%'
-        },
-        {
-            id: 5,
-            customer: 'Delta Partners',
-            protocol: 'Morpho',
-            collateral: '8.7 BTC',
-            collateralValue: '$825,330',
-            borrowed: '$720,000 USDT',
-            healthFactor: '1.15',
-            status: 'at-risk',
-            ltv: '87.2%'
-        },
-        {
-            id: 6,
-            customer: 'Zeta Investments',
-            protocol: 'Compound',
-            collateral: '15.1 BTC',
-            collateralValue: '$1,432,490',
-            borrowed: '$1,350,000 USDC',
-            healthFactor: '1.06',
-            status: 'exposed',
-            ltv: '94.2%'
+// Load collateral positions data from API
+async function loadCollateralPositions() {
+    try {
+        // Afficher un indicateur de chargement
+        const container = document.getElementById('collateralPositions');
+        if (container) {
+            container.innerHTML = '<p style="color: var(--text-secondary); text-align: center; padding: var(--space-8);">Chargement des données collatérales...</p>';
         }
-    ];
-    
-    window.collateralPositionsData = positionsData;
-    renderCollateralPositions(positionsData);
+
+        // Charger les données depuis l'API
+        // Import dynamique de la configuration des wallets
+        const { WATCHED_WALLETS } = await import('../src/config/wallets.js');
+        const wallets = WATCHED_WALLETS;
+
+        const response = await fetch(`/api/collateral?wallets=${wallets.join(',')}&chains=eth`);
+        
+        if (!response.ok) {
+            throw new Error(`Erreur API: ${response.status} ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        const clients = data.clients || [];
+
+        // Transformer les données de l'API vers le format attendu par renderCollateralPositions
+        const positionsData = transformClientsToPositions(clients);
+        
+        window.collateralPositionsData = positionsData;
+        renderCollateralPositions(positionsData);
+    } catch (error) {
+        console.error('[Collateral] Erreur lors du chargement:', error);
+        
+        // Afficher un message d'erreur
+        const container = document.getElementById('collateralPositions');
+        if (container) {
+            container.innerHTML = `
+                <div style="text-align: center; padding: var(--space-8);">
+                    <p style="color: var(--cockpit-red); margin-bottom: var(--space-4);">
+                        Erreur lors du chargement des données collatérales
+                    </p>
+                    <p style="color: var(--text-secondary); font-size: var(--text-sm);">
+                        ${error.message}
+                    </p>
+                    <button class="btn btn-primary" onclick="loadCollateralPositions()" style="margin-top: var(--space-4);">
+                        Réessayer
+                    </button>
+                </div>
+            `;
+        }
+    }
 }
+
+/**
+ * Transforme les clients de l'API vers le format attendu par renderCollateralPositions
+ * @param {Array} clients - Liste des clients avec métriques
+ * @returns {Array} Liste des positions au format attendu
+ */
+function transformClientsToPositions(clients) {
+    const positions = [];
+    
+    clients.forEach((client, clientIndex) => {
+        // Pour chaque position du client, créer une entrée dans la liste
+        client.positions.forEach((position, posIndex) => {
+            const metrics = client.metrics || {};
+            
+            // Calculer le health factor à partir du ratio de collatéralisation
+            const healthFactor = metrics.collateralizationRatio 
+                ? (metrics.collateralizationRatio / 100).toFixed(2)
+                : '0.00';
+            
+            // Déterminer le statut basé sur le riskPercent
+            let status = 'safe';
+            if (metrics.riskPercent >= 70) {
+                status = 'exposed';
+            } else if (metrics.riskPercent >= 30) {
+                status = 'at-risk';
+            }
+            
+            // Calculer le LTV
+            const ltv = metrics.totalDebtUsd && metrics.totalCollateralUsd
+                ? ((metrics.totalDebtUsd / metrics.totalCollateralUsd) * 100).toFixed(1)
+                : '0.0';
+            
+            // Formater le collatéral
+            const collateralAmount = position.collateralAmount.toFixed(1);
+            const collateralAsset = position.asset;
+            const collateralFormatted = `${collateralAmount} ${collateralAsset}`;
+            const collateralValue = `$${metrics.totalCollateralUsd?.toLocaleString() || '0'}`;
+            
+            // Formater la dette
+            const debtAmount = position.debtAmount.toLocaleString();
+            const debtToken = position.debtToken;
+            const borrowed = `$${debtAmount} ${debtToken}`;
+            
+            positions.push({
+                id: `${clientIndex}_${posIndex}`,
+                customer: client.name,
+                protocol: position.protocol,
+                collateral: collateralFormatted,
+                collateralValue: collateralValue,
+                borrowed: borrowed,
+                healthFactor: healthFactor,
+                status: status,
+                ltv: `${ltv}%`,
+                // Garder les données brutes pour référence
+                _rawClient: client,
+                _rawPosition: position
+            });
+        });
+    });
+    
+    return positions;
+}
+
+// Exposer la fonction globalement pour le bouton de retry
+window.loadCollateralPositions = loadCollateralPositions;
 
 // Render collateral positions
 function renderCollateralPositions(positions) {

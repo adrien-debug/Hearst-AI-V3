@@ -5,11 +5,22 @@
 // In production on Vercel, NEXT_PUBLIC_API_URL should be set to Railway backend URL
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || '/api'
 
+// Ensure API_BASE_URL ends with /api if it's a full URL
+const getBaseUrl = () => {
+  const base = API_BASE_URL
+  if (base.startsWith('http')) {
+    // If it's a full URL, ensure it ends with /api
+    return base.endsWith('/api') ? base : `${base}/api`
+  }
+  return base
+}
+
 export async function fetchAPI<T>(
   endpoint: string,
   options?: RequestInit
 ): Promise<T> {
-  const url = `${API_BASE_URL}${endpoint}`
+  const baseUrl = getBaseUrl()
+  const url = `${baseUrl}${endpoint.startsWith('/') ? endpoint : `/${endpoint}`}`
   
   const response = await fetch(url, {
     ...options,
@@ -86,7 +97,32 @@ export async function getElectricity() {
 
 // Collateral API
 export const collateralAPI = {
-  getAll: () => fetchAPI<any>('/collateral'),
+  getAll: (wallets?: string[], chains?: string[], protocols?: string[]) => {
+    const params = new URLSearchParams()
+    if (wallets && wallets.length > 0) {
+      params.append('wallets', wallets.join(','))
+    }
+    if (chains && chains.length > 0) {
+      params.append('chains', chains.join(','))
+    }
+    if (protocols && protocols.length > 0) {
+      params.append('protocols', protocols.join(','))
+    }
+    const queryString = params.toString()
+    const endpoint = `/collateral${queryString ? `?${queryString}` : ''}`
+    return fetchAPI<any>(endpoint)
+  },
+}
+
+// Customers API
+export const customersAPI = {
+  getAll: () => fetchAPI<{ customers: any[] }>('/customers'),
+  getById: (id: string) => fetchAPI<{ customer: any }>(`/customers/${id}`),
+  create: (data: { name: string; erc20Address: string; tag?: string; chains?: string[]; protocols?: string[] }) => 
+    fetchAPI<{ customer: any }>('/customers', { method: 'POST', body: JSON.stringify(data) }),
+  update: (id: string, data: { name?: string; erc20Address?: string; tag?: string; chains?: string[]; protocols?: string[] }) => 
+    fetchAPI<{ customer: any }>(`/customers/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  delete: (id: string) => fetchAPI(`/customers/${id}`, { method: 'DELETE' }),
 }
 
 // Cockpit API

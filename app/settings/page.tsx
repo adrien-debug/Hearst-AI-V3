@@ -18,9 +18,7 @@ export default function SettingsPage() {
     <div className="dashboard-view">
       <div className="dashboard-content">
         <div style={{ marginBottom: 'var(--space-6)' }}>
-          <h1 style={{ fontSize: 'var(--text-2xl)', fontWeight: 700, marginBottom: 'var(--space-4)' }}>
-            Settings
-          </h1>
+          <h1 style={{ fontSize: 'var(--text-2xl)', fontWeight: 700 }}>Settings</h1>
           
           {/* Navigation tabs */}
           <div style={{
@@ -71,7 +69,7 @@ export default function SettingsPage() {
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = 'var(--hearst-green)'
-                  e.currentTarget.style.background = 'rgba(158, 255, 0, 0.05)'
+                  e.currentTarget.style.background = 'rgba(165, 255, 156, 0.05)'
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.borderColor = 'var(--border)'
@@ -98,7 +96,7 @@ export default function SettingsPage() {
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = 'var(--hearst-green)'
-                  e.currentTarget.style.background = 'rgba(158, 255, 0, 0.05)'
+                  e.currentTarget.style.background = 'rgba(165, 255, 156, 0.05)'
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.borderColor = 'var(--border)'
@@ -125,7 +123,7 @@ export default function SettingsPage() {
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = 'var(--hearst-green)'
-                  e.currentTarget.style.background = 'rgba(158, 255, 0, 0.05)'
+                  e.currentTarget.style.background = 'rgba(165, 255, 156, 0.05)'
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.borderColor = 'var(--border)'

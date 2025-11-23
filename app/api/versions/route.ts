@@ -47,6 +47,49 @@ export async function GET(request: NextRequest) {
       },
     })
 
+    // Si pas de versions, retourner des données mockées
+    if (versions.length === 0) {
+      const mockVersions = [
+        {
+          id: '1',
+          projectId: project_id,
+          label: 'v1.2.0',
+          description: 'Stable release with performance improvements',
+          isStable: true,
+          createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
+          updatedAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
+          parentVersionId: null,
+          metadata: '{}',
+          _count: { files: 45 },
+        },
+        {
+          id: '2',
+          projectId: project_id,
+          label: 'v1.1.5',
+          description: 'Bug fixes and minor updates',
+          isStable: false,
+          createdAt: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(),
+          updatedAt: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(),
+          parentVersionId: '1',
+          metadata: '{}',
+          _count: { files: 42 },
+        },
+        {
+          id: '3',
+          projectId: project_id,
+          label: 'v1.1.0',
+          description: 'Feature release',
+          isStable: true,
+          createdAt: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000).toISOString(),
+          updatedAt: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000).toISOString(),
+          parentVersionId: null,
+          metadata: '{}',
+          _count: { files: 38 },
+        },
+      ]
+      return NextResponse.json({ versions: mockVersions })
+    }
+
     return NextResponse.json({ versions })
   } catch (error) {
     console.error('Error getting versions:', error)

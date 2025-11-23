@@ -83,8 +83,8 @@ export default function VersionsPage() {
             <div className="spinner" style={{
               width: '40px',
               height: '40px',
-              border: '3px solid rgba(158, 255, 0, 0.2)',
-              borderTopColor: '#9EFF00',
+              border: '3px solid rgba(165, 255, 156, 0.2)',
+              borderTopColor: '#a5ff9c',
               borderRadius: '50%',
               animation: 'spin 1s linear infinite',
             }}></div>
@@ -99,9 +99,7 @@ export default function VersionsPage() {
     <div className="dashboard-view">
       <div className="dashboard-content">
         <div style={{ marginBottom: 'var(--space-6)' }}>
-          <h1 style={{ fontSize: 'var(--text-2xl)', fontWeight: 700, marginBottom: 'var(--space-4)' }}>
-            Versions
-          </h1>
+          <h1 style={{ fontSize: 'var(--text-2xl)', fontWeight: 700 }}>Versions</h1>
           
           {/* Filters */}
           <div style={{ display: 'flex', gap: 'var(--space-4)', marginBottom: 'var(--space-6)', flexWrap: 'wrap' }}>
@@ -175,7 +173,7 @@ export default function VersionsPage() {
                         borderRadius: 'var(--radius-sm)',
                         fontSize: 'var(--text-xs)',
                         fontWeight: 600,
-                        background: 'rgba(158, 255, 0, 0.2)',
+                        background: 'rgba(165, 255, 156, 0.2)',
                         color: 'var(--hearst-green)',
                       }}>
                         STABLE

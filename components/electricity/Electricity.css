@@ -1,0 +1,473 @@
+/* Electricity Styles - EXACT copy from STYLE_GUIDE_HOME_PAGE.md */
+
+/* Ensure the dashboard view is visible */
+.dashboard-view {
+    padding: 0;
+    padding-top: 10px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+}
+
+.dashboard-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+}
+
+/* ====================================
+   NAVIGATION TABS
+   ==================================== */
+.electricity-nav-tabs {
+    display: flex;
+    gap: var(--space-2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    margin-bottom: var(--space-6);
+    padding-bottom: 0;
+    overflow-x: auto;
+}
+
+.electricity-nav-tab {
+    padding: var(--space-3) var(--space-4);
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text-secondary);
+    font-size: var(--text-base);
+    font-weight: var(--font-medium);
+    font-family: var(--font-primary);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-in-out);
+    white-space: nowrap;
+}
+
+.electricity-nav-tab:hover {
+    color: var(--text-primary);
+}
+
+.electricity-nav-tab.active {
+    color: #C5FFA7;
+    border-bottom-color: #C5FFA7;
+    font-weight: var(--font-semibold);
+}
+
+/* ====================================
+   SECTION HEADERS
+   ==================================== */
+.section-header-home {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-6);
+    flex-wrap: wrap;
+    gap: var(--space-4);
+}
+
+.section-title-home {
+    font-size: var(--text-lg);
+    font-weight: var(--font-semibold);
+    color: var(--text-primary);
+    margin: 0;
+    letter-spacing: -0.01em;
+    line-height: var(--leading-normal);
+    padding-left: var(--space-4);
+}
+
+/* ====================================
+   KPI CARDS (Dashboard Style - UNIFIED)
+   ==================================== */
+.electricity-kpi-grid,
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+}
+
+/* Unified KPI Card Styles - Same as MyEarthAI */
+.kpi-card,
+.electricity-kpi-card {
+    background: rgba(26, 26, 26, 0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: var(--border-thin) solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-xl);
+    padding: var(--space-4);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    transition: all var(--duration-normal) var(--ease-in-out);
+    position: relative;
+    overflow: hidden;
+}
+
+.kpi-card::after,
+.electricity-kpi-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at top right,
+        rgba(197, 255, 167, 0.05) 0%,
+        transparent 50%
+    );
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.kpi-card > *,
+.electricity-kpi-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.kpi-card:hover,
+.electricity-kpi-card:hover {
+    box-shadow: 
+        0 12px 48px rgba(0, 0, 0, 0.5),
+        0 4px 16px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(197, 255, 167, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transform: translateY(-4px);
+}
+
+/* Unified Label/Title - Simple structure */
+.kpi-label,
+.electricity-kpi-header .electricity-kpi-title {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: var(--font-medium);
+}
+
+/* Unified Value */
+.kpi-value,
+.electricity-kpi-value {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+    color: #C5FFA7;
+    margin-bottom: var(--space-1);
+    letter-spacing: -0.02em;
+    line-height: var(--leading-tight);
+    text-shadow: 0 0 10px rgba(197, 255, 167, 0.2);
+}
+
+/* Unified Description */
+.kpi-description,
+.electricity-kpi-description {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* Legacy support - keep old classes working */
+.electricity-kpi-header {
+    margin-bottom: var(--space-2);
+}
+
+.electricity-kpi-title {
+    font-size: var(--text-xs);
+    font-weight: var(--font-medium);
+    color: var(--text-secondary);
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ====================================
+   CARDS (Dashboard Style)
+   ==================================== */
+.electricity-card {
+    background: rgba(26, 26, 26, 0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: var(--border-thin) solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    transition: all var(--duration-normal) var(--ease-in-out);
+    margin-bottom: var(--space-6);
+    position: relative;
+}
+
+.electricity-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at top right,
+        rgba(197, 255, 167, 0.05) 0%,
+        transparent 50%
+    );
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.electricity-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.electricity-card:hover {
+    box-shadow: 
+        0 12px 48px rgba(0, 0, 0, 0.5),
+        0 4px 16px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(197, 255, 167, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.electricity-card-header {
+    padding: var(--space-4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.electricity-card-title {
+    font-size: var(--text-lg);
+    font-weight: var(--font-semibold);
+    color: var(--text-primary);
+    margin: 0;
+    letter-spacing: -0.01em;
+}
+
+.electricity-card-body {
+    padding: var(--space-4);
+}
+
+/* ====================================
+   TABLES (Dashboard Style)
+   ==================================== */
+.electricity-table-container {
+    background: transparent;
+    border-radius: 0;
+    overflow: hidden;
+}
+
+.electricity-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.electricity-table thead tr {
+    background: linear-gradient(180deg, #454646 0%, #3a3a3a 100%);
+    border-bottom: var(--border-medium) solid rgba(197, 255, 167, 0.3);
+}
+
+.electricity-table thead th {
+    padding: var(--space-3) var(--space-4);
+    text-align: left;
+    font-size: var(--text-xs);
+    font-weight: var(--font-normal);
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: none;
+}
+
+.electricity-table tbody tr {
+    transition: all var(--duration-fast) var(--ease-in-out);
+}
+
+.electricity-table tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.electricity-table tbody tr:hover {
+    background: linear-gradient(
+        90deg,
+        rgba(197, 255, 167, 0.05) 0%,
+        rgba(197, 255, 167, 0.1) 50%,
+        rgba(197, 255, 167, 0.05) 100%
+    );
+    box-shadow: inset 2px 0 0 #C5FFA7;
+    transform: translateX(2px);
+}
+
+.electricity-table tbody td {
+    padding: var(--space-4);
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+    border-bottom: var(--border-thin) solid rgba(255, 255, 255, 0.05);
+}
+
+.electricity-table tbody td strong {
+    color: var(--text-primary);
+    font-weight: var(--font-semibold);
+}
+
+.electricity-value-green {
+    color: #C5FFA7;
+    font-weight: var(--font-semibold);
+    font-family: var(--font-mono);
+    text-shadow: 0 0 10px rgba(197, 255, 167, 0.2);
+}
+
+/* ====================================
+   MINER CARDS
+   ==================================== */
+.electricity-miner-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-4);
+}
+
+.electricity-miner-card {
+    padding: var(--space-4);
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all var(--duration-fast) var(--ease-in-out);
+}
+
+.electricity-miner-card:hover {
+    background: rgba(197, 255, 167, 0.05);
+    border-color: rgba(197, 255, 167, 0.2);
+}
+
+.electricity-miner-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-3);
+}
+
+.electricity-miner-name {
+    font-size: var(--text-lg);
+    font-weight: var(--font-semibold);
+    color: var(--text-primary);
+}
+
+.electricity-miner-status {
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-xs);
+    font-weight: var(--font-semibold);
+    text-transform: uppercase;
+}
+
+.electricity-miner-status.online {
+    background: rgba(197, 255, 167, 0.2);
+    color: #C5FFA7;
+}
+
+.electricity-miner-status.offline {
+    background: rgba(255, 77, 77, 0.2);
+    color: #ff4d4d;
+}
+
+.electricity-miner-status.degraded {
+    background: rgba(255, 165, 0, 0.2);
+    color: #FFA500;
+}
+
+.electricity-miner-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3);
+}
+
+.electricity-miner-metric-label {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-1);
+}
+
+.electricity-miner-metric-value {
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    color: var(--text-primary);
+}
+
+/* ====================================
+   BUTTONS (Dashboard Style)
+   ==================================== */
+.electricity-btn {
+    padding: var(--space-3) var(--space-6);
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    border-radius: var(--radius-full);
+    background: #C5FFA7;
+    color: #000000;
+    border: none;
+    transition: all var(--duration-normal) var(--ease-in-out);
+    cursor: pointer;
+    letter-spacing: -0.01em;
+    box-shadow: 
+        0 4px 16px rgba(197, 255, 167, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    font-family: var(--font-primary);
+}
+
+.electricity-btn:hover:not(:disabled) {
+    background: #B0FF8F;
+    box-shadow: 
+        0 6px 24px rgba(197, 255, 167, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    transform: translateY(-1px) scale(1.02);
+}
+
+.electricity-btn:active:not(:disabled) {
+    transform: translateY(0) scale(1);
+}
+
+/* ====================================
+   PAGE TITLE
+   ==================================== */
+.electricity-page-title {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+    color: var(--text-primary);
+    margin: 0;
+    margin-bottom: var(--space-4);
+    letter-spacing: -0.02em;
+}
+
+/* ====================================
+   RESPONSIVE
+   ==================================== */
+@media (max-width: 1024px) {
+    .electricity-kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .electricity-miner-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .electricity-kpi-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .electricity-miner-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .electricity-kpi-value {
+        font-size: var(--text-3xl);
+    }
+    
+    .electricity-nav-tabs {
+        overflow-x: auto;
+    }
+    
+    .electricity-table {
+        font-size: 12px;
+    }
+    
+    .electricity-table thead th,
+    .electricity-table tbody td {
+        padding: 8px 12px;
+    }
+}
+

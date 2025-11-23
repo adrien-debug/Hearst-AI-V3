@@ -69,7 +69,7 @@
     inset: 0;
     background: radial-gradient(
         circle at top right,
-        rgba(163, 255, 139, 0.1) 0%,
+        rgba(165, 255, 156, 0.1) 0%,
         transparent 60%
     );
     border-radius: inherit;
@@ -85,8 +85,8 @@
 .stat-card:hover {
     box-shadow: 
         var(--shadow-2xl),
-        0 0 40px rgba(163, 255, 139, 0.4),
-        0 0 80px rgba(163, 255, 139, 0.2);
+        0 0 40px rgba(165, 255, 156, 0.4),
+        0 0 80px rgba(165, 255, 156, 0.2);
     transform: translateY(-6px);
     border-color: var(--color-primary-light-green);
 }
@@ -110,7 +110,7 @@
     margin-bottom: var(--space-2);
     letter-spacing: -0.02em;
     line-height: 1.2;
-    filter: drop-shadow(0 0 20px rgba(163, 255, 139, 0.3));
+    filter: drop-shadow(0 0 20px rgba(165, 255, 156, 0.3));
 }
 
 .stat-value.green {
@@ -192,7 +192,7 @@
     inset: 0;
     background: radial-gradient(
         circle at top right,
-        rgba(163, 255, 139, 0.08) 0%,
+        rgba(165, 255, 156, 0.08) 0%,
         transparent 60%
     );
     border-radius: inherit;
@@ -208,8 +208,8 @@
 .electricity-view .card:hover {
     box-shadow: 
         var(--shadow-2xl),
-        0 0 40px rgba(163, 255, 139, 0.4),
-        0 0 80px rgba(163, 255, 139, 0.2);
+        0 0 40px rgba(165, 255, 156, 0.4),
+        0 0 80px rgba(165, 255, 156, 0.2);
     transform: translateY(-6px);
     border-color: var(--color-primary-light-green);
 }
@@ -240,8 +240,8 @@
 .electricity-view .table-container:hover {
     box-shadow: 
         var(--shadow-2xl),
-        0 0 40px rgba(163, 255, 139, 0.4),
-        0 0 80px rgba(163, 255, 139, 0.2);
+        0 0 40px rgba(165, 255, 156, 0.4),
+        0 0 80px rgba(165, 255, 156, 0.2);
     transform: translateY(-4px);
     border-color: var(--color-primary-light-green);
 }
@@ -281,15 +281,15 @@
 }
 
 .electricity-view .table-container table tbody tr:nth-child(even) {
-    background: rgba(163, 255, 139, 0.03);
+    background: rgba(165, 255, 156, 0.03);
 }
 
 .electricity-view .table-container table tbody tr:hover {
     background: linear-gradient(
         90deg,
-        rgba(163, 255, 139, 0.08) 0%,
-        rgba(163, 255, 139, 0.15) 50%,
-        rgba(163, 255, 139, 0.08) 100%
+        rgba(165, 255, 156, 0.08) 0%,
+        rgba(165, 255, 156, 0.15) 50%,
+        rgba(165, 255, 156, 0.08) 100%
     );
     box-shadow: inset 3px 0 0 var(--color-primary-light-green);
     transform: translateX(4px);
@@ -310,7 +310,7 @@
 .electricity-view .table-container table tbody tr.total-row td:last-child {
     color: var(--color-primary-light-green);
     font-weight: var(--typography-section-title-weight);
-    filter: drop-shadow(0 0 10px rgba(163, 255, 139, 0.3));
+    filter: drop-shadow(0 0 10px rgba(165, 255, 156, 0.3));
 }
 
 /* Filters - Premium */
@@ -357,7 +357,7 @@
     outline: none;
     border-color: var(--color-primary-light-green);
     box-shadow: 
-        0 0 0 4px rgba(163, 255, 139, 0.2),
+        0 0 0 4px rgba(165, 255, 156, 0.2),
         var(--shadow-lg);
 }
 
@@ -390,11 +390,11 @@
 }
 
 .electricity-view .filters .btn-primary:hover {
-    background: linear-gradient(135deg, #8DFFA9 0%, #A3FF8B 50%, #B8FFCA 100%);
+    background: linear-gradient(135deg, #8DFFA9 0%, #a5ff9c 50%, #B8FFCA 100%);
     box-shadow: 
         var(--shadow-xl),
-        0 0 30px rgba(163, 255, 139, 0.5),
-        0 0 60px rgba(163, 255, 139, 0.3);
+        0 0 30px rgba(165, 255, 156, 0.5),
+        0 0 60px rgba(165, 255, 156, 0.3);
     transform: translateY(-3px) scale(1.02);
 }
 
@@ -501,10 +501,10 @@
 }
 
 .electricity-view .provider-btn.active:hover {
-    background: linear-gradient(135deg, #8DFFA9 0%, #A3FF8B 50%, #B8FFCA 100%);
+    background: linear-gradient(135deg, #8DFFA9 0%, #a5ff9c 50%, #B8FFCA 100%);
     box-shadow: 
         var(--shadow-xl),
-        0 0 30px rgba(163, 255, 139, 0.5);
+        0 0 30px rgba(165, 255, 156, 0.5);
     transform: translateY(-3px) scale(1.02);
 }
 
@@ -542,7 +542,7 @@
     inset: 0;
     background: radial-gradient(
         circle at top right,
-        rgba(163, 255, 139, 0.08) 0%,
+        rgba(165, 255, 156, 0.08) 0%,
         transparent 60%
     );
     border-radius: inherit;
@@ -558,8 +558,8 @@
 .electricity-view .chart-container:hover {
     box-shadow: 
         var(--shadow-2xl),
-        0 0 40px rgba(163, 255, 139, 0.4),
-        0 0 80px rgba(163, 255, 139, 0.2);
+        0 0 40px rgba(165, 255, 156, 0.4),
+        0 0 80px rgba(165, 255, 156, 0.2);
     transform: translateY(-4px);
     border-color: var(--color-primary-light-green);
 }

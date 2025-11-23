@@ -1,59 +1,37 @@
 'use client'
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import './Cockpit.css'
 
 export default function CockpitHealth() {
   return (
     <div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 'var(--space-4)', marginBottom: 'var(--space-6)' }}>
-        <Card>
-          <CardHeader>
-            <CardTitle>System Health</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--hearst-green)' }}>
-              Healthy
-            </div>
-            <p style={{ color: 'var(--text-secondary)', marginTop: 'var(--space-2)', fontSize: 'var(--text-sm)' }}>
-              All systems operational
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Uptime</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--hearst-green)' }}>
-              99.9%
-            </div>
-            <p style={{ color: 'var(--text-secondary)', marginTop: 'var(--space-2)', fontSize: 'var(--text-sm)' }}>
-              Last 30 days
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Active Alerts</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--hearst-green)' }}>
-              0
-            </div>
-            <p style={{ color: 'var(--text-secondary)', marginTop: 'var(--space-2)', fontSize: 'var(--text-sm)' }}>
-              No critical issues
-            </p>
-          </CardContent>
-        </Card>
+      {/* KPI Cards - Dashboard Style (UNIFIED STRUCTURE) */}
+      <div className="kpi-grid">
+        <div className="kpi-card">
+          <div className="kpi-label">System Health</div>
+          <div className="kpi-value">Healthy</div>
+          <div className="kpi-description">All systems operational</div>
+        </div>
+        <div className="kpi-card">
+          <div className="kpi-label">Uptime</div>
+          <div className="kpi-value">99.9%</div>
+          <div className="kpi-description">Last 30 days</div>
+        </div>
+        <div className="kpi-card">
+          <div className="kpi-label">Active Alerts</div>
+          <div className="kpi-value">0</div>
+          <div className="kpi-description">No critical issues</div>
+        </div>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Health Monitoring</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="table-container">
-            <table className="table">
+      {/* Health Monitoring Table - Dashboard Style */}
+      <div className="cockpit-card">
+        <div className="cockpit-card-header">
+          <h3 className="cockpit-card-title">Health Monitoring</h3>
+        </div>
+        <div className="cockpit-card-body">
+          <div className="cockpit-table-container">
+            <table className="cockpit-table">
               <thead>
                 <tr>
                   <th>Component</th>
@@ -64,29 +42,28 @@ export default function CockpitHealth() {
               </thead>
               <tbody>
                 <tr>
-                  <td>API Server</td>
-                  <td><span style={{ color: 'var(--hearst-green)' }}>Online</span></td>
+                  <td><strong>API Server</strong></td>
+                  <td><span className="cockpit-value-green">Online</span></td>
                   <td>Just now</td>
                   <td>12ms</td>
                 </tr>
                 <tr>
-                  <td>Database</td>
-                  <td><span style={{ color: 'var(--hearst-green)' }}>Connected</span></td>
+                  <td><strong>Database</strong></td>
+                  <td><span className="cockpit-value-green">Connected</span></td>
                   <td>Just now</td>
                   <td>5ms</td>
                 </tr>
                 <tr>
-                  <td>Cache</td>
-                  <td><span style={{ color: 'var(--hearst-green)' }}>Active</span></td>
+                  <td><strong>Cache</strong></td>
+                  <td><span className="cockpit-value-green">Active</span></td>
                   <td>Just now</td>
                   <td>2ms</td>
                 </tr>
               </tbody>
             </table>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   )
 }
-

@@ -1,59 +1,37 @@
 'use client'
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import './Cockpit.css'
 
 export default function CockpitIncidents() {
   return (
     <div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 'var(--space-4)', marginBottom: 'var(--space-6)' }}>
-        <Card>
-          <CardHeader>
-            <CardTitle>Open Incidents</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--hearst-green)' }}>
-              0
-            </div>
-            <p style={{ color: 'var(--text-secondary)', marginTop: 'var(--space-2)', fontSize: 'var(--text-sm)' }}>
-              Active incidents
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Resolved (24h)</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--hearst-green)' }}>
-              0
-            </div>
-            <p style={{ color: 'var(--text-secondary)', marginTop: 'var(--space-2)', fontSize: 'var(--text-sm)' }}>
-              Last 24 hours
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Average Resolution</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--hearst-green)' }}>
-              0h
-            </div>
-            <p style={{ color: 'var(--text-secondary)', marginTop: 'var(--space-2)', fontSize: 'var(--text-sm)' }}>
-              Mean time to resolve
-            </p>
-          </CardContent>
-        </Card>
+      {/* KPI Cards - Dashboard Style (UNIFIED STRUCTURE) */}
+      <div className="kpi-grid">
+        <div className="kpi-card">
+          <div className="kpi-label">Open Incidents</div>
+          <div className="kpi-value">0</div>
+          <div className="kpi-description">Active incidents</div>
+        </div>
+        <div className="kpi-card">
+          <div className="kpi-label">Resolved (24h)</div>
+          <div className="kpi-value">0</div>
+          <div className="kpi-description">Last 24 hours</div>
+        </div>
+        <div className="kpi-card">
+          <div className="kpi-label">Average Resolution</div>
+          <div className="kpi-value">0h</div>
+          <div className="kpi-description">Mean time to resolve</div>
+        </div>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Recent Incidents</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="table-container">
-            <table className="table">
+      {/* Recent Incidents Table - Dashboard Style */}
+      <div className="cockpit-card">
+        <div className="cockpit-card-header">
+          <h3 className="cockpit-card-title">Recent Incidents</h3>
+        </div>
+        <div className="cockpit-card-body">
+          <div className="cockpit-table-container">
+            <table className="cockpit-table">
               <thead>
                 <tr>
                   <th>ID</th>
@@ -66,16 +44,15 @@ export default function CockpitIncidents() {
               </thead>
               <tbody>
                 <tr>
-                  <td colSpan={6} style={{ textAlign: 'center', color: 'var(--text-secondary)' }}>
+                  <td colSpan={6} style={{ textAlign: 'center', color: 'var(--text-secondary)', padding: 'var(--space-8)' }}>
                     No incidents recorded
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   )
 }
-

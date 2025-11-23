@@ -1,72 +1,55 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import Dashboard from '@/components/Dashboard'
-import { statsAPI } from '@/lib/api'
+import { useState } from 'react'
+import HomeOverview from '@/components/home/HomeOverview'
+import HomeStatistics from '@/components/home/HomeStatistics'
+import HomeAnalytics from '@/components/home/HomeAnalytics'
+import HomePerformance from '@/components/home/HomePerformance'
+import HomeActivity from '@/components/home/HomeActivity'
+import HomeReports from '@/components/home/HomeReports'
+import '@/components/home/Home.css'
 
 export default function Home() {
-  const [data, setData] = useState<any>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const [activeSection, setActiveSection] = useState('overview')
 
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        const response = await statsAPI.getStats()
-        setData(response.stats)
-        setError(null)
-      } catch (err) {
-        console.error('Error loading dashboard data:', err)
-        setError(err instanceof Error ? err.message : 'Failed to load data')
-      } finally {
-        setLoading(false)
-      }
-    }
+  const sections = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'statistics', label: 'Statistics' },
+    { id: 'analytics', label: 'Analytics' },
+    { id: 'performance', label: 'Performance' },
+    { id: 'activity', label: 'Recent Activity' },
+    { id: 'reports', label: 'Reports' },
+  ]
 
-    loadData()
-    
-    // Refresh every 30 seconds
-    const interval = setInterval(loadData, 30000)
-    return () => clearInterval(interval)
-  }, [])
+  return (
+    <div className="dashboard-view">
+      <div className="dashboard-content">
+        <div style={{ marginBottom: 'var(--space-6)' }}>
+          <h1 style={{ fontSize: 'var(--text-2xl)', fontWeight: 700 }}>Home</h1>
+          <nav className="home-nav-tabs">
+            {sections.map((section) => (
+              <button
+                key={section.id}
+                onClick={() => setActiveSection(section.id)}
+                className={`home-nav-tab ${activeSection === section.id ? 'active' : ''}`}
+              >
+                {section.label}
+              </button>
+            ))}
+          </nav>
+        </div>
 
-  if (loading) {
-    return (
-      <div className="loading-state" style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        minHeight: '400px',
-        gap: 'var(--space-4)',
-      }}>
-        <div className="spinner" style={{
-          width: '40px',
-          height: '40px',
-          border: '3px solid rgba(158, 255, 0, 0.2)',
-          borderTopColor: '#9EFF00',
-          borderRadius: '50%',
-          animation: 'spin 1s linear infinite',
-        }}></div>
-        <p style={{ color: 'var(--text-secondary)' }}>Loading...</p>
+        {activeSection === 'overview' && <HomeOverview />}
+        {activeSection === 'statistics' && <HomeStatistics />}
+        {activeSection === 'analytics' && <HomeAnalytics />}
+        {activeSection === 'performance' && <HomePerformance />}
+        {activeSection === 'activity' && <HomeActivity />}
+        {activeSection === 'reports' && <HomeReports />}
       </div>
-    )
-  }
-
-  if (error) {
-    return (
-      <div className="error-state" style={{
-        padding: 'var(--space-6)',
-        textAlign: 'center',
-        color: 'var(--text-error)',
-      }}>
-        <p>Error: {error}</p>
-      </div>
-    )
-  }
-
-  return <Dashboard data={data} />
+    </div>
+  )
 }
+
 
 
 

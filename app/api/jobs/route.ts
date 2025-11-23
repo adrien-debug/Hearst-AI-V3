@@ -81,6 +81,86 @@ export async function GET(request: NextRequest) {
       }
     })
 
+    // Si pas de jobs, retourner des données mockées
+    if (formattedJobs.length === 0) {
+      const mockJobs = [
+        {
+          id: '1',
+          projectId: '1',
+          type: 'REFACTOR',
+          status: 'SUCCESS',
+          inputPrompt: 'Refactor the dashboard component to improve performance',
+          createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+          updatedAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+          startedAt: new Date(Date.now() - 2 * 60 * 60 * 1000 + 1000).toISOString(),
+          completedAt: new Date(Date.now() - 2 * 60 * 60 * 1000 + 5 * 60 * 1000).toISOString(),
+          project: { id: '1', name: 'HearstAI Dashboard' },
+          context_data: {},
+          metadata: {},
+        },
+        {
+          id: '2',
+          projectId: '2',
+          type: 'DEBUG',
+          status: 'SUCCESS',
+          inputPrompt: 'Fix the chart rendering issue on mobile devices',
+          createdAt: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
+          updatedAt: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
+          startedAt: new Date(Date.now() - 5 * 60 * 60 * 1000 + 2000).toISOString(),
+          completedAt: new Date(Date.now() - 5 * 60 * 60 * 1000 + 8 * 60 * 1000).toISOString(),
+          project: { id: '2', name: 'Mining Analytics Platform' },
+          context_data: {},
+          metadata: {},
+        },
+        {
+          id: '3',
+          projectId: '3',
+          type: 'GENERATE',
+          status: 'RUNNING',
+          inputPrompt: 'Generate new API endpoints for electricity monitoring',
+          createdAt: new Date(Date.now() - 30 * 60 * 1000).toISOString(),
+          updatedAt: new Date(Date.now() - 30 * 60 * 1000).toISOString(),
+          startedAt: new Date(Date.now() - 30 * 60 * 1000 + 1000).toISOString(),
+          completedAt: null,
+          project: { id: '3', name: 'Electricity Monitor' },
+          context_data: {},
+          metadata: {},
+        },
+        {
+          id: '4',
+          projectId: '1',
+          type: 'PATCH',
+          status: 'SUCCESS',
+          inputPrompt: 'Add error handling to the authentication flow',
+          createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
+          updatedAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
+          startedAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000 + 1500).toISOString(),
+          completedAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000 + 6 * 60 * 1000).toISOString(),
+          project: { id: '1', name: 'HearstAI Dashboard' },
+          context_data: {},
+          metadata: {},
+        },
+        {
+          id: '5',
+          projectId: '4',
+          type: 'REVIEW',
+          status: 'PENDING',
+          inputPrompt: 'Review the collateral tracking implementation',
+          createdAt: new Date(Date.now() - 10 * 60 * 1000).toISOString(),
+          updatedAt: new Date(Date.now() - 10 * 60 * 1000).toISOString(),
+          startedAt: null,
+          completedAt: null,
+          project: { id: '4', name: 'Collateral Tracker' },
+          context_data: {},
+          metadata: {},
+        },
+      ]
+      return NextResponse.json({
+        jobs: mockJobs,
+        total: mockJobs.length,
+      })
+    }
+
     return NextResponse.json({
       jobs: formattedJobs,
       total,

@@ -36,7 +36,7 @@ export default function JobsPage() {
     if (statusLower === 'success' || statusLower === 'completed') return 'var(--hearst-green)'
     if (statusLower === 'failed' || statusLower === 'error') return '#ff4d4d'
     if (statusLower === 'running') return '#ffa500'
-    if (statusLower === 'pending') return '#9EFF00'
+    if (statusLower === 'pending') return '#a5ff9c'
     return 'var(--text-secondary)'
   }
 
@@ -48,8 +48,8 @@ export default function JobsPage() {
             <div className="spinner" style={{
               width: '40px',
               height: '40px',
-              border: '3px solid rgba(158, 255, 0, 0.2)',
-              borderTopColor: '#9EFF00',
+              border: '3px solid rgba(165, 255, 156, 0.2)',
+              borderTopColor: '#a5ff9c',
               borderRadius: '50%',
               animation: 'spin 1s linear infinite',
             }}></div>

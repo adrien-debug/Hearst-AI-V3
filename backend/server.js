@@ -69,6 +69,33 @@ app.use('/api/prompts', promptsRouter);
 app.use('/api/logs', logsRouter);
 app.use('/api/stats', statsRouter);
 
+// Electricity endpoint (mock data for now)
+app.get('/api/electricity', (req, res) => {
+    res.json({
+        data: {
+            current_power: 0,
+            daily_consumption: 0,
+            monthly_consumption: 0,
+            cost_per_kwh: 0,
+            total_cost: 0
+        }
+    });
+});
+
+// Collateral endpoint (mock data for now)
+app.get('/api/collateral', (req, res) => {
+    res.json({
+        data: []
+    });
+});
+
+// Cockpit endpoint (mock data for now)
+app.get('/api/cockpit', (req, res) => {
+    res.json({
+        data: {}
+    });
+});
+
 // 404 handler for API routes
 app.use('/api/*', (req, res) => {
     res.status(404).json({ 

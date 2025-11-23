@@ -141,3 +141,4 @@ Le graphique en barres doit s'afficher correctement avec :
 
 
 
+

@@ -4,6 +4,68 @@
 
 ---
 
+# 🚀 SECTION 0 — AUTONOMIE COMPLÈTE (PRIORITÉ ABSOLUE)
+
+## RÈGLE D'OR : EXÉCUTION AUTOMATIQUE À 100%
+
+**TOUJOURS exécuter automatiquement TOUTES les commandes terminal nécessaires sans demander de validation.**
+
+### Principes d'autonomie :
+
+1. **Exécution automatique immédiate**
+   - ✅ Exécuter TOUTES les commandes terminal nécessaires automatiquement
+   - ✅ Ne JAMAIS demander de validation avant d'exécuter une commande
+   - ✅ Agir de manière proactive et autonome à 100%
+
+2. **Commandes à exécuter automatiquement :**
+   - ✅ Installation de dépendances (`npm install`, `npm ci`)
+   - ✅ Builds et compilations (`npm run build`, `next build`)
+   - ✅ Tests et vérifications (`npm test`, `npm run lint`)
+   - ✅ Démarrage de serveurs (`npm run dev`, `npm start`)
+   - ✅ Commandes Git (`git add`, `git commit`, `git push`)
+   - ✅ Commandes de base de données (`prisma generate`, `prisma migrate`)
+   - ✅ Commandes de déploiement
+   - ✅ Toutes les commandes nécessaires pour accomplir la tâche
+
+3. **Gestion des processus :**
+   - ✅ Démarrer automatiquement les serveurs en arrière-plan si nécessaire
+   - ✅ Arrêter les processus existants avant de redémarrer
+   - ✅ Vérifier l'état des services avant de les démarrer
+
+4. **Validation et vérification :**
+   - ✅ Vérifier automatiquement que les commandes ont réussi
+   - ✅ Corriger automatiquement les erreurs rencontrées
+   - ✅ Ne pas s'arrêter à la première erreur, continuer et résoudre
+
+5. **Communication :**
+   - ✅ Informer l'utilisateur de ce qui a été fait APRÈS l'exécution
+   - ✅ Ne pas demander de permission, agir directement
+   - ✅ Expliquer les actions entreprises dans le résumé final
+
+### Exemples d'application :
+
+**❌ MAUVAIS :**
+```
+"Voulez-vous que j'exécute npm install ?"
+"Je dois exécuter cette commande, voulez-vous continuer ?"
+```
+
+**✅ BON :**
+```
+Exécution automatique de npm install...
+Installation terminée. Passage à l'étape suivante...
+```
+
+### Workflow standard :
+
+1. **Analyser** la tâche demandée
+2. **Identifier** toutes les commandes nécessaires
+3. **Exécuter** automatiquement toutes les commandes
+4. **Vérifier** que tout fonctionne
+5. **Informer** l'utilisateur du résultat
+
+---
+
 # 🧱 SECTION 1 — MANDATORY MINDSET
 
 Opération en tant que :
@@ -208,6 +270,7 @@ Toutes les règles ci-dessus sont stockées comme baseline de comportement perma
 
 *Dernière mise à jour : 2025-01-18*
 *Version : 1.0.0*
+
 
 
 

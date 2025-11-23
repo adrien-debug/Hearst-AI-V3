@@ -1,55 +1,72 @@
 'use client'
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import './Electricity.css'
 
 export default function ElectricityAnalytics() {
   return (
     <div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'var(--space-4)', marginBottom: 'var(--space-6)' }}>
-        <Card>
-          <CardHeader>
-            <CardTitle>Consumption Trend</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div style={{ padding: 'var(--space-4)', background: 'var(--bg-tertiary)', borderRadius: 'var(--radius-md)', minHeight: '250px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      {/* Analytics Cards - Dashboard Style */}
+      <div className="electricity-kpi-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
+        <div className="electricity-card">
+          <div className="electricity-card-header">
+            <h3 className="electricity-card-title">Consumption Trend</h3>
+          </div>
+          <div className="electricity-card-body">
+            <div style={{ 
+              padding: 'var(--space-8)', 
+              background: 'rgba(255, 255, 255, 0.02)', 
+              borderRadius: 'var(--radius-md)', 
+              minHeight: '250px', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center' 
+            }}>
               <p style={{ color: 'var(--text-secondary)' }}>Trend chart will be displayed here</p>
             </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Cost Analysis</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div style={{ padding: 'var(--space-4)', background: 'var(--bg-tertiary)', borderRadius: 'var(--radius-md)', minHeight: '250px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          </div>
+        </div>
+        <div className="electricity-card">
+          <div className="electricity-card-header">
+            <h3 className="electricity-card-title">Cost Analysis</h3>
+          </div>
+          <div className="electricity-card-body">
+            <div style={{ 
+              padding: 'var(--space-8)', 
+              background: 'rgba(255, 255, 255, 0.02)', 
+              borderRadius: 'var(--radius-md)', 
+              minHeight: '250px', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center' 
+            }}>
               <p style={{ color: 'var(--text-secondary)' }}>Cost analysis chart will be displayed here</p>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Efficiency Metrics</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--space-4)' }}>
-            <div style={{ padding: 'var(--space-4)', background: 'var(--bg-tertiary)', borderRadius: 'var(--radius-md)' }}>
-              <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', marginBottom: 'var(--space-2)' }}>Average Efficiency</div>
-              <div style={{ fontSize: 'var(--text-xl)', fontWeight: 'bold', color: 'var(--hearst-green)' }}>0 J/TH</div>
+      {/* Efficiency Metrics - Dashboard Style */}
+      <div className="electricity-card">
+        <div className="electricity-card-header">
+          <h3 className="electricity-card-title">Efficiency Metrics</h3>
+        </div>
+        <div className="electricity-card-body">
+          <div className="kpi-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))' }}>
+            <div className="kpi-card">
+              <div className="kpi-label">Average Efficiency</div>
+              <div className="kpi-value">0 J/TH</div>
             </div>
-            <div style={{ padding: 'var(--space-4)', background: 'var(--bg-tertiary)', borderRadius: 'var(--radius-md)' }}>
-              <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', marginBottom: 'var(--space-2)' }}>Power Factor</div>
-              <div style={{ fontSize: 'var(--text-xl)', fontWeight: 'bold', color: 'var(--hearst-green)' }}>0.00</div>
+            <div className="kpi-card">
+              <div className="kpi-label">Power Factor</div>
+              <div className="kpi-value">0.00</div>
             </div>
-            <div style={{ padding: 'var(--space-4)', background: 'var(--bg-tertiary)', borderRadius: 'var(--radius-md)' }}>
-              <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', marginBottom: 'var(--space-2)' }}>Peak Demand</div>
-              <div style={{ fontSize: 'var(--text-xl)', fontWeight: 'bold', color: 'var(--hearst-green)' }}>0 kW</div>
+            <div className="kpi-card">
+              <div className="kpi-label">Peak Demand</div>
+              <div className="kpi-value">0 kW</div>
             </div>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   )
 }
-

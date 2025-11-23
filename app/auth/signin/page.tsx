@@ -6,8 +6,8 @@ import { useRouter } from 'next/navigation'
 
 export default function SignInPage() {
   const router = useRouter()
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('admin@hearst.ai')
+  const [password, setPassword] = useState('admin')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
@@ -123,7 +123,7 @@ export default function SignInPage() {
                 transition: 'all 0.2s',
               }}
               onFocus={(e) => {
-                e.currentTarget.style.borderColor = '#A6FB93'
+                e.currentTarget.style.borderColor = '#a5ff9c'
               }}
               onBlur={(e) => {
                 e.currentTarget.style.borderColor = '#3A3A3A'
@@ -161,7 +161,7 @@ export default function SignInPage() {
                 transition: 'all 0.2s',
               }}
               onFocus={(e) => {
-                e.currentTarget.style.borderColor = '#A6FB93'
+                e.currentTarget.style.borderColor = '#a5ff9c'
               }}
               onBlur={(e) => {
                 e.currentTarget.style.borderColor = '#3A3A3A'
@@ -177,7 +177,7 @@ export default function SignInPage() {
               padding: '16px',
               background: loading
                 ? '#666'
-                : 'linear-gradient(90deg, #A6FB93 0%, #7FD860 100%)',
+                : 'linear-gradient(90deg, #a5ff9c 0%, #a5ff9c 100%)',
               color: '#000',
               border: 'none',
               borderRadius: '8px',
@@ -185,18 +185,18 @@ export default function SignInPage() {
               fontWeight: 700,
               cursor: loading ? 'not-allowed' : 'pointer',
               transition: 'all 0.2s',
-              boxShadow: '0 4px 12px rgba(166, 251, 147, 0.3)',
+              boxShadow: '0 4px 12px rgba(165, 255, 156, 0.3)',
             }}
             onMouseEnter={(e) => {
               if (!loading) {
                 e.currentTarget.style.transform = 'translateY(-2px)'
-                e.currentTarget.style.boxShadow = '0 6px 16px rgba(166, 251, 147, 0.4)'
+                e.currentTarget.style.boxShadow = '0 6px 16px rgba(165, 255, 156, 0.4)'
               }
             }}
             onMouseLeave={(e) => {
               if (!loading) {
                 e.currentTarget.style.transform = 'translateY(0)'
-                e.currentTarget.style.boxShadow = '0 4px 12px rgba(166, 251, 147, 0.3)'
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(165, 255, 156, 0.3)'
               }
             }}
           >

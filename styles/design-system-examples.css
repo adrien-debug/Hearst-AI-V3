@@ -129,7 +129,7 @@
 .input-example:focus {
     outline: none;
     border-color: var(--border-color-active);
-    box-shadow: 0 0 0 3px rgba(163, 255, 139, 0.1);
+    box-shadow: 0 0 0 3px rgba(165, 255, 156, 0.1);
 }
 
 .input-example::placeholder {

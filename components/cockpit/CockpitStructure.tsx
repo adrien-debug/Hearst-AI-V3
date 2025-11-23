@@ -1,38 +1,31 @@
 'use client'
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import './Cockpit.css'
 
 export default function CockpitStructure() {
   return (
     <div>
-      <Card>
-        <CardHeader>
-          <CardTitle>Organizational Structure</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'var(--space-4)' }}>
-            <div style={{ padding: 'var(--space-4)', background: 'var(--bg-tertiary)', borderRadius: 'var(--radius-md)' }}>
-              <h3 style={{ fontSize: 'var(--text-lg)', fontWeight: 600, marginBottom: 'var(--space-3)' }}>Teams</h3>
-              <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
-                Manage organizational teams and hierarchy
-              </p>
+      <div className="cockpit-card">
+        <div className="cockpit-card-header">
+          <h3 className="cockpit-card-title">Organizational Structure</h3>
+        </div>
+        <div className="cockpit-card-body">
+          <div className="kpi-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
+            <div className="kpi-card">
+              <div className="kpi-label">Teams</div>
+              <div className="kpi-description">Manage organizational teams and hierarchy</div>
             </div>
-            <div style={{ padding: 'var(--space-4)', background: 'var(--bg-tertiary)', borderRadius: 'var(--radius-md)' }}>
-              <h3 style={{ fontSize: 'var(--text-lg)', fontWeight: 600, marginBottom: 'var(--space-3)' }}>Departments</h3>
-              <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
-                Department structure and assignments
-              </p>
+            <div className="kpi-card">
+              <div className="kpi-label">Departments</div>
+              <div className="kpi-description">Department structure and assignments</div>
             </div>
-            <div style={{ padding: 'var(--space-4)', background: 'var(--bg-tertiary)', borderRadius: 'var(--radius-md)' }}>
-              <h3 style={{ fontSize: 'var(--text-lg)', fontWeight: 600, marginBottom: 'var(--space-3)' }}>Roles</h3>
-              <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
-                Role definitions and permissions
-              </p>
+            <div className="kpi-card">
+              <div className="kpi-label">Roles</div>
+              <div className="kpi-description">Role definitions and permissions</div>
             </div>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   )
 }
-

@@ -7,7 +7,7 @@
     /* ====================================
        PRIMARY COLORS
        ==================================== */
-    --color-primary-light-green: #A3FF8B;
+    --color-primary-light-green: #a5ff9c;
     
     /* Light Green Variants */
     --color-light-green-1: #E5FFEB;
@@ -70,7 +70,7 @@
        ==================================== */
     --color-text-default: #000000;
     --color-text-negative: #FFFFFF;
-    --color-text-unrestricted: #A3FF8B;
+    --color-text-unrestricted: #a5ff9c;
     --color-text-accent: #9EB3A8;
     --color-text-accent-lighter: #C4CFCB;
     --color-text-accent-darker: #75847C;
@@ -106,7 +106,7 @@
     /* ====================================
        GRAPHICS COLOR PALETTE (1-15)
        ==================================== */
-    --color-graphic-1: #A3FF8B;
+    --color-graphic-1: #a5ff9c;
     --color-graphic-2: #9EB3A8;
     --color-graphic-3: #FFB800;
     --color-graphic-4: #FF4444;
@@ -220,7 +220,7 @@
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
     --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
     --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    --shadow-glow-green: 0 0 20px rgba(163, 255, 139, 0.3), 0 0 40px rgba(163, 255, 139, 0.1);
+    --shadow-glow-green: 0 0 20px rgba(165, 255, 156, 0.3), 0 0 40px rgba(165, 255, 156, 0.1);
     --shadow-glow-accent: 0 0 20px rgba(158, 179, 168, 0.2), 0 0 40px rgba(158, 179, 168, 0.1);
     --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
     
@@ -235,9 +235,9 @@
     /* ====================================
        GRADIENTS - PREMIUM
        ==================================== */
-    --gradient-primary: linear-gradient(135deg, #A3FF8B 0%, #8DFFA9 50%, #B8FFCA 100%);
+    --gradient-primary: linear-gradient(135deg, #a5ff9c 0%, #8DFFA9 50%, #B8FFCA 100%);
     --gradient-accent: linear-gradient(135deg, #9EB3A8 0%, #ADBAB6 50%, #C4CFCB 100%);
-    --gradient-subtle: linear-gradient(135deg, rgba(163, 255, 139, 0.1) 0%, rgba(207, 253, 218, 0.05) 100%);
+    --gradient-subtle: linear-gradient(135deg, rgba(165, 255, 156, 0.1) 0%, rgba(207, 253, 218, 0.05) 100%);
     --gradient-overlay: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%);
     --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
     
@@ -255,7 +255,7 @@
     --color-text-default: #FFFFFF;
     --color-text-negative: #000000;
     --color-surface-default: #1A1A1A;
-    --color-surface-subtle-green: rgba(163, 255, 139, 0.1);
+    --color-surface-subtle-green: rgba(165, 255, 156, 0.1);
     --color-grey-subtle: #2D2D2D;
     --color-grey-subtle-darker: #404040;
 }

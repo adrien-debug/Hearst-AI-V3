@@ -1,23 +1,18 @@
 'use client'
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
+import './Cockpit.css'
 
 export default function CockpitTeams() {
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-4)' }}>
-        <h2 style={{ fontSize: 'var(--text-xl)', fontWeight: 600 }}>Teams Management</h2>
-        <Button>+ New Team</Button>
-      </div>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>Teams</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="table-container">
-            <table className="table">
+      {/* Teams Management Table - Dashboard Style */}
+      <div className="cockpit-card">
+        <div className="cockpit-card-header">
+          <h3 className="cockpit-card-title">Teams</h3>
+        </div>
+        <div className="cockpit-card-body">
+          <div className="cockpit-table-container">
+            <table className="cockpit-table">
               <thead>
                 <tr>
                   <th>Team Name</th>
@@ -29,16 +24,15 @@ export default function CockpitTeams() {
               </thead>
               <tbody>
                 <tr>
-                  <td colSpan={5} style={{ textAlign: 'center', color: 'var(--text-secondary)' }}>
+                  <td colSpan={5} style={{ textAlign: 'center', color: 'var(--text-secondary)', padding: 'var(--space-8)' }}>
                     No teams yet. Create your first team!
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   )
 }
-

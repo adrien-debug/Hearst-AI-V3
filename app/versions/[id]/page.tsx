@@ -63,8 +63,8 @@ export default function VersionDetailPage() {
             <div className="spinner" style={{
               width: '40px',
               height: '40px',
-              border: '3px solid rgba(158, 255, 0, 0.2)',
-              borderTopColor: '#9EFF00',
+              border: '3px solid rgba(165, 255, 156, 0.2)',
+              borderTopColor: '#a5ff9c',
               borderRadius: '50%',
               animation: 'spin 1s linear infinite',
             }}></div>
@@ -109,7 +109,7 @@ export default function VersionDetailPage() {
                 borderRadius: 'var(--radius-md)',
                 fontSize: 'var(--text-sm)',
                 fontWeight: 600,
-                background: 'rgba(158, 255, 0, 0.2)',
+                background: 'rgba(165, 255, 156, 0.2)',
                 color: 'var(--hearst-green)',
               }}>
                 STABLE

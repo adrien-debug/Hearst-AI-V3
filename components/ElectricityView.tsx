@@ -1,7 +1,6 @@
 'use client'
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
+import './electricity/Electricity.css'
 
 interface ElectricityData {
   current_power?: number
@@ -31,173 +30,79 @@ export default function ElectricityView({ data }: ElectricityViewProps) {
 
   return (
     <div>
-      {/* KPI Cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 'var(--space-4)', marginBottom: 'var(--space-6)' }}>
-        <Card>
-          <CardHeader>
-            <CardTitle>Current Power</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--hearst-green)' }}>
-              {data?.current_power?.toLocaleString() || '0'} W
-            </div>
-            <p style={{ color: 'var(--text-secondary)', marginTop: 'var(--space-2)', fontSize: 'var(--text-sm)' }}>
-              Real-time power consumption
-            </p>
-          </CardContent>
-        </Card>
+      {/* KPI Cards - Dashboard Style (UNIFIED STRUCTURE) */}
+      <div className="kpi-grid">
+        <div className="kpi-card">
+          <div className="kpi-label">Current Power</div>
+          <div className="kpi-value">{data?.current_power?.toLocaleString() || '0'} W</div>
+          <div className="kpi-description">Real-time power consumption</div>
+        </div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Daily Consumption</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--hearst-green)' }}>
-              {data?.daily_consumption?.toFixed(1) || '0'} kWh
-            </div>
-            <p style={{ color: 'var(--text-secondary)', marginTop: 'var(--space-2)', fontSize: 'var(--text-sm)' }}>
-              Last 24 hours
-            </p>
-          </CardContent>
-        </Card>
+        <div className="kpi-card">
+          <div className="kpi-label">Daily Consumption</div>
+          <div className="kpi-value">{data?.daily_consumption?.toFixed(1) || '0'} kWh</div>
+          <div className="kpi-description">Last 24 hours</div>
+        </div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Monthly Consumption</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--hearst-green)' }}>
-              {data?.monthly_consumption?.toLocaleString() || '0'} kWh
-            </div>
-            <p style={{ color: 'var(--text-secondary)', marginTop: 'var(--space-2)', fontSize: 'var(--text-sm)' }}>
-              Current month
-            </p>
-          </CardContent>
-        </Card>
+        <div className="kpi-card">
+          <div className="kpi-label">Daily Cost</div>
+          <div className="kpi-value">${data?.daily_cost?.toFixed(2) || '0.00'}</div>
+          <div className="kpi-description">Last 24 hours</div>
+        </div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Daily Cost</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--hearst-green)' }}>
-              ${data?.daily_cost?.toFixed(2) || '0.00'}
-            </div>
-            <p style={{ color: 'var(--text-secondary)', marginTop: 'var(--space-2)', fontSize: 'var(--text-sm)' }}>
-              Last 24 hours
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Monthly Cost</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--hearst-green)' }}>
-              ${data?.monthly_cost?.toFixed(2) || '0.00'}
-            </div>
-            <p style={{ color: 'var(--text-secondary)', marginTop: 'var(--space-2)', fontSize: 'var(--text-sm)' }}>
-              Current month
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Cost per kWh</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--hearst-green)' }}>
-              ${data?.cost_per_kwh?.toFixed(3) || '0.000'}
-            </div>
-            <p style={{ color: 'var(--text-secondary)', marginTop: 'var(--space-2)', fontSize: 'var(--text-sm)' }}>
-              Average rate
-            </p>
-          </CardContent>
-        </Card>
+        <div className="kpi-card">
+          <div className="kpi-label">Cost per kWh</div>
+          <div className="kpi-value">${data?.cost_per_kwh?.toFixed(3) || '0.000'}</div>
+          <div className="kpi-description">Average rate</div>
+        </div>
       </div>
 
-      {/* Active Miners Section */}
+      {/* Active Miners Section - Dashboard Style */}
       {data?.miners && data.miners.length > 0 && (
-        <Card style={{ marginBottom: 'var(--space-6)' }}>
-          <CardHeader>
-            <CardTitle>Active Miners</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 'var(--space-4)' }}>
+        <div className="electricity-card">
+          <div className="electricity-card-header">
+            <h3 className="electricity-card-title">Active Miners</h3>
+          </div>
+          <div className="electricity-card-body">
+            <div className="electricity-miner-grid">
               {data.miners.map((miner: any, index: number) => (
-                <div
-                  key={index}
-                  style={{
-                    padding: 'var(--space-4)',
-                    background: 'var(--bg-tertiary)',
-                    borderRadius: 'var(--radius-md)',
-                    border: '1px solid var(--border)',
-                  }}
-                >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-3)' }}>
-                    <div style={{ fontSize: 'var(--text-lg)', fontWeight: 600, color: 'var(--text-primary)' }}>
-                      {miner.name}
-                    </div>
-                    <div
-                      style={{
-                        padding: 'var(--space-1) var(--space-2)',
-                        borderRadius: 'var(--radius-sm)',
-                        fontSize: 'var(--text-xs)',
-                        fontWeight: 600,
-                        background: miner.status === 'online' ? 'rgba(158, 255, 0, 0.2)' : 'rgba(255, 77, 77, 0.2)',
-                        color: miner.status === 'online' ? 'var(--hearst-green)' : '#ff4d4d',
-                      }}
-                    >
+                <div key={index} className="electricity-miner-card">
+                  <div className="electricity-miner-header">
+                    <div className="electricity-miner-name">{miner.name}</div>
+                    <div className={`electricity-miner-status ${miner.status === 'online' ? 'online' : 'offline'}`}>
                       {miner.status}
                     </div>
                   </div>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--space-3)' }}>
+                  <div className="electricity-miner-metrics">
                     <div>
-                      <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', marginBottom: 'var(--space-1)' }}>
-                        Hashrate
-                      </div>
-                      <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--text-primary)' }}>
-                        {miner.hashrate}
-                      </div>
+                      <div className="electricity-miner-metric-label">Hashrate</div>
+                      <div className="electricity-miner-metric-value">{miner.hashrate}</div>
                     </div>
                     <div>
-                      <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', marginBottom: 'var(--space-1)' }}>
-                        Power
-                      </div>
-                      <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--text-primary)' }}>
-                        {miner.power}W
-                      </div>
+                      <div className="electricity-miner-metric-label">Power</div>
+                      <div className="electricity-miner-metric-value">{miner.power}W</div>
                     </div>
                     <div>
-                      <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', marginBottom: 'var(--space-1)' }}>
-                        Temperature
-                      </div>
-                      <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--text-primary)' }}>
-                        {miner.temp}°C
-                      </div>
+                      <div className="electricity-miner-metric-label">Temperature</div>
+                      <div className="electricity-miner-metric-value">{miner.temp}°C</div>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       )}
 
-      {/* Refresh Button and Last Update */}
+      {/* Refresh Button and Last Update - Dashboard Style */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'var(--space-6)' }}>
         <div style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)' }}>
           Last update: {data?.timestamp ? new Date(data.timestamp).toLocaleString() : 'Never'}
         </div>
-        <Button onClick={refreshData}>
+        <button className="electricity-btn" onClick={refreshData}>
           🔄 Refresh Data
-        </Button>
+        </button>
       </div>
     </div>
   )
 }
-
-
-

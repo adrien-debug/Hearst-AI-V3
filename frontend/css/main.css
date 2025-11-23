@@ -14,7 +14,7 @@
        ==================================== */
     
     /* Couleurs principales */
-    --primary-green: #8afd81;          /* Accent principal (CTA, focus, highlights) */
+    --primary-green: #a5ff9c;          /* Accent principal (CTA, focus, highlights) */
     --primary-dark: #000000;           /* Fond principal */
     --primary-grey: #1a1a1a;          /* Fond secondaire (cards, panels) */
     
@@ -148,7 +148,7 @@
     --bg-secondary: #1a1a1a; /* ✅ Standard HEARST - Background secondaire */
     --bg-tertiary: #242424; /* ✅ Standard HEARST - Background tertiaire */
     --accent-primary: var(--primary-green);
-    --accent-color: var(--primary-green); /* ✅ Garde #8afd81 (pas #8AE38A) */
+    --accent-color: var(--primary-green); /* ✅ Garde #a5ff9c (pas #8AE38A) */
     --border-color: rgba(255, 255, 255, 0.08); /* ✅ Match demande */
     --border-hover: var(--grey-200);
     --spacing-xs: var(--space-1);
@@ -326,7 +326,7 @@ body {
 }
 
 .nav-item:hover {
-    background: #8afd81 !important;
+    background: #a5ff9c !important;
     color: #000000 !important;
     box-shadow: 
         0 4px 12px rgba(138, 253, 129, 0.2),
@@ -334,7 +334,7 @@ body {
 }
 
 .nav-item.active {
-    background: #8afd81 !important;
+    background: #a5ff9c !important;
     color: #000000 !important;
     font-weight: 600 !important;
     box-shadow: 
@@ -737,7 +737,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #8afd81 0%, #7bed9f 100%) !important;
+    background: linear-gradient(180deg, #a5ff9c 0%, #7bed9f 100%) !important;
     box-shadow: 0 0 10px rgba(138, 253, 129, 0.5) !important;
 }
 
@@ -1020,7 +1020,7 @@ body {
 .footer-logo {
     font-size: var(--text-lg);
     font-weight: var(--font-bold);
-    background: linear-gradient(135deg, #ffffff 0%, #8afd81 100%) !important;
+    background: linear-gradient(135deg, #ffffff 0%, #a5ff9c 100%) !important;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
     background-clip: text !important;

@@ -96,6 +96,33 @@ class API {
     static async health() {
         return this.request('/health');
     }
+
+    // ==================== COLLATERAL ====================
+    
+    /**
+     * Récupère les données collatérales depuis DeBank
+     * @param {Object} params
+     * @param {string[]} params.wallets - Liste des wallets ERC20
+     * @param {string[]} [params.chains] - Liste des chains (défaut: ["eth"])
+     * @param {string[]} [params.protocols] - Liste des protocoles autorisés
+     * @returns {Promise<{clients: Array}>}
+     */
+    static async getCollateralClients(params) {
+        const { wallets, chains, protocols } = params;
+        const queryParams = new URLSearchParams();
+        
+        if (wallets && Array.isArray(wallets)) {
+            queryParams.set('wallets', wallets.join(','));
+        }
+        if (chains && Array.isArray(chains)) {
+            queryParams.set('chains', chains.join(','));
+        }
+        if (protocols && Array.isArray(protocols)) {
+            queryParams.set('protocols', protocols.join(','));
+        }
+        
+        return this.request(`/collateral?${queryParams.toString()}`);
+    }
 }
 
 export default API;
